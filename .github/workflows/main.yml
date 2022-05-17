@@ -1,0 +1,29 @@
+name: Auto Lint and Test
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm install
+      - name: Lint with ESLint
+        run: yarn lint
+  test:
+    name: Test Code
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm install
+      - name: Test with Jest
+        run: yarn test
+
+    

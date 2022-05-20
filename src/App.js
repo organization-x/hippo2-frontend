@@ -4,8 +4,10 @@ import {
 import Navbar from './components/navbar/navbar';
 import Home from './pages/home';
 import Example from './pages/example';
+import Footer from './components/footer/footer';
 
 import './App.css';
+
 
 function App() {
 	return (
@@ -15,6 +17,7 @@ function App() {
 				<Route path='/' element={<Home />}></Route>
 				<Route path='/example' element={<Example />}></Route>
 			</Routes>
+			<Footer />
 		</BrowserRouter>
 	);
 }

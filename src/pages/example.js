@@ -1,20 +1,5 @@
 import { useState } from 'react';
-
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+import sendReq from '../services/sendReq';
 
 function Example() {
 	const [res, setRes] = useState(null);
@@ -26,36 +11,6 @@ function Example() {
 	const signUpUrl = 'http://localhost:8000/auth/registration/';
 	const loginUrl = 'http://localhost:8000/auth/login/';
 	const logoutUrl = 'http://localhost:8000/auth/logout/';
-
-	const csrftoken = getCookie('csrftoken');
-
-	const sendReq = (url, method='GET', body=null) => {
-		const options = {
-			method: method,
-			credentials: 'include',
-			headers: {
-				'X-CSRFToken': csrftoken
-			}
-		}
-		if (body) {
-			options.body = JSON.stringify(body);
-			options.headers['Content-Type'] = 'application/json';
-		}
-		console.log(options);
-		fetch(url, options).then((res) => {
-			if (!res.ok) {
-				return res.text().then(text => { throw new Error(text) });
-			}
-			return res.json();
-		}).then((data) => {
-			console.log('success');
-			setRes(JSON.stringify(data, null, 2));
-		}).catch((err) => {
-			console.log('error');
-			console.log(err);
-			setRes(JSON.stringify(err));
-		});
-	};
 
 	const testUser = () => {
 		sendReq(userUrl);

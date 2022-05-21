@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../logo.svg';
 import './navbar.css';
 
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 function Navbar() {
-	const [show, setShow] = useState(false);
-	const showNav = () => {
-		setShow(!show);
-	};
+	const [show] = useState(false); //change [show] to [show, setShow] if uncommenting showNav() below
+	// const showNav = () => {
+	// 	setShow(!show);
+	// };
 
 	return (
 		<header className='w-full py-3'>

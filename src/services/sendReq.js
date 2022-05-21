@@ -1,10 +1,8 @@
 // ==============================
-// Exports func sendReq
+// Exports asyncfunc sendReq
 // @desc - fetch api wrapper
 // @param {string} url - url
-// @param {string} method - 'GET' || 'POST'
-// @param {object} body - req body if applicable
-// @param {func({error, result})} callback - executes func and passes results
+// @param {object} options - provide method, body, etc.
 // ==============================
 
 function getCookie(name) {
@@ -23,36 +21,30 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function sendReq(url, method='GET', body=null, callback) {
+async function sendReq(url, iOptions) {
 	const csrftoken = getCookie('csrftoken');
 	const options = {
-		method: method,
+		method: iOptions.method,
 		credentials: 'include',
 		headers: {
 			'X-CSRFToken': csrftoken
 		}
 	}
-	if (body) {
-		options.body = JSON.stringify(body);
+	if (iOptions.body) {
+		options.body = JSON.stringify(iOptions.body);
 		options.headers['Content-Type'] = 'application/json';
 	}
-
-	fetch(url, options).then((res) => {
-		if (!res.ok) {
-			return res.text().then(text => { throw new Error(text) });
-		}
-		return res.json();
-	}).then((data) => {
-		callback({
-			error: false,
-			result: data
-		});
-	}).catch((err) => {
-		callback({
-			error: err,
-			result: null
-		});
-	});
+	if (iOptions.credentials === false) {
+		delete options.credentials;
+	}
+	const res = await fetch(url, options);
+	const error = res.ok ? false : true;
+	const json = await res.json();
+	return {
+		status: res.status,
+		error: error,
+		data: json
+	}
 };
 
 export default sendReq;

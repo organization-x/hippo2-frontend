@@ -1,23 +1,30 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import { AuthContext } from '../services/authentication';
+import baseUrl from '../baseUrl';
 import sendReq from '../services/sendReq';
 
-function Example() {
+function Signup() {
 	const [res, setRes] = useState(null);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
+	const auth = useContext(AuthContext);
+	const location = useLocation();
 
-	const userUrl = 'http://localhost:8000/auth/user/';
-	const signUpUrl = 'http://localhost:8000/auth/registration/';
-	const loginUrl = 'http://localhost:8000/auth/login/';
-	const logoutUrl = 'http://localhost:8000/auth/logout/';
+	const origin = location.state.from.pathname || '/';
+
+	const userUrl = baseUrl + '/auth/user/';
+	const signUpUrl = baseUrl + '/auth/registration/';
+	const vTokenUrl = baseUrl + '/auth/token/verify/';
+	const rTokenUrl = baseUrl + '/auth/token/refresh/';
 
 	const testUser = () => {
-		sendReq(userUrl);
+		sendReq(userUrl, { method: 'POST' }).then(data => setRes(data));
 	}
 
 	const logoutUser = () => {
-		sendReq(logoutUrl, 'POST');
+		auth.handleLogout();
 	}
 
 	const signUpUser = () => {
@@ -27,16 +34,30 @@ function Example() {
 			password2: password,
 			email: email
 		};
-		sendReq(signUpUrl, 'POST', body);
+		const options = {
+			method: 'POST',
+			body: body
+		};
+		sendReq(signUpUrl, options).then(data => setRes(data));
 	}
 
 	const loginUser = () => {
-		const body = {
-			email: email,
-			username: username,
-			password: password
-		};
-		sendReq(loginUrl, 'POST', body);
+		auth.handleLogin(email, username, password, origin);
+	}
+
+	const verifyToken = () => {
+		const options = {
+			method: 'POST',
+			body: {}
+		}
+		sendReq(vTokenUrl, options).then(data => setRes(data));
+	}
+	const refreshToken = () => {
+		const options = {
+			method: 'POST',
+			body: {}
+		}
+		sendReq(rTokenUrl, options).then(data => setRes(data));
 	}
 
 	return (
@@ -71,11 +92,15 @@ function Example() {
 				onClick={() => testUser()}>Test User</button>
 			<button className="bg-purple-500 p-1" type="button" 
 				onClick={() => logoutUser()}>Logout User</button>
-			<div className="results">
-				{res}
+			<button className="bg-yellow-500 p-1 ml-3" type="button" 
+				onClick={() => verifyToken()}>Verify Token</button>
+			<button className="bg-red-400 p-1" type="button" 
+				onClick={() => refreshToken()}>Refresh Token</button>
+			<div className="results mt-5">
+				{JSON.stringify(res, null, '\t')}
 			</div>
 		</form>
 	)
 }
 
-export default Example;
+export default Signup;

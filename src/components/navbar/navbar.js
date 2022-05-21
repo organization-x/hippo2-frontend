@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import logo from '../../logo.svg';
 import './navbar.css';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faBars } from '@fortawesome/free-solid-svg-icons';
-
 function Navbar() {
 	const [show] = useState(false); //change [show] to [show, setShow] if uncommenting showNav() below
 	// const showNav = () => {

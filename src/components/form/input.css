@@ -5,14 +5,11 @@
 .input {
     display: flex;
     flex-direction: column;
-    width: 213px;
-    height: 19px;
+    padding-right: 6.656rem;
 
-    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 300;
-    font-size: 14px;
-    line-height: 19px;
+    font-size: 0.875rem;
 
     color: #000000;
 
@@ -20,22 +17,19 @@
     border-bottom: 1px solid #979797;
 }
 
-.invalidText {
+.invalid-text {
     color: red;
     font-size: 14px;
 }
 
-.invalidBorder {
+.invalid-border {
     display: flex;
     flex-direction: column;
-    width: 213px;
-    height: 19px;
+    padding-right: 6.656rem;
 
-    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 300;
-    font-size: 14px;
-    line-height: 19px;
+    font-size: 0.875rem;
 
     color: #000000;
     border: 1px solid red;

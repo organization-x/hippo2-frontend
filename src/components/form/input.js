@@ -1,25 +1,26 @@
 import './input.css';
 
-function Input({ph, label, type, value, onChange, isValid, errorText}) {
-    var error = '';
-    var style = 'input';
+function Input({placeHolder, label, type, value, onChange, isValid, errorText}) {
+    let error = '';
+    let style = 'input';
 
     if (isValid === 'false') {
         error = errorText;
-        style = 'invalidBorder'
+        style = 'invalid-border';
     }
 
     return (
-        <div>
+        <>
             <label className='label'>{label}</label>
 
             <input type={type} 
-            onChange={onChange}
-            placeholder={ph}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeHolder}
             className={style}
             value={value}>
-            </input><span className='invalidText'>{error}</span>
-        </div>
+            </input>
+            <span className='invalid-text'>{error}</span>
+        </>
     );
 }
 

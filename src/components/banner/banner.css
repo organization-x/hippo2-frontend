@@ -1,14 +1,30 @@
 /* flex all elements horizontally */
 .banner {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	flex-grow: 0;
 	flex-shrink: 0;
     background: linear-gradient(101.02deg, #E431FF 2.58%, #00EAC0 96.92%);
+	height: 186px;
 }
 
-/* Center align text and set font size*/
+/* Center align text and set font size */
+.text-section {
+	text-align: center;
+}
+
+/* Set text to black */
+h1 {
+    color: #000000;
+	font-family: 'Open Sans';
+}
+
+/* Set font sizes for the top and bottom portions of text */
 .top-text {
-    text-align: center;
+	font-size: 35px;
+}
+
+.bottom-text {
+	font-size: 18px;
 }

@@ -13,7 +13,7 @@
     color: #000000;
 
     border: none;
-    border-bottom: 0.063rem solid #979797;
+    border-bottom: 1px solid #979797;
 }
 
 .invalid-text {
@@ -31,5 +31,5 @@
     font-size: 0.875rem;
 
     color: #000000;
-    border: 0.063rem solid red;
+    border: 1px solid red;
 }

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { useAuth } from "../services/authentication";
+import Loading from "./loading";
 
 
 function GoogleAuth() {
@@ -18,7 +19,7 @@ function GoogleAuth() {
 	},[code, auth, origin]);
 
 	return (
-		<h1>Waiting...</h1>
+		<Loading />
 	);
 }
 

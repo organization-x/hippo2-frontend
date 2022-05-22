@@ -1,12 +1,29 @@
 import { useState, createContext, useEffect, useRef, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import sendReq from "./sendReq";
-import baseUrl from "../baseUrl";
+import baseUrl from "../apiUrls";
 
 import Navbar from "../components/navbar/navbar";
 import Loading from "../pages/loading";
 
-export const AuthContext = createContext();
+/**
+ * ==============================================
+ * Provides abstractified auth methods
+ * useAuth() 	- returns react context with auth methods
+ * AuthProvider	- component wrapper that provides auth context
+ *
+ * METHODS
+ * user					- object with user info
+ * handleLogin()		- logins user
+ * handleGoogleLogin()	- logins user with Google
+ * handleSignup()		- registers user with optional redirect
+ * handleLogout()		- logouts user with optional redirect
+ * autoAuthReq()		- sendReq wrapper that refreshes token or 
+ *					  	  redirects to signup page as necessary
+ * ==============================================
+ */
+
+const AuthContext = createContext();
 
 export function useAuth() {
 	return useContext(AuthContext);
@@ -38,31 +55,14 @@ export function AuthProvider({ children }) {
 			if (!rRes.error) {
 				return await sendReq(url, options);
 			}
-			// refresh failed
-			// logout user to clear cookies 
-			const loOptions = {
-				method: 'POST',
-				body: {},
-				// credentials: false
-			};
-			const loUrl = baseUrl + '/auth/logout/';
-			const loRes = await sendReq(loUrl, loOptions);
-			if (!loRes.error) {
-				setUser({
-					email: '',
-					fName: '',
-					lName: '',
-					isLoggedIn: false
-				});
-			}
-			if (!loRes.error && redirect) {
-				navigate('/signup', { state: { from: { pathname: redirect } } });
-			}
+			// refresh token invalid/expired
+			// get user to signup again
+			navigate('/signup', { state: { from: { pathname: redirect } } });
 		}
 		return res;
 	}).current;
 
-	const handleSignup = async (email, username, password, redirect) => {
+	const handleSignup = async (email, username, password, redirect='/') => {
 		const url = baseUrl + '/auth/registration/';
 		const body = {
 			email: email,
@@ -83,11 +83,11 @@ export function AuthProvider({ children }) {
 				lName: body.user.last_name,
 				isLoggedIn: true
 			});
-			navigate(redirect ? redirect : '/');
+			navigate(redirect);
 		}
 	};
 
-	const handleLogin = async (email, username, password, redirect) => {
+	const handleLogin = async (email, username, password, redirect='/') => {
 		const url = baseUrl + '/auth/login/';
 		const body = {
 			email: email,
@@ -107,19 +107,15 @@ export function AuthProvider({ children }) {
 				lName: body.user.last_name,
 				isLoggedIn: true
 			});
-			navigate(redirect ? redirect : '/');
+			navigate(redirect);
 		}
 	};
-
-	const handleGoogleLogin = async (code, redirect) => {
+	// TODO: add state param to google redirect uri for redirect memory
+	const handleGoogleLogin = async (code, redirect='/') => {
 		const url = baseUrl + '/auth/google/';
-		const form = new FormData();
-		form.append('code', code);
 		const options = {
 			method: 'POST',
-			body: form,
-			headers: {},
-			customHeader: true
+			body: { code: code }
 		};
 		const data = await sendReq(url, options);
 		if (!data.error) {
@@ -130,7 +126,7 @@ export function AuthProvider({ children }) {
 				lName: body.user.last_name,
 				isLoggedIn: true
 			});
-			navigate(redirect ? redirect : '/');
+			navigate(redirect);
 		}
 	};
 
@@ -138,9 +134,8 @@ export function AuthProvider({ children }) {
 		const url = baseUrl + '/auth/logout/';
 		const options = {
 			method: 'POST',
-			body: {},
-			// credentials: false
-		}
+			body: {}
+		};
 		const res = await sendReq(url, options);
 		if (!res.error) {
 			setUser({
@@ -161,7 +156,7 @@ export function AuthProvider({ children }) {
 		const options = {
 			method: 'GET'
 		};
-		autoAuthReq(url, options, '/').then(res => {
+		autoAuthReq(url, options, location.pathname).then(res => {
 			setCheckLogin(true);
 			if (!res.error) {
 				const data = res.data;

@@ -1,11 +1,10 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { AuthContext } from '../../services/authentication';
-import { useContext } from 'react';
+import { useAuth } from '../../services/authentication';
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
 function PrivateRoute({ children }) {
-	const auth = useContext(AuthContext);
+	const auth = useAuth();
 	const location = useLocation();
 	if (!auth.user.isLoggedIn) {
 		return <Navigate to={'/signup'} replace state={{ from: location }} />

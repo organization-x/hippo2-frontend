@@ -30,15 +30,9 @@ async function sendReq(url, iOptions) {
 			'X-CSRFToken': csrftoken
 		}
 	}
-	if (iOptions.body && !iOptions.customHeader) {
+	if (iOptions.body) {
 		options.body = JSON.stringify(iOptions.body);
 		options.headers['Content-Type'] = 'application/json';
-	} else {
-		options.body = iOptions.body;
-		options.headers = {...options.headers, ...iOptions.headers};
-	}
-	if (iOptions.credentials === false) {
-		delete options.credentials;
 	}
 	const res = await fetch(url, options);
 	const error = res.ok ? false : true;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../services/authentication';
-import baseUrl from '../baseUrl';
+import baseUrl, { googleSocialUrl } from '../apiUrls';
 import sendReq from '../services/sendReq';
 
 function Signup() {
@@ -73,7 +73,7 @@ function Signup() {
 				onClick={() => loginUser()}
 			>Login</button>
 			<a className="text-blue-500 hover:text-blue-300 mx-3"
-				href="https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://localhost:3000/auth/google/&prompt=consent&response_type=code&client_id=306664220522-n9okltev4f4ehokm23k4ddiom4lk051b.apps.googleusercontent.com&scope=openid%20email%20"
+				href={googleSocialUrl}
 			>Connect with Google</a>
 			<button className="bg-blue-500 p-1" type="button" 
 				onClick={() => testUser()}>Test User</button>

@@ -7,11 +7,9 @@ import { AuthProvider } from './services/authentication';
 
 import Navbar from './components/navbar/navbar';
 import Home from './pages/home';
-
 import Signup from './pages/signup';
 import Protected from './pages/protected';
 import GoogleAuth from './pages/google';
-
 
 import './App.css';
 

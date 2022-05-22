@@ -4,6 +4,7 @@ import {
 import Navbar from './components/navbar/navbar';
 import Home from './pages/home';
 import Example from './pages/example';
+import Banner from './components/banner/banner';
 
 import './App.css';
 
@@ -15,6 +16,7 @@ function App() {
 				<Route path='/' element={<Home />}></Route>
 				<Route path='/example' element={<Example />}></Route>
 			</Routes>
+			<Banner />
 		</BrowserRouter>
 	);
 }

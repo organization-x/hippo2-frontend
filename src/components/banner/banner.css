@@ -1,0 +1,14 @@
+/* flex all elements horizontally */
+.banner {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-grow: 0;
+	flex-shrink: 0;
+    background: linear-gradient(101.02deg, #E431FF 2.58%, #00EAC0 96.92%);
+}
+
+/* Center align text and set font size*/
+.top-text {
+    text-align: center;
+}

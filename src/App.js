@@ -16,7 +16,6 @@ function App() {
 				<Route path='/' element={<Home />}></Route>
 				<Route path='/example' element={<Example />}></Route>
 			</Routes>
-			<Banner />
 		</BrowserRouter>
 	);
 }

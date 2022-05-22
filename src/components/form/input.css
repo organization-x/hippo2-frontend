@@ -1,5 +1,5 @@
 .label {
-    font-size: 18px;
+    font-size: 1.125rem;
     display: block;
 }
 
@@ -13,12 +13,12 @@
     color: #000000;
 
     border: none;
-    border-bottom: 1px solid #979797;
+    border-bottom: 0.063rem solid #979797;
 }
 
 .invalid-text {
     color: red;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .invalid-border {
@@ -31,5 +31,5 @@
     font-size: 0.875rem;
 
     color: #000000;
-    border: 1px solid red;
+    border: 0.063rem solid red;
 }

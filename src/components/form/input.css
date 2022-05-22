@@ -1,0 +1,42 @@
+.label {
+    font-size: 18px;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    width: 213px;
+    height: 19px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 19px;
+
+    color: #000000;
+
+    border: none;
+    border-bottom: 1px solid #979797;
+}
+
+.invalidText {
+    color: red;
+    font-size: 14px;
+}
+
+.invalidBorder {
+    display: flex;
+    flex-direction: column;
+    width: 213px;
+    height: 19px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 19px;
+
+    color: #000000;
+    border: 1px solid red;
+}

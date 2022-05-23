@@ -30,7 +30,7 @@ function App() {
 					}></Route>
 					<Route path='/signup' element={<Signup />}></Route>
 				</Routes>
-        <Footer />
+				<Footer />
 			</AuthProvider>
 		</BrowserRouter>
 	);

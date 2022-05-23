@@ -6,7 +6,6 @@ import sendReq from '../services/sendReq';
 
 function Signup() {
 	const [res, setRes] = useState(null);
-	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
 	const auth = useAuth();
@@ -27,11 +26,19 @@ function Signup() {
 	}
 
 	const signUpUser = () => {
-		auth.handleSignup(email, username, password, origin);
+		auth.handleSignup(email, password, origin).then(res => {
+			if (res.error) {
+				setRes(res);
+			}
+		});;
 	}
 
 	const loginUser = () => {
-		auth.handleLogin(email, username, password, origin);
+		auth.handleLogin(email, password, origin).then(res => {
+			if (res.error) {
+				setRes(res);
+			}
+		});
 	}
 
 	const verifyToken = () => {
@@ -51,11 +58,6 @@ function Signup() {
 
 	return (
 		<form className="mt-10" action="/" method="get">
-			<label htmlFor="email">Username</label>
-			<input className="mx-3 p-1 border-solid border-2 border-slate-700" type="text" id="email" 
-				value={username}
-				onChange={(e) => setUsername(e.target.value)}
-			/>
 			<label htmlFor="email">Email</label>
 			<input className="mx-3 p-1 border-solid border-2 border-slate-700" type="text" id="email" 
 				value={email}

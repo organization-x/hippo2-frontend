@@ -29,7 +29,7 @@ async function sendReq(url, iOptions) {
 		headers: {
 			'X-CSRFToken': csrftoken
 		}
-	}
+	};
 	if (iOptions.body) {
 		options.body = JSON.stringify(iOptions.body);
 		options.headers['Content-Type'] = 'application/json';
@@ -41,7 +41,7 @@ async function sendReq(url, iOptions) {
 		status: res.status,
 		error: error,
 		data: json
-	}
+	};
 };
 
 export default sendReq;

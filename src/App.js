@@ -23,6 +23,7 @@ function App() {
 				<Routes>
 					<Route path='/' element={<Home />}></Route>
 					<Route path='/auth/google/' element={<GoogleAuth />}></Route>
+					<Route path='/welcome' element={<Welcome />}></Route>
 					<Route path='/protected' element={
 						<PrivateRoute>
 							<Protected />
@@ -30,7 +31,6 @@ function App() {
 					}></Route>
 					<Route path='/signup' element={<Signup />}></Route>
 					<Route path='/login' element={<Login />}></Route>
-					<Route path='/welcome' element={<Welcome />}></Route>
 				</Routes>
 			</AuthProvider>
 		</BrowserRouter>

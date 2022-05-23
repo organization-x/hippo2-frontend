@@ -27,7 +27,7 @@ function Signup() {
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<p className="text-2xl mb-5 text-center">Create an Account</p>
+				<h1 className="text-2xl mb-5 text-center">Create an Account</h1>
 
 				<p className="text-base mb-3">
 					AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
@@ -46,8 +46,11 @@ function Signup() {
 				</p>
 			</div>
 
-			<div className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<p className="text-xl mb-6 text-center">Join AI Camp as a</p>
+			<form action="/" method="GET" onSubmit={event => {
+				event.preventDefault();
+				signUpUser();
+			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+				<h2 className="text-xl mb-6 text-center">Join AI Camp as a</h2>
 
 				<div className="mb-6 flex items-center justify-center">
 					<div className="mx-auto inline-block">
@@ -60,24 +63,28 @@ function Signup() {
 					   type="text"
 					   placeHolder="John"
 					   className="mb-3"
+					   id="firstName"
 					   onChange={val => setFirstName(val)}
 				/>
 				<Input label="Last Name"
 					   type="text"
 					   placeHolder="Doe"
 					   className="mb-3"
+					   id="lastName"
 					   onChange={val => setLastName(val)}
 				/>
 				<Input label="Email"
 					   type="email"
 					   placeHolder="JohnDoe@yahoo.com"
 					   className="mb-3"
+					   id="email"
 					   onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
 					   type="password"
 					   placeHolder="JohnDoePassword"
 					   className="mb-3"
+					   id="password"
 					   onChange={val => setPassword(val)}
 				/>
 
@@ -95,7 +102,7 @@ function Signup() {
 				</div>
 
 				<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
-			</div>
+			</form>
 		</div>
 	)
 }

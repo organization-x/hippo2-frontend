@@ -1,6 +1,6 @@
 import './input.css';
 
-function Input({placeHolder, label, type, value, onChange, isValid, errorText, className}) {
+function Input({placeHolder, label, type, value, onChange, isValid, errorText, className, id}) {
     let error = '';
     let style = 'input';
 
@@ -19,7 +19,8 @@ function Input({placeHolder, label, type, value, onChange, isValid, errorText, c
 			} }
             placeholder={placeHolder}
             className={`${style} ${className}`}
-            value={value}>
+            value={value}
+			id={id}>
             </input>
             <span className='invalid-text'>{error}</span>
         </>

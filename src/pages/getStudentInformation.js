@@ -11,8 +11,8 @@ function GetStudentInformation() {
 	// eslint-disable-next-line
 	const [studentBirthday, setStudentBirthday] = useState('');
 
-	const nextButton = () => {
-		// executes when the Next button is clicked
+	const onSubmit = () => {
+		// executes when the Next button is clicked or when form is submitted
 	}
 	const backButton = () => {
 		// executes when the Back button is clicked
@@ -22,7 +22,7 @@ function GetStudentInformation() {
 		<div>
 			<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
 				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-					<p className="text-2xl mb-8 text-center">Account Logistics</p>
+					<h1 className="text-2xl mb-8 text-center">Account Logistics</h1>
 					<p className="text-base mb-3">
 						Fill out your personal details to create your account profile! Some items may be pre-filled, so feel free to make edits to ensure that the information is accurate.
 					</p>
@@ -30,8 +30,11 @@ function GetStudentInformation() {
 						Click "Next" to move onto course selection!
 					</p>
 				</div>
-				<div className="flex-none md:flex-initial w-full md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-					<p className="text-xl mb-7 text-center">Gain real experience by building real AI products. We are here to support you.</p>
+				<form action="/" method="GET" onSubmit={event => {
+					event.preventDefault();
+					onSubmit();
+				}} className="flex-none md:flex-initial w-full md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+					<h2 className="text-xl mb-7 text-center">Gain real experience by building real AI products. We are here to support you.</h2>
 
 					<div className="mb-8">
 						<Input label="Student Name"
@@ -55,9 +58,9 @@ function GetStudentInformation() {
 
 					<div className="flex">
 						<Button bgColor="gray" txtColor="white" className="w-1/3 mx-2 py-1" onClick={() => backButton()}>Back</Button>
-						<Button bgColor="green" txtColor="white" className="w-2/3 mx-2 py-1" onClick={() => nextButton()}>Next</Button>
+						<Button bgColor="green" txtColor="white" className="w-2/3 mx-2 py-1" onClick={() => onSubmit()}>Next</Button>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	)

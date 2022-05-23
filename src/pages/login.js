@@ -21,7 +21,7 @@ function Login() {
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<p className="text-2xl mb-5 text-center">Log In</p>
+				<h1 className="text-2xl mb-5 text-center">Log In</h1>
 
 				<p className="text-base mb-3">Nice to see you again!</p>
 
@@ -30,8 +30,11 @@ function Login() {
 				</p>
 			</div>
 
-			<div className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<p className="text-2xl mb-7 text-center">Welcome back to AI Camp!</p>
+			<form action="/" method="GET" onSubmit={event => {
+				event.preventDefault();
+				loginUser();
+			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+				<h2 className="text-2xl mb-7 text-center">Welcome back to AI Camp!</h2>
 
 				<Input label="Email"
 					   type="email"
@@ -63,7 +66,7 @@ function Login() {
 				</div>
 
 				<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => loginUser()}>Next</Button>
-			</div>
+			</form>
 		</div>
 	);
 }

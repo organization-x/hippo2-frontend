@@ -6,7 +6,7 @@ function Welcome() {
 		<div>
 			<div className="bg-banner w-full flex items-center justify-center">
 				<div className="mx-auto max-w-3xl py-10">
-					<p className="font-semibold text-3xl mb-4 text-center">Welcome to AI Camp!</p>
+					<h1 className="font-semibold text-3xl mb-4 text-center">Welcome to AI Camp!</h1>
 					<p className="text-lg text-center">Watch the video below for important information about next steps on how you can create an AI Camp account and complete course registration for your student(s).</p>
 				</div>
 			</div>

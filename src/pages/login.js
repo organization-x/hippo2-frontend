@@ -62,7 +62,7 @@ function Login() {
 					<Link to="/signup" className="mx-auto text-blue-700 hover:text-blue-600">Create an account</Link>
 				</div>
 
-				<Button bgColor="green" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => loginUser()}>Next</Button>
+				<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => loginUser()}>Next</Button>
 			</div>
 		</div>
 	);

@@ -94,7 +94,7 @@ function Signup() {
 					<Link to="/login" className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit">Already have an account?</Link>
 				</div>
 
-				<Button bgColor="green" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
+				<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
 			</div>
 		</div>
 	)

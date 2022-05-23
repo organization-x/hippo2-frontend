@@ -1,6 +1,6 @@
 import Input from "../components/form/input";
 import Button from "../components/button/button";
-import {useState} from "react";
+import { useState } from "react";
 
 function GetStudentInformation() {
 	// We ignore these lines from linting because these variables aren't used yet but the setters are used
@@ -37,21 +37,21 @@ function GetStudentInformation() {
 
 					<div className="mb-8">
 						<Input label="Student Name"
-							   type="text"
-							   placeHolder="John Doe"
-							   className="mb-3"
-							   onChange={val => setStudentName(val)}
+							type="text"
+							placeHolder="John Doe"
+							className="mb-3"
+							onChange={val => setStudentName(val)}
 						/>
 						<Input label="Student Email"
-							   type="email"
-							   placeHolder="JohnDoe@yahoo.com"
-							   className="mb-3"
-							   onChange={val => setStudentEmail(val)}
+							type="email"
+							placeHolder="JohnDoe@yahoo.com"
+							className="mb-3"
+							onChange={val => setStudentEmail(val)}
 						/>
 						<Input label="Student Birth Month and Year"
-							   type="text"
-							   placeHolder="MM/YYYY"
-							   onChange={val => setStudentBirthday(val)}
+							type="text"
+							placeHolder="MM/YYYY"
+							onChange={val => setStudentBirthday(val)}
 						/>
 					</div>
 

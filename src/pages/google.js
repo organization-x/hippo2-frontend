@@ -9,14 +9,14 @@ function GoogleAuth() {
 	const location = useLocation();
 	const origin = location.state?.from?.pathname || '/';
 
-	const [ search ] = useSearchParams();
+	const [search] = useSearchParams();
 	const code = search.get('code');
 
-	useEffect(()=> {
+	useEffect(() => {
 		if (code) {
 			auth.handleGoogleLogin(code, origin);
 		}
-	},[code, auth, origin]);
+	}, [code, auth, origin]);
 
 	return (
 		<Loading />

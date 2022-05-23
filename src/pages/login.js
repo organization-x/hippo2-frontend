@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './auth.css';
 import { googleSocialUrl } from '../apiUrls';
-import {useAuth} from "../services/authentication";
-import {Link, useLocation} from "react-router-dom";
+import { useAuth } from "../services/authentication";
+import { Link, useLocation } from "react-router-dom";
 import Input from "../components/form/input";
 import Button from "../components/button/button";
 
@@ -36,16 +36,16 @@ function Login() {
 				<h2 className="text-2xl mb-7 text-center">Welcome back to AI Camp!</h2>
 
 				<Input label="Email"
-					   type="email"
-					   placeHolder="JohnDoe@yahoo.com"
-					   className="mb-5"
-					   onChange={val => setEmail(val)}
+					type="email"
+					placeHolder="JohnDoe@yahoo.com"
+					className="mb-5"
+					onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
-					   type="password"
-					   placeHolder="JohnDoePassword"
-					   className="mb-2"
-					   onChange={val => setPassword(val)}
+					type="password"
+					placeHolder="JohnDoePassword"
+					className="mb-2"
+					onChange={val => setPassword(val)}
 				/>
 				<div className="mb-4">
 					<Link to="/" className="mx-auto text-blue-700 hover:text-blue-600">Forgot password?</Link>

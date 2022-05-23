@@ -44,7 +44,7 @@ export function AuthProvider({ children }) {
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
 
-	const autoAuthReq = useRef(async (url, options, redirect=null) => {
+	const autoAuthReq = useRef(async (url, options, redirect = null) => {
 		const res = await sendReq(url, options);
 
 		// access token expired
@@ -73,7 +73,7 @@ export function AuthProvider({ children }) {
 		return res;
 	}).current;
 
-	const handleSignup = async (email, password, redirect='/') => {
+	const handleSignup = async (email, password, redirect = '/') => {
 		const url = baseUrl + '/auth/registration/';
 		const body = {
 			email: email,
@@ -98,7 +98,7 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
-	const handleLogin = async (email, password, redirect='/') => {
+	const handleLogin = async (email, password, redirect = '/') => {
 		const url = baseUrl + '/auth/login/';
 		const body = {
 			email: email,
@@ -122,7 +122,7 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 	// TODO: add state param to google redirect uri for redirect memory
-	const handleGoogleLogin = async (code, redirect='/') => {
+	const handleGoogleLogin = async (code, redirect = '/') => {
 		const url = baseUrl + '/auth/google/';
 		const options = {
 			method: 'POST',

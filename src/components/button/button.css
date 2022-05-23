@@ -1,33 +1,33 @@
-.bg-gray {
+.btn.bg-gray {
     background-color: #c4c4c4;
 }
 
-.bg-green {
+.btn.bg-green {
     background-color: rgba(15, 184, 113, 0.83);
 }
 
-.bg-black {
+.btn.bg-black {
     background-color: black;
 }
 
-.bg-white {
+.btn.bg-white {
     border: 1px solid black;
     background-color: rgba(255, 255, 255, 0.83);
 }
 
-.txt-black {
+.btn.txt-black {
     color: black;
 }
 
-.txt-white {
+.btn.txt-white {
     color: white;
 }
 
-.normal {
+.btn.normal {
     padding: 0.469rem 2.531rem;
 }
 
-.button {
+.btn.button {
     border-radius: 1.875rem;
     font-size: 1.25rem;
 }

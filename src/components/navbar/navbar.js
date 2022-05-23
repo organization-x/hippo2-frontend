@@ -27,13 +27,16 @@ function Navbar() {
 						<li className='text-white hover:text-gray-300'>
 							<Link to='protected'>Page 2</Link>
 						</li>
+						<li className='text-white hover:text-gray-300'>
+							<Link to='/welcome'>Welcome Page</Link>
+						</li>
 					</ul>
 					<ul className='nav-links grow-0'>
 						<li className='text-white hover:text-gray-300'>
 							<Link to='signup'>Sign Up</Link>
 						</li>
 						<li className='text-white hover:text-gray-300'>
-							<Link to='/'>Login</Link>
+							<Link to='login'>Login</Link>
 						</li>
 					</ul> */}
 				</nav>

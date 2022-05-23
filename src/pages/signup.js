@@ -48,7 +48,6 @@ function Signup() {
 
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
-				signUpUser();
 			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-xl mb-6 text-center">Join AI Camp as a</h2>
 

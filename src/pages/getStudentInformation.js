@@ -32,7 +32,6 @@ function GetStudentInformation() {
 				</div>
 				<form action="/" method="GET" onSubmit={event => {
 					event.preventDefault();
-					onSubmit();
 				}} className="flex-none md:flex-initial w-full md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-xl mb-7 text-center">Gain real experience by building real AI products. We are here to support you.</h2>
 

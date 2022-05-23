@@ -32,7 +32,6 @@ function Login() {
 
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
-				loginUser();
 			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-2xl mb-7 text-center">Welcome back to AI Camp!</h2>
 

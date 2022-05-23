@@ -60,6 +60,13 @@ export function AuthProvider({ children }) {
 				return await sendReq(url, options);
 			}
 			// refresh token invalid/expired
+			// set user as not logged in
+			setUser({
+				email: '',
+				fName: '',
+				lName: '',
+				isLoggedIn: false
+			});
 			// get user to signup again
 			navigate('/signup', { state: { from: { pathname: redirect } } });
 		}

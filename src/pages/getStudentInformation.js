@@ -3,8 +3,12 @@ import Button from "../components/button/button";
 import {useState} from "react";
 
 function GetStudentInformation() {
+	// We ignore these lines from linting because these variables aren't used yet but the setters are used
+	// eslint-disable-next-line
 	const [studentName, setStudentName] = useState('');
+	// eslint-disable-next-line
 	const [studentEmail, setStudentEmail] = useState('');
+	// eslint-disable-next-line
 	const [studentBirthday, setStudentBirthday] = useState('');
 
 	const nextButton = () => {
@@ -50,8 +54,8 @@ function GetStudentInformation() {
 					</div>
 
 					<div className="flex">
-						<Button bgColor="gray" txtColor="white" className="w-1/3 mx-2 py-1">Back</Button>
-						<Button bgColor="green" txtColor="white" className="w-2/3 mx-2 py-1">Next</Button>
+						<Button bgColor="gray" txtColor="white" className="w-1/3 mx-2 py-1" onClick={() => backButton()}>Back</Button>
+						<Button bgColor="green" txtColor="white" className="w-2/3 mx-2 py-1" onClick={() => nextButton()}>Next</Button>
 					</div>
 				</div>
 			</div>

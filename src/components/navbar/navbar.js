@@ -14,7 +14,7 @@ function Navbar() {
 			<div className="navbar container mx-auto px-3 md:px-0">
 				<Link className='nav-logo' to="/">
 					<img src={logo} alt='logo'/>
-					<h1 className='text-3xl text-white font-semibold' >Navbar</h1>
+					<h1 className='text-3xl text-white font-semibold' >{/*Navbar*/}</h1>
 				</Link>
 				{/* <button className='navbar-collapse' onClick={() => showNav()}>
 					<FontAwesomeIcon icon={faBars} />

@@ -8,6 +8,8 @@ import { AuthProvider } from './services/authentication';
 import Navbar from './components/navbar/navbar';
 import Home from './pages/home';
 import Signup from './pages/signup';
+import Login from './pages/login';
+import Welcome from './pages/welcome';
 import Protected from './pages/protected';
 import GoogleAuth from './pages/google';
 
@@ -27,6 +29,8 @@ function App() {
 						</PrivateRoute>
 					}></Route>
 					<Route path='/signup' element={<Signup />}></Route>
+					<Route path='/login' element={<Login />}></Route>
+					<Route path='/welcome' element={<Welcome />}></Route>
 				</Routes>
 			</AuthProvider>
 		</BrowserRouter>

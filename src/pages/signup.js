@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from "../components/button/button";
 import './auth.css';
-import {Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../services/authentication';
 import { googleSocialUrl } from '../apiUrls';
 import Input from "../components/form/input";
@@ -57,32 +57,32 @@ function Signup() {
 				</div>
 
 				<Input label="First Name"
-					   type="text"
-					   placeHolder="John"
-					   className="mb-3"
-					   id="firstName"
-					   onChange={val => setFirstName(val)}
+					type="text"
+					placeHolder="John"
+					className="mb-3"
+					id="firstName"
+					onChange={val => setFirstName(val)}
 				/>
 				<Input label="Last Name"
-					   type="text"
-					   placeHolder="Doe"
-					   className="mb-3"
-					   id="lastName"
-					   onChange={val => setLastName(val)}
+					type="text"
+					placeHolder="Doe"
+					className="mb-3"
+					id="lastName"
+					onChange={val => setLastName(val)}
 				/>
 				<Input label="Email"
-					   type="email"
-					   placeHolder="JohnDoe@yahoo.com"
-					   className="mb-3"
-					   id="email"
-					   onChange={val => setEmail(val)}
+					type="email"
+					placeHolder="JohnDoe@yahoo.com"
+					className="mb-3"
+					id="email"
+					onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
-					   type="password"
-					   placeHolder="JohnDoePassword"
-					   className="mb-3"
-					   id="password"
-					   onChange={val => setPassword(val)}
+					type="password"
+					placeHolder="JohnDoePassword"
+					className="mb-3"
+					id="password"
+					onChange={val => setPassword(val)}
 				/>
 
 				<p className="text-xl mb-3 text-center">Or</p>

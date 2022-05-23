@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from "../components/button/button";
 import './auth.css';
-import {Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../services/authentication';
 import { googleSocialUrl } from '../apiUrls';
 import Input from "../components/form/input";
@@ -12,7 +12,6 @@ function Signup() {
 	const [firstName, setFirstName] = useState('');
 	// eslint-disable-next-line
 	const [lastName, setLastName] = useState('');
-
 	const [password, setPassword] = useState('');
 	const [email, setEmail] = useState('');
 	const auth = useAuth();
@@ -28,7 +27,6 @@ function Signup() {
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 				<h1 className="text-2xl mb-5 text-center">Create an Account</h1>
-
 				<p className="text-base mb-3">
 					AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
 				</p>
@@ -59,32 +57,32 @@ function Signup() {
 				</div>
 
 				<Input label="First Name"
-					   type="text"
-					   placeHolder="John"
-					   className="mb-3"
-					   id="firstName"
-					   onChange={val => setFirstName(val)}
+					type="text"
+					placeHolder="John"
+					className="mb-3"
+					id="firstName"
+					onChange={val => setFirstName(val)}
 				/>
 				<Input label="Last Name"
-					   type="text"
-					   placeHolder="Doe"
-					   className="mb-3"
-					   id="lastName"
-					   onChange={val => setLastName(val)}
+					type="text"
+					placeHolder="Doe"
+					className="mb-3"
+					id="lastName"
+					onChange={val => setLastName(val)}
 				/>
 				<Input label="Email"
-					   type="email"
-					   placeHolder="JohnDoe@yahoo.com"
-					   className="mb-3"
-					   id="email"
-					   onChange={val => setEmail(val)}
+					type="email"
+					placeHolder="JohnDoe@yahoo.com"
+					className="mb-3"
+					id="email"
+					onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
-					   type="password"
-					   placeHolder="JohnDoePassword"
-					   className="mb-3"
-					   id="password"
-					   onChange={val => setPassword(val)}
+					type="password"
+					placeHolder="JohnDoePassword"
+					className="mb-3"
+					id="password"
+					onChange={val => setPassword(val)}
 				/>
 
 				<p className="text-xl mb-3 text-center">Or</p>

@@ -14,16 +14,20 @@ import Loading from "../pages/loading";
  *
  * METHODS
  * user					- object with user info
- * handleLogin()		- logins user
- * handleGoogleLogin()	- logins user with Google
- * handleSignup()		- registers user with optional redirect
- * handleLogout()		- logouts user with optional redirect
+ * handleLogin()		- logins user (redirects to '/' or custom)
+ * handleGoogleLogin()	- logins user with Google (redirects to '/' or custom)
+ * handleSignup()		- registers user (redirects to '/' or custom)
+ * handleLogout()		- logouts user (redirects to '/' or custom)
  * autoAuthReq()		- sendReq wrapper that refreshes token or 
  *					  	  redirects to signup page as necessary
  * ==============================================
  */
 
 const AuthContext = createContext();
+// so that app does not redirect user back to login after login
+const excludeRedirects = [
+	'/signup', '/login'
+];
 
 export function useAuth() {
 	return useContext(AuthContext);
@@ -40,7 +44,7 @@ export function AuthProvider({ children }) {
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
 
-	const autoAuthReq = useRef(async (url, options, redirect=null) => {
+	const autoAuthReq = useRef(async (url, options, redirect = null) => {
 		const res = await sendReq(url, options);
 
 		// access token expired
@@ -56,17 +60,23 @@ export function AuthProvider({ children }) {
 				return await sendReq(url, options);
 			}
 			// refresh token invalid/expired
+			// set user as not logged in
+			setUser({
+				email: '',
+				fName: '',
+				lName: '',
+				isLoggedIn: false
+			});
 			// get user to signup again
 			navigate('/signup', { state: { from: { pathname: redirect } } });
 		}
 		return res;
 	}).current;
 
-	const handleSignup = async (email, username, password, redirect='/') => {
+	const handleSignup = async (email, password, redirect = '/') => {
 		const url = baseUrl + '/auth/registration/';
 		const body = {
 			email: email,
-			username: username,
 			password1: password,
 			password2: password
 		};
@@ -74,60 +84,62 @@ export function AuthProvider({ children }) {
 			method: 'POST',
 			body: body
 		};
-		const data = await sendReq(url, options);
-		if (!data.error) {
-			const body = data.data;
+		const res = await sendReq(url, options);
+		if (!res.error) {
+			const data = res.data;
 			setUser({
-				email: body.user.email,
-				fName: body.user.first_name,
-				lName: body.user.last_name,
+				email: data.user.email,
+				fName: data.user.first_name,
+				lName: data.user.last_name,
 				isLoggedIn: true
 			});
 			navigate(redirect);
 		}
+		return res;
 	};
 
-	const handleLogin = async (email, username, password, redirect='/') => {
+	const handleLogin = async (email, password, redirect = '/') => {
 		const url = baseUrl + '/auth/login/';
 		const body = {
 			email: email,
-			username: username,
 			password: password
 		};
 		const options = {
 			method: 'POST',
 			body: body
 		};
-		const data = await sendReq(url, options);
-		if (!data.error) {
-			const body = data.data;
+		const res = await sendReq(url, options);
+		if (!res.error) {
+			const data = res.data;
 			setUser({
-				email: body.user.email,
-				fName: body.user.first_name,
-				lName: body.user.last_name,
+				email: data.user.email,
+				fName: data.user.first_name,
+				lName: data.user.last_name,
 				isLoggedIn: true
 			});
 			navigate(redirect);
 		}
+		return res;
 	};
 	// TODO: add state param to google redirect uri for redirect memory
-	const handleGoogleLogin = async (code, redirect='/') => {
+	const handleGoogleLogin = async (code, redirect = '/') => {
 		const url = baseUrl + '/auth/google/';
 		const options = {
 			method: 'POST',
 			body: { code: code }
 		};
-		const data = await sendReq(url, options);
-		if (!data.error) {
-			const body = data.data;
+		const res = await sendReq(url, options);
+		if (!res.error) {
+			const data = res.data;
 			setUser({
-				email: body.user.email,
-				fName: body.user.first_name,
-				lName: body.user.last_name,
+				email: data.user.email,
+				fName: data.user.first_name,
+				lName: data.user.last_name,
 				isLoggedIn: true
 			});
 			navigate(redirect);
 		}
+		return res;
 	};
 
 	const handleLogout = async () => {
@@ -144,8 +156,9 @@ export function AuthProvider({ children }) {
 				lName: '',
 				isLoggedIn: false
 			});
-			navigate('/signup')
+			navigate('/signup');
 		}
+		return res;
 	};
 
 	useEffect(() => {
@@ -156,7 +169,11 @@ export function AuthProvider({ children }) {
 		const options = {
 			method: 'GET'
 		};
-		autoAuthReq(url, options, location.pathname).then(res => {
+		let origin = location.pathname;
+		if (excludeRedirects.includes(location.pathname)) {
+			origin = '/';
+		}
+		autoAuthReq(url, options, origin).then(res => {
 			setCheckLogin(true);
 			if (!res.error) {
 				const data = res.data;
@@ -166,11 +183,15 @@ export function AuthProvider({ children }) {
 					lName: data.last_name,
 					isLoggedIn: true
 				});
+				// redirect user away from signup/login 
+				// if they're signed in already
+				navigate(origin);
 			}
+			// TODO: error handling
 		}).catch(err => {
-			console.log(err);
+			// TODO: error handling pt 2.
 		});
-	}, [autoAuthReq, location]);
+	}, [autoAuthReq, location, navigate]);
 
 	const value = {
 		user,

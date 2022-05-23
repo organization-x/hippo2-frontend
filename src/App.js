@@ -10,8 +10,10 @@ import Home from './pages/home';
 import Signup from './pages/signup';
 import Protected from './pages/protected';
 import GoogleAuth from './pages/google';
+import Footer from './components/footer/footer';
 
 import './App.css';
+
 
 function App() {
 	return (
@@ -28,6 +30,7 @@ function App() {
 					}></Route>
 					<Route path='/signup' element={<Signup />}></Route>
 				</Routes>
+				<Footer />
 			</AuthProvider>
 		</BrowserRouter>
 	);

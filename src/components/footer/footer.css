@@ -1,0 +1,8 @@
+/* change background color */
+.footer {
+	background-color: rgb(56, 56, 56);
+}
+/* change color when hovering over link */
+.link:hover{
+	color: rgb(128, 129, 131);
+}

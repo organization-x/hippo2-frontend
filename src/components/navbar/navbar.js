@@ -1,28 +1,26 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../logo.svg';
 import './navbar.css';
 
 function Navbar() {
-	const [show, setShow] = useState(false);
-	const showNav = () => {
-		setShow(!show);
-	};
+	const [show] = useState(false); //change [show] to [show, setShow] if uncommenting showNav() below
+	// const showNav = () => {
+	// 	setShow(!show);
+	// };
 
 	return (
 		<header className='w-full py-3'>
 			<div className="navbar container mx-auto px-3 md:px-0">
 				<Link className='nav-logo' to="/">
 					<img src={logo} alt='logo'/>
-					<h1 className='text-3xl text-white font-semibold' >Navbar</h1>
+					<h1 className='text-3xl text-white font-semibold' >{/*Navbar*/}</h1>
 				</Link>
-				<button className='navbar-collapse' onClick={() => showNav()}>
+				{/* <button className='navbar-collapse' onClick={() => showNav()}>
 					<FontAwesomeIcon icon={faBars} />
-				</button>
+				</button> */}
 				<nav className={`${show ? 'show' : ''}`}>
-					<ul className='nav-links grow'>
+					{/* <ul className='nav-links grow'>
 						<li className='text-white hover:text-gray-300'>
 							<Link to='/'>Page 1</Link>
 						</li>
@@ -37,7 +35,7 @@ function Navbar() {
 						<li className='text-white hover:text-gray-300'>
 							<Link to='/'>Login</Link>
 						</li>
-					</ul>
+					</ul> */}
 				</nav>
 			</div>
 		</header>

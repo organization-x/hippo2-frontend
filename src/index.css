@@ -1,5 +1,6 @@
 /* This is the file that lets us add variables to tailwind so that we can use them with other tailwind styles. */
 /* This file and App.css should have the same variables in them */
+/* Documentation for the full process is at https://www.notion.so/aicamp/Unified-Styling-2e76e8e9c9e04129900f8a332d33d4ef */
 
 /* Import Font */
 @font-face {

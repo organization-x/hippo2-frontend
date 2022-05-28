@@ -1,18 +1,30 @@
 .btn.bg-gray {
     background-color: #c4c4c4;
 }
+.btn.bg-gray:hover {
+    background-color: #cacaca;
+}
 
 .btn.bg-green {
-    background-color: rgba(15, 184, 113, 0.83);
+    background-color: #12A868;
+}
+.btn.bg-green:hover {
+    background-color: #13b66f;
 }
 
 .btn.bg-black {
     background-color: black;
 }
+.btn.bg-black:hover {
+    background-color: rgb(48, 48, 48);
+}
 
 .btn.bg-white {
     border: 1px solid black;
-    background-color: rgba(255, 255, 255, 0.83);
+    background-color: rgba(255, 255, 255);
+}
+.btn.bg-white:hover {
+    background-color: rgb(242, 242, 242);
 }
 
 .btn.txt-black {
@@ -24,10 +36,10 @@
 }
 
 .btn.normal {
-    padding: 0.469rem 2.531rem;
+    padding: 0.47rem 2.53rem;
 }
 
 .btn.button {
-    border-radius: 1.875rem;
+    border-radius: 1.88rem;
     font-size: 1.25rem;
 }

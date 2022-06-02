@@ -29,17 +29,20 @@ const excludeRedirects = [
 	'/signup', '/login'
 ];
 
+const blankUser = {
+	email: '',
+	fName: '',
+	lName: '',
+	type: '', // parent || student
+	isLoggedIn: false
+};
+
 export function useAuth() {
 	return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
-	const [user, setUser] = useState({
-		email: '',
-		fName: '',
-		lName: '',
-		isLoggedIn: false
-	});
+	const [user, setUser] = useState(blankUser);
 	const [checkLogin, setCheckLogin] = useState(false);
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
@@ -61,41 +64,56 @@ export function AuthProvider({ children }) {
 			}
 			// refresh token invalid/expired
 			// set user as not logged in
-			setUser({
-				email: '',
-				fName: '',
-				lName: '',
-				isLoggedIn: false
-			});
+			setUser(blankUser);
 			// get user to signup again
 			navigate('/signup', { state: { from: { pathname: redirect } } });
 		}
 		return res;
 	}).current;
 
-	const handleSignup = async (email, password, redirect = '/') => {
-		const url = baseUrl + '/auth/registration/';
-		const body = {
-			email: email,
-			password1: password,
-			password2: password
-		};
-		const options = {
+	const handleSignup = async (email, fName, lName, type, password, redirect = '/') => {
+		const newUrl = baseUrl + '/auth/registration/';
+		const newOptions = {
 			method: 'POST',
-			body: body
+			body: {
+				email: email,
+				password1: password,
+				password2: password
+			}
 		};
-		const res = await sendReq(url, options);
-		if (!res.error) {
-			const data = res.data;
-			setUser({
-				email: data.user.email,
-				fName: data.user.first_name,
-				lName: data.user.last_name,
-				isLoggedIn: true
-			});
-			navigate(redirect);
+		// signup user
+		const newRes = await sendReq(newUrl, newOptions);
+		console.log(newRes);
+		if (newRes.error) {
+			return newRes;
 		}
-		return res;
+		return newRes;
+		// update user's info (fname, lname, type)
+		const userUrl = baseUrl + '/api/v1/userinfo/';
+		const updateOptions = {
+			method: 'POST',
+			body: {
+				first_name: fName,
+				last_name: lName
+				// TODO: add type later
+			}
+		};
+		const updateRes = await sendReq(userUrl, updateOptions);
+		if (updateRes.error) {
+			return updateRes;
+		}
+
+		// set user's info on frontend
+		setUser({
+			email: newRes.data.user.email,
+			fName: fName,
+			lName: lName,
+			type: type,
+			isLoggedIn: true
+		});
+
+		navigate(redirect);
+		return newRes;
 	};
 
 	const handleLogin = async (email, password, redirect = '/') => {

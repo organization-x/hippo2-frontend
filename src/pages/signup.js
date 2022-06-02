@@ -13,6 +13,7 @@ function Signup() {
 	// eslint-disable-next-line
 	const [lastName, setLastName] = useState('');
 	const [password, setPassword] = useState('');
+	const [type, setType] = useState('');
 	const [email, setEmail] = useState('');
 	const auth = useAuth();
 	const location = useLocation();
@@ -20,7 +21,14 @@ function Signup() {
 	const origin = location.state?.from?.pathname || '/';
 
 	const signUpUser = () => {
-		auth.handleSignup(email, password, origin);
+		auth.handleSignup(
+			email, 
+			firstName,
+			lastName,
+			type,
+			password, 
+			origin
+		);
 	}
 
 	return (

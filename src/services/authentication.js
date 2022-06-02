@@ -121,9 +121,9 @@ export function AuthProvider({ children }) {
 		const data = userRes.data;
 		setUser({
 			email: data.email,
-			fName: data.first_name,
-			lName: data.last_name,
-			type: data.user_type,
+			fName: data.first_name || '',
+			lName: data.last_name || '',
+			type: data.user_type || '',
 			isLoggedIn: true
 		});
 
@@ -148,9 +148,9 @@ export function AuthProvider({ children }) {
 		const data = userRes.data;
 		setUser({
 			email: data.email,
-			fName: data.first_name,
-			lName: data.last_name,
-			type: data.user_type,
+			fName: data.first_name || '',
+			lName: data.last_name || '',
+			type: data.user_type || '',
 			isLoggedIn: true
 		});
 
@@ -188,9 +188,9 @@ export function AuthProvider({ children }) {
 			const data = res.data;
 			setUser({
 				email: data.email,
-				fName: data.first_name,
-				lName: data.last_name,
-				type: data.user_type,
+				fName: data.first_name || '',
+				lName: data.last_name || '',
+				type: data.user_type || '',
 				isLoggedIn: true
 			});
 			// redirect user away from signup/login 

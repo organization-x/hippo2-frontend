@@ -50,22 +50,9 @@ export function AuthProvider({ children }) {
 	const autoAuthReq = useRef(async (url, options, redirect = null) => {
 		const res = await sendReq(url, options);
 
-		// access token expired
-		// attempt refresh
-		if (res.status === 401) {
-			const rOptions = {
-				method: 'POST',
-				body: {}
-			};
-			const rUrl = baseUrl + '/auth/token/refresh/';
-			const rRes = await sendReq(rUrl, rOptions);
-			if (!rRes.error) {
-				return await sendReq(url, options);
-			}
-			// refresh token invalid/expired
-			// set user as not logged in
+		// unauthenticated
+		if ([401, 403].includes(res.status)) {
 			setUser(blankUser);
-			// get user to signup again
 			navigate('/signup', { state: { from: { pathname: redirect } } });
 		}
 		return res;
@@ -83,11 +70,10 @@ export function AuthProvider({ children }) {
 		};
 		// signup user
 		const newRes = await sendReq(newUrl, newOptions);
-		console.log(newRes);
 		if (newRes.error) {
 			return newRes;
 		}
-		return newRes;
+
 		// update user's info (fname, lname, type)
 		const userUrl = baseUrl + '/api/v1/userinfo/';
 		const updateOptions = {
@@ -105,7 +91,7 @@ export function AuthProvider({ children }) {
 
 		// set user's info on frontend
 		setUser({
-			email: newRes.data.user.email,
+			email: email,
 			fName: fName,
 			lName: lName,
 			type: type,
@@ -117,27 +103,36 @@ export function AuthProvider({ children }) {
 	};
 
 	const handleLogin = async (email, password, redirect = '/') => {
-		const url = baseUrl + '/auth/login/';
-		const body = {
-			email: email,
-			password: password
-		};
-		const options = {
+		const lUrl = baseUrl + '/auth/login/';
+		const lOptions = {
 			method: 'POST',
-			body: body
+			body: {
+				email: email,
+				password: password
+			}
 		};
-		const res = await sendReq(url, options);
-		if (!res.error) {
-			const data = res.data;
-			setUser({
-				email: data.user.email,
-				fName: data.user.first_name,
-				lName: data.user.last_name,
-				isLoggedIn: true
-			});
-			navigate(redirect);
+		// login
+		const lRes = await sendReq(lUrl, lOptions);
+		if (lRes.error) {
+			return lRes;
 		}
-		return res;
+		const userUrl = baseUrl + '/api/v1/userinfo/';
+		const userOptions = { method: 'GET' };
+		const userRes = await sendReq(userUrl, userOptions);
+		if (userRes.error) {
+			return userRes;
+		}
+		const data = userRes.data;
+		setUser({
+			email: data.email,
+			fName: data.first_name,
+			lName: data.last_name,
+			type: data.user_type,
+			isLoggedIn: true
+		});
+
+		navigate(redirect);
+		return userRes;
 	};
 	// TODO: add state param to google redirect uri for redirect memory
 	const handleGoogleLogin = async (code, redirect = '/') => {
@@ -183,7 +178,7 @@ export function AuthProvider({ children }) {
 		if (location.pathname === '/auth/google/') {
 			return setCheckLogin(true);
 		}
-		const url = baseUrl + '/auth/user/';
+		const url = baseUrl + '/api/v1/userinfo/';
 		const options = {
 			method: 'GET'
 		};
@@ -195,10 +190,12 @@ export function AuthProvider({ children }) {
 			setCheckLogin(true);
 			if (!res.error) {
 				const data = res.data;
+				console.log(data);
 				setUser({
 					email: data.email,
 					fName: data.first_name,
 					lName: data.last_name,
+					type: data.user_type,
 					isLoggedIn: true
 				});
 				// redirect user away from signup/login 

@@ -133,7 +133,7 @@ export function AuthProvider({ children }) {
 
 	// TODO: add state param to google redirect uri for redirect memory
 	const handleGoogleLogin = async (code, redirect = '/') => {
-		const url = baseUrl + '/auth/google/';
+		const url = baseUrl + '/api/v1/auth/google/';
 		const options = {
 			method: 'POST',
 			body: { code: code }

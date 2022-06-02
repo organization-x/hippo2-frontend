@@ -7,10 +7,7 @@ import { googleSocialUrl } from '../apiUrls';
 import Input from "../components/form/input";
 
 function Signup() {
-	// We ignore these lines from linting because firstName and lastName aren't used yet but setFirstName and setLastName are used
-	// eslint-disable-next-line
 	const [firstName, setFirstName] = useState('');
-	// eslint-disable-next-line
 	const [lastName, setLastName] = useState('');
 	const [password, setPassword] = useState('');
 	const [type, setType] = useState('');
@@ -59,8 +56,22 @@ function Signup() {
 
 				<div className="mb-6 flex items-center justify-center">
 					<div className="mx-auto inline-block">
-						<Button bgColor="white" className="w-28 md:w-36 mx-2 p-1">Student</Button>
-						<Button bgColor="black" className="w-28 md:w-36 mx-2 p-1" txtColor="white">Parent</Button>
+						<Button 
+							bgColor={type === 'student' ? 'black' : 'white'} 
+							txtColor={type === 'student' ? 'white' : 'black'}
+							onClick={() => setType('student')}
+							className="w-28 md:w-36 mx-2 p-1"
+						>
+							Student
+						</Button>
+						<Button 
+							bgColor={type === 'parent' ? 'black' : 'white'} 
+							txtColor={type === 'parent' ? 'white' : 'black'}
+							onClick={() => setType('parent')}
+							className="w-28 md:w-36 mx-2 p-1"
+						>
+							Parent
+						</Button>
 					</div>
 				</div>
 

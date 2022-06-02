@@ -37,11 +37,14 @@ async function sendReq(url, iOptions) {
 	const res = await fetch(url, options);
 	const error = res.ok ? false : true;
 	const json = await res.json();
-	return {
+	
+	const result = {
 		status: res.status,
-		error: error,
 		data: json
 	};
+	// if error, handle with .catch
+	if (error) throw result;
+	return result;
 };
 
 export default sendReq;

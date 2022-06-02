@@ -47,15 +47,21 @@ export function AuthProvider({ children }) {
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
 
-	const autoAuthReq = useRef(async (url, options, redirect = null) => {
-		const res = await sendReq(url, options);
-
-		// unauthenticated
-		if ([401, 403].includes(res.status)) {
-			setUser(blankUser);
-			navigate('/signup', { state: { from: { pathname: redirect } } });
-		}
-		return res;
+	const autoAuthReq = useRef((url, options, redirect = null) => {
+		return new Promise((resolve, reject) => {
+			sendReq(
+				url, options
+			).then(res => {
+				resolve(res);
+			}).catch(err => {
+				// redirect if unauthenticated
+				if (err.status && [401, 403].includes(err.status)) {
+					setUser(blankUser);
+					navigate('/signup', { state: { from: { pathname: redirect } } });
+				}
+				reject(err);
+			});
+		});
 	}).current;
 
 	const handleSignup = async (email, fName, lName, type, password, redirect = '/') => {
@@ -69,10 +75,7 @@ export function AuthProvider({ children }) {
 			}
 		};
 		// signup user
-		const newRes = await sendReq(newUrl, newOptions);
-		if (newRes.error) {
-			return newRes;
-		}
+		await sendReq(newUrl, newOptions);
 
 		// update user's info (fname, lname, type)
 		const userUrl = baseUrl + '/api/v1/userinfo/';
@@ -80,14 +83,11 @@ export function AuthProvider({ children }) {
 			method: 'POST',
 			body: {
 				first_name: fName,
-				last_name: lName
-				// TODO: add type later
+				last_name: lName,
+				type: type
 			}
 		};
 		const updateRes = await sendReq(userUrl, updateOptions);
-		if (updateRes.error) {
-			return updateRes;
-		}
 
 		// set user's info on frontend
 		setUser({
@@ -99,7 +99,7 @@ export function AuthProvider({ children }) {
 		});
 
 		navigate(redirect);
-		return newRes;
+		return updateRes;
 	};
 
 	const handleLogin = async (email, password, redirect = '/') => {
@@ -112,16 +112,12 @@ export function AuthProvider({ children }) {
 			}
 		};
 		// login
-		const lRes = await sendReq(lUrl, lOptions);
-		if (lRes.error) {
-			return lRes;
-		}
+		await sendReq(lUrl, lOptions);
+
+		// get user info
 		const userUrl = baseUrl + '/api/v1/userinfo/';
-		const userOptions = { method: 'GET' };
-		const userRes = await sendReq(userUrl, userOptions);
-		if (userRes.error) {
-			return userRes;
-		}
+		const userRes = await sendReq(userUrl, { method: 'GET' });
+
 		const data = userRes.data;
 		setUser({
 			email: data.email,
@@ -134,6 +130,7 @@ export function AuthProvider({ children }) {
 		navigate(redirect);
 		return userRes;
 	};
+
 	// TODO: add state param to google redirect uri for redirect memory
 	const handleGoogleLogin = async (code, redirect = '/') => {
 		const url = baseUrl + '/auth/google/';
@@ -141,18 +138,24 @@ export function AuthProvider({ children }) {
 			method: 'POST',
 			body: { code: code }
 		};
-		const res = await sendReq(url, options);
-		if (!res.error) {
-			const data = res.data;
-			setUser({
-				email: data.user.email,
-				fName: data.user.first_name,
-				lName: data.user.last_name,
-				isLoggedIn: true
-			});
-			navigate(redirect);
-		}
-		return res;
+		// signup/login
+		await sendReq(url, options);
+		
+		// get user info
+		const userUrl = baseUrl + '/api/v1/userinfo/';
+		const userRes = await sendReq(userUrl, { method: 'GET' });
+
+		const data = userRes.data;
+		setUser({
+			email: data.email,
+			fName: data.first_name,
+			lName: data.last_name,
+			type: data.user_type,
+			isLoggedIn: true
+		});
+
+		navigate(redirect);
+		return userRes;
 	};
 
 	const handleLogout = async () => {
@@ -162,15 +165,9 @@ export function AuthProvider({ children }) {
 			body: {}
 		};
 		const res = await sendReq(url, options);
-		if (!res.error) {
-			setUser({
-				email: '',
-				fName: '',
-				lName: '',
-				isLoggedIn: false
-			});
-			navigate('/signup');
-		}
+		setUser(blankUser);
+
+		navigate('/signup');
 		return res;
 	};
 
@@ -188,23 +185,20 @@ export function AuthProvider({ children }) {
 		}
 		autoAuthReq(url, options, origin).then(res => {
 			setCheckLogin(true);
-			if (!res.error) {
-				const data = res.data;
-				console.log(data);
-				setUser({
-					email: data.email,
-					fName: data.first_name,
-					lName: data.last_name,
-					type: data.user_type,
-					isLoggedIn: true
-				});
-				// redirect user away from signup/login 
-				// if they're signed in already
-				navigate(origin);
-			}
-			// TODO: error handling
+			const data = res.data;
+			setUser({
+				email: data.email,
+				fName: data.first_name,
+				lName: data.last_name,
+				type: data.user_type,
+				isLoggedIn: true
+			});
+			// redirect user away from signup/login 
+			// if they're signed in already
+			navigate(origin);
 		}).catch(err => {
-			// TODO: error handling pt 2.
+			setCheckLogin(true);
+			// TODO: error handling for non-unauthenticated messages
 		});
 	}, [autoAuthReq, location, navigate]);
 

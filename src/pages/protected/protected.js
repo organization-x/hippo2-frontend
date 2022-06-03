@@ -1,4 +1,4 @@
-import { useAuth } from "../services/authentication";
+import { useAuth } from "../../services/authentication";
 
 function Protected() {
 	const auth = useAuth();

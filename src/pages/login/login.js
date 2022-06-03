@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import './auth.css';
-import { googleSocialUrl } from '../apiUrls';
-import { useAuth } from "../services/authentication";
 import { Link, useLocation } from "react-router-dom";
-import Input from "../components/form/input";
-import Button from "../components/button/button";
+import { googleSocialUrl } from '../../apiUrls';
+import { useAuth } from "../../services/authentication";
+import Input from "../../components/form/input";
+import Button from "../../components/button/button";
+import './login.css';
 
 function Login() {
 	const [email, setEmail] = useState('');
@@ -61,7 +61,11 @@ function Login() {
 				</div>
 
 				<div className="mb-5 flex items-center justify-center">
-					<Link to="/signup" className="mx-auto text-blue-700 hover:text-blue-600">Create an account</Link>
+					<Link 
+						to="/signup" 
+						className="mx-auto text-blue-700 hover:text-blue-600"
+						state={{from: { pathname: origin }}}
+					>Create an account</Link>
 				</div>
 
 				<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => loginUser()}>Next</Button>

@@ -1,5 +1,5 @@
-import Input from "../components/form/input";
-import Button from "../components/button/button";
+import Input from "../../components/form/input";
+import Button from "../../components/button/button";
 import { useState } from "react";
 
 function GetStudentInformation() {

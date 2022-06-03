@@ -6,12 +6,12 @@ import PrivateRoute from './components/privateroute/privateRoute';
 import { AuthProvider } from './services/authentication';
 
 import Navbar from './components/navbar/navbar';
-import Home from './pages/home';
-import Signup from './pages/signup';
-import Login from './pages/login';
-import Welcome from './pages/welcome';
-import Protected from './pages/protected';
-import GoogleAuth from './pages/google';
+import Home from './pages/home/home';
+import Signup from './pages/signup/signup';
+import Login from './pages/login/login';
+import Welcome from './pages/welcome/welcome';
+import Protected from './pages/protected/protected';
+import GoogleAuth from './pages/google/google';
 import Footer from './components/footer/footer';
 
 import './App.css';

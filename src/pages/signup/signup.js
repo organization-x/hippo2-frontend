@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import Button from "../components/button/button";
-import './auth.css';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../services/authentication';
-import { googleSocialUrl } from '../apiUrls';
-import Input from "../components/form/input";
+import { useAuth } from '../../services/authentication';
+import { googleSocialUrl } from '../../apiUrls';
+import Button from "../../components/button/button";
+import Input from "../../components/form/input";
+import './signup.css';
 
 function Signup() {
 	const [firstName, setFirstName] = useState('');
@@ -114,7 +114,11 @@ function Signup() {
 				</div>
 
 				<div className="mb-6 flex items-center justify-center">
-					<Link to="/login" className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit">Already have an account?</Link>
+					<Link 
+						to="/login" 
+						className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit"
+						state={{from: {pathname: origin}}}
+					>Already have an account?</Link>
 				</div>
 
 				<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>

@@ -28,6 +28,11 @@ const AuthContext = createContext();
 const excludeRedirects = [
 	'/signup', '/login'
 ];
+// routes that don't require check to see if user is authenticated
+// prevents navigate from removing query string
+const excludeChecks = [
+	'/auth/google/', '/password/reset', '/password/reset/confirm'
+];
 
 const blankUser = {
 	email: '',
@@ -172,7 +177,7 @@ export function AuthProvider({ children }) {
 	};
 
 	useEffect(() => {
-		if (location.pathname === '/auth/google/') {
+		if (excludeChecks.includes(location.pathname)) {
 			return setCheckLogin(true);
 		}
 		const url = baseUrl + '/api/v1/userinfo/';

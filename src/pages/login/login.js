@@ -48,7 +48,7 @@ function Login() {
 					onChange={val => setPassword(val)}
 				/>
 				<div className="mb-4">
-					<Link to="/" className="mx-auto text-blue-700 hover:text-blue-600">Forgot password?</Link>
+					<Link to="/password/reset" className="mx-auto text-blue-700 hover:text-blue-600">Forgot password?</Link>
 				</div>
 
 				<p className="text-xl mb-5 text-center">Or</p>

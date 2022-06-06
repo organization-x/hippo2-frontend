@@ -13,6 +13,8 @@ import Welcome from './pages/welcome/welcome';
 import Protected from './pages/protected/protected';
 import GoogleAuth from './pages/google/google';
 import Footer from './components/footer/footer';
+import ForgotPassword from './pages/forgotPassword/forgotPassword';
+import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
 
 import './App.css';
 
@@ -33,6 +35,8 @@ function App() {
 					}></Route>
 					<Route path='/signup' element={<Signup />}></Route>
 					<Route path='/login' element={<Login />}></Route>
+					<Route path='/password/reset' element={<ForgotPassword />}></Route>
+					<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
 				</Routes>
 				<Footer />
 			</AuthProvider>

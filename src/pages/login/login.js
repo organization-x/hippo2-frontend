@@ -2,20 +2,39 @@ import { useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { googleSocialUrl } from '../../apiUrls';
 import { useAuth } from "../../services/authentication";
+import validateUserLogin from '../../validation/login';
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
 import './login.css';
+import formatApiErrors from '../../validation/formatApiErrors';
 
 function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [formErrors, setFormErrors] = useState({});
 	const auth = useAuth();
 	const location = useLocation();
 
 	const origin = location.state?.from?.pathname || '/';
 
 	const loginUser = () => {
-		auth.handleLogin(email, password, origin);
+		setFormErrors({});
+		const [err, data] = validateUserLogin({
+			email,
+			password
+		});
+		if (err) {
+			return setFormErrors(err);
+		}
+		auth.handleLogin(data.email, data.password, origin).catch(err => {
+			if (err.status === 400) {
+				const keyMap = {
+					password1: 'password',
+					non_field_errors: 'nonFieldErrors'
+				};
+				setFormErrors(formatApiErrors(err.data, keyMap));
+			}
+		});
 	}
 
 	return (
@@ -33,18 +52,31 @@ function Login() {
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
 			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-2xl mb-7 text-center">Welcome back to AI Camp!</h2>
+				<h2 className="text-2xl mb-3 text-center">Welcome back to AI Camp!</h2>
+
+				{
+					formErrors.nonFieldErrors?.length ? 
+						<span className='block form-error'>
+							{formErrors.nonFieldErrors[0]}
+						</span> 
+					:
+						null
+				}
 
 				<Input label="Email"
 					type="email"
 					placeHolder="JohnDoe@yahoo.com"
-					className="mb-5"
+					className="mb-5 mt-5"
+					isValid={formErrors.email?.length}
+					errorText={formErrors.email?.[0]}
 					onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
 					type="password"
 					placeHolder="JohnDoePassword"
 					className="mb-2"
+					isValid={formErrors.password?.length}
+					errorText={formErrors.password?.[0]}
 					onChange={val => setPassword(val)}
 				/>
 				<div className="mb-4">

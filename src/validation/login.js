@@ -16,7 +16,7 @@ const messages = {
 	size: {
 		password: 'Password length must be more than 7'
 	}
-}
+};
 
 function validateUserLogin(data) {
 	const [err, vData] = validate(data, UserLogin);

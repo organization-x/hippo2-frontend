@@ -109,7 +109,7 @@ function Signup() {
 					className="mb-3 mt-6"
 					id="firstName"
 					isValid={formErrors.firstName?.length}
-					errorText={formErrors.firstName?.length ? formErrors.firstName[0] : null}
+					errorText={formErrors.firstName?.[0]}
 					onChange={val => setFirstName(val)}
 				/>
 				<Input label="Last Name"
@@ -118,7 +118,7 @@ function Signup() {
 					className="mb-3"
 					id="lastName"
 					isValid={formErrors.lastName?.length}
-					errorText={formErrors.lastName?.length ? formErrors.lastName[0] : null}
+					errorText={formErrors.lastName?.[0]}
 					onChange={val => setLastName(val)}
 				/>
 				<Input label="Email"
@@ -127,7 +127,7 @@ function Signup() {
 					className="mb-3"
 					id="email"
 					isValid={formErrors.email?.length}
-					errorText={formErrors.email?.length ? formErrors.email[0] : null}
+					errorText={formErrors.email?.[0]}
 					onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
@@ -136,7 +136,7 @@ function Signup() {
 					className="mb-3"
 					id="password"
 					isValid={formErrors.password?.length}
-					errorText={formErrors.password?.length ? formErrors.password[0] : null}
+					errorText={formErrors.password?.[0]}
 					onChange={val => setPassword(val)}
 				/>
 

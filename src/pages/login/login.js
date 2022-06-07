@@ -68,7 +68,7 @@ function Login() {
 					placeHolder="JohnDoe@yahoo.com"
 					className="mb-5 mt-5"
 					isValid={formErrors.email?.length}
-					errorText={formErrors.email?.length ? formErrors.email[0] : null}
+					errorText={formErrors.email?.[0]}
 					onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
@@ -76,7 +76,7 @@ function Login() {
 					placeHolder="JohnDoePassword"
 					className="mb-2"
 					isValid={formErrors.password?.length}
-					errorText={formErrors.password?.length ? formErrors.password[0] : null}
+					errorText={formErrors.password?.[0]}
 					onChange={val => setPassword(val)}
 				/>
 				<div className="mb-4">

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../services/authentication';
 import { googleSocialUrl } from '../../apiUrls';
+import validateUserSignup from '../../validation/signup';
+import formatApiErrors from '../../validation/formatApiErrors';
 import Button from "../../components/button/button";
 import Input from "../../components/form/input";
 import './signup.css';
@@ -12,20 +14,40 @@ function Signup() {
 	const [password, setPassword] = useState('');
 	const [type, setType] = useState('');
 	const [email, setEmail] = useState('');
+	const [formErrors, setFormErrors] = useState({});
 	const auth = useAuth();
 	const location = useLocation();
 
 	const origin = location.state?.from?.pathname || '/';
 
 	const signUpUser = () => {
-		auth.handleSignup(
-			email, 
+		setFormErrors({});
+		const [err, data] = validateUserSignup({
+			email,
 			firstName,
 			lastName,
 			type,
-			password, 
+			password
+		});
+		if (err) {
+			return setFormErrors(err);
+		}
+		auth.handleSignup(
+			data.email, 
+			data.firstName,
+			data.lastName,
+			data.type,
+			data.password, 
 			origin
-		);
+		).catch(err => {
+			if (err.status === 400) {
+				const keyMap = {
+					'password1': 'password',
+					'non_field_errors': 'nonFieldErrors'
+				};
+				setFormErrors(formatApiErrors(err.data, keyMap));
+			}
+		});
 	}
 
 	return (
@@ -54,7 +76,7 @@ function Signup() {
 			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-xl mb-6 text-center">Join AI Camp as a</h2>
 
-				<div className="mb-6 flex items-center justify-center">
+				<div className="flex items-center justify-center">
 					<div className="mx-auto inline-block">
 						<Button 
 							bgColor={type === 'student' ? 'black' : 'white'} 
@@ -74,12 +96,20 @@ function Signup() {
 						</Button>
 					</div>
 				</div>
+				{
+					formErrors.type?.length ? 
+						<span className='mt-3 block text-center form-error'>{formErrors.type[0]}</span> 
+					: 
+						null
+				}
 
 				<Input label="First Name"
 					type="text"
 					placeHolder="John"
-					className="mb-3"
+					className="mb-3 mt-6"
 					id="firstName"
+					isValid={formErrors.firstName?.length}
+					errorText={formErrors.firstName?.length ? formErrors.firstName[0] : null}
 					onChange={val => setFirstName(val)}
 				/>
 				<Input label="Last Name"
@@ -87,6 +117,8 @@ function Signup() {
 					placeHolder="Doe"
 					className="mb-3"
 					id="lastName"
+					isValid={formErrors.lastName?.length}
+					errorText={formErrors.lastName?.length ? formErrors.lastName[0] : null}
 					onChange={val => setLastName(val)}
 				/>
 				<Input label="Email"
@@ -94,6 +126,8 @@ function Signup() {
 					placeHolder="JohnDoe@yahoo.com"
 					className="mb-3"
 					id="email"
+					isValid={formErrors.email?.length}
+					errorText={formErrors.email?.length ? formErrors.email[0] : null}
 					onChange={val => setEmail(val)}
 				/>
 				<Input label="Password"
@@ -101,6 +135,8 @@ function Signup() {
 					placeHolder="JohnDoePassword"
 					className="mb-3"
 					id="password"
+					isValid={formErrors.password?.length}
+					errorText={formErrors.password?.length ? formErrors.password[0] : null}
 					onChange={val => setPassword(val)}
 				/>
 

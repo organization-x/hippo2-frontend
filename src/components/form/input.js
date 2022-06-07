@@ -4,7 +4,7 @@ function Input({placeHolder, label, type, value, onChange, isValid, errorText, c
     let error = '';
     let style = 'input';
 
-    if (isValid === 'false') {
+    if (isValid) {
         error = errorText;
         style += ' invalid-border';
     }

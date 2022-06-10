@@ -4,6 +4,7 @@ import {
 import PrivateRoute from './components/privateroute/privateRoute';
 
 import { AuthProvider } from './services/authentication';
+import { FlashMsgProvider } from './services/flashMsg';
 
 import Navbar from './components/navbar/navbar';
 import Home from './pages/home/home';
@@ -23,22 +24,24 @@ function App() {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
-				<Navbar />
-				<Routes>
-					<Route path='/' element={<Home />}></Route>
-					<Route path='/auth/google/' element={<GoogleAuth />}></Route>
-					<Route path='/welcome' element={<Welcome />}></Route>
-					<Route path='/protected' element={
-						<PrivateRoute>
-							<Protected />
-						</PrivateRoute>
-					}></Route>
-					<Route path='/signup' element={<Signup />}></Route>
-					<Route path='/login' element={<Login />}></Route>
-					<Route path='/password/reset' element={<ForgotPassword />}></Route>
-					<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
-				</Routes>
-				<Footer />
+				<FlashMsgProvider>
+					<Navbar />
+					<Routes>
+						<Route path='/' element={<Home />}></Route>
+						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
+						<Route path='/welcome' element={<Welcome />}></Route>
+						<Route path='/protected' element={
+							<PrivateRoute>
+								<Protected />
+							</PrivateRoute>
+						}></Route>
+						<Route path='/signup' element={<Signup />}></Route>
+						<Route path='/login' element={<Login />}></Route>
+						<Route path='/password/reset' element={<ForgotPassword />}></Route>
+						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
+					</Routes>
+					<Footer />
+				</FlashMsgProvider>
 			</AuthProvider>
 		</BrowserRouter>
 	);

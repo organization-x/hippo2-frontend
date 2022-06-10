@@ -16,6 +16,7 @@ import GoogleAuth from './pages/google/google';
 import Footer from './components/footer/footer';
 import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
+import GroupJoin from './pages/groupJoin/groupJoin';
 
 import './App.css';
 
@@ -39,6 +40,11 @@ function App() {
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
 						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
+						<Route path='/group/join' element={
+							<PrivateRoute>
+								<GroupJoin />
+							</PrivateRoute>
+						}></Route>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

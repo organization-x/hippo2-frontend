@@ -7,7 +7,9 @@ function PrivateRoute({ children }) {
 	const auth = useAuth();
 	const location = useLocation();
 	if (!auth.user.isLoggedIn) {
-		return <Navigate to={'/signup'} replace state={{ from: location }} />
+		return <Navigate to={'/signup'} replace state={
+			{ from: { pathname: location.pathname + location.search } }
+		} />;
 	}
 	return children;
 }

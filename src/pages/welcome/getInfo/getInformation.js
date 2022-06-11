@@ -20,7 +20,7 @@ function GetInformation({type, onBack, onNext}) {
 	const onSubmit = () => {
 		// executes when the Next button is clicked or when form is submitted
 		setFormErrors({});
-		let info = {
+		const info = {
 			firstName,
 			lastName,
 			email,
@@ -32,7 +32,6 @@ function GetInformation({type, onBack, onNext}) {
 
 		const [err, data] = validateUserInformation(info, user.type);
 		if (err) {
-			console.log(err);
 			return setFormErrors(err);
 		}
 		sendReq(baseUrl + '/api/v1/userinfo/', {

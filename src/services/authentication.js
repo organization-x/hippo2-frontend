@@ -184,7 +184,7 @@ export function AuthProvider({ children }) {
 		const options = {
 			method: 'GET'
 		};
-		let origin = location.pathname;
+		let origin = location.pathname + location.search;
 		if (excludeRedirects.includes(location.pathname)) {
 			origin = '/';
 		}

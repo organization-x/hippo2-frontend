@@ -9,25 +9,19 @@ jobs:
     name: Lint Code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install packages
-        run: |
-          npm install yarn \
-          yarn install
-      - name: Lint with ESLint
-        run: yarn lint
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: yarn install
+      - run: yarn lint 
   test:
     name: Test Code
     runs-on: ubuntu-latest
     env:
       CI: true
     steps:
-      - uses: actions/checkout@v2
-      - name: Install packages
-        run: |
-          npm install yarn \
-          yarn install
-      - name: Test with Jest
-        run: yarn test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: yarn install
+      - run: yarn test 
 
     

@@ -19,7 +19,8 @@ function Input({placeHolder, label, type, value, onChange, isValid, errorText, c
             placeholder={placeHolder}
             className={style + ' w-full md:w-9/12'}
             value={value}
-			id={id}>
+			id={id}
+			>
             </input>
             <span className='invalid-text'>{error}</span>
         </div>

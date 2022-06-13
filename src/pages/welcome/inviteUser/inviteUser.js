@@ -2,28 +2,88 @@ import {useState} from "react";
 import Input from "../../../components/form/input";
 import Button from "../../../components/button/button";
 import validateEmail from "../../../validation/email";
+import { useAuth } from "../../../services/authentication";
+import baseUrl from "../../../apiUrls";
+import { useNavigate } from "react-router-dom";
 
 function InviteUser({type, onBack}) {
-	const [email, setEmail] = useState('');
-	const [formErrors, setFormErrors] = useState({});
+	const { autoAuthReq } = useAuth();
+	const navigate = useNavigate();
+	const [emails, setEmails] = useState(['']);
+	const [formErrors, setFormErrors] = useState([]);
+	const [processing, setProcessing] = useState(false);
 
 	const backButton = () => {
-		onBack()
-	}
+		onBack();
+	};
+
 	const onSubmit = () => {
-		setFormErrors({});
-
-		// ignore this line because we aren't doing anything with data yet, so the variable is unused
-		// eslint-disable-next-line
-		const [err, data] = validateEmail({email});
-		if (err) {
-			return setFormErrors(err);
+		const errors = [];
+		const validEmails = [];
+		let hasError = false;
+		
+		for (let i = 0; i < emails.length; i++) {
+			const optional = i > 0;
+			if (emails[i] === '' && optional) {
+				errors.push([]);
+				continue;
+			}
+			const [err, data] = validateEmail({ email: emails[i] });
+			if (err) {
+				hasError = true;
+				errors.push(err.email);
+			} else {
+				if (!validEmails.includes(data.email)) {
+					validEmails.push(data.email);
+				}
+				errors.push([]);
+			}
 		}
+		setFormErrors(errors);
+		if (!hasError) {
+			const url = baseUrl + '/api/v1/group/invite/';
+			setProcessing(true);
+			for (let i = 0; i < validEmails.length; i++) {
+				const options = {
+					method: 'POST',
+					body: {
+						email: validEmails[i]
+					}
+				};
+				autoAuthReq(url, options).then(res => {
+					if (i === validEmails.length - 1) {
+						setProcessing(false);
+						navigate('/');
+					}
+				});
+			}
+		}
+	};
 
-		// TODO: do something with data
-	}
 	const addStudent = () => {
 		// called when the Add Another Student button is clicked
+		setEmails([...emails, '']);
+	};
+
+	const emailInputs = [];
+	for (let i = 0; i < emails.length; i++) {
+		emailInputs.push(
+			<Input 
+				label={`${i > 0 ? 'Additional ' : ''}Email`}
+				type='text'
+				placeHolder='example@gmail.com'
+				className='my-3'
+				key={i.toString()}
+				value={emails[i]}
+				onChange={(value) => {
+					const newEmails = Array.from(emails);
+					newEmails[i] = value;
+					setEmails(newEmails);
+				}}
+				isValid={formErrors[i]?.length}
+				errorText={formErrors[i]?.[0]}
+			/>
+		);
 	}
 
 	if (type === 'student') {
@@ -43,15 +103,7 @@ function InviteUser({type, onBack}) {
 				}} className="flex-none md:flex-initial relative w-full md:w-5/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-xl mb-6 text-center">Invite your parent or guardian to create their AI Camp account.</h2>
 
-					<Input label="Email"
-						   type="text"
-						   placeHolder="example@gmail.com"
-						   className="mt-8 mb-16"
-						   value={email}
-						   isValid={formErrors.email?.length}
-						   errorText={formErrors.email?.[0]}
-						   onChange={val => setEmail(val)}
-					/>
+					{emailInputs}
 
 					<div className="flex">
 						<Button bgColor="gray" txtColor="white" className="w-1/3 mx-2 py-1" onClick={() => backButton()}>Back</Button>
@@ -80,21 +132,12 @@ function InviteUser({type, onBack}) {
 				}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-xl mb-6 text-center">Invite your student(s) to create their AI Camp account.</h2>
 
-					<Input label="Email"
-						   type="text"
-						   placeHolder="example@gmail.com"
-						   className="mt-8 mb-16 sm:mb-32"
-						   value={email}
-						   isValid={formErrors.email?.length}
-						   errorText={formErrors.email?.[0]}
-						   onChange={val => setEmail(val)}
-					/>
-
+					{emailInputs}
 
 					<div className="grid grid-cols-3 gap-y-4">
-						<Button bgColor="white" txtColor="black" className="col-span-3 mx-2 py-3" onClick={() => addStudent()}>Add Another Student</Button>
-						<Button bgColor="gray" txtColor="white" className="mx-2 py-1" onClick={() => backButton()}>Back</Button>
-						<Button bgColor="green" txtColor="white" className="col-span-2 mx-2 py-1" onClick={() => onSubmit()}>Next</Button>
+						<Button bgColor="white" disabled={processing} txtColor="black" className="col-span-3 mx-2 py-3" onClick={() => addStudent()}>Add Another Student</Button>
+						<Button bgColor="gray" disabled={processing} txtColor="white" className="mx-2 py-1" onClick={() => backButton()}>Back</Button>
+						<Button bgColor="green" disabled={processing} txtColor="white" className="col-span-2 mx-2 py-1" onClick={() => onSubmit()}>{processing ? 'Loading...' : 'Next'}</Button>
 					</div>
 				</form>
 			</div>

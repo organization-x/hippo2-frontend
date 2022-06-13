@@ -18,6 +18,7 @@ import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
 import GroupJoin from './pages/groupJoin/groupJoin';
 import './App.css';
+import Loading from './pages/loading/loading';
 
 const Welcome = lazy(() => import('./pages/welcome/welcome'));
 
@@ -36,7 +37,7 @@ function App() {
 						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
 						<Route path='/welcome' element={
 							<PrivateRoute initBlind={true}>
-								<Suspense fallback={<h1>Oops! Something went wrong!</h1>}>
+								<Suspense fallback={<Loading />}>
 									<Welcome />
 								</Suspense>
 							</PrivateRoute>

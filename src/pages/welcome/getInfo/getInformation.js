@@ -20,7 +20,7 @@ function GetInformation({onBack, onNext}) {
 	const [birthday, setBirthday] = useState(user.dob);
 	const [phone, setPhone] = useState(user.phone);
 	const [formErrors, setFormErrors] = useState({});
-
+	
 	const onSubmit = () => {
 		// executes when the Next button is clicked or when form is submitted
 		setFormErrors({});
@@ -31,11 +31,11 @@ function GetInformation({onBack, onNext}) {
 			type,
 			phone
 		};
-		if (user.type !== 'parent') {
+		if (type !== 'parent') {
 			info.dob = birthday;
 		}
 
-		const [err, data] = validateUserInformation(info, user.type);
+		const [err, data] = validateUserInformation(info, type);
 		if (err) {
 			return setFormErrors(err);
 		}

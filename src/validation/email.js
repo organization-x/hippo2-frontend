@@ -1,7 +1,7 @@
-import {nonempty, object, pattern, string, validate} from "superstruct";
+import {nonempty, object, pattern, string, validate } from "superstruct";
 import formatFormErrors from "./formatFormErrors";
 
-const EmailValidation = object({
+const Email = object({
 	email: pattern(nonempty(string()), /^\S+@\S+\.\S+$/)
 });
 
@@ -15,7 +15,7 @@ const messages = {
 };
 
 function validateEmail(data) {
-	const [err, vData] = validate(data, EmailValidation);
+	const [err, vData] = validate(data, Email);
 	const formattedErr = formatFormErrors(err, messages);
 	return [formattedErr, vData]
 }

@@ -1,21 +1,21 @@
 .btn.bg-gray {
     background-color: #c4c4c4;
 }
-.btn.bg-gray:hover {
+.btn.active.bg-gray:hover {
     background-color: #cacaca;
 }
 
 .btn.bg-green {
     background-color: #12A868;
 }
-.btn.bg-green:hover {
+.btn.active.bg-green:hover {
     background-color: #13b66f;
 }
 
 .btn.bg-black {
     background-color: black;
 }
-.btn.bg-black:hover {
+.btn.active.bg-black:hover {
     background-color: rgb(48, 48, 48);
 }
 
@@ -23,7 +23,7 @@
     border: 1px solid black;
     background-color: rgba(255, 255, 255);
 }
-.btn.bg-white:hover {
+.btn.active.bg-white:hover {
     background-color: rgb(242, 242, 242);
 }
 

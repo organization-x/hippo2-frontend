@@ -28,7 +28,8 @@ const messages = {
 };
 
 function validateUserInformation(data, type) {
-	const [err, vData] = type !== 'parent' ? validate(data, StudentInformation) : validate(data, ParentInformation);
+	const schema = type !== 'parent' ? StudentInformation : ParentInformation;
+	const [err, vData] = validate(data, schema);
 	const formattedErr = formatFormErrors(err, messages);
 	return [formattedErr, vData];
 }

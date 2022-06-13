@@ -11,8 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install packages
-        run: npm install yarn
-        run: yarn install
+        run: |
+          npm install yarn \
+          yarn install
       - name: Lint with ESLint
         run: yarn lint
   test:
@@ -23,8 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install packages
-        run: npm install yarn
-        run: yarn install
+        run: |
+          npm install yarn \
+          yarn install
       - name: Test with Jest
         run: yarn test
 

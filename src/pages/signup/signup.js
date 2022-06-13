@@ -144,9 +144,6 @@ function Signup() {
 
 				<div className="block mb-5">
 					<Button isLink={true} bgColor="white" href={googleSocialUrl} className="w-full my-1 py-1 mx-auto block text-center">Continue with Google</Button>
-					<Button isLink={true} bgColor="white" href="/" className="w-full my-1 py-1 mx-auto block text-center">Continue with Facebook</Button>
-					<Button isLink={true} bgColor="white" href="/" className="w-full my-1 py-1 mx-auto block text-center">Continue with LinkedIn</Button>
-					<Button isLink={true} bgColor="white" href="/" className="w-full my-1 py-1 mx-auto block text-center">Continue with Apple</Button>
 				</div>
 
 				<div className="mb-6 flex items-center justify-center">

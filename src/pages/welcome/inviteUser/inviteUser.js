@@ -92,8 +92,9 @@ function InviteUser({type, onBack}) {
 				<div className="flex-none md:flex-initial w-full md:w-7/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 					<h1 className="text-2xl mb-5 text-center">Parent Account</h1>
 					<p className="text-base mb-3">
-						Fill out your parent or guardian's email to invite them to create their account profile so they can log in and access information, as well as other AI camp course resources! Select the bubble below to indicate that your parent or guardian already has an AI Camp account if that statement applies.
-						<br/><br/>
+						Fill out your parent or guardian's email to invite them to create their account profile so they can log in and access information, as well as other AI camp course resources!
+					</p>
+					<p className="text-base my-5">
 						You can add multiple parent(s) or guardian(s) in your dashboard later.
 					</p>
 					<p className="text-lg">Click "Next" to proceed to your student dashboard!</p>
@@ -121,7 +122,7 @@ function InviteUser({type, onBack}) {
 						Fill out your student's personal details to invite them to create an account, which will allow them to access resources in preparation for their course(s).
 					</p>
 					<p className="text-base mb-3">
-						If you would like to complete course registration for multiple students, click "Add Another Student" and fill out their personal details.
+						If you would like to complete course registration for multiple students, click "Add Another Student" and fill out their email.
 					</p>
 					<p className="text-lg">
 						Click "Next" to proceed to your parent dashboard!
@@ -134,7 +135,7 @@ function InviteUser({type, onBack}) {
 
 					{emailInputs}
 
-					<div className="grid grid-cols-3 gap-y-4">
+					<div className="grid grid-cols-3 gap-y-10 mt-20">
 						<Button bgColor="white" disabled={processing} txtColor="black" className="col-span-3 mx-2 py-3" onClick={() => addStudent()}>Add Another Student</Button>
 						<Button bgColor="gray" disabled={processing} txtColor="white" className="mx-2 py-1" onClick={() => backButton()}>Back</Button>
 						<Button bgColor="green" disabled={processing} txtColor="white" className="col-span-2 mx-2 py-1" onClick={() => onSubmit()}>{processing ? 'Loading...' : 'Next'}</Button>

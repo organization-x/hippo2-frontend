@@ -42,7 +42,7 @@ function Login() {
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 				<h1 className="text-2xl mb-5 text-center">Log In</h1>
 
-				<p className="text-base mb-3">Nice to see you again!</p>
+				<p className="text-base mb-3">Welcome back to AI Camp!</p>
 
 				<p className="text-base">
 					By logging into AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Privacy Policy</a>.
@@ -87,9 +87,6 @@ function Login() {
 
 				<div className="block mb-4">
 					<Button isLink={true} bgColor="white" href={googleSocialUrl} className="w-full my-1 py-1 mx-auto block text-center">Log in with Google</Button>
-					<Button isLink={true} bgColor="white" href="/" className="w-full my-1 py-1 mx-auto block text-center">Log in with Facebook</Button>
-					<Button isLink={true} bgColor="white" href="/" className="w-full my-1 py-1 mx-auto block text-center">Log in with LinkedIn</Button>
-					<Button isLink={true} bgColor="white" href="/" className="w-full my-1 py-1 mx-auto block text-center">Log in with Apple</Button>
 				</div>
 
 				<div className="mb-5 flex items-center justify-center">

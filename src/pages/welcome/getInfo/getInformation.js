@@ -9,7 +9,7 @@ import Button from "../../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './getInformation.css';
 
-function GetInformation({onBack, onNext}) {
+function GetInformation({ onNext }) {
 	const {user, handleUserInitiation} = useAuth();
 	const location = useLocation();
 
@@ -55,10 +55,6 @@ function GetInformation({onBack, onNext}) {
 			}
 		});
 
-	}
-	const backButton = () => {
-		// executes when the Back button is clicked
-		onBack()
 	}
 
 	return (
@@ -166,8 +162,7 @@ function GetInformation({onBack, onNext}) {
 					</div>
 
 					<div className="flex">
-						<Button bgColor="gray" txtColor="white" className="w-1/3 mx-2 py-1" onClick={() => backButton()}>Back</Button>
-						<Button bgColor="green" txtColor="white" className="w-2/3 mx-2 py-1" onClick={() => onSubmit()}>Next</Button>
+						<Button bgColor="green" txtColor="white" className="w-full py-1" onClick={() => onSubmit()}>Next</Button>
 					</div>
 				</form>
 			</div>

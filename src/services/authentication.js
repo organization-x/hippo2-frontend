@@ -211,7 +211,7 @@ export function AuthProvider({ children }) {
 			lName: lName,
 			type: type,
 			dob: dob,
-			phone_number: phoneNum,
+			phone: phoneNum,
 			isInit: true,
 			isLoggedIn: true
 		});

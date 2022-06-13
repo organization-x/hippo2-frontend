@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Hippo2 Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br>
 Visit [notion](https://www.notion.so/aicamp/Hippo2-9b367978f2a94be1854d6d3aff2f4df8#847ea43594e94a0a9f0b2b0e663c09ee) for project docs and more.

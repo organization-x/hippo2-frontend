@@ -4,6 +4,7 @@
 /* Variable Definitions */
 :root {
     --main_green: #13A769;
+	--highlight_green: #0FB871;
     --main_grey: #383838;
     --placeholder_text: #979797;
     --button_green: rgba(15, 184, 113, 0.83);

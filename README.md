@@ -1,12 +1,33 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). <br>
+Visit [notion](https://www.notion.so/aicamp/Hippo2-9b367978f2a94be1854d6d3aff2f4df8#847ea43594e94a0a9f0b2b0e663c09ee) for project docs and more.
+
+## Set Up
+
+### 1. Make sure you have NodeJS and npm is installed
+[Official download](https://nodejs.org/en/download/) <br>
+Or alternatively with a node version manager:
+[Link](https://npm.github.io/installation-setup-docs/installing/using-a-node-version-manager.html)
+
+### 2. Install yarn
+`npm install -g yarn` should work. 
+
+### 3. Install app dependencies
+In the project root directory: <br>
+`yarn install`
+
+### 4. Start development server
+`yarn start` <br>
+**Note: App will error if backend server is not running as well.** <br>
+Refer to **Available Scripts** below for more.
+
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,12 +35,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `yarn test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### `yarn build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -29,7 +50,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `yarn eject` (Don't do this unless you know what you're doing)
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
@@ -65,6 +86,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,14 +1,14 @@
 import WelcomeComponent from './introductionVideo/welcome';
-import {useAuth} from "../../services/authentication";
-import {useState} from "react";
+import { useAuth } from "../../services/authentication";
+import { useState } from "react";
 import GetInformation from "./getInfo/getInformation";
 import InviteUser from "./inviteUser/inviteUser";
 
 function Welcome() {
-	const auth = useAuth();
+	const { user } = useAuth();
 	const [page, setPage] = useState('introductionVideo');
-
-	const type = auth.user.type
+	
+	const type = user.type;
 
 	switch (page) {
 		case 'introductionVideo':
@@ -17,7 +17,7 @@ function Welcome() {
 			);
 		case 'confirm':
 			return (
-				<GetInformation type={type} onBack={() => setPage('introductionVideo')} onNext={() => setPage('invite')} />
+				<GetInformation onBack={() => setPage('introductionVideo')} onNext={() => setPage('invite')} />
 			);
 		case 'invite':
 			return (

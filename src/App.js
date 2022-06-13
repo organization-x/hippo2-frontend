@@ -1,6 +1,7 @@
 import {
 	BrowserRouter, Routes, Route
 } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import PrivateRoute from './components/privateroute/privateRoute';
 
 import { AuthProvider } from './services/authentication';
@@ -10,16 +11,15 @@ import Navbar from './components/navbar/navbar';
 import Home from './pages/home/home';
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
-import Welcome from './pages/welcome/welcome';
 import Protected from './pages/protected/protected';
 import GoogleAuth from './pages/google/google';
 import Footer from './components/footer/footer';
 import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
 import GroupJoin from './pages/groupJoin/groupJoin';
-
 import './App.css';
 
+const Welcome = lazy(() => import('./pages/welcome/welcome'));
 
 function App() {
 	return (
@@ -28,9 +28,19 @@ function App() {
 				<FlashMsgProvider>
 					<Navbar />
 					<Routes>
-						<Route path='/' element={<Home />}></Route>
+						<Route path='/' element={
+							<PrivateRoute>
+								<Home />
+							</PrivateRoute>
+						}></Route>
 						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
-						<Route path='/welcome' element={<Welcome />}></Route>
+						<Route path='/welcome' element={
+							<PrivateRoute initBlind={true}>
+								<Suspense fallback={<h1>Oops! Something went wrong!</h1>}>
+									<Welcome />
+								</Suspense>
+							</PrivateRoute>
+						}></Route>
 						<Route path='/protected' element={
 							<PrivateRoute>
 								<Protected />
@@ -41,7 +51,7 @@ function App() {
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
 						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
 						<Route path='/group/join' element={
-							<PrivateRoute>
+							<PrivateRoute initBlind={true}>
 								<GroupJoin />
 							</PrivateRoute>
 						}></Route>

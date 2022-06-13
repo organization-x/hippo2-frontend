@@ -11,7 +11,7 @@ function Input({placeHolder, label, type, value, onChange, isValid, errorText, c
 
     return (
         <div className={`${className}`}>
-            <label className='label' htmlFor={id}>{label}</label>
+            <label className='form-label' htmlFor={id}>{label}</label>
             <input type={type} 
             onChange={(e) => {
 				if (onChange) onChange(e.target.value)

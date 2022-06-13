@@ -14,7 +14,7 @@ function WelcomeComponent({onNext}) {
 			<div className="container max-w-4xl flex flex-wrap mx-auto p-4 pt-6 auth">
 				<iframe className="bg-banner rounded-2xl w-full mb-5" title="placeholder iframe" />
 
-				<Button onClick={onNext()} bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center">Next</Button>
+				<Button onClick={() => onNext()} bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center">Next</Button>
 			</div>
 		</div>
 	)

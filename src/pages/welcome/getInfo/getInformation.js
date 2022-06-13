@@ -1,20 +1,24 @@
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import validateUserInformation from "../../../validation/userInformation";
+import formatApiErrors from "../../../validation/formatApiErrors";
+import { useAuth } from "../../../services/authentication";
+import PhoneInput from "react-phone-input-2";
 import Input from "../../../components/form/input";
 import Button from "../../../components/button/button";
-import { useState } from "react";
-import validateUserInformation from "../../../validation/userInformation";
-import sendReq from "../../../services/sendReq";
-import baseUrl from "../../../apiUrls";
-import {useAuth} from "../../../services/authentication";
+import 'react-phone-input-2/lib/style.css';
+import './getInformation.css';
 
-function GetInformation({type, onBack, onNext}) {
-	const auth = useAuth()
-	const user = auth.user
+function GetInformation({onBack, onNext}) {
+	const {user, handleUserInitiation} = useAuth();
+	const location = useLocation();
 
 	const [firstName, setFirstName] = useState(user.fName);
 	const [lastName, setLastName] = useState(user.lName);
 	const [email, setEmail] = useState(user.email);
-	const [birthday, setBirthday] = useState('');
-	const [phone, setPhone] = useState('');
+	const [type, setType] = useState(user.type);
+	const [birthday, setBirthday] = useState(user.dob);
+	const [phone, setPhone] = useState(user.phone);
 	const [formErrors, setFormErrors] = useState({});
 
 	const onSubmit = () => {
@@ -24,30 +28,33 @@ function GetInformation({type, onBack, onNext}) {
 			firstName,
 			lastName,
 			email,
+			type,
 			phone
-		}
-		if (user.type === 'student') {
-			info.dob = birthday
+		};
+		if (user.type !== 'parent') {
+			info.dob = birthday;
 		}
 
 		const [err, data] = validateUserInformation(info, user.type);
 		if (err) {
 			return setFormErrors(err);
 		}
-		sendReq(baseUrl + '/api/v1/userinfo/', {
-			method: 'POST',
-			body: {
-				first_name: data.firstName,
-				last_name: data.lastName,
-				dob: type === 'student' ? data.dob : undefined,
-				email: data.email
-				// TODO: add phone number when backend supports updating it
+
+		handleUserInitiation(
+			data.email, data.firstName, data.lastName, data.type, data.dob, data.phone, location.pathname
+		).then(res => {
+			onNext();
+		}).catch(err => {
+			if (err.status === 400) {
+				const keyMap = {
+					'first_name': 'firstName',
+					'last_name': 'lastName',
+					'phone_number': 'phone'
+				};
+				setFormErrors(formatApiErrors(err.data, keyMap));
 			}
-		}).then(() => {
-			onNext()
-		}).catch(e => {
-			console.error(e)
-		})
+		});
+
 	}
 	const backButton = () => {
 		// executes when the Back button is clicked
@@ -70,8 +77,33 @@ function GetInformation({type, onBack, onNext}) {
 					event.preventDefault();
 				}} className="flex-none md:flex-initial w-full md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-xl mb-7 text-center">Gain real experience by building real AI products. We are here to support you.</h2>
-
-					<div className="mb-8">
+					<div className="flex items-center justify-center">
+						<div className="mx-auto inline-block">
+							<Button 
+								bgColor={type === 'student' ? 'black' : 'white'} 
+								txtColor={type === 'student' ? 'white' : 'black'}
+								onClick={() => setType('student')}
+								className="w-28 md:w-36 mx-2 p-1"
+							>
+								Student
+							</Button>
+							<Button 
+								bgColor={type === 'parent' ? 'black' : 'white'} 
+								txtColor={type === 'parent' ? 'white' : 'black'}
+								onClick={() => setType('parent')}
+								className="w-28 md:w-36 mx-2 p-1"
+							>
+								Parent
+							</Button>
+						</div>
+					</div>
+					{
+						formErrors.type?.length ? 
+							<span className='mt-3 block text-center form-error'>{formErrors.type[0]}</span> 
+						: 
+							null
+					}
+					<div className="mb-8 mt-5">
 						<Input label="First Name"
 							type="text"
 							placeHolder="John"
@@ -99,23 +131,36 @@ function GetInformation({type, onBack, onNext}) {
 						    errorText={formErrors.email?.[0]}
 							onChange={val => setEmail(val)}
 						/>
-						<Input label="Mobile Phone Number"
-							type="text"
-						    placeHolder="(415) 123-4567"
-						    className="mb-3"
-						    value={phone}
-						    isValid={formErrors.phone?.length}
-						    errorText={formErrors.phone?.[0]}
-						    onChange={val => setPhone(val)}
+						<label className="form-label mb-1">Mobile Phone Number</label>
+						<PhoneInput 
+							specialLabel="Phone Number"
+							enableSearch
+							countryCodeEditable={false}
+							country={'us'}
+							disableSearchIcon
+							value={phone}
+							onChange={value => {
+								setPhone(value);
+							}}
+							isValid={() => {
+								return !formErrors.phone?.length;
+							}}
 						/>
-						{type === 'student' &&
-							<Input label="Date of Birth"
+						{
+							formErrors.phone?.length ? 
+								<span className='mt-1 block form-error text-sm'>{formErrors.phone[0]}</span> 
+							: 
+								null
+						}
+						{type !== 'parent' &&
+							<Input label="Birth Month and Year"
 							   type="text"
-							   placeHolder="MM/DD/YYYY"
+							   placeHolder="MM/YYYY"
 							   value={birthday}
 							   isValid={formErrors.dob?.length}
 							   errorText={formErrors.dob?.[0]}
 							   onChange={val => setBirthday(val)}
+							   className='mt-3'
 							/>
 						}
 					</div>

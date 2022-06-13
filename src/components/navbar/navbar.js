@@ -28,7 +28,7 @@ function Navbar() {
 							<Link to='protected'>Page 2</Link>
 						</li>
 						<li className='text-white hover:text-gray-300'>
-							<Link to='/welcome'>Welcome Page</Link>
+							<Link to='/introductionVideo'>Welcome Page</Link>
 						</li>
 					</ul>
 					<ul className='nav-links grow-0'>

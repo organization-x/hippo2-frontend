@@ -38,7 +38,10 @@ const blankUser = {
 	email: '',
 	fName: '',
 	lName: '',
-	type: '', // parent || student
+	type: '', // parent || student,
+	phone: '',
+	dob: '',
+	isInit: false,
 	isLoggedIn: false
 };
 
@@ -100,6 +103,9 @@ export function AuthProvider({ children }) {
 			fName: fName,
 			lName: lName,
 			type: type,
+			phone: '',
+			dob: '',
+			isInit: false,
 			isLoggedIn: true
 		});
 
@@ -129,6 +135,9 @@ export function AuthProvider({ children }) {
 			fName: data.first_name || '',
 			lName: data.last_name || '',
 			type: data.user_type || '',
+			phone: data.phone_number || '',
+			dob: data.dob || '',
+			isInit: data.is_initiated,
 			isLoggedIn: true
 		});
 
@@ -156,6 +165,9 @@ export function AuthProvider({ children }) {
 			fName: data.first_name || '',
 			lName: data.last_name || '',
 			type: data.user_type || '',
+			phone: data.phone_number || '',
+			dob: data.dob || '',
+			isInit: data.is_initiated,
 			isLoggedIn: true
 		});
 
@@ -176,6 +188,37 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
+	const handleUserInitiation = async (email, fName, lName, type, dob, phoneNum, redirect = '/') => {
+		const userUrl = baseUrl + '/api/v1/userinfo/';
+		const updateOptions = {
+			method: 'POST',
+			body: {
+				email: email,
+				first_name: fName,
+				last_name: lName,
+				type: type,
+				dob: dob,
+				phone_number: phoneNum,
+				initiate: true
+			}
+		};
+		const res = await autoAuthReq(userUrl, updateOptions, redirect);
+
+		// set user's info on frontend
+		setUser({
+			email: email,
+			fName: fName,
+			lName: lName,
+			type: type,
+			dob: dob,
+			phone: phoneNum,
+			isInit: true,
+			isLoggedIn: true
+		});
+
+		return res;
+	};
+
 	useEffect(() => {
 		if (excludeChecks.includes(location.pathname)) {
 			return setCheckLogin(true);
@@ -191,11 +234,15 @@ export function AuthProvider({ children }) {
 		autoAuthReq(url, options, origin).then(res => {
 			setCheckLogin(true);
 			const data = res.data;
+			
 			setUser({
 				email: data.email,
 				fName: data.first_name || '',
 				lName: data.last_name || '',
 				type: data.user_type || '',
+				phone: data.phone_number || '',
+				dob: data.dob || '',
+				isInit: data.is_initiated,
 				isLoggedIn: true
 			});
 			// redirect user away from signup/login 
@@ -213,7 +260,8 @@ export function AuthProvider({ children }) {
 		handleSignup,
 		handleLogin,
 		handleGoogleLogin,
-		handleLogout
+		handleLogout,
+		handleUserInitiation
 	};
 
 	if (!checkLogin) {

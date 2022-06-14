@@ -73,7 +73,11 @@ function GetInformation({ onNext }) {
 					event.preventDefault();
 				}} className="flex-none md:flex-initial w-full md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-xl mb-7 text-center">Gain real experience by building real AI products. We are here to support you.</h2>
-					<div className="flex items-center justify-center">
+					<div className={
+						`flex items-center justify-center ${
+							['parent', 'student'].includes(user.type) ? 'hidden' : ''
+						}`
+					}>
 						<div className="mx-auto inline-block">
 							<Button 
 								bgColor={type === 'student' ? 'black' : 'white'} 

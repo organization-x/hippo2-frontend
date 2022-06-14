@@ -1,0 +1,167 @@
+.batch_box {
+    display: inline-block;
+}
+
+.batch_description_box {
+    border-spacing:0px;
+    position: absolute;
+    width: 504px;
+    height: 264px;
+    left: 629px;
+    top: 100px;
+
+    border-collapse: separate;
+}
+
+.batch_description_box td, th {
+    text-align: center;
+    border: 1px solid #000000;
+    border-collapse: separate;
+}
+.batch_description_box td {
+    padding: 15px 5px 50px 5px;
+}
+
+.batch_description_box th {
+    font-size: 20px;
+    padding: 10px 0px 25px 0px;
+}
+
+.batch_description_box td *, th * {
+    margin: 0 auto;
+}
+
+.batch_description_box button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.batch_description_box thead th:first-child {
+    border-radius:20px 0px 0px 0px;
+    border-collapse: separate;
+}
+
+.batch_description_box thead th:last-child {
+    border-radius:0px 20px 0px 0px;
+    border-collapse: separate;
+}
+
+.batch_description_box tfoot td:first-child {
+    border-radius:0px 0px 0px 20px;
+    border-collapse: separate;
+}
+
+.batch_description_box tfoot td:last-child {
+    border-radius:0px 0px 20px 0px;
+    border-collapse: separate;
+}
+
+
+.batch_time_range {
+    width: 100px;
+    height: 24px;
+    font-weight: 400;
+    line-height: 132.5%;
+    color: #727272;
+}
+
+.batch_status_button {
+    width: 180px;
+    height: 24px;
+    padding-bottom: 40px;
+    padding-top: 15px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    margin-top: 100px;
+
+    line-height: 27px;
+    background: rgba(15, 184, 113, 0.83);
+    border-radius: 30px;
+
+    color: #FFFFFF;
+}
+
+/*
+rgba(248, 139, 12, 0.75); red
+rgba(15, 184, 113, 0.83); green
+rgba(226, 83, 83, 0.8); yellow
+*/
+
+
+.batch_date_range { 
+    width: 126px;
+    height: 27px;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    line-height: 27px;
+    color: #000000;
+}
+
+.batch_name {
+    width: 100px;
+    height: 24px;
+
+    font-style: normal;
+    font-weight: 300;
+    font-size:16px;
+    line-height: 132.5%;
+    text-align: center;
+
+    color: .727272;
+}
+
+.batch_pricing {
+    width: 100px;
+    height: 66px;
+
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 132.5%;
+
+    text-align: center;
+    color: #727272;
+}
+
+.batch_sideview_box {
+    width: 324px;
+    height: 686px;
+    left: 240px;
+    top: 121px;
+
+    background: #13A769;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.batch_description_box_title {
+    width: 298px;
+    height: 82px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 41px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.batch_sideview_text {
+    width: 252px;
+    height: 200px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+
+    color: #FFFFFF;
+}
+

@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import logo from '../../logo.svg';
 import './batchSelect.css';
 import Button from '../button/button';
 
@@ -17,15 +15,15 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
                     <p className="text-2xl">OPEN</p>
                 </Button>);
         }
-        else if (seats != 0) {
+        else if (seats > 0) {
             return (
-                <Button onClick={() => onChange(batch_no)} bgColor="main_yellow" txtColor="white" className="w-11/12 h-8">
-                    <p className="text-2xl">{seats} LEFT</p>
+            <Button onClick={() => onChange(batch_no, batchID)} bgColor="yellow" txtColor="white" className="w-11/12 h-8">
+                <p className="text-2xl">{seats} LEFT</p>
                 </Button>);
         }
         return (
-            <Button onClick={() => { onChange(batch_no) }} bgColor="main_red" txtColor="white" className="w-11/12 h-8">
-                <p className="text-2xl">SOLD OUT</p>
+            <Button onClick={() => onChange(batch_no, batchID)} bgColor="red" txtColor="white" className="w-11/12 h-8">
+            <p className="text-2xl">SOLD OUT</p>
             </Button>);
     }
     // returns the table's header with the date range and batch name
@@ -39,59 +37,51 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
         </th>);
     }
     // returns table data formatted with times, seats, and price
-    function columnData(key, start_time, end_time, seats, price, tz, batch_no) {
+    function cellData(key, start_time, end_time, seats, tz, batch_no, batchID) {
         return (
             <td key={key} className={batch_no == batchIndex ? 'bg-gray-500' : ''}>
                 <p className="text-sm">{start_time} - {end_time} <b>{tz}</b></p>
-                    {getAvailability(batch_no, seats)}
-                <p>from<br/><b>${price}</b><br/>(Early Bird)</p>
+                {getAvailability(batch_no, batchID, seats)}
+                <p>from<br/><b>${batchData.price}</b><br/>(Early Bird)</p>
             </td>);
     }
 
-    function submitBatchSelection(batchID) {
-	console.log(batchID);	
-    }
-    
-
-    let batches_dict = {};
-    // populate batches_dict with date -> batches by timezones
-    batchData.forEach((batch, index) => {
-	if (batches_dict[`${batch.start_date} - ${batch.end_date}`]) {
-	    batches_dict[`${batch.start_date} - ${batch.end_date}`][batch['timezone']] = batch;
-	}
-	else {
-	    batches_dict[`${batch.start_date} - ${batch.end_date}`] = {};
-	}
+    batchData.batches.forEach((batch, index) => {
+        let counter = index;
+        if(counter % 2 === 0) {
+            column_headers.push(columnHeader(index, batch.start_date, batch.end_date, batch.name));
+        }
+        if (batch.time_zone === "PST") {
+            column_bodies_pst.push(cellData(index, batch.start_time, batch.end_time, batch.seats, batch.price, 'PST', index, batch.id));
+        }
+        if (batch.time_zone === "EST") {
+            column_bodies_est.push(cellData(index, batch.start_time, batch.end_time, batch.seats, batch.price, 'EST', index, batch.id));
+        }
     });
     
-    for (let batch in batches_dict) {
-	//TODO: Render batches by timezone under date range
-	/*
-        column_headers.push(columnHeader(index, batch.start_date, batch.end_date, batch.name));
-        column_bodies_pst.push(columnData(index, batch.start_time, batch.end_time, batch.seats, batch.price, 'PST', index, batch.id));
-        column_bodies_est.push(columnData(l+index, batch.start_time, batch.end_time, batch.seats, batch.price, 'EST', index, batch.id));
-	*/
-    }
+    const course = batchData.name;
 
     return (
         <div className="flex flex-col md:flex-initial w-full md:w-7/12 text-center px-10 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-            <h2 className="text-2xl mt-3"><b>3-Week AI Summer Course</b></h2>
+            <h2 className="text-2xl mt-3"><b>{course}</b></h2>
             <h2 className="text-2xl">Select a batch that fits your schedule</h2>
             <table className='batch_description_box'>
                 <thead>
                     <tr>
-			{column_headers}
+			            {column_headers}
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='hover:bg-gray-300'>
                     <tr>
                         {column_bodies_pst}
                     </tr>
                 </tbody>
-            	<tfoot>
+                <tbody className='hover:bg-gray-300'>
                     <tr>
                         {column_bodies_est}
                     </tr>
+                </tbody>
+            	<tfoot>
                 </tfoot>
             </table>
             <div className="flex space-x-14">

@@ -1,59 +1,43 @@
-.batch_description_box {
-    border: 1px solid #000000;
-    border-spacing:0px;
-    border-radius: 20px;
-    border-collapse: separate;
-    margin: 15px 0px 15px 0px;
+@media (max-width: 768px) {
+  .selectColumn {
+    background-color: #F5F6F6;
+    border-radius: 24px;
+    margin-top: 40px;
+  }
+  .dropdown {
+     display: inline-block; 
+     transition: all .5s ease;
+  }
+
+  .lastColumn, .firstColumn {
+    border-radius: 0px 0px 24px 24px;
+  }
+  .dropdown-content {
+    display: none;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+    transform: translateY(0);
+  }
 }
 
-.batch_description_box td, th {
-    text-align: center;
-    border: 1px solid #000000;
-    border-collapse: separate;
-}
-.batch_description_box td {
-    padding-top: 15px;
-    padding-bottom: 50px;
-}
-
-.batch_description_box th {
-    font-size: 20px;
-    padding: 10px 0px 25px 0px;
-}
-
-.batch_description_box td *, th * {
-    margin: 0 auto;
-}
-
-.batch_description_box button {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-.batch_description_box thead th:first-child {
-    border-radius:20px 0px 0px 0px;
-    border-collapse: separate;
-}
-
-.batch_description_box thead th:last-child {
-    border-radius:0px 20px 0px 0px;
-    border-collapse: separate;
-}
-
-.batch_description_box tfoot td:first-child {
-    border-radius:0px 0px 0px 20px;
-    border-collapse: separate;
-}
-
-.batch_description_box tfoot td:last-child {
-    border-radius:0px 0px 20px 0px;
-    border-collapse: separate;
-}
-
-
-.batch_time_range {
-    font-weight: 400;
-    line-height: 132.5%;
-    color: #727272;
+@media (min-width: 768px) {
+  .selectTable {
+    border-width: 2px;
+    border-radius: 24px;
+  }
+  .selectColumn {
+    border-right-width: 2px;
+  }
+  .selectColumn:last-child {
+    border-right-width: 0px;
+  }
+  .lastColumn {
+    border-bottom-right-radius: 24px;
+  }
+  .firstColumn {
+    border-bottom-left-radius: 24px;
+  }
 }
 
 /*

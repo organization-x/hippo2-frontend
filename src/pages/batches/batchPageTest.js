@@ -132,7 +132,7 @@ function BatchPageTest() {
            return (
                 <div className="flex-none md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                 <h1 className="text-3xl mb-10 text-center">
-                Batch {testData.batches[batch_no].name}
+                    Batch {testData.batches[batch_no].name}
                 </h1>
                 <ul className="list-disc list-inside text-1xl mx-4 mb-3">
                     <li className="my-3">Program Dates: {testData.batches[batch_no].start_date} - {testData.batches[batch_no].end_date}</li>
@@ -146,7 +146,7 @@ function BatchPageTest() {
         }
     }
     return (
-        <div className='container max-w-7xl flex flex-wrap mx-auto mt-3 auth'>
+        <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto mt-3 auth'>
         <SideBarContent/>
         <BatchSelect 
          batchData={testData} 

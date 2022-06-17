@@ -1,7 +1,8 @@
 import './batchSelect.css';
 import Button from '../button/button';
+import Loading from "../../pages/loading/loading";
 
-function BatchSelect({batchData, onChange, batchIndex, err}) {
+function BatchSelect({batchData, onChange, batchIndex, isLoading}) {
     // /api/v1/courses/<course_id>/batches_dict/
     // returns a Button Component indicating the availabilty of a batch
     function AvailabilityButton({batch_no, batchID, seats}) {
@@ -93,7 +94,9 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
     
     const course = batchData.name;
 
-    return (
+    return isLoading ? (
+        <Loading />
+        ) : (
         <div className="flex flex-col md:flex-initial w-full justify-center md:w-7/12 px-10 bg-white">
 	    <div className="my-2 text-center">
                 <h2 className="text-2xl mt-3"><b>{course}</b></h2>

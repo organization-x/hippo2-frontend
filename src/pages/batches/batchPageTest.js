@@ -130,7 +130,7 @@ function BatchPageTest() {
         }
         else {
            return (
-                <div className="flex-none md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+                <div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                 <h1 className="text-3xl mb-10 text-center">
                     Batch {testData.batches[batch_no].name}
                 </h1>

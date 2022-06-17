@@ -14,11 +14,11 @@ function BatchPage() {
 
     useEffect(async () => {
         const url = baseUrl + `/api/v1/courses/${searchParams.get('courseID')}/batches/`;
-	const options = {
-	    method: 'GET',
-	};
-	const data = await sendReq(url, options);
-	selectBatchData(data);
+	    const options = {
+	        method: 'GET',
+	    };
+        const data = await sendReq(url, options);
+        selectBatchData(data);
     }) ;
 
     function SideBarContent() {

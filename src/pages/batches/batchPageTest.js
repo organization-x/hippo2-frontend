@@ -90,7 +90,7 @@ function BatchPageTest() {
             },
             {
                 "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
-                "seats": 3,
+                "seats": 0,
                 "start_date": "08/02",
                 "end_date": "08/23",
                 "time_zone": "PST",
@@ -101,7 +101,7 @@ function BatchPageTest() {
             },
             {
                 "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
-                "seats": 3,
+                "seats": 21,
                 "start_date": "08/02",
                 "end_date": "08/23",
                 "time_zone": "EST",

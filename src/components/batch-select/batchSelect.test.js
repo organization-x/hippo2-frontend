@@ -2,94 +2,127 @@ import BatchSelect from './batchSelect.js';
 import { render, screen } from '@testing-library/react';
 
 test('batch select test', () => {
-const testData = [
-  {
-    'id': '62a7bfd2eaaf121caad3968d',
-    'course': 'Carolina',
-    'price': 1983.2,
-    'seats': 20,
-    'start_date': '8/24',
-    'end_date': '8/25',
-    'time_zone': 'PST',
-    'start_time': '2:00 PM',
-    'end_time': '3:00 PM',
-    'name': 'a',
-  },
-  {
-    'id': '62a7bfd2c06e03b6a5eee2b5',
-    'course': 'Aida',
-    'price': 2404.7,
-    'seats': 0,
-    'start_date': '7/21',
-    'end_date': '8/22',
-    'time_zone': 'PST',
-    'start_time': '2:00 AM',
-    'end_time': '9:00 AM',
-    'name': 'b',
-  },
-  {
-    'id': '62a7bfd291832ebf9178b6d6',
-    'course': 'Mcdonald',
-    'price': 3980.2,
-    'seats': 5,
-    'start_date': '6/22',
-    'end_date': '9/22',
-    'time_zone': 'PST',
-    'start_time': '2:00 AM',
-    'end_time': '9:00 AM',
-    'name': 'c',
-  },
-  {
-    'id': '62a7bfd2338845a563edcacd',
-    'course': 'Eloise',
-    'price': 2853.6,
-    'seats': 32,
-    'start_date': '6/22',
-    'end_date': '8/22',
-    'time_zone': 'EST',
-    'start_time': '3:00 PM',
-    'end_time': '6:00 PM',
-    'name': 'd',
-  },
-]
+  const batch_no = -1;
+  const batchID = '';
+  const testData = {
+    "id": "af83050f-121c-4851-9ba6-78a1ae70ab48",
+    "name": "Test Course",
+    "price": 1999.0,
+    "is_available": true,
+    "batches": [
+        {
+            "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
+            "seats": 3,
+            "start_date": "06/02",
+            "end_date": "06/03",
+            "time_zone": "PST",
+            "start_time": "11PM",
+            "end_time": "05AM",
+            "name": "A",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        },
+        {
+            "id": "de5b5ea7-d944-45aa-84ec-6f5e9eaf14cf",
+            "seats": 20,
+            "start_date": "06/02",
+            "end_date": "06/03",
+            "time_zone": "EST",
+            "start_time": "08PM",
+            "end_time": "02AM",
+            "name": "A",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        },
+        {
+            "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
+            "seats": 3,
+            "start_date": "06/20",
+            "end_date": "06/23",
+            "time_zone": "PST",
+            "start_time": "11PM",
+            "end_time": "05AM",
+            "name": "B",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        },
+        {
+            "id": "043f473b-b0ed-4b89-bb1b-799ce15d8188",
+            "seats": 5,
+            "start_date": "06/20",
+            "end_date": "06/23",
+            "time_zone": "EST",
+            "start_time": "08AM",
+            "end_time": "02PM",
+            "name": "B",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        },
+        {
+            "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
+            "seats": 3,
+            "start_date": "07/11",
+            "end_date": "07/30",
+            "time_zone": "PST",
+            "start_time": "11PM",
+            "end_time": "05AM",
+            "name": "C",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        },
+        {
+            "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
+            "seats": 3,
+            "start_date": "07/11",
+            "end_date": "07/30",
+            "time_zone": "EST",
+            "start_time": "11PM",
+            "end_time": "05AM",
+            "name": "C",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        },
+        {
+            "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
+            "seats": 0,
+            "start_date": "08/02",
+            "end_date": "08/23",
+            "time_zone": "PST",
+            "start_time": "11PM",
+            "end_time": "05AM",
+            "name": "D",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        },
+        {
+            "id": "f5fc41b2-ff42-43cb-8fcc-68304751c5fc",
+            "seats": 21,
+            "start_date": "08/02",
+            "end_date": "08/23",
+            "time_zone": "EST",
+            "start_time": "11PM",
+            "end_time": "05AM",
+            "name": "D",
+            "course": "af83050f-121c-4851-9ba6-78a1ae70ab48"
+        }
+    ]
+  };
 
     render(
-	<BatchSelect 
-         batchData={testData} 
-         onChange={
-                      (batch_no, batchID) => { 
-                          selectBatchID(batchID); 
-                          selectBatchNo(batch_no);
-                          console.log(batchID);
-                          console.log(batch_no);
-                      } 
-              	  }
-         value='-1'/>
+      <BatchSelect 
+        batchData={testData} 
+        onChange={
+                   (batch_no, batchID) => { 
+                    selectBatchNo(batch_no);
+                    selectBatchID(batchID); 
+                    console.log(batch_no);
+                    console.log(batchID);
+                   } 
+                }
+        batchIndex={batch_no}/>
     )
-    const batch = screen.getByRole('table', { className: 'batch_description_box' });
+    const seats_left = screen.getByRole('button', { name: '20 LEFT' });
+    const open = screen.getByRole('button', { name: 'OPEN' });
+    const sold_out = screen.getByRole('button', { name: 'SOLD OUT' });
+    const back = screen.getByRole('button', { name: 'Back' });
+    const next = screen.getByRole('button', { name: 'Next' });
 
-    const tableBody = batch.tBodies;
-    const tableHeader = batch.tHead;
-    const tableFooter = batch.tFoot;
-
-    const headTab = tableHeader.getElementsByTagName('th')[0];
-    const bodyTab = tableBody[0].getElementsByTagName('td')[0];
-    const footerTab = tableFooter.getElementsByTagName('td')[0];
-
-    const headChildren = headTab.getElementsByTagName('p');
-    const bodyChildren = bodyTab.getElementsByTagName('p');
-    const footChildren = footerTab.getElementsByTagName('p');
-
-    const selectButton = bodyTab.getElementsByTagName('button')[0];
-    const footSelectButton = footerTab.getElementsByTagName('button')[0];
-
-    console.log(bodyChildren[2].innerHTML);
-    expect(headChildren[0].innerHTML.includes('8/24 - 8/25')).toBeTruthy();
-    expect(headChildren[1].innerHTML.includes('Batch a')).toBeTruthy();
-    expect(bodyChildren[0].innerHTML.includes('2:00 PM - 3:00 PM <b>PST</b>')).toBeTruthy();
-    expect(selectButton.innerHTML.includes('20 LEFT')).toBeTruthy();
-    expect(bodyChildren[2].innerHTML.includes('from<br><b>$1983.2</b><br>(Early Bird)')).toBeTruthy();
-    expect(footChildren[0].innerHTML.includes('2:00 PM - 3:00 PM <b>EST</b>')).toBeTruthy();
-    expect(footSelectButton.innerHTML.includes('20 LEFT')).toBeTruthy();
-    expect(bodyChildren[2].innerHTML.includes('from<br><b>$1983.2</b><br>(Early Bird)')).toBeTruthy();
+    expect(seats_left.className.includes('btn bg-yellow my-4 w-11/12 h-8 txt-white button active')).toBeTruthy();
+    expect(open.className.includes('btn bg-green my-4 w-11/12 h-8 txt-white button active')).toBeTruthy();
+    expect(sold_out.className.includes('btn bg-red my-4 w-11/12 h-8 txt-white button active')).toBeTruthy();
+    expect(back.className.includes('btn bg-gray w-1/4 h-12 my-3 txt-white button active')).toBeTruthy();
+    expect(next.className.includes('btn bg-green w-1/2 h-12 my-3 txt-white button active')).toBeTruthy();
 });

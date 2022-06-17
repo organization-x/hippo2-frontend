@@ -12,5 +12,5 @@ test('button test', () => {
         button.className.includes('txt-black') &&
         button.className.includes('button') &&
         button.innerHTML === 'Student'
-    );
+    ).toBeTruthy();
 });

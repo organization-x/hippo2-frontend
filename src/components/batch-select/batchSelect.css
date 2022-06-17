@@ -4,9 +4,9 @@
     border-radius: 24px;
     margin-top: 40px;
   }
+
   .dropdown {
      display: inline-block; 
-     transition: all .5s ease;
   }
 
   .lastColumn, .firstColumn {
@@ -17,8 +17,18 @@
   }
   .dropdown:hover .dropdown-content {
     display: block;
-    transform: translateY(0);
   }
+  .selectHeader {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+  .selectBody {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+
 }
 
 @media (min-width: 768px) {

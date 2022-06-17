@@ -59,7 +59,7 @@ function App() {
 							</PrivateRoute>
 						}></Route>
 						<Route path='/courses/1234/batches' element={<BatchPage />}></Route>
-						<Route path='/courses/1234/batches_test' element={<BatchPageTest />}></Route>
+						<Route path='/courses/:courseID/batches_test' element={<BatchPageTest />}></Route>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

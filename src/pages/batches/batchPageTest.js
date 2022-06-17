@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BatchSelect from "../../components/batch-select/batchSelect";
 import validateBatchSelect from "../../validation/batchSelectPage";
+import { useParams } from "react-router-dom";
 
 function BatchPageTest() {
     const [batch_no, selectBatchNo] = useState(-1);    
     const [batchID, selectBatchID] = useState('');    
     const [errors, setErrors] = useState({});
+    const [batchData, setBatchData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    
+    const { courseID } = useParams();
 
-    const selectBatch = () => {
-	setErrors({});
-	const [err, data] = validateBatchSelect({
-	    batchID: batchID
-	});
-	if (err) {
-	    return setErrors(err);
-	}
-    };
+    useEffect(() => {
+        async function fetchData() {
+            if(courseID){
+                setBatchData(testData);
+                setIsLoading(false);
+            }
+            setBatchData(testData);
+            setIsLoading(false);
+        }
+        fetchData();
+    }, []);
     const testData = {
         "id": "af83050f-121c-4851-9ba6-78a1ae70ab48",
         "name": "Test Course",
@@ -154,11 +161,10 @@ function BatchPageTest() {
                       (batch_no, batchID) => { 
                         selectBatchNo(batch_no);
                         selectBatchID(batchID); 
-                        console.log(batch_no);
-                        console.log(batchID);
                       } 
               	  }
-         batchIndex={batch_no}/>
+         batchIndex={batch_no}
+         isLoading = {isLoading}/>
         </div>
     );
 }

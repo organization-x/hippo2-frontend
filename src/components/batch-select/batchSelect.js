@@ -35,7 +35,7 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
     // returns table data formatted with times, seats, and price
     function CellData({batch_no, start_time, end_time, seats, time_zone, batchID, className}) {
         return (
-            <div key={batch_no} className={`border-t-2 sm:border-gray-300 md:border-black ${className} ${batch_no === batchIndex ? 'bg-gray-300' : 'hover:bg-gray-200'}`}>
+            <div key={batch_no} onClick={() => onChange(batch_no, batchID)} className={`border-t-2 sm:border-gray-300 md:border-black ${className} ${batch_no === batchIndex ? 'bg-gray-300' : 'hover:bg-gray-200'}`}>
                 <p className="text-xs text-gray-800 mt-4">{start_time} - {end_time} <b>{time_zone}</b></p>
                 <AvailabilityButton batch_no={batch_no} batchID={batchID} seats={seats}/>
                 <p className='text-xs text-gray-800 pb-16'>from<br/><b className='text-sm text-gray-500'>${batchData.price}</b><br/>(Early Bird)</p>
@@ -75,7 +75,7 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
 
     let columns = [];
     for (let i = 1; i < batchData.batches.length / 2 - 1; i++) {
-	columns.push((<Column column_no={i} lastChildCSS='rounded-none sm:rounded-b-3xl md:rounded-none' />));
+	    columns.push((<Column column_no={i} lastChildCSS='rounded-none sm:rounded-b-3xl md:rounded-none' />));
     }
     
     const course = batchData.name;

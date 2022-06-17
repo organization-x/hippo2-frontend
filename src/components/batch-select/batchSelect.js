@@ -8,10 +8,10 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
     let column_headers = [];
 
     // returns a Button Component indicating the availabilty of a batch
-    function getAvailability(batch_no, seats) {
+    function getAvailability(batch_no, batchID, seats) {
         if (seats > 20) {
             return (
-                <Button onClick={() => onChange(batch_no)} bgColor="green" txtColor="white" className="w-11/12 h-8">
+                <Button onClick={() => onChange(batch_no, batchID)} bgColor="green" txtColor="white" className="w-11/12 h-8">
                     <p className="text-2xl">OPEN</p>
                 </Button>);
         }
@@ -37,11 +37,11 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
         </th>);
     }
     // returns table data formatted with times, seats, and price
-    function cellData(key, start_time, end_time, seats, tz, batch_no, batchID) {
+    function cellData(key, start_time, end_time, seats, tz, batchID) {
         return (
-            <td key={key} className={batch_no == batchIndex ? 'bg-gray-500' : ''}>
+            <td key={key} className={key === batchIndex ? 'bg-gray-400' : 'hover:bg-gray-200'}>
                 <p className="text-sm">{start_time} - {end_time} <b>{tz}</b></p>
-                {getAvailability(batch_no, batchID, seats)}
+                {getAvailability(key, batchID, seats)}
                 <p>from<br/><b>${batchData.price}</b><br/>(Early Bird)</p>
             </td>);
     }
@@ -52,10 +52,10 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
             column_headers.push(columnHeader(index, batch.start_date, batch.end_date, batch.name));
         }
         if (batch.time_zone === "PST") {
-            column_bodies_pst.push(cellData(index, batch.start_time, batch.end_time, batch.seats, batch.price, 'PST', index, batch.id));
+            column_bodies_pst.push(cellData(index, batch.start_time, batch.end_time, batch.seats, batch.price, 'PST', batch.id));
         }
         if (batch.time_zone === "EST") {
-            column_bodies_est.push(cellData(index, batch.start_time, batch.end_time, batch.seats, batch.price, 'EST', index, batch.id));
+            column_bodies_est.push(cellData(index, batch.start_time, batch.end_time, batch.seats, batch.price, 'EST', batch.id));
         }
     });
     
@@ -68,20 +68,18 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
             <table className='batch_description_box'>
                 <thead>
                     <tr>
-			            {column_headers}
+			{column_headers}
                     </tr>
                 </thead>
-                <tbody className='hover:bg-gray-300'>
+                <tbody>
                     <tr>
                         {column_bodies_pst}
                     </tr>
                 </tbody>
-                <tbody className='hover:bg-gray-300'>
-                    <tr>
+            	<tfoot>
+		    <tr>
                         {column_bodies_est}
                     </tr>
-                </tbody>
-            	<tfoot>
                 </tfoot>
             </table>
             <div className="flex space-x-14">
@@ -89,7 +87,7 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
                     <p className="text-2xl">Back</p>
                 </Button>
                 <Button 
-	    	 onClick={() => { submitBatchSelection(batchData[batchIndex].id)}}
+	    	 onClick={() => console.log("hello") }
 	    	 bgColor="green" txtColor="white" 
 	    	 className="w-2/3 h-12 my-3"
 	    	>

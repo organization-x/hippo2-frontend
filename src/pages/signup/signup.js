@@ -53,7 +53,7 @@ function Signup() {
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<h1 className="text-2xl mb-5 text-center">Batch Details</h1>
+				<h1 className="text-2xl mb-5 text-center">Create an Account</h1>
 				<p className="text-base mb-3">
 					AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
 				</p>

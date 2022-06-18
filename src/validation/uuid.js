@@ -16,10 +16,10 @@ const messages = {
     }
 };
 
-function validate_course_id(id) {
+function validateUuid(id) {
     const [err, vId] = validate(id, Uuid);
     const formattedErr = formatFormErrors(err, messages);
     return [formattedErr, vId];
 }
 
-export default validate_course_id;
+export default validateUuid;

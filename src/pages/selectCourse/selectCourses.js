@@ -1,54 +1,55 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../components/button/button";
+import Button from "../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
-import './get_courses.css';
-import sendReq from "../../../services/sendReq";
-import baseUrl from '../../../apiUrls';
-import validate_course_id from "../../../validation/course_selection";
+import './selectCourses.css';
+import sendReq from "../../services/sendReq";
+import baseUrl from '../../apiUrls';
+import validateUuid from "../../validation/uuid";
 
-function GetInformation({ onNext }) {
+function SelectCourses({ onNext }) {
 	const navigate = useNavigate();
-	let [course_list, setcourse_list] = useState([]);
-	let [course_id,set_course_id] = useState('');
+	const [courseList, setCourseList] = useState([]);
+	const [courseId,setCourseId] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const handleChange = (course_id) => {
-		set_course_id(course_id.target.value);
-		console.log(course_id.target.value ); //this prints the selected option
+	const handleChange = (courseId) => {
+		setCourseId(courseId.target.value);
 	  };
 
-	const listItems = course_list.map((course) =>
+	const listItems = courseList.map((course) =>
 	  <option value={course.id} key={course.name.toString()} >{course.name}</option>
 	  );
 
 	const onSubmit = () => {
-		const [err] = validate_course_id(course_id);
+		const [err] = validateUuid(courseId);
 		if(err){
 			setErrorMessage('Please choose a course');
-			console.log("fix");
 		}
 		else{
-			navigate('/courses/'+course_id+'/batches');
+			navigate('/courses/'+courseId+'/batches');
 		}
 	}
-	
+	const onBack = () => {
+		//dummy onback function for now
+	}
 	  useEffect(() => {
 		// Runs after the first render() lifecycle
-		const url_courses_api =baseUrl +'/api/v1/courses/';
+		const urlCoursesApi =baseUrl +'/api/v1/courses/';
 		const options = {
 			method:'GET',
 		};
-		const res = sendReq(url_courses_api, options);
-		res.then(function(result) {
-			setcourse_list(result.data);
-		 })
+
+		sendReq(urlCoursesApi,options).then(res => {
+			setCourseList(res.data);
+		});
+
+		
 	  }, [])
 	
-	
 	return (
-		<div>
-			<div className="container max-w-3xl flex flex-wrap mx-auto pt-11 auth pl-14">
+		<>
+			<div className="container max-w-3xl flex flex-wrap mx-auto pt-11 auth px-3">
 				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 					<h1 className="text-2xl mb-8 text-center">3-Week AI Summer Course</h1>
 					<ul className="text-base mb-3 pt">
@@ -63,7 +64,7 @@ function GetInformation({ onNext }) {
 					</p>
 				</div>
 
-				<div className="flex-none md:flex-initial w-full  md:w-3/6 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+				<div className="flex-none md:flex-initial w-full  md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-2xl mb-8 text-center font-semibold">Select a course to reserve a spot.</h2>
 					<div className="mb-4 mt-5 " >
 						<h1 className="text-lg mb-3 font-semibold">Course</h1>
@@ -71,7 +72,7 @@ function GetInformation({ onNext }) {
                     </div>
 
 					<div className=''>
-						<select data-dropdown-placement="right" value={course_id} onChange={handleChange}
+						<select data-dropdown-placement="right" value={courseId} onChange={handleChange}
                         className="w-full py-1 form-select form-select-lg mb-3 
 						px-5
 						py-6
@@ -88,7 +89,7 @@ function GetInformation({ onNext }) {
 						focus:border-blue-600
 						focus:outline-none w-full"
 						aria-label=".form-select-lg example">
-                            <option className="" value ="" >3-Week AI Summer Course</option>
+                            <option value ="" disabled selected >Select a Course</option>
                             {listItems}
                         </select>	
 					</div>
@@ -102,13 +103,14 @@ function GetInformation({ onNext }) {
 					</div>
 
 					<div className="flex pt-2.5">
-						<Button bgColor="gray" txtColor="white" className="w-full py-1" onClick={() => onSubmit()}>Back</Button>
+						<Button bgColor="gray" txtColor="white" className="w-full py-1" onClick={() => onBack()}>Back</Button>
 					</div>
 
 				</div>	
 			</div>
-		</div>
+		</>
+		
 	)
 }
 
-export default GetInformation;
+export default SelectCourses;

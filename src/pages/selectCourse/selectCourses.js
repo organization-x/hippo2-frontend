@@ -35,7 +35,7 @@ function SelectCourses({ onNext }) {
 	}
 	  useEffect(() => {
 		// Runs after the first render() lifecycle
-		const urlCoursesApi =baseUrl +'/api/v1/courses/';
+		const urlCoursesApi = baseUrl +'/api/v1/courses/';
 		const options = {
 			method:'GET',
 		};

@@ -120,9 +120,10 @@ test('batch select test', () => {
     const back = screen.getByRole('button', { name: 'Back' });
     const next = screen.getByRole('button', { name: 'Next' });
 
-    expect(seats_left.className.includes('btn bg-yellow my-4 w-11/12 h-8 txt-white button active')).toBeTruthy();
-    expect(open.className.includes('btn bg-green my-4 w-11/12 h-8 txt-white button active')).toBeTruthy();
-    expect(sold_out.className.includes('btn bg-red my-4 w-11/12 h-8 txt-white button active')).toBeTruthy();
-    expect(back.className.includes('btn bg-gray w-1/4 h-12 my-3 txt-white button active')).toBeTruthy();
-    expect(next.className.includes('btn bg-green w-1/2 h-12 my-3 txt-white button active')).toBeTruthy();
+    expect(seats_left.className.includes('btn bg-yellow my-4 w-1/4 md:w-11/12 h-12 md:h-8 txt-white button active')).toBeTruthy();
+    expect(open.className.includes('btn bg-green my-4 w-1/4 md:w-11/12 h-12 md:h-8 txt-white button active')).toBeTruthy();
+    expect(sold_out.className.includes('btn bg-red my-4 w-1/4 md:w-11/12 h-12 md:h-8 txt-white button active')).toBeTruthy();
+    expect(back.className.includes('btn bg-gray w-full md:w-1/4 h-12 mb-6 md:my-3 txt-white button active')).toBeTruthy();
+    expect(next.className.includes('btn bg-green w-full md:w-1/2 h-12 md:my-3 txt-white button active')).toBeTruthy();
 });
+

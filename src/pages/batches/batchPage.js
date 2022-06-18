@@ -113,7 +113,7 @@ function BatchPage() {
     return (
         <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto mt-3 auth'>
             <SideBarContent/>
-            <div className='<div className="flex flex-col md:flex-initial justify-center md:w-7/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">'>
+            <div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
                 <BatchSelect 
                     batchData={batchData} 
                     onChange={

@@ -9,6 +9,8 @@ import { FlashMsgProvider } from './services/flashMsg';
 
 import Navbar from './components/navbar/navbar';
 import Home from './pages/home/home';
+import SelectCourses from './pages/selectCourse/selectCourses';
+
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
 import Protected from './pages/protected/protected';
@@ -50,6 +52,7 @@ function App() {
 						<Route path='/signup' element={<Signup />}></Route>
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
+						<Route path='/courses' element={<SelectCourses/>}></Route>
 						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
 						<Route path='/group/join' element={
 							<PrivateRoute initBlind={true}>

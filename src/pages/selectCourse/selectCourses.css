@@ -1,0 +1,26 @@
+
+.form-error {
+	color: red;
+}
+
+.form-label {
+    font-size: 1.125rem;
+    display: block;
+}
+
+ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    padding-left: 1.5em;
+    text-indent:-1.5em;
+}
+
+select {
+	position: relative;
+	appearance: none;
+	padding: 5px;
+	width: 120px;
+	background: transparent url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") no-repeat;
+	background-position: 90% 50%;
+ }
+ 

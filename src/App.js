@@ -10,7 +10,7 @@ import { FlashMsgProvider } from './services/flashMsg';
 import Navbar from './components/navbar/navbar';
 import Home from './pages/home/home';
 
-import Select_course from './pages/select_course/select_course';
+import SelectCourse from './pages/select_course/select_course';
 
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
@@ -57,7 +57,7 @@ function App() {
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
 
-						<Route path='/courses' element={<Select_course/>}></Route>
+						<Route path='/courses' element={<SelectCourse/>}></Route>
 
 
 						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>

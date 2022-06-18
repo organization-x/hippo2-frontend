@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
-import validateUserInformation from "../../../validation/userInformation";
-import formatApiErrors from "../../../validation/formatApiErrors";
-import { useAuth } from "../../../services/authentication";
-import PhoneInput from "react-phone-input-2";
-import Input from "../../../components/form/input";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './get_courses.css';
 import sendReq from "../../../services/sendReq";
-import { string, type } from "superstruct";
 import baseUrl from '../../../apiUrls';
 import validate_course_id from "../../../validation/course_selection";
 
 function GetInformation({ onNext }) {
-	//const auth = useAuth();
 	const navigate = useNavigate();
 	let [course_list, setcourse_list] = useState([]);
 	let [course_id,set_course_id] = useState('');
@@ -30,7 +23,7 @@ function GetInformation({ onNext }) {
 	  );
 
 	const onSubmit = () => {
-		const [err, id] = validate_course_id(course_id);
+		const [err] = validate_course_id(course_id);
 		if(err){
 			setErrorMessage('Please choose a course');
 			console.log("fix");
@@ -40,7 +33,7 @@ function GetInformation({ onNext }) {
 		}
 	}
 	
-	  React.useEffect(() => {
+	  useEffect(() => {
 		// Runs after the first render() lifecycle
 		const url_courses_api =baseUrl +'/api/v1/courses/';
 		const options = {
@@ -53,15 +46,13 @@ function GetInformation({ onNext }) {
 	  }, [])
 	
 	
-
-
 	return (
 		<div>
-			<div className="container max-w-3xl flex flex-wrap mx-auto pt-[50px] auth">
+			<div className="container max-w-3xl flex flex-wrap mx-auto pt-11 auth pl-14">
 				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 					<h1 className="text-2xl mb-8 text-center">3-Week AI Summer Course</h1>
 					<ul className="text-base mb-3 pt">
-                            <li>Learn Ai in small classes online</li>
+                            <li>Learn AI in small classes online</li>
                             <li>(6 students per instructer)</li>
                             <li>Build an impressive AI product</li>
                             <li>No coding experience necessary to start </li>
@@ -72,7 +63,7 @@ function GetInformation({ onNext }) {
 					</p>
 				</div>
 
-				<div className="flex-none md:flex-initial w-full  md:w-2/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+				<div className="flex-none md:flex-initial w-full  md:w-3/6 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-2xl mb-8 text-center font-semibold">Select a course to reserve a spot.</h2>
 					<div className="mb-4 mt-5 " >
 						<h1 className="text-lg mb-3 font-semibold">Course</h1>
@@ -109,20 +100,12 @@ function GetInformation({ onNext }) {
 					<div className="flex pb-2.5">
 						<Button bgColor="green" txtColor="white" className="w-full py-1" onClick={() => onSubmit()}>Next</Button>
 					</div>
-					
 
 					<div className="flex pt-2.5">
 						<Button bgColor="gray" txtColor="white" className="w-full py-1" onClick={() => onSubmit()}>Back</Button>
 					</div>
 
-				</div>
-
-
-				
-              
-
-
-				
+				</div>	
 			</div>
 		</div>
 	)

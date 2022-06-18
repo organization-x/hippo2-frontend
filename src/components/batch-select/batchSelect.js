@@ -92,8 +92,10 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
     }
 
     let columns = [];
-    for (let i = 1; i < batchData.batches.length / 2 - 1; i++) {
-	    columns.push((<Column key={i} column_no={i} lastChildCSS='rounded-none md:rounded-b-3xl lg:rounded-none' />));
+    if(!isLoading) {
+        for (let i = 1; i < batchData.batches.length / 2 - 1; i++) {
+            columns.push((<Column key={i} column_no={i} lastChildCSS='rounded-none md:rounded-b-3xl lg:rounded-none' />));
+        }
     }
     
     const course = batchData.name;
@@ -104,7 +106,7 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
 
     const onNext = () => {
         setFormErrors({});
-        const [ err, vData ] = validateBatchSelect(batch_id);
+        const [ err ] = validateBatchSelect(batch_id);
         if(err){
             return setFormErrors(err);
         } else {
@@ -126,7 +128,14 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
 	    	        {columns}
 		        <Column key={batchData.batches.length / 2 - 1} column_no={batchData.batches.length / 2 - 1} lastChildCSS='lastColumn'/>
                     </div>
-	            <div className="flex flex-wrap justify-between my-8">
+        <div>
+            {   
+				Object.keys(formErrors).length ? 
+					<div className='text-right text-red-600 mt-5'>{formErrors['batchID'][0]}</div> 
+				: 
+                    <div className='text-right text-red-600 mt-5'>&nbsp;</div>
+			}
+	        <div className="flex flex-wrap justify-between my-5">
                 <Button 
                     onClick={() => console.log("jawn")} 
                     bgColor="gray" 
@@ -135,21 +144,16 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
                 >
                     <p className="text-2xl">Back</p>
                 </Button>
-                {
-					formErrors.type?.length ? 
-						<span className='mt-3 block text-center form-error'>{formErrors[0][0]}</span> 
-					: 
-						null
-				}
                 <Button
                     onClick={() => onNext()}
                     bgColor="green" txtColor="white" 
                     className="w-full lg:w-1/2 h-12 lg:my-3"
                 >
                     <p className="text-2xl">Next</p>
-                            
+                                
                 </Button>
             </div>
+        </div>
         </div>
     );
 }

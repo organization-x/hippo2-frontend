@@ -20,7 +20,6 @@ import GroupJoin from './pages/groupJoin/groupJoin';
 import './App.css';
 import Loading from './pages/loading/loading';
 import BatchPage from './pages/batches/batchPage';
-import BatchPageTest from './pages/batches/batchPageTest';
 
 const Welcome = lazy(() => import('./pages/welcome/welcome'));
 
@@ -58,8 +57,7 @@ function App() {
 								<GroupJoin />
 							</PrivateRoute>
 						}></Route>
-						<Route path='/courses/1234/batches' element={<BatchPage />}></Route>
-						<Route path='/courses/:courseID/batches_test' element={<BatchPageTest />}></Route>
+						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

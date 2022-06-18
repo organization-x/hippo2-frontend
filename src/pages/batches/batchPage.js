@@ -3,6 +3,9 @@ import baseUrl from "../../apiUrls";
 import { useParams } from "react-router-dom";
 import sendReq from "../../services/sendReq";
 import BatchSelect from "../../components/batch-select/batchSelect";
+import Button from "../../components/button/button";
+import validateBatchSelect from "../../validation/batchSelect";
+import { useNavigate } from 'react-router-dom';
 
 function BatchPage() {
     const [batch_no, selectBatchNo] = useState(-1);    
@@ -13,20 +16,22 @@ function BatchPage() {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(async () => {
-        async function fetchData() {
-            if(courseID){
-                const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
-                const options = {
-                    method: 'GET',
-                };
-                const data = await sendReq(url, options);
-                setBatchData(data);
+    const navigate = useNavigate();
+
+    const [formErrors, setFormErrors] = useState({});
+
+    useEffect(() => {
+        if(courseID){
+            const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
+            const options = {
+                method: 'GET',
+            };
+            sendReq(url, options).then(res => {
+                setBatchData(res.data);
                 setIsLoading(false);
-            }
+            });
         }
-        fetchData();
-    }, []);
+    }, [courseID]);
 
     function SideBarContent() {
         if (batch_no === -1) {
@@ -60,21 +65,68 @@ function BatchPage() {
                 </div>);
         }
     }
+
+    function NextAndBackButtons() {
+        const onNext = () => {
+            setFormErrors({});
+            const [ err ] = validateBatchSelect(batchID);
+            if(err){
+                return setFormErrors(err);
+            } else {
+                const path = `/batches/${batchID}/payment`;
+                navigate(path); 
+            }
+        }
+    
+        const onBack = () => {   
+        }
+        return (
+            <div>
+                {   
+                    Object.keys(formErrors).length ? 
+                        <div className='text-right text-red-600 mt-5'>{formErrors[undefined][0]}</div> 
+                    : 
+                        <div className='text-right text-red-600 mt-5'>&nbsp;</div>
+                }
+                <div className="flex flex-wrap justify-between my-5">
+                    <Button 
+                        onClick={() => onBack()} 
+                        bgColor="gray" 
+                        txtColor="white" 
+                        className="w-full lg:w-1/4 h-12 mb-6 lg:my-3"
+                    >
+                        <p className="text-2xl">Back</p>
+                    </Button>
+                    <Button
+                        onClick={() => onNext()}
+                        bgColor="green" txtColor="white" 
+                        className="w-full lg:w-1/2 h-12 lg:my-3"
+                    >
+                        <p className="text-2xl">Next</p>
+                                    
+                    </Button>
+                </div>
+            </div>
+        );
+    }
     
     return (
-        <div className='container max-w-7xl flex flex-wrap mx-auto mt-3 auth'>
+        <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto mt-3 auth'>
             <SideBarContent/>
-            <BatchSelect 
-             batchData={batchData} 
-             onChange={
-                          (batch_no) => { 
-                              selectBatchNo(batch_no);
-			      selectBatchID(batchData[batch_no].id);
-                          } 
-              	      }
-             batchIndex={batch_no}
-             isLoading = {isLoading}
-	    />
+            <div className='<div className="flex flex-col md:flex-initial justify-center md:w-7/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">'>
+                <BatchSelect 
+                    batchData={batchData} 
+                    onChange={
+                        (batch_no, batchID) => { 
+                        selectBatchNo(batch_no);
+                        selectBatchID(batchID); 
+                        } 
+                        }
+                    batch_id = {batchID}
+                    batchIndex={batch_no}
+                    isLoading = {isLoading}/>
+                <NextAndBackButtons/>
+            </div>
         </div>
     );
 }

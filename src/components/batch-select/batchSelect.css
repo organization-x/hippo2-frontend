@@ -1,8 +1,8 @@
 @media (max-width: 1024px) {
   .selectColumn {
     background-color: #F5F6F6;
-    border-radius: 24px;
-    margin-top: 40px;
+    border-radius: 1.5rem;
+    margin-top: 2.5rem;
   }
 
   .dropdown {
@@ -10,7 +10,7 @@
   }
 
   .lastColumn, .firstColumn {
-    border-radius: 0px 0px 24px 24px;
+    border-radius: 0rem 0rem 1.5rem 1.5rem;
   }
   .dropdown-content {
     display: none;
@@ -31,36 +31,30 @@
 
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64rem) {
   .selectTable {
-    border-width: 2px;
-    border-radius: 24px;
+    border-width: 0.125rem;
+    border-radius: 1.5rem;
   }
   .selectColumn {
-    border-right-width: 2px;
+    border-right-width: 0.125rem;
   }
   .selectColumn:last-child {
-    border-right-width: 0px;
+    border-right-width: 0rem;
   }
   .lastColumn {
-    border-bottom-right-radius: 24px;
+    border-bottom-right-radius: 1.5rem;
   }
   .firstColumn {
-    border-bottom-left-radius: 24px;
+    border-bottom-left-radius: 1.5rem;
   }
 }
-
-/*
-rgba(248, 139, 12, 0.75); red
-rgba(15, 184, 113, 0.83); green
-rgba(226, 83, 83, 0.8); yellow
-*/
 
 
 .batch_name {
     font-style: normal;
     font-weight: 300;
-    font-size:16px;
+    font-size: 1rem;
     line-height: 132.5%;
     text-align: center;
 

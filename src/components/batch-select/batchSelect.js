@@ -3,9 +3,9 @@ import Button from '../button/button';
 import Loading from "../../pages/loading/loading";
 import validateBatchSelect from "../../validation/batchSelect";
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
-    // /api/v1/courses/<course_id>/batches_dict/
     // returns a Button Component indicating the availabilty of a batch
     function AvailabilityButton({batch_no, batchID, seats}) {
 	const buttonClassName = "my-4 w-1/4 text-center lg:w-11/12 p-2 lg:p-1 inline-block";
@@ -14,17 +14,17 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
                 <Button onClick={() => onChange(batch_no, batchID)} bgColor="green" txtColor="white" className={buttonClassName}>
                     OPEN
                 </Button>);
-        }
-        else if (seats > 0) {
+        } else if (seats > 0) {
             return (
                 <Button onClick={() => onChange(batch_no, batchID)} bgColor="yellow" txtColor="white" className={buttonClassName}>
                     {seats} LEFT
                 </Button>);
+        } else {
+                return (
+                    <Button onClick={() => onChange(batch_no, batchID)} bgColor="red" txtColor="white" className={buttonClassName}>
+                        SOLD OUT
+                    </Button>);
         }
-        return (
-            <Button onClick={() => onChange(batch_no, batchID)} bgColor="red" txtColor="white" className={buttonClassName}>
-                SOLD OUT
-            </Button>);
     }
     // returns the table's header with the date range and batch name
     function ColumnHeader({start_date, end_date, name}) {
@@ -63,7 +63,9 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
 	let batchPST = batchData.batches[batchNoPST];
 	let batchEST = batchData.batches[batchNoEST];
 
-	return (
+	return isLoading ? (
+        <Loading/>
+        ) : (
 	    <div key={column_no} className={`grow border-black selectColumn dropdown`}>
 		<ColumnHeader start_date={batchPST.start_date} end_date={batchPST.end_date} name={batchPST.name}/>
 		<CellData 
@@ -98,6 +100,19 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
 
     let navigate = useNavigate();
 
+    const [formErrors, setFormErrors] = useState({});
+
+    const onNext = () => {
+        setFormErrors({});
+        const [ err, vData ] = validateBatchSelect(batch_id);
+        if(err){
+            return setFormErrors(err);
+        } else {
+            let path = `/batches/${batch_id}/payment`;
+            navigate(path); 
+        }
+    }
+
     return isLoading ? (
         <Loading />
         ) : (
@@ -107,32 +122,32 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
                 <h2 className="text-2xl">Select a batch that fits your schedule</h2>
 	    </div>
             <div className='flex flex-col lg:flex-row lg:text-center justify-center border-black selectTable'>
-		<Column key={0} column_no={0} lastChildCSS='firstColumn'/>
-	    	{columns}
-		<Column key={batchData.batches.length / 2 - 1} column_no={batchData.batches.length / 2 - 1} lastChildCSS='lastColumn'/>
-            </div>
-	    <div className="flex flex-wrap justify-between my-8">
+		        <Column key={0} column_no={0} lastChildCSS='firstColumn'/>
+	    	        {columns}
+		        <Column key={batchData.batches.length / 2 - 1} column_no={batchData.batches.length / 2 - 1} lastChildCSS='lastColumn'/>
+                    </div>
+	            <div className="flex flex-wrap justify-between my-8">
                 <Button 
-	    	    onClick={() => console.log("jawn")} 
-	            bgColor="gray" 
-	            txtColor="white" 
-	            className="w-full lg:w-1/4 h-12 mb-6 lg:my-3"
-	    	>
+                    onClick={() => console.log("jawn")} 
+                    bgColor="gray" 
+                    txtColor="white" 
+                    className="w-full lg:w-1/4 h-12 mb-6 lg:my-3"
+                >
                     <p className="text-2xl">Back</p>
                 </Button>
+                {
+					formErrors.type?.length ? 
+						<span className='mt-3 block text-center form-error'>{formErrors[0][0]}</span> 
+					: 
+						null
+				}
                 <Button
-	    	    onClick={() => {const [ err, vData ] = validateBatchSelect(batch_id);
-                                if(err){
-                                    alert('Please select a batch');
-                                } else {
-                                    let path = `/batches/${batch_id}/payment`;
-                                    navigate(path); 
-                                }} }
-	    	    bgColor="green" txtColor="white" 
-	    	    className="w-full lg:w-1/2 h-12 lg:my-3"
-	    	>
+                    onClick={() => onNext()}
+                    bgColor="green" txtColor="white" 
+                    className="w-full lg:w-1/2 h-12 lg:my-3"
+                >
                     <p className="text-2xl">Next</p>
-	    	        
+                            
                 </Button>
             </div>
         </div>

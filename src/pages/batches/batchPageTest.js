@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import BatchSelect from "../../components/batch-select/batchSelect";
-import validateBatchSelect from "../../validation/batchSelectPage";
 import { useParams } from "react-router-dom";
 
 function BatchPageTest() {
@@ -20,6 +19,7 @@ function BatchPageTest() {
             }
             setBatchData(testData);
             setIsLoading(false);
+            console.log(isLoading);
         }
         fetchData();
     }, []);
@@ -163,6 +163,7 @@ function BatchPageTest() {
                         selectBatchID(batchID); 
                       } 
               	  }
+         batch_id = {batchID}
          batchIndex={batch_no}
          isLoading = {isLoading}/>
         </div>

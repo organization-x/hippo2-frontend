@@ -14,15 +14,18 @@ function BatchPage() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(async () => {
-        if(courseID){
-            const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
-	        const options = {
-	            method: 'GET',
-	        };
-            const data = await sendReq(url, options);
-            setBatchData(data);
-            setIsLoading(false);
+        async function fetchData() {
+            if(courseID){
+                const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
+                const options = {
+                    method: 'GET',
+                };
+                const data = await sendReq(url, options);
+                setBatchData(data);
+                setIsLoading(false);
+            }
         }
+        fetchData();
     }, []);
 
     function SideBarContent() {

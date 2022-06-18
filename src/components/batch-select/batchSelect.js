@@ -1,7 +1,10 @@
 import './batchSelect.css';
 import Button from '../button/button';
+import Loading from "../../pages/loading/loading";
+import validateBatchSelect from "../../validation/batchSelect";
+import { useNavigate } from 'react-router-dom';
 
-function BatchSelect({batchData, onChange, batchIndex, err}) {
+function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
     // /api/v1/courses/<course_id>/batches_dict/
     // returns a Button Component indicating the availabilty of a batch
     function AvailabilityButton({batch_no, batchID, seats}) {
@@ -93,7 +96,11 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
     
     const course = batchData.name;
 
-    return (
+    let navigate = useNavigate();
+
+    return isLoading ? (
+        <Loading />
+        ) : (
         <div className="flex flex-col md:flex-initial w-full justify-center md:w-7/12 px-10 bg-white">
 	    <div className="my-2 text-center">
                 <h2 className="text-2xl mt-3"><b>{course}</b></h2>
@@ -110,14 +117,20 @@ function BatchSelect({batchData, onChange, batchIndex, err}) {
 	            bgColor="gray" 
 	            txtColor="white" 
 	            className="w-full md:w-1/4 h-12 mb-6 md:my-3"
-	    	>
+	    	    >
                     <p className="text-2xl">Back</p>
                 </Button>
-                <Button 
-	    	    onClick={() => console.log("hello") }
+                <Button
+	    	    onClick={() => {const [ err, vData ] = validateBatchSelect(batch_id);
+                                if(err){
+                                    alert('Please select a batch');
+                                } else {
+                                    let path = `/batches/${batch_id}/payment`;
+                                    navigate(path); 
+                                }} }
 	    	    bgColor="green" txtColor="white" 
 	    	    className="w-full md:w-1/2 h-12 md:my-3"
-	    	>
+	    	    >
                     <p className="text-2xl">Next</p>
 	    	        
                 </Button>

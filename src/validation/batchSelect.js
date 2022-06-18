@@ -1,8 +1,8 @@
-import { nonempty, object, pattern, size, string, validate } from "superstruct";
+import { nonempty, object, pattern, string, validate } from "superstruct";
 import formatFormErrors from "./formatFormErrors";
 
 const BatchSelect = object({
-    batchID: pattern(nonempty(string()), /^[a-f0-9]+$/),
+    batchID: pattern(nonempty(string()), /^[a-f0-9-]+$/),
 });
 
 const messages = {
@@ -15,7 +15,7 @@ const messages = {
 };
 
 function validateBatchSelect(batchID) {
-	const [err, vData] = validate(batchID, BatchSelect);
+	const [err, vData] = validate({'batchID' : batchID}, BatchSelect);
 	const formattedErr = formatFormErrors(err, messages);
 	return [formattedErr, vData];
 }

@@ -53,7 +53,7 @@ function Signup() {
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<h1 className="text-2xl mb-5 text-center">Batch Details</h1>
+				<h1 className="text-2xl mb-5 text-center">Create an Account</h1>
 				<p className="text-base mb-3">
 					AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
 				</p>
@@ -73,7 +73,7 @@ function Signup() {
 
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
-			}} className="flex-none md:flex-initial w-full md:w-5/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-xl mb-6 text-center">Join AI Camp as a</h2>
 
 				<div className="flex items-center justify-center">

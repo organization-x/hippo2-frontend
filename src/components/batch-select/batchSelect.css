@@ -1,4 +1,4 @@
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .selectColumn {
     background-color: #F5F6F6;
     border-radius: 24px;
@@ -31,7 +31,7 @@
 
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .selectTable {
     border-width: 2px;
     border-radius: 24px;

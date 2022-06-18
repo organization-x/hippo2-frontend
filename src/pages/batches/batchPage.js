@@ -13,17 +13,20 @@ function BatchPage() {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(async () => {
-        if(courseID){
-            const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
-	        const options = {
-	            method: 'GET',
-	        };
-            const data = await sendReq(url, options);
-            setBatchData(data);
-            setIsLoading(false);
+    useEffect(() => {
+        async function fetchData() {
+            if(courseID){
+                const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
+                const options = {
+                    method: 'GET',
+                };
+                const data = await sendReq(url, options);
+                setBatchData(data);
+                setIsLoading(false);
+            }
         }
-    }, []);
+        fetchData();
+    }, [courseID]);
 
     function SideBarContent() {
         if (batch_no === -1) {
@@ -42,7 +45,7 @@ function BatchPage() {
         }
         else {
            return (
-                <div className="flex-none md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+                <div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                 <h1 className="text-3xl mb-10 text-center">
                     Batch {batchData.batches[batch_no].name}
                 </h1>
@@ -59,19 +62,19 @@ function BatchPage() {
     }
     
     return (
-        <div className='container max-w-7xl flex flex-wrap mx-auto mt-3 auth'>
-            <SideBarContent/>
-            <BatchSelect 
-             batchData={batchData} 
-             onChange={
-                          (batch_no) => { 
-                              selectBatchNo(batch_no);
-			      selectBatchID(batchData[batch_no].id);
-                          } 
-              	      }
-             batchIndex={batch_no}
-             isLoading = {isLoading}
-	    />
+        <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto mt-3 auth'>
+        <SideBarContent/>
+        <BatchSelect 
+         batchData={batchData} 
+         onChange={
+                      (batch_no, batchID) => { 
+                        selectBatchNo(batch_no);
+                        selectBatchID(batchID); 
+                      } 
+              	  }
+         batch_id = {batchID}
+         batchIndex={batch_no}
+         isLoading = {isLoading}/>
         </div>
     );
 }

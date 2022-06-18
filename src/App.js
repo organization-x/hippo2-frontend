@@ -57,7 +57,7 @@ function App() {
 								<GroupJoin />
 							</PrivateRoute>
 						}></Route>
-						<Route path='/courses/1234/batches' element={<BatchPage />}></Route>
+						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

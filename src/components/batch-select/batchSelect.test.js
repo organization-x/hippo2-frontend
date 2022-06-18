@@ -1,5 +1,6 @@
 import BatchSelect from './batchSelect.js';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 test('batch select test', () => {
   const batch_no = -1;

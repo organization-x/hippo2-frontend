@@ -66,3 +66,14 @@ rgba(226, 83, 83, 0.8); yellow
 
     color: #727272;
 }
+
+.batch-error {
+    font-style: normal;
+    font-weight: 300;
+    font-size:16px;
+    line-height: 132.5%;
+    text-align: center;
+
+    background-color: #F5F6F6;
+    color: #fd0000;
+}

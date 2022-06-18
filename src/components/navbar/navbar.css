@@ -52,6 +52,15 @@ header {
 	display: inline-block;
 	padding: 0 1rem;
 }
+
+.nav-links .user-text, .nav-links .logout {
+	color: var(--highlight_green);
+}
+
+.nav-links .logout:hover {
+	opacity: 0.8;
+}
+
 /* for small screens */
 @media (max-width: 768px) {
 	/* display hamburger */
@@ -92,6 +101,7 @@ header {
 
 	.nav-links li {
 		margin-top: 0.5rem;
+		padding: 0;
 	}
 	/* logo + hamburger = 100% width for two rows */
 	.nav-logo {

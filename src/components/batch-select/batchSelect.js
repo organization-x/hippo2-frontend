@@ -1,8 +1,7 @@
 import './batchSelect.css';
 import Button from '../button/button';
-import Loading from "../../pages/loading/loading";
 
-function BatchSelect({batchData, onChange, batchIndex, isLoading}) {
+function BatchSelect({batchData, onChange, batchIndex, err}) {
     // /api/v1/courses/<course_id>/batches_dict/
     // returns a Button Component indicating the availabilty of a batch
     function AvailabilityButton({batch_no, batchID, seats}) {
@@ -10,18 +9,18 @@ function BatchSelect({batchData, onChange, batchIndex, isLoading}) {
         if (seats > 20) {
             return (
                 <Button onClick={() => onChange(batch_no, batchID)} bgColor="green" txtColor="white" className={buttonClassName}>
-                    <p className="text-2xl">OPEN</p>
+                    OPEN
                 </Button>);
         }
         else if (seats > 0) {
             return (
                 <Button onClick={() => onChange(batch_no, batchID)} bgColor="yellow" txtColor="white" className={buttonClassName}>
-                    <p className="text-2xl">{seats} LEFT</p>
+                    {seats} LEFT
                 </Button>);
         }
         return (
             <Button onClick={() => onChange(batch_no, batchID)} bgColor="red" txtColor="white" className={buttonClassName}>
-                <p className="text-2xl">SOLD OUT</p>
+                SOLD OUT
             </Button>);
     }
     // returns the table's header with the date range and batch name
@@ -94,9 +93,7 @@ function BatchSelect({batchData, onChange, batchIndex, isLoading}) {
     
     const course = batchData.name;
 
-    return isLoading ? (
-        <Loading />
-        ) : (
+    return (
         <div className="flex flex-col md:flex-initial w-full justify-center md:w-7/12 px-10 bg-white">
 	    <div className="my-2 text-center">
                 <h2 className="text-2xl mt-3"><b>{course}</b></h2>

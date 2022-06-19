@@ -27,6 +27,14 @@
     background-color: rgb(242, 242, 242);
 }
 
+.btn.bg-yellow {
+    background-color: #f8d50c;
+}
+
+.btn.bg-red {
+    background-color: #e25353;
+}
+
 .btn.txt-black {
     color: black;
 }

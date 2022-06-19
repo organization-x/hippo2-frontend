@@ -5,13 +5,6 @@
     margin-top: 2.5rem;
   }
 
-  .dropdown {
-     display: inline-block; 
-  }
-
-  .lastColumn, .firstColumn {
-     border-radius: 0rem 0rem 1.5rem 1.5rem;
-  }
   .selectHeader {
     display: flex;
     justify-content: space-between; 
@@ -36,14 +29,7 @@
   .selectColumn:last-child {
     border-right-width: 0rem;
   }
-  .lastColumn {
-    border-bottom-right-radius: 1.5rem;
-  }
-  .firstColumn {
-    border-bottom-left-radius: 1.5rem;
-  }
 }
-
 
 .batch_name {
     font-style: normal;

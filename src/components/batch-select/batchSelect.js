@@ -60,7 +60,7 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
             </div>);
     }
 
-    const Column = ({column_no, className, lastChildCSS}) => {
+    const Column = ({column_no, className}) => {
 	const [clicked, setClicked] = useState(false);
         const batchNoPST = 2*column_no;
         const batchNoEST = batchNoPST+1;
@@ -93,15 +93,15 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
                     time_zone={batchEST.time_zone} 
                     batchID={batchEST.id}
                     name={batchEST.name}
-                    className={`${visibility} ${lastChildCSS}`}
+                    className={`${visibility} rounded-b-3xl lg:rounded-none`}
                 />
             </div>);
     }
 
     const columns = [];
     if(!isLoading) {
-        for (let i = 1; i < batchData.batches.length / 2 - 1; i++) {
-            columns.push(<Column key={i} column_no={i} lastChildCSS='rounded-none sm:rounded-b-3xl lg:rounded-none' />);
+        for (let i = 0; i < batchData.batches.length / 2; i++) {
+            columns.push(<Column key={i} column_no={i} />);
         }
     }
     
@@ -115,10 +115,8 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
                 <h2 className="text-2xl mt-3"><b>{course}</b></h2>
                 <h2 className="text-2xl">Select a batch that fits your schedule</h2>
 	    </div>
-            <div className='flex flex-col lg:flex-row lg:text-center justify-center border-black selectTable'>
-		<Column key={0} column_no={0} lastChildCSS='firstColumn'/>
+            <div className='flex flex-col lg:flex-row lg:text-center overflow-hidden justify-center border-black selectTable'>
 	    	{columns}
-		<Column key={batchData.batches.length / 2 - 1} column_no={batchData.batches.length / 2 - 1} lastChildCSS='lastColumn'/>
             </div>
         </div>
     );

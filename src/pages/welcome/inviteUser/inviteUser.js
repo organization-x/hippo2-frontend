@@ -65,6 +65,14 @@ function InviteUser({type, onBack}) {
 		setEmails([...emails, '']);
 	};
 
+	const removeStudent = () => {
+		if (emails.length > 1) {
+			const newEmails = Array.from(emails);
+			newEmails.pop();
+			setEmails(newEmails);
+		}
+	};
+
 	const emailInputs = [];
 	for (let i = 0; i < emails.length; i++) {
 		emailInputs.push(
@@ -135,8 +143,13 @@ function InviteUser({type, onBack}) {
 
 					{emailInputs}
 
-					<div className="grid grid-cols-3 gap-y-10 mt-20">
+					<div className="grid grid-cols-3 gap-y-5 mt-20">
 						<Button bgColor="white" disabled={processing} txtColor="black" className="col-span-3 mx-2 py-3" onClick={() => addStudent()}>Add Another Student</Button>
+						{
+							emails.length > 1 ? 
+								<Button bgColor="white" disabled={processing} txtColor="black" className="col-span-3 mx-2 py-3" onClick={() => removeStudent()}>Remove a Student</Button>
+							: null
+						}
 						<Button bgColor="gray" disabled={processing} txtColor="white" className="mx-2 py-1" onClick={() => backButton()}>Back</Button>
 						<Button bgColor="green" disabled={processing} txtColor="white" className="col-span-2 mx-2 py-1" onClick={() => onSubmit()}>{processing ? 'Loading...' : 'Next'}</Button>
 					</div>

@@ -21,6 +21,8 @@ import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordC
 import GroupJoin from './pages/groupJoin/groupJoin';
 import './App.css';
 import Loading from './pages/loading/loading';
+import BatchPayment from "./pages/batchPayment/batchPayment";
+import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
 
 const Welcome = lazy(() => import('./pages/welcome/welcome'));
@@ -60,6 +62,8 @@ function App() {
 								<GroupJoin />
 							</PrivateRoute>
 						}></Route>
+						<Route path='/batches/:batchId/payment' element={<BatchPayment />}></Route>
+						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
 					</Routes>
 					<Footer />

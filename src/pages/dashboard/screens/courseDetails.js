@@ -1,27 +1,22 @@
 import Loading from "../../loading/loading";
 import {useEffect, useState} from "react";
-import sendReq from "../../../services/sendReq";
 import baseUrl from "../../../apiUrls";
 import {useAuth} from "../../../services/authentication";
 import Button from "../../../components/button/button";
 
 function DashboardCourseDetails() {
 	const [courses, setCourses] = useState(null);
-	const [user, setUser] = useState(null);
 	const auth = useAuth();
-	auth.autoAuthReq(baseUrl + '/api/v1/userinfo/', {method: 'GET'}).then(setUser).catch();
 
 	useEffect(() => {
-		if (user) {
-			sendReq(baseUrl + `/api/v1/users/${user.id}/orders/`)
-				.then(data => {
-					setCourses(data.data)
-				}).catch(() => {
-				// API request was not successful
-				// TODO: handle API error
-			});
-		}
-	}, [user]);
+		auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`)
+			.then(data => {
+				setCourses(data.data)
+			}).catch(() => {
+			// API request was not successful
+			// TODO: handle API error
+		});
+	}, [auth]);
 
 	const coursesList = [];
 	if (courses !== null) {

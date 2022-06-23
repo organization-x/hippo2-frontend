@@ -24,7 +24,7 @@ function DashboardCourseDetails() {
 		for (let course of courses) {
 			// TODO: remove dummy deadline - API does not return a deadline yet
 			coursesList.push((
-				<div className="container flex flex-wrap mx-auto mt-10 px-5">
+				<div className="container flex flex-wrap mx-auto mt-10 px-5 mb-10">
 					<div
 						className="flex-none md:flex-initial w-full md:w-7/12 py-8 px-16 pb-10 text-lg text-black bg-white rounded-t-xl md:rounded-l-xl md:rounded-none">
 						<h1 className="font-semibold text-2xl mb-8 text-center">Course Information</h1>

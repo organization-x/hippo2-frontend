@@ -2,20 +2,21 @@ import Button from "../../components/button/button";
 
 function PaymentSuccess() {
 	// placeholders
-	const courseName = 'Course Name'
-	const batchId = '#'
+	const courseName = 'Course Name';
+	const batchId = '#';
 
 	const registerCourse = () => {
 		// called when "Register for Another Course" is clicked
-	}
+	};
 
 	const studentDashboard = () => {
 		// called when "Proceed to Student Dashboard" is clicked
-	}
+	};
 
 	const onBack = () => {
 		// called when the Back button is clicked
-	}
+	};
+
 	return (
 		<div className="container max-w-4xl flex flex-wrap mx-auto p-4 auth">
 			<div className="flex-none md:flex-initial w-full md:w-1/2 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">

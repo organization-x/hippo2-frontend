@@ -2,12 +2,13 @@ import Input from "../../components/form/input";
 import {useState, useEffect} from "react";
 import Button from "../../components/button/button";
 import {useParams} from "react-router-dom";
-import sendReq from "../../services/sendReq";
 import baseUrl from "../../apiUrls";
+import {useAuth} from "../../services/authentication";
 
 function BatchPayment() {
 	const {batchId} = useParams();
 	const [batchInfo, setBatchInfo] = useState(null);
+	const auth = useAuth();
 
 	const batchInfoDisplay = batchInfo ? (
 		<div>
@@ -23,37 +24,38 @@ function BatchPayment() {
 	// currently, API does not return payment deadline
 	// TODO
 	const paymentDeadline = batchInfo ? '6/1/22' : 'Loading...';
+	const endpoint = baseUrl + `/api/v1/batches/${batchId}/`;
 
 	// fetch batch data from API
 	useEffect(() => {
-		sendReq(baseUrl + `/api/v1/batches/${batchId}/`, {method: 'GET'})
+		auth.autoAuthReq(endpoint, {method: 'GET'})
 			.then(data => setBatchInfo(data.data))
 			.catch(data => {
-				if (data.status === 400) {
+				if (data.status === 404) {
 					// batch does not exist
 					// TODO
 				}
-			})
-	})
+			});
+	}, [endpoint, auth]);
 
 	const [promoCode, setPromoCode] = useState('');
 
 	const onPayNow = () => {
 		// called when Submit Tuition button is clicked
-		sendReq(baseUrl + `/api/v1/batches/${batchId}/payment/`, {method: 'POST'})
+		auth.autoAuthReq(baseUrl + `/api/v1/batches/${batchId}/payment/`, {method: 'POST'})
 			.then(data => {
-				const checkoutURL = data.data.checkout_url
-				window.location.replace(checkoutURL)
+				const checkoutURL = data.data.checkout_url;
+				window.location.replace(checkoutURL);
 			}).catch(data => {
 				// failed to get payment URL
 				// TODO
-			})
-	}
+			});
+	};
 
 	const onPayLater = () => {
 		// called when Pay Later button is clicked
 		// TODO
-	}
+	};
 
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
@@ -84,7 +86,7 @@ function BatchPayment() {
 				<Button bgColor="gray" txtColor="white" className="px-8 py-1">Back</Button>
 			</div>
 		</div>
-	)
+	);
 }
 
 export default BatchPayment;

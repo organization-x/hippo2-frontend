@@ -22,5 +22,5 @@ test('invalid input test', () => {
         input.className.includes('invalid-border') &&
         input.type.includes('text') &&
         input.value.includes('')
-    );
+    ).toBeTruthy();
 });

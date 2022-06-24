@@ -1,0 +1,13 @@
+.auth > .bg-green {
+	background-color: #13a769;
+}
+.auth > .bg-white {
+	background-color: #ffffff;
+}
+.link-color {
+	color: #0c59a8;
+}
+
+.form-error {
+	color: red;
+}

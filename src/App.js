@@ -19,6 +19,8 @@ import Footer from './components/footer/footer';
 import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
 import GroupJoin from './pages/groupJoin/groupJoin';
+import GroupJoinSignup from './pages/groupJoinSignup/groupJoinSignup';
+
 import './App.css';
 import Loading from './pages/loading/loading';
 import BatchPage from './pages/batches/batchPage';
@@ -59,6 +61,9 @@ function App() {
 							<PrivateRoute initBlind={true}>
 								<GroupJoin />
 							</PrivateRoute>
+						}></Route>
+						<Route path='/group/join/signup' element={
+								<GroupJoinSignup />
 						}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
 					</Routes>

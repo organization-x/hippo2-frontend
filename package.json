@@ -20,6 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:stag": "node -r dotenv/config ./node_modules/.bin/react-scripts build dotenv_config_path=.env.staging",
     "test": "react-scripts test",
     "lint": "eslint ./src --max-warnings 0",
     "eject": "react-scripts eject"

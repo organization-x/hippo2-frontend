@@ -19,11 +19,11 @@ import Footer from './components/footer/footer';
 import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
 import GroupJoin from './pages/groupJoin/groupJoin';
-import './App.css';
 import Loading from './pages/loading/loading';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
+import './App.css';
 
 const Welcome = lazy(() => import('./pages/welcome/welcome'));
 

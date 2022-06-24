@@ -114,7 +114,7 @@ function BatchPage() {
     }
     
     return (
-        <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto mt-3 auth'>
+        <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto auth'>
             <SideBarContent/>
             <div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
                 <BatchSelect 

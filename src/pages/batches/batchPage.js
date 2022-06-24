@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import sendReq from "../../services/sendReq";
 import BatchSelect from "../../components/batch-select/batchSelect";
 import Button from "../../components/button/button";
-import validateBatchSelect from "../../validation/batchSelect";
+import validateUuid from "../../validation/uuid";
 import { useNavigate } from 'react-router-dom';
 
 function BatchPage() {
@@ -72,7 +72,7 @@ function BatchPage() {
     function NextAndBackButtons() {
         const onNext = () => {
             setFormErrors({});
-            const [ err ] = validateBatchSelect(batchID);
+            const [ err ] = validateUuid(batchID);
             if(err){
                 return setFormErrors(err);
             } else {

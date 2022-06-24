@@ -34,6 +34,8 @@ function DashboardHome({ onNext }) {
 						<span className="checkmark"></span>
 						<p className='text-sm text-red-500 italic'>Deadline: {task.deadline}</p>
 					</label>
+		}else{
+			return null;
 		}
 	});
 	const ToDoCompletedTasks = tasksList.map((task) =>{
@@ -42,6 +44,8 @@ function DashboardHome({ onNext }) {
 						<input type="checkbox" value = {task.id} checked={true}></input>
 						<span className="checkmark"></span>
 					</label>
+		}else{
+			return null;
 		}
 	});
 
@@ -51,7 +55,7 @@ function DashboardHome({ onNext }) {
 		var hideViewText = document.getElementById("hideViewText");
 		var upArrow = document.getElementById("upArrow");
 		var downArrow = document.getElementById("downArrow");
-		if (toDoBlock.style.display == "none") {
+		if (toDoBlock.style.display === "none") {
 			// if toDoBlock hidden, show it
 			// Change from text View to Hide and downArrow to upArrow
 			toDoBlock.style.display = "block";

@@ -10,22 +10,22 @@ function DashboardBody({page}){
                 return (<AccountSettings />);
             case 'course-details':
                 //return (<CourseDetails />);
-                /* falls through */
+                break;
             case 'payment-details':
                 //return (<PaymentDetails />);
-                /* falls through */
+                break;
             case 'register-for-courses':
                 //return (<RegisterForCourses />);
-                /* falls through */
+                break;
             case 'upcoming-events':
                 //return (<UpcomingEvents />);
-                /* falls through */
+                break;
             case 'explore-student-products':
                 //return (<ExploreStudentProducts />);
-                /* falls through */
+                break;
             case 'help-center':
                 //return (<HelpCenter />);
-                /* falls through */
+                break;
             default:
                 return (<h2>Page Under Construction</h2>)
         }

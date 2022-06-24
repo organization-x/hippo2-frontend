@@ -24,6 +24,7 @@ import Loading from './pages/loading/loading';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
+import Dashboard from './pages/dashboard/dashboard'
 
 const Welcome = lazy(() => import('./pages/welcome/welcome'));
 
@@ -53,6 +54,7 @@ function App() {
 							</PrivateRoute>
 						}></Route>
 						<Route path='/signup' element={<Signup />}></Route>
+						<Route path='/dashboard' element={<Dashboard />}></Route>
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
 						<Route path='/courses' element={<SelectCourses/>}></Route>

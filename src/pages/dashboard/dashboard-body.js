@@ -9,19 +9,19 @@ function DashboardBody({page}){
             case 'account-settings':
                 return (<AccountSettings />);
             case 'course-details':
-                return (<CourseDetails />);
+                //return (<CourseDetails />);
             case 'payment-details':
-                return (<PaymentDetails />);
+                //return (<PaymentDetails />);
             case 'register-for-courses':
-                return (<RegisterForCourses />);
+                //return (<RegisterForCourses />);
             case 'upcoming-events':
-                return (<UpcomingEvents />);
+                //return (<UpcomingEvents />);
             case 'explore-student-products':
-                return (<ExploreStudentProducts />);
+                //return (<ExploreStudentProducts />);
             case 'help-center':
-                return (<HelpCenter />);
+                //return (<HelpCenter />);
             default:
-                return (<h2>Does the function work?</h2>)
+                return (<h2>Page Under Construction</h2>)
         }
     }
 

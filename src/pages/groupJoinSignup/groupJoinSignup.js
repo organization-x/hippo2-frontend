@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../services/authentication';
 import './groupJoinSignup.css';
 import baseUrl from "../../apiUrls";

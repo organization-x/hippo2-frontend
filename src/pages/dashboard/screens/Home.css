@@ -1,15 +1,12 @@
 .containertask {
 	display: block;
 	position: relative;
-	padding-left: 35px;
-	margin-bottom: 5px;
+	padding-left: 2rem;
+	margin-bottom: 0.3rem;
 	cursor: pointer;
-	padding-bottom: 7px;
-	font-size: 18px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	padding-bottom: 0.4rem;
+	font-size: 1.1rem;
+	
 	
   }
   
@@ -25,13 +22,13 @@
   /* Create a custom checkbox */
   .checkmark {
 	position: absolute;
-	top: 2px;
+	top: 0.125rem;
 	left: 0;
-	height: 25px;
-	width: 25px;
+	height: 1.563rem;
+	width: 1.563rem;
 	background-color: white;
-	border-width: 2px;
-	  border-radius: 15px;
+	border-width: 0.125rem;
+	border-radius: 0.938rem;
   }
   
  
@@ -57,14 +54,12 @@
   
   /* Style the checkmark/indicator */
   .containertask .checkmark:after {
-	left: 8px;
-	top: 5px;
-	width: 5px;
-	height: 10px;
+	left: 0.5rem;
+	top: 0.313rem;
+	width: 0.313rem;
+	height: 0.625rem;
 	border: solid limegreen;
-	border-width: 0 3px 3px 0;
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
+	border-width: 0 0.188rem 0.188rem 0;
 	transform: rotate(45deg);
   }
 
@@ -75,7 +70,7 @@
 	width: 1vw;
 	border-style: solid;
 	border-color: black;
-	border-width: 0px 1px 1px 0px;
+	border-width: 0rem 0.063rem 0.063rem 0rem;
 	
   }
 .downArrow{

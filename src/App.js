@@ -8,9 +8,8 @@ import { AuthProvider } from './services/authentication';
 import { FlashMsgProvider } from './services/flashMsg';
 
 import Navbar from './components/navbar/navbar';
-import Home from './pages/home/home';
 import SelectCourses from './pages/selectCourse/selectCourses';
-import DashboardHome from './pages/dashboard/screens/DashboardHome'
+import Home from './pages/dashboard/screens/Home'
 
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
@@ -34,7 +33,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={
 							<PrivateRoute>
-								<Home />
+								<Home/>
 							</PrivateRoute>
 						}></Route>
 						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
@@ -54,7 +53,6 @@ function App() {
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
 						<Route path='/courses' element={<SelectCourses/>}></Route>
-						<Route path='/dashboard/home' element={<DashboardHome/>}></Route>
 						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
 						<Route path='/group/join' element={
 							<PrivateRoute initBlind={true}>

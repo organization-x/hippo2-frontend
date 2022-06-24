@@ -23,6 +23,8 @@ import GroupJoinSignup from './pages/groupJoinSignup/groupJoinSignup';
 
 import './App.css';
 import Loading from './pages/loading/loading';
+import BatchPayment from "./pages/batchPayment/batchPayment";
+import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
 
 const Welcome = lazy(() => import('./pages/welcome/welcome'));
@@ -62,9 +64,9 @@ function App() {
 								<GroupJoin />
 							</PrivateRoute>
 						}></Route>
-						<Route path='/group/join/signup' element={
-								<GroupJoinSignup />
-						}></Route>
+						<Route path='/group/join/signup' element={<GroupJoinSignup />}></Route>
+						<Route path='/batches/:batchId/payment' element={<BatchPayment />}></Route>
+						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
 					</Routes>
 					<Footer />

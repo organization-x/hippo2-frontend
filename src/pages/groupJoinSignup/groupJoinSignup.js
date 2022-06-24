@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
+import { useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../services/authentication';
-import { googleSocialUrl } from '../../apiUrls';
-import validateUserSignup from '../../validation/signup';
-import formatApiErrors from '../../validation/formatApiErrors';
-import Button from "../../components/button/button";
-import Input from "../../components/form/input";
 import './groupJoinSignup.css';
 import baseUrl from "../../apiUrls";
 import sendReq from "../../services/sendReq";
@@ -17,15 +12,11 @@ function GroupJoinSignup() {
 
 	const auth = useAuth();
 	const navigate = useNavigate();
-	const location = useLocation();
 	const [search] = useSearchParams();
 	
-
 	const token = search.get('token');
 	const passwordResetToken = search.get('passwordresettoken');
 	const userid = search.get('userid');
-
-	const origin = location.state?.from?.pathname || '/';
 
 	const joinUser = async () => {
 		if (userid && passwordResetToken) {

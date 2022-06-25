@@ -1,6 +1,6 @@
 import './input.css';
 
-function Input({placeHolder, label, type, value, onChange, isValid, errorText, className, id}) {
+function Input({placeHolder, label, type, value, onChange, isValid, errorText, className, id, readOnly}) {
     let error = '';
     let style = 'input';
 
@@ -16,6 +16,7 @@ function Input({placeHolder, label, type, value, onChange, isValid, errorText, c
             onChange={(e) => {
 				if (onChange) onChange(e.target.value)
 			} }
+			readOnly={readOnly}
             placeholder={placeHolder}
             className={style + ' w-full md:w-9/12'}
             value={value}

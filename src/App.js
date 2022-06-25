@@ -8,8 +8,8 @@ import { AuthProvider } from './services/authentication';
 import { FlashMsgProvider } from './services/flashMsg';
 
 import Navbar from './components/navbar/navbar';
-import Home from './pages/home/home';
 import SelectCourses from './pages/selectCourse/selectCourses';
+import Home from './pages/dashboard/screens/Home'
 
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
@@ -36,7 +36,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={
 							<PrivateRoute>
-								<Home />
+								<Home/>
 							</PrivateRoute>
 						}></Route>
 						<Route path='/auth/google/' element={<GoogleAuth />}></Route>

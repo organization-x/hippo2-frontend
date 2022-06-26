@@ -36,7 +36,7 @@ function SignUpInvite() {
 	}, [resetToken, inviteToken]);
 
 	const setupUser = () => {
-		setFormErrors({});
+		setFormErrors('');
 		const [err, vPassword] = validatePassword(password);
 		if (err) {
 			return setFormErrors(err);

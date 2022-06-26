@@ -1,8 +1,7 @@
 import {
 	BrowserRouter, Routes, Route
 } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import PrivateRoute from './components/privateroute/privateRoute';
+import ProtectedRoute from './components/protectedRoute/protectedRoute';
 
 import { AuthProvider } from './services/authentication';
 import { FlashMsgProvider } from './services/flashMsg';
@@ -19,13 +18,11 @@ import Footer from './components/footer/footer';
 import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
 import GroupJoin from './pages/groupJoin/groupJoin';
-import Loading from './pages/loading/loading';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
+import InviteUser from './pages/inviteUser/inviteUser';
 import './App.css';
-
-const Welcome = lazy(() => import('./pages/welcome/welcome'));
 
 function App() {
 	return (
@@ -35,35 +32,33 @@ function App() {
 					<Navbar />
 					<Routes>
 						<Route path='/' element={
-							<PrivateRoute>
+							<ProtectedRoute>
 								<Home />
-							</PrivateRoute>
+							</ProtectedRoute>
 						}></Route>
 						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
-						<Route path='/welcome' element={
-							<PrivateRoute initBlind={true}>
-								<Suspense fallback={<Loading />}>
-									<Welcome />
-								</Suspense>
-							</PrivateRoute>
+						<Route path='/invite' element={
+							<ProtectedRoute inviteReq={false}>
+								<InviteUser />
+							</ProtectedRoute>
 						}></Route>
 						<Route path='/protected' element={
-							<PrivateRoute>
+							<ProtectedRoute>
 								<Protected />
-							</PrivateRoute>
+							</ProtectedRoute>
 						}></Route>
 						<Route path='/signup' element={<Signup />}></Route>
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
-						<Route path='/courses' element={<SelectCourses/>}></Route>
 						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
 						<Route path='/group/join' element={
-							<PrivateRoute initBlind={true}>
+							<ProtectedRoute detailsReq={false} inviteReq={false}>
 								<GroupJoin />
-							</PrivateRoute>
+							</ProtectedRoute>
 						}></Route>
 						<Route path='/batches/:batchId/payment' element={<BatchPayment />}></Route>
 						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
+						<Route path='/courses' element={<SelectCourses/>}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
 					</Routes>
 					<Footer />

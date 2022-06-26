@@ -33,9 +33,7 @@ function Signup() {
 			return setFormErrors(err);
 		}
 		auth.handleSignup(
-			data.email, 
-			data.firstName,
-			data.lastName,
+			data.email,
 			data.type,
 			data.password, 
 			origin
@@ -79,17 +77,17 @@ function Signup() {
 				<div className="flex items-center justify-center">
 					<div className="mx-auto inline-block">
 						<Button 
-							bgColor={type === 'student' ? 'black' : 'white'} 
-							txtColor={type === 'student' ? 'white' : 'black'}
-							onClick={() => setType('student')}
+							bgColor={type === 'STUDENT' ? 'black' : 'white'} 
+							txtColor={type === 'STUDENT' ? 'white' : 'black'}
+							onClick={() => setType('STUDENT')}
 							className="w-28 md:w-36 mx-2 p-1"
 						>
 							Student
 						</Button>
 						<Button 
-							bgColor={type === 'parent' ? 'black' : 'white'} 
-							txtColor={type === 'parent' ? 'white' : 'black'}
-							onClick={() => setType('parent')}
+							bgColor={type === 'PARENT' ? 'black' : 'white'} 
+							txtColor={type === 'PARENT' ? 'white' : 'black'}
+							onClick={() => setType('PARENT')}
 							className="w-28 md:w-36 mx-2 p-1"
 						>
 							Parent

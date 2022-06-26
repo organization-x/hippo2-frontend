@@ -20,7 +20,8 @@ function InviteUser() {
 	const [fName, setFName] = useState('');
 	const [lName, setLName] = useState('');
 	// users can only invite opposite type users currently
-	const type = user.type === 'student' ? 'parent' : 'student';
+	const type = user.type === 'STUDENT' ? 'PARENT' : 'STUDENT';
+
 	const [phone, setPhone] = useState('');
 	const [dob, setDob] = useState('');
 
@@ -36,14 +37,17 @@ function InviteUser() {
 
 	const onSubmit = () => {
 		setFormErrors({});
-		const [err, vData] = validateUserInformation({
+		const data = {
 			email,
 			fName,
 			lName,
 			type,
-			phone,
-			dob
-		});
+			phone
+		};
+		if (type !== 'PARENT') {
+			data.dob = dob;
+		}
+		const [err, vData] = validateUserInformation(data, type);
 		if (err) {
 			return setFormErrors(err);
 		}
@@ -68,7 +72,7 @@ function InviteUser() {
 
 	let panelText;
 	let formTitle;
-	if (type === 'student') {
+	if (type === 'PARENT') {
 		panelText = (
 			<>
 				<h1 className="text-2xl mb-5 text-center">Parent Or Guardian Details</h1>
@@ -93,14 +97,14 @@ function InviteUser() {
 	
 
 	return (
-		<div className="container max-w-6xl flex flex-wrap mx-auto p-4 auth">
-			<div className="flex-none md:flex-initial w-full md:w-7/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
+			<div className="flex-none md:flex-initial w-full md:w-1/2 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 				{panelText}
 				<p className="text-lg">Click "Next" to move onto the payment stage!</p>
 			</div>
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
-			}} className="flex-none md:flex-initial relative w-full md:w-5/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+			}} className="flex-none md:flex-initial relative w-full md:w-1/2 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-xl text-center">
 					{formTitle}
 				</h2>
@@ -153,7 +157,7 @@ function InviteUser() {
 						: 
 							null
 					}
-					{type === 'student' &&
+					{type !== 'PARENT' &&
 						<Input label="Birth Month and Year"
 							type="text"
 							placeHolder="MM/YYYY"

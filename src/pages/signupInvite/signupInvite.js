@@ -30,7 +30,7 @@ function SignUpInvite() {
 			setData(res.data);
 			setLoading(false);
 		});
-	}, []);
+	}, [resetToken, inviteToken]);
 
 	const setupUser = () => {
 		setFormErrors({});

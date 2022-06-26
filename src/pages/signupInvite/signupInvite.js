@@ -4,7 +4,10 @@ import baseUrl from "../../apiUrls";
 import validatePassword from "../../validation/password";
 import { useAuth } from "../../services/authentication";
 import sendReq from "../../services/sendReq";
+
 import Loading from "../loading/loading";
+import Button from "../../components/button/button";
+import Input from "../../components/form/input";
 
 function SignUpInvite() {
 	const [data, setData] = useState({
@@ -52,7 +55,7 @@ function SignUpInvite() {
 		(async () => {
 			await sendReq(url, options);
 			// login user
-			await handleLogin(data.invite_to.email, vPassword, '/user/details');
+			await handleLogin(data.invite_to.email, vPassword, '/');
 		})().catch(err => {
 			// TODO: handle error
 		});
@@ -61,6 +64,12 @@ function SignUpInvite() {
 	if (loading) {
 		return <Loading/>;
 	}
+
+	const formTitle = `
+		Your ${data.invited_by.type === 'STUDENT' ? 'student': 'parent or guardian'}, 
+		${data.invited_by.first_name}, has invited you to create a 
+		${data.invite_to.type === 'STUDENT' ? 'student' : 'parent'} account.
+	`;
 
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
@@ -87,8 +96,7 @@ function SignUpInvite() {
 				event.preventDefault();
 			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-xl mb-6 text-center">
-					Your {data.invited_by.type === 'student' ? 'student': 'parent or guardian'}, 
-					{data.invited_by.first_name}, has invited you to create a {data.invite_to.type} account.
+					{formTitle}
 				</h2>
 				<Input label="Email"
 					type="email"

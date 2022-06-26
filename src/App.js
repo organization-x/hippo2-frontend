@@ -22,6 +22,7 @@ import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
 import InviteUser from './pages/inviteUser/inviteUser';
+import SignUpInvite from './pages/signupInvite/signupInvite';
 import './App.css';
 
 function App() {
@@ -38,9 +39,7 @@ function App() {
 						}></Route>
 						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
 						<Route path='/invite' element={
-							<ProtectedRoute inviteReq={false}>
-								<InviteUser />
-							</ProtectedRoute>
+							<InviteUser /> 
 						}></Route>
 						<Route path='/protected' element={
 							<ProtectedRoute>
@@ -49,6 +48,7 @@ function App() {
 						}></Route>
 						<Route path='/signup' element={<Signup />}></Route>
 						<Route path='/login' element={<Login />}></Route>
+						<Route path='/signup/invite' element={<SignUpInvite />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>
 						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
 						<Route path='/group/join' element={

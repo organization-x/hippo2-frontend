@@ -39,7 +39,9 @@ function App() {
 						}></Route>
 						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
 						<Route path='/invite' element={
-							<InviteUser /> 
+							<ProtectedRoute inviteReq={false}>
+								<InviteUser /> 
+							</ProtectedRoute>
 						}></Route>
 						<Route path='/protected' element={
 							<ProtectedRoute>

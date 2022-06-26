@@ -18,7 +18,7 @@ function BatchPage() {
 
     const navigate = useNavigate();
 
-    const [formErrors, setFormErrors] = useState({});
+    const [formErrors, setFormErrors] = useState('');
 
     useEffect(() => {
         if(courseID){
@@ -71,7 +71,7 @@ function BatchPage() {
 
     function NextAndBackButtons() {
         const onNext = () => {
-            setFormErrors({});
+            setFormErrors('');
             const [ err ] = validateUuid(batchID);
             if(err){
                 return setFormErrors(err);
@@ -86,8 +86,8 @@ function BatchPage() {
         return (
             <div>
                 {   
-                    Object.keys(formErrors).length ? 
-                        <div className='text-right text-red-600 mt-5'>{formErrors[undefined][0]}</div> 
+                    formErrors ? 
+                        <div className='text-right text-red-600 mt-5'>{formErrors}</div> 
                     : 
                         <div className='text-right text-red-600 mt-5'>&nbsp;</div>
                 }

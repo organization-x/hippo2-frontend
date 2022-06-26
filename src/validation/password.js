@@ -18,7 +18,7 @@ const messages = {
 
 function validatePassword(password) {
     const [err, vPassword] = validate(password, Password);
-    const formattedErr = formatFormErrors(err, messages);
+    const formattedErr = formatFormErrors(err, messages, true);
     return [formattedErr, vPassword];
 }
 

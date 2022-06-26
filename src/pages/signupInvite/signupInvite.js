@@ -16,7 +16,7 @@ function SignUpInvite() {
 	});
 	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(true);
-	const [formErrors, setFormErrors] = useState([]);
+	const [formErrors, setFormErrors] = useState('');
 	const [search] = useSearchParams();
 	const { handleLogin } = useAuth();
 	const resetToken = search.get('resettoken');
@@ -111,8 +111,8 @@ function SignUpInvite() {
 					placeHolder="JohnDoePassword"
 					className="mb-3"
 					id="password"
-					isValid={formErrors?.length}
-					errorText={formErrors?.[0]}
+					isValid={formErrors}
+					errorText={formErrors}
 					onChange={val => setPassword(val)}
 				/>
 

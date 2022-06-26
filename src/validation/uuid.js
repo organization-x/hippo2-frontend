@@ -18,7 +18,7 @@ const messages = {
 
 function validateUuid(id) {
     const [err, vId] = validate(id, Uuid);
-    const formattedErr = formatFormErrors(err, messages);
+    const formattedErr = formatFormErrors(err, messages, true);
     return [formattedErr, vId];
 }
 

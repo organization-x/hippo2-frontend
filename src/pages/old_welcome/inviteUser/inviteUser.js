@@ -94,7 +94,7 @@ function InviteUser({type, onBack}) {
 		);
 	}
 
-	if (type === 'student') {
+	if (type === 'STUDENT') {
 		return (
 			<div className="container max-w-6xl flex flex-wrap mx-auto p-4 auth">
 				<div className="flex-none md:flex-initial w-full md:w-7/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">

@@ -8,8 +8,15 @@
 // 	}
 // }
 
-function formatFormErrors(err, messages) {
+function formatFormErrors(err, messages, singleField=false) {
 	if (err) {
+		if (singleField) {
+			const error = err.failures()[0];
+			if (messages[error.refinement]) {
+				return messages[error.refinement].default;
+			}
+			return 'This field is invalid';
+		}
 		const formattedErrors = {};
 		const errors = err.failures();
 		for (let i = 0; i < errors.length; i++) {

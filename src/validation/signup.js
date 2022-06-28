@@ -5,7 +5,7 @@ const UserSignup = object({
 	email: pattern(nonempty(string()), /^\S+@\S+\.\S+$/),
 	firstName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
 	lastName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
-	type: pattern(nonempty(string()), /^(student|parent)$/),
+	type: pattern(nonempty(string()), /^(STUDENT|PARENT)$/),
 	password: size(nonempty(string()), 7, Infinity)
 });
 

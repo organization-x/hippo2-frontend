@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import sendReq from "../../services/sendReq";
 import BatchSelect from "../../components/batch-select/batchSelect";
 import Button from "../../components/button/button";
-import validateBatchSelect from "../../validation/batchSelect";
+import validateUuid from "../../validation/uuid";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../services/authentication";
 
 function BatchPage() {
     const [batch_no, selectBatchNo] = useState(-1);    
@@ -18,7 +19,9 @@ function BatchPage() {
 
     const navigate = useNavigate();
 
-    const [formErrors, setFormErrors] = useState({});
+    const [formErrors, setFormErrors] = useState('');
+
+    const {user} = useAuth();
 
     useEffect(() => {
         if(courseID){
@@ -71,23 +74,28 @@ function BatchPage() {
 
     function NextAndBackButtons() {
         const onNext = () => {
-            setFormErrors({});
-            const [ err ] = validateBatchSelect(batchID);
+            setFormErrors('');
+            const [ err ] = validateUuid(batchID);
             if(err){
                 return setFormErrors(err);
-            } else {
+            } else if(user.type==="PARENT"){
+                const path = `/batches/${batchID}/student-selection`;
+                navigate(path); 
+            }else{
                 const path = `/batches/${batchID}/payment`;
                 navigate(path); 
             }
-        }
+        };
     
-        const onBack = () => {   
-        }
+        const onBack = () => {
+            const back_path =`/courses`;
+            navigate(back_path);   
+        };
         return (
             <div>
                 {   
-                    Object.keys(formErrors).length ? 
-                        <div className='text-right text-red-600 mt-5'>{formErrors[undefined][0]}</div> 
+                    formErrors ? 
+                        <div className='text-right text-red-600 mt-5'>{formErrors}</div> 
                     : 
                         <div className='text-right text-red-600 mt-5'>&nbsp;</div>
                 }
@@ -114,7 +122,7 @@ function BatchPage() {
     }
     
     return (
-        <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto mt-3 auth'>
+        <div className='container max-w-7xl mt-10 flex flex-wrap mx-auto auth'>
             <SideBarContent/>
             <div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
                 <BatchSelect 

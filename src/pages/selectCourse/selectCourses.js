@@ -7,7 +7,7 @@ import sendReq from "../../services/sendReq";
 import baseUrl from '../../apiUrls';
 import validateUuid from "../../validation/uuid";
 
-function SelectCourses({ onNext }) {
+function SelectCourses() {
 	const navigate = useNavigate();
 	const [courseList, setCourseList] = useState([]);
 	const [courseId,setCourseId] = useState('');
@@ -15,11 +15,11 @@ function SelectCourses({ onNext }) {
 
 	const handleChange = (courseId) => {
 		setCourseId(courseId.target.value);
-	  };
+	};
 
 	const listItems = courseList.map((course) =>
-	  <option value={course.id} key={course.name.toString()} >{course.name}</option>
-	  );
+		<option value={course.id} key={course.name.toString()} >{course.name}</option>
+	);
 
 	const onSubmit = () => {
 		const [err] = validateUuid(courseId);
@@ -29,11 +29,13 @@ function SelectCourses({ onNext }) {
 		else{
 			navigate('/courses/'+courseId+'/batches');
 		}
-	}
+	};
+
 	const onBack = () => {
 		//dummy onback function for now
-	}
-	  useEffect(() => {
+	};
+
+	useEffect(() => {
 		// Runs after the first render() lifecycle
 		const urlCoursesApi = baseUrl +'/api/v1/courses/';
 		const options = {
@@ -43,9 +45,7 @@ function SelectCourses({ onNext }) {
 		sendReq(urlCoursesApi,options).then(res => {
 			setCourseList(res.data);
 		});
-
-		
-	  }, [])
+	}, []);
 	
 	return (
 		<>
@@ -73,23 +73,23 @@ function SelectCourses({ onNext }) {
 
 					<div className=''>
 						<select data-dropdown-placement="right" value={courseId} onChange={handleChange}
-                        className="w-full py-1 form-select form-select-lg mb-3 
-						px-5
-						py-6
-						text-left
-						font-normal
-						text-gray-700
-						bg-slate-100 bg-no-repeat
-						border border-solid border-gray-100
-						rounded-full
-						transition
-						ease-in-out
-						focus:text-gray-700
-						focus:bg-white
-						focus:border-blue-600
-						focus:outline-none w-full"
-						aria-label=".form-select-lg example">
-                            <option value ="" disabled selected >Select a Course</option>
+							className="w-full py-6 form-select form-select-lg mb-3 
+							px-5
+							text-left
+							font-normal
+							text-gray-700
+							bg-slate-100 bg-no-repeat
+							border border-solid border-gray-100
+							rounded-full
+							transition
+							ease-in-out
+							focus:text-gray-700
+							focus:bg-white
+							focus:border-blue-600
+							focus:outline-none"
+							aria-label=".form-select-lg example"
+						>
+                            <option value ="" disabled >Select a Course</option>
                             {listItems}
                         </select>	
 					</div>

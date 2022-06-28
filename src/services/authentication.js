@@ -31,17 +31,20 @@ const excludeRedirects = [
 // routes that don't require check to see if user is authenticated
 // prevents navigate from removing query string
 const excludeChecks = [
-	'/auth/google/', '/password/reset', '/password/reset/confirm'
+	'/auth/google/', '/password/reset', '/password/reset/confirm', '/signup/invite'
 ];
 
 const blankUser = {
+	id: '',
 	email: '',
 	fName: '',
 	lName: '',
 	type: '', // parent || student,
 	phone: '',
 	dob: '',
-	isInit: false,
+	filledDetails: false,
+	filledInvite: false,
+	passwordSet: false,
 	isLoggedIn: false
 };
 
@@ -72,7 +75,7 @@ export function AuthProvider({ children }) {
 		});
 	}).current;
 
-	const handleSignup = async (email, fName, lName, type, password, redirect = '/') => {
+	const handleSignup = async (email, type, password, redirect = '/') => {
 		const newUrl = baseUrl + '/auth/registration/';
 		const newOptions = {
 			method: 'POST',
@@ -90,22 +93,23 @@ export function AuthProvider({ children }) {
 		const updateOptions = {
 			method: 'POST',
 			body: {
-				first_name: fName,
-				last_name: lName,
 				type: type
 			}
 		};
 		const updateRes = await sendReq(userUrl, updateOptions);
-
+		const data = updateRes.data;
 		// set user's info on frontend
 		setUser({
-			email: email,
-			fName: fName,
-			lName: lName,
-			type: type,
-			phone: '',
-			dob: '',
-			isInit: false,
+			id: data.id,
+			email: data.email,
+			fName: data.first_name || '',
+			lName: data.last_name || '',
+			type: data.type || '',
+			phone: data.phone_number || '',
+			dob: data.dob || '',
+			filledDetails: data.filled_details,
+			filledInvite: data.filledInvite,
+			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
 
@@ -131,13 +135,16 @@ export function AuthProvider({ children }) {
 
 		const data = userRes.data;
 		setUser({
+			id: data.id,
 			email: data.email,
 			fName: data.first_name || '',
 			lName: data.last_name || '',
-			type: data.user_type || '',
+			type: data.type || '',
 			phone: data.phone_number || '',
 			dob: data.dob || '',
-			isInit: data.is_initiated,
+			filledDetails: data.filled_details,
+			filledInvite: data.filledInvite,
+			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
 
@@ -161,13 +168,16 @@ export function AuthProvider({ children }) {
 
 		const data = userRes.data;
 		setUser({
+			id: data.id,
 			email: data.email,
 			fName: data.first_name || '',
 			lName: data.last_name || '',
-			type: data.user_type || '',
+			type: data.type || '',
 			phone: data.phone_number || '',
 			dob: data.dob || '',
-			isInit: data.is_initiated,
+			filledDetails: data.filled_details,
+			filledInvite: data.filledInvite,
+			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
 
@@ -188,34 +198,55 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
-	const handleUserInitiation = async (email, fName, lName, type, dob, phoneNum, redirect = '/') => {
+	const handleUserInitiation = async (fName, lName, dob, phoneNum, redirect = '/') => {
 		const userUrl = baseUrl + '/api/v1/userinfo/';
 		const updateOptions = {
 			method: 'POST',
 			body: {
-				email: email,
 				first_name: fName,
 				last_name: lName,
-				type: type,
 				dob: dob,
 				phone_number: phoneNum,
 				initiate: true
 			}
 		};
 		const res = await autoAuthReq(userUrl, updateOptions, redirect);
-
+		const data = res.data
 		// set user's info on frontend
 		setUser({
-			email: email,
-			fName: fName,
-			lName: lName,
-			type: type,
-			dob: dob,
-			phone: phoneNum,
-			isInit: true,
+			id: data.id,
+			email: data.email,
+			fName: data.first_name || '',
+			lName: data.last_name || '',
+			type: data.type || '',
+			phone: data.phone_number || '',
+			dob: data.dob || '',
+			filledDetails: data.filled_details,
+			filledInvite: data.filledInvite,
+			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
 
+		return res;
+	};
+
+	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect='/') => {
+		const url = baseUrl + '/api/v1/group/invite/';
+		const options = {
+			method: 'POST',
+			body: {
+				email: email,
+				first_name: fName,
+				last_name: lName,
+				type: type,
+				phone_number: phone,
+			}
+		};
+		if (dob) {
+			options.body.dob = dob;
+		}
+		const res = await autoAuthReq(url, options, redirect);
+		navigate(redirect);
 		return res;
 	};
 
@@ -239,10 +270,12 @@ export function AuthProvider({ children }) {
 				email: data.email,
 				fName: data.first_name || '',
 				lName: data.last_name || '',
-				type: data.user_type || '',
+				type: data.type || '',
 				phone: data.phone_number || '',
 				dob: data.dob || '',
-				isInit: data.is_initiated,
+				filledDetails: data.filled_details,
+				filledInvite: data.filledInvite,
+				passwordSet: data.password_set,
 				isLoggedIn: true
 			});
 			// redirect user away from signup/login 
@@ -261,7 +294,8 @@ export function AuthProvider({ children }) {
 		handleLogin,
 		handleGoogleLogin,
 		handleLogout,
-		handleUserInitiation
+		handleUserInitiation,
+		handleUserInvite
 	};
 
 	if (!checkLogin) {

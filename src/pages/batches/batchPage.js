@@ -85,12 +85,12 @@ function BatchPage() {
                 const path = `/batches/${batchID}/payment`;
                 navigate(path); 
             }
-        }
+        };
     
         const onBack = () => {
             const back_path =`/courses`;
             navigate(back_path);   
-        }
+        };
         return (
             <div>
                 {   

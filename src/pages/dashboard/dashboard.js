@@ -6,10 +6,9 @@ import { useState } from 'react';
 function Dashboard(){
 
     const [page, setPage] = useState('');
-    console.log(page)
 
     return (
-        <div className="grid grid-cols-2">
+        <div className="flex h-screen">
             <div className="w-64 h-full bg-neutral-300 px-1">
                 <ul className="mt-12">
                     <li className="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-5">
@@ -73,4 +72,4 @@ function Dashboard(){
     )
 }
 
-export default Dashboard
+export default Dashboard;

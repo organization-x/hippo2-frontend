@@ -6,4 +6,4 @@ function DashboardHome () {
     )
 }
 
-export default DashboardHome
+export default DashboardHome;

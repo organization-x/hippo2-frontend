@@ -3,7 +3,7 @@ function AccountSettings () {
         <div>
             <h2>Account Settings</h2>
         </div>
-    )
+    );
 }
 
-export default AccountSettings
+export default AccountSettings;

@@ -27,8 +27,8 @@ function DashboardBody({page}){
                 //return (<HelpCenter />);
                 break;
             default:
-                return (<h2>Page Under Construction</h2>)
+                return (<h2>Page Under Construction</h2>);
         }
     }
 
-export default DashboardBody
+export default DashboardBody;

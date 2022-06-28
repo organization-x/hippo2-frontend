@@ -17,7 +17,7 @@ function DashboardCourseDetails() {
 			// TODO: handle API error
 		});
 	}, [auth]);
-
+	
 	const coursesList = [];
 	if (courses !== null) {
 		for (let course of courses) {

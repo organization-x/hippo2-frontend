@@ -88,7 +88,7 @@ function BatchPage() {
         }
     
         const onBack = () => {
-            const back_path =`/courses`  
+            const back_path =`/courses`;
             navigate(back_path);   
         }
         return (

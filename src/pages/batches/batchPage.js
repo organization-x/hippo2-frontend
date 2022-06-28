@@ -78,7 +78,7 @@ function BatchPage() {
             const [ err ] = validateUuid(batchID);
             if(err){
                 return setFormErrors(err);
-            } else if(user.type=="PARENT"){
+            } else if(user.type==="PARENT"){
                 const path = `/batches/${batchID}/student-selection`;
                 navigate(path); 
             }else{

@@ -6,6 +6,7 @@ import BatchSelect from "../../components/batch-select/batchSelect";
 import Button from "../../components/button/button";
 import validateUuid from "../../validation/uuid";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../services/authentication";
 
 function BatchPage() {
     const [batch_no, selectBatchNo] = useState(-1);    
@@ -19,6 +20,8 @@ function BatchPage() {
     const navigate = useNavigate();
 
     const [formErrors, setFormErrors] = useState('');
+
+    const {user} = useAuth();
 
     useEffect(() => {
         if(courseID){
@@ -75,14 +78,19 @@ function BatchPage() {
             const [ err ] = validateUuid(batchID);
             if(err){
                 return setFormErrors(err);
-            } else {
+            } else if(user.type==="PARENT"){
+                const path = `/batches/${batchID}/student-selection`;
+                navigate(path); 
+            }else{
                 const path = `/batches/${batchID}/payment`;
                 navigate(path); 
             }
-        }
+        };
     
-        const onBack = () => {   
-        }
+        const onBack = () => {
+            const back_path =`/courses`;
+            navigate(back_path);   
+        };
         return (
             <div>
                 {   

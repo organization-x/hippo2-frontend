@@ -21,8 +21,10 @@ import GroupJoin from './pages/groupJoin/groupJoin';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
+import Dashboard from './pages/dashboard/dashboard'
 import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
+
 import './App.css';
 
 function App() {
@@ -49,6 +51,7 @@ function App() {
 							</ProtectedRoute>
 						}></Route>
 						<Route path='/signup' element={<Signup />}></Route>
+						<Route path='/dashboard' element={<Dashboard />}></Route>
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/signup/invite' element={<SignUpInvite />}></Route>
 						<Route path='/password/reset' element={<ForgotPassword />}></Route>

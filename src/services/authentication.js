@@ -48,6 +48,16 @@ const blankUser = {
 	isLoggedIn: false
 };
 
+const GoogleBaseAuth = async (code) => {
+	const url = baseUrl + '/api/v1/auth/google/';
+	const options = {
+		method: 'POST',
+		body: { code: code }
+	};
+	// signup/login
+	await sendReq(url, options);
+};
+
 export function useAuth() {
 	return useContext(AuthContext);
 }
@@ -88,7 +98,7 @@ export function AuthProvider({ children }) {
 		// signup user
 		await sendReq(newUrl, newOptions);
 
-		// update user's info (fname, lname, type)
+		// update user's info (type)
 		const userUrl = baseUrl + '/api/v1/userinfo/';
 		const updateOptions = {
 			method: 'POST',
@@ -153,20 +163,24 @@ export function AuthProvider({ children }) {
 	};
 
 	// TODO: add state param to google redirect uri for redirect memory
-	const handleGoogleLogin = async (code, redirect = '/') => {
-		const url = baseUrl + '/api/v1/auth/google/';
-		const options = {
-			method: 'POST',
-			body: { code: code }
-		};
-		// signup/login
-		await sendReq(url, options);
-		
-		// get user info
-		const userUrl = baseUrl + '/api/v1/userinfo/';
-		const userRes = await sendReq(userUrl, { method: 'GET' });
+	const handleGoogleLogin = async (code, type=null, redirect = '/') => {
+		await GoogleBaseAuth(code);
 
-		const data = userRes.data;
+		// if user type provided, update user type
+		// either way, get user info
+		const url = baseUrl + '/api/v1/userinfo/';
+		let options;
+		if (type) {
+			options = {
+				method: 'POST',
+				body: { type: type }
+			};
+		} else {
+			options = { method: 'GET' };
+		}
+		const res = await sendReq(url, options);
+
+		const data = res.data;
 		setUser({
 			id: data.id,
 			email: data.email,
@@ -182,7 +196,7 @@ export function AuthProvider({ children }) {
 		});
 
 		navigate(redirect);
-		return userRes;
+		return res;
 	};
 
 	const handleLogout = async () => {

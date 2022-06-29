@@ -9,6 +9,7 @@ import { FlashMsgProvider } from './services/flashMsg';
 import Navbar from './components/navbar/navbar';
 import SelectCourses from './pages/selectCourse/selectCourses';
 import Home from './pages/dashboard/screens/Home'
+import DashboardCourseDetails from './pages/dashboard/screens/courseDetails'
 
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
@@ -65,6 +66,7 @@ function App() {
 						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
 						<Route path='/courses' element={<SelectCourses/>}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
+						<Route path='/courseDetails' element={<DashboardCourseDetails />}></Route>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

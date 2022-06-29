@@ -108,7 +108,7 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
@@ -143,7 +143,7 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
@@ -176,7 +176,7 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
@@ -222,7 +222,7 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
@@ -274,7 +274,7 @@ export function AuthProvider({ children }) {
 				phone: data.phone_number || '',
 				dob: data.dob || '',
 				filledDetails: data.filled_details,
-				filledInvite: data.filledInvite,
+				filledInvite: data.filled_invite,
 				passwordSet: data.password_set,
 				isLoggedIn: true
 			});

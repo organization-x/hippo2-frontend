@@ -20,6 +20,13 @@ function Signup() {
 
 	const origin = location.state?.from?.pathname || '/';
 
+	const googleState = encodeURI(window.btoa(JSON.stringify({
+		type: type,
+		origin: origin
+	})));
+
+	const googleSocialUrlFull = googleSocialUrl + `&state=${googleState}`;
+
 	const signUpUser = () => {
 		setFormErrors({});
 		const [err, data] = validateUserSignup({
@@ -141,7 +148,7 @@ function Signup() {
 				<p className="text-xl mb-3 text-center">Or</p>
 
 				<div className="block mb-5">
-					<Button isLink={true} bgColor="white" href={googleSocialUrl} className="w-full my-1 py-1 mx-auto block text-center">Continue with Google</Button>
+					<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Continue with Google</Button>
 				</div>
 
 				<div className="mb-6 flex items-center justify-center">

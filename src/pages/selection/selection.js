@@ -53,42 +53,22 @@ function SelectionPage(){
         const buttons = [];
         if(studentData.length > 0){
             for(let i = 0; i < studentData.length; i++){
-                if(i % 2 === 0){
-                    buttons.push(
-                    <Button key={i} onClick={() => onNext(studentData[i].id)} bgColor='black'
-                    txtColor='white' 
-                    className="mt-3 px-28 py-4">
-                    <p className="text-lg">{studentData[i].first_name + ' ' + studentData[i].last_name}</p>
-                    </Button>)
-                }
-                else{
-                    buttons.push(
-                    <Button key={i} onClick={() => onNext(studentData[i].id)} bgColor='white'
-                    txtColor='black' 
-                    className="mt-3 px-28 py-4">
-                    <p className="text-lg">{studentData[i].first_name + ' ' + studentData[i].last_name}</p>
-                    </Button>)
-                }
+                buttons.push(
+                <Button key={i} onClick={() => onNext(studentData[i].id)} bgColor='white'
+                txtColor='black' 
+                className="mt-3 px-28 py-4 w-full">
+                <p className="text-lg">{studentData[i].first_name + ' ' + studentData[i].last_name}</p>
+                </Button>)
             }
         }
         if(pendingInvites.length > 0){
             for(let i = 0; i < pendingInvites.length; i++){
-                if(i % 2 === 0){
-                    buttons.push(
-                    <Button key={i + studentData.length} onClick={() => onNext(pendingInvites[i].invite_to.id)} bgColor='black'
-                    txtColor='white' 
-                    className="mt-3 px-28 py-4">
-                    <p className="text-lg">{pendingInvites[i].invite_to.first_name + ' ' + pendingInvites[i].invite_to.last_name}</p>
-                    </Button>)
-                }
-                else{
-                    buttons.push(
-                    <Button key={i + studentData.length} onClick={() => onNext(pendingInvites[i].invite_to.id)} bgColor='white'
-                    txtColor='black' 
-                    className="mt-3 px-28 py-4">
-                    <p className="text-lg">{pendingInvites[i].invite_to.first_name + ' ' + pendingInvites[i].invite_to.last_name}</p>
-                    </Button>)
-                }
+                buttons.push(
+                <Button key={i} onClick={() => onNext(studentData[i].id)} bgColor='white'
+                txtColor='black' 
+                className="mt-3 px-28 py-4 w-full">
+                <p className="text-lg">{studentData[i].first_name + ' ' + studentData[i].last_name}</p>
+                </Button>)
             }
         }
         return (
@@ -120,7 +100,7 @@ function SelectionPage(){
     }
 
     return (
-        <div className='container max-w-7xl mt-48 flex flex-wrap justify-center mx-auto auth'>
+        <div className='container max-w-7xl mt-10 flex flex-wrap justify-center mx-auto auth md:px-10 px-3'>
             <SideBar/>
             <div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
                 <Selection/>

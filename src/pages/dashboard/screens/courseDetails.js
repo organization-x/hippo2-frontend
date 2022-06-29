@@ -9,30 +9,11 @@ function DashboardCourseDetails() {
 	const [courses, setCourses] = useState([]);
 	const auth = useAuth();
 	const [blockHidden, setBlockHidden] = useState(false);
-	const test_data = [{
-		id:123,
-		status:'paid',
-		created_at:'today',
-		user:{id:123,first_name:'ALex',last_name:'nguyen'},
-		product:{id:234,seats:3,start_date:'3/25',end_date:'6/24',time_zone:"PST",start_time:'10:00',
-				end_time:'10:00',name:'Batch A',created_at:'today',
-				course:{id:1234,name:'AI Summer camp 3 weeks CV', price:1234, is_available:'true',stripe_product_id:123,stripe_price_id:1234,created_at:'here'}},
-		transactions:{id:123,name:'Alex',email:'email yo',address:'12345 street', city:'sd',state:'ca',phone_number:'123456',stripe_session_id:1234,status:'paid',created_at:'6/24'},
-	},{
-		id:123,
-		status:'refunded',
-		created_at:'today',
-		user:{id:123,first_name:'ALex',last_name:'nguyen'},
-		product:{id:234,seats:3,start_date:'3/25',end_date:'6/24',time_zone:"PST",start_time:'10:00',
-				end_time:'10:00',name:'Batch A',created_at:'today',
-				course:{id:1234,name:'AI Summer camp 3 weeks CV', price:1234, is_available:'true',stripe_product_id:123,stripe_price_id:1234,created_at:'here'}},
-		transactions:{id:123,name:'Alex',email:'email yo',address:'12345 street', city:'sd',state:'ca',phone_number:'123456',stripe_session_id:1234,status:'paid',created_at:'6/24'},
-	}];
 
 
 	function hideView() {
 		setBlockHidden(!blockHidden);
-	  }
+	  };
 
 	useEffect(() => {
 		auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`)
@@ -42,7 +23,6 @@ function DashboardCourseDetails() {
 			}).catch(() => {
 			// API request was not successful
 			// TODO: handle API error
-			setCourses(test_data);
 		});
 	}, [auth]);
 
@@ -53,8 +33,7 @@ function DashboardCourseDetails() {
 		<td>{course.transactions.name}</td>
 		<td><span className=
 		{{unpaid: 'text-red-400', paid: 'text-green-500', cancelled: 'text-yellow-400', 'refunded': 'text-gray-500'}[course.status]}>
-			{{unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded'}[course.status]}</span></td>
-		
+		{{unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded'}[course.status]}</span></td>
 	</tr>
 	});
 
@@ -95,9 +74,10 @@ function DashboardCourseDetails() {
 								{blockHidden ? <div className='arrow upArrow relative left-3 top-1' id='upArrow'></div>:null}
 							</Button>
 						</div>
+						
 						{blockHidden ? 
-						<div id='hideView' className='pt-5'>
-							<table className='w-full'>
+						<div id='hideView' className='pt-7'>
+							<table className='w-full text-center'>
 								<thead>
 									<tr className='font-bold'>
 										<td >Date</td>
@@ -113,9 +93,6 @@ function DashboardCourseDetails() {
 						</div>:null}	
 	
 					</div>	
-
-
-
 				</div>
 			));
 		}

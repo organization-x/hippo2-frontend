@@ -86,7 +86,8 @@ export function AuthProvider({ children }) {
 			}
 		};
 		// signup user
-		await sendReq(newUrl, newOptions);
+		const initRes = await sendReq(newUrl, newOptions);
+		console.log(initRes);
 
 		// update user's info (type)
 		const userUrl = baseUrl + '/api/v1/users/';
@@ -97,6 +98,7 @@ export function AuthProvider({ children }) {
 			}
 		};
 		const updateRes = await sendReq(userUrl, updateOptions);
+		console.log(updateRes);
 		const data = updateRes.data;
 		// set user's info on frontend
 		setUser({

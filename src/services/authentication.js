@@ -167,8 +167,7 @@ export function AuthProvider({ children }) {
 		// signup/login
 		const loginRes = await sendReq(loginUrl, loginOptions);
 
-		// if user type provided, update user type
-		// either way, get user info
+		// get user info
 		const infoUrl = baseUrl + '/api/v1/userinfo/';
 		const infoRes = await sendReq(infoUrl, { method: 'GET' });
 

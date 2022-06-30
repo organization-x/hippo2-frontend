@@ -24,7 +24,10 @@ function GoogleAuth() {
 				// TODO: error handling
 				return console.log(err);
 			}
-			handleGoogleLogin(code, type, origin);
+			handleGoogleLogin(code, type, origin).catch(err => {
+				// TODO: error handling
+				console.log(err.data);
+			});
 		}
 	}, [code, handleGoogleLogin, state]);
 

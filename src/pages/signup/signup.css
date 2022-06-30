@@ -8,6 +8,8 @@
 	color: #0c59a8;
 }
 
-.form-error {
-	color: red;
-}
+
+
+.fade-in {
+	transition: opacity 1s ease;
+  }

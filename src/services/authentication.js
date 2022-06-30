@@ -272,6 +272,7 @@ export function AuthProvider({ children }) {
 			const data = res.data;
 			
 			setUser({
+				id: data.id,
 				email: data.email,
 				fName: data.first_name || '',
 				lName: data.last_name || '',

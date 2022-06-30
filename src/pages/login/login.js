@@ -17,6 +17,12 @@ function Login() {
 
 	const origin = location.state?.from?.pathname || '/';
 
+	const googleState = encodeURI(window.btoa(JSON.stringify({
+		origin: origin
+	})));
+
+	const googleSocialUrlFull = googleSocialUrl + `&state=${googleState}`;
+
 	const loginUser = () => {
 		setFormErrors({});
 		const [err, data] = validateUserLogin({
@@ -86,7 +92,7 @@ function Login() {
 				<p className="text-xl mb-5 text-center">Or</p>
 
 				<div className="block mb-4">
-					<Button isLink={true} bgColor="white" href={googleSocialUrl} className="w-full my-1 py-1 mx-auto block text-center">Log in with Google</Button>
+					<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Log in with Google</Button>
 				</div>
 
 				<div className="mb-5 flex items-center justify-center">

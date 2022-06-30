@@ -1,12 +1,6 @@
 import Button from "../../components/button/button";
 
-function PaymentSuccess() {
-	// placeholders
-	// TODO
-	const courseName = 'Course Name';
-	const batchId = '#';
-	const orderNumber = '#######'
-
+function PaymentSuccess({courseName = 'Course Name', batchId = '#', orderNumber = '#######'}) {
 	const studentDashboard = () => {
 		// called when "Proceed to Student Dashboard" is clicked
 	};
@@ -25,7 +19,7 @@ function PaymentSuccess() {
 				<Button bgColor="green" txtColor="white" className="col-span-3 my-2 mb-8 py-3 w-full" onClick={studentDashboard}>Proceed to Student Dashboard</Button>
 			</div>
 		</div>
-	)
+	);
 }
 
 export default PaymentSuccess;

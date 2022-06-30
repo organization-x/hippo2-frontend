@@ -1,22 +1,35 @@
 import { useEffect } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../../services/authentication";
 import Loading from "../loading/loading";
 
 
 function GoogleAuth() {
-	const auth = useAuth();
-	const location = useLocation();
-	const origin = location.state?.from?.pathname || '/';
+	const { handleGoogleLogin } = useAuth();
 
 	const [search] = useSearchParams();
 	const code = search.get('code');
+	const state = search.get('state');
+	
 
 	useEffect(() => {
 		if (code) {
-			auth.handleGoogleLogin(code, origin);
+			let type;
+			let origin;
+			try {
+				const stateObj = JSON.parse(window.atob(decodeURI(state)));
+				type = stateObj.type;
+				origin = stateObj.origin;
+			} catch (err) {
+				// TODO: error handling
+				return console.log(err);
+			}
+			handleGoogleLogin(code, type, origin).catch(err => {
+				// TODO: error handling
+				console.log(err.data);
+			});
 		}
-	}, [code, auth, origin]);
+	}, [code, handleGoogleLogin, state]);
 
 	return (
 		<Loading />

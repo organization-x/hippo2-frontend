@@ -88,7 +88,7 @@ export function AuthProvider({ children }) {
 		// signup user
 		await sendReq(newUrl, newOptions);
 
-		// update user's info (fname, lname, type)
+		// update user's info (type)
 		const userUrl = baseUrl + '/api/v1/userinfo/';
 		const updateOptions = {
 			method: 'POST',
@@ -108,7 +108,7 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
@@ -143,7 +143,7 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
@@ -153,20 +153,25 @@ export function AuthProvider({ children }) {
 	};
 
 	// TODO: add state param to google redirect uri for redirect memory
-	const handleGoogleLogin = async (code, redirect = '/') => {
-		const url = baseUrl + '/api/v1/auth/google/';
-		const options = {
+	const handleGoogleLogin = async (code, type=null, redirect = '/') => {
+		const loginUrl = baseUrl + '/api/v1/auth/google/';
+		const loginOptions = {
 			method: 'POST',
-			body: { code: code }
+			body: { 
+				code: code 
+			}
 		};
+		if (type) {
+			loginOptions.body.type = type;
+		}
 		// signup/login
-		await sendReq(url, options);
-		
-		// get user info
-		const userUrl = baseUrl + '/api/v1/userinfo/';
-		const userRes = await sendReq(userUrl, { method: 'GET' });
+		const loginRes = await sendReq(loginUrl, loginOptions);
 
-		const data = userRes.data;
+		// get user info
+		const infoUrl = baseUrl + '/api/v1/userinfo/';
+		const infoRes = await sendReq(infoUrl, { method: 'GET' });
+
+		const data = infoRes.data;
 		setUser({
 			id: data.id,
 			email: data.email,
@@ -176,13 +181,13 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
 
 		navigate(redirect);
-		return userRes;
+		return loginRes;
 	};
 
 	const handleLogout = async () => {
@@ -222,7 +227,7 @@ export function AuthProvider({ children }) {
 			phone: data.phone_number || '',
 			dob: data.dob || '',
 			filledDetails: data.filled_details,
-			filledInvite: data.filledInvite,
+			filledInvite: data.filled_invite,
 			passwordSet: data.password_set,
 			isLoggedIn: true
 		});
@@ -274,7 +279,7 @@ export function AuthProvider({ children }) {
 				phone: data.phone_number || '',
 				dob: data.dob || '',
 				filledDetails: data.filled_details,
-				filledInvite: data.filledInvite,
+				filledInvite: data.filled_invite,
 				passwordSet: data.password_set,
 				isLoggedIn: true
 			});

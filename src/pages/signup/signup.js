@@ -17,11 +17,19 @@ function Signup() {
 	const location = useLocation();
 	const [fade, setFade] = useState(false);
 
-	const origin = location.state?.from?.pathname || '/';
-
+	
 	const handleFade = () => {
 		setFade(true);
 	}
+
+	const origin = location.state?.from?.pathname || '/';
+
+	const googleState = encodeURI(window.btoa(JSON.stringify({
+		type: type,
+		origin: origin
+	})));
+
+	const googleSocialUrlFull = googleSocialUrl + `&state=${googleState}`;
 
 	const signUpUser = () => {
 		setFormErrors({});

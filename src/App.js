@@ -24,7 +24,7 @@ import BatchPage from './pages/batches/batchPage';
 import Dashboard from './pages/dashboard/dashboard'
 import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
-
+import SelectionPage from './pages/selection/selection';
 import './App.css';
 
 function App() {
@@ -65,6 +65,11 @@ function App() {
 						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
 						<Route path='/courses' element={<SelectCourses/>}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
+						<Route path='/batches/:batchID/student-selection' element={
+							<ProtectedRoute>
+								<SelectionPage />
+							</ProtectedRoute>
+						}></Route>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

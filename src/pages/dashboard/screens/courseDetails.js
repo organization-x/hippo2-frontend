@@ -10,7 +10,6 @@ function DashboardCourseDetails() {
 	const auth = useAuth();
 	const [blockHidden, setBlockHidden] = useState(false);
 
-
 	function hideView() {
 		setBlockHidden(!blockHidden);
 	  };
@@ -37,8 +36,6 @@ function DashboardCourseDetails() {
 	</tr>
 	});
 
-
-	
 	const coursesList = [];
 	if (courses !== null) {
 		for (let course of courses) {
@@ -64,7 +61,6 @@ function DashboardCourseDetails() {
 						<Button bgColor="white" txtColor="black" className="w-full py-2">Slideshow Presentations</Button>
 					</div>
 
-					
 					<div className="flex-none md:flex-initial w-full py-5 px-8 bg-gray-300 rounded-b-xl rounded-none">
 						<div className="flex items-center justify-center h-0">
 							<Button className="text-2xl flex font-semibold items-center justify-center px-20" onClick={() => hideView()}>
@@ -91,8 +87,8 @@ function DashboardCourseDetails() {
 								</tbody>
 							</table>
 						</div>:null}	
-	
 					</div>	
+
 				</div>
 			));
 		}

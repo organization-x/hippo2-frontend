@@ -9,14 +9,18 @@ import Input from "../../components/form/input";
 import './signup.css';
 
 function Signup() {
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
 	const [password, setPassword] = useState('');
 	const [type, setType] = useState('');
 	const [email, setEmail] = useState('');
 	const [formErrors, setFormErrors] = useState({});
 	const auth = useAuth();
 	const location = useLocation();
+	const [fade, setFade] = useState(false);
+
+	
+	const handleFade = () => {
+		setFade(true);
+	}
 
 	const origin = location.state?.from?.pathname || '/';
 
@@ -31,8 +35,6 @@ function Signup() {
 		setFormErrors({});
 		const [err, data] = validateUserSignup({
 			email,
-			firstName,
-			lastName,
 			type,
 			password
 		});
@@ -79,14 +81,17 @@ function Signup() {
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
 			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-xl mb-6 text-center">Join AI Camp as a</h2>
+				<h2 className="text-xl mb-6 mt-8 text-center">Join AI Camp as a</h2>
 
 				<div className="flex items-center justify-center">
 					<div className="mx-auto inline-block">
 						<Button 
 							bgColor={type === 'STUDENT' ? 'black' : 'white'} 
 							txtColor={type === 'STUDENT' ? 'white' : 'black'}
-							onClick={() => setType('STUDENT')}
+							onClick={() => {
+								setType('STUDENT');
+								handleFade();
+							}}
 							className="w-28 md:w-36 mx-2 p-1"
 						>
 							Student
@@ -94,7 +99,10 @@ function Signup() {
 						<Button 
 							bgColor={type === 'PARENT' ? 'black' : 'white'} 
 							txtColor={type === 'PARENT' ? 'white' : 'black'}
-							onClick={() => setType('PARENT')}
+							onClick={() => {
+								setType('PARENT');
+								handleFade();
+							}}
 							className="w-28 md:w-36 mx-2 p-1"
 						>
 							Parent
@@ -108,58 +116,44 @@ function Signup() {
 						null
 				}
 
-				<Input label="First Name"
-					type="text"
-					placeHolder="John"
-					className="mb-3 mt-6"
-					id="firstName"
-					isValid={formErrors.firstName?.length}
-					errorText={formErrors.firstName?.[0]}
-					onChange={val => setFirstName(val)}
-				/>
-				<Input label="Last Name"
-					type="text"
-					placeHolder="Doe"
-					className="mb-3"
-					id="lastName"
-					isValid={formErrors.lastName?.length}
-					errorText={formErrors.lastName?.[0]}
-					onChange={val => setLastName(val)}
-				/>
-				<Input label="Email"
-					type="email"
-					placeHolder="JohnDoe@yahoo.com"
-					className="mb-3"
-					id="email"
-					isValid={formErrors.email?.length}
-					errorText={formErrors.email?.[0]}
-					onChange={val => setEmail(val)}
-				/>
-				<Input label="Password"
-					type="password"
-					placeHolder="JohnDoePassword"
-					className="mb-3"
-					id="password"
-					isValid={formErrors.password?.length}
-					errorText={formErrors.password?.[0]}
-					onChange={val => setPassword(val)}
-				/>
+					<div className={`transition-all duration-1000 ${fade ? "opacity-100" : "opacity-0"}`}>
+						<Input label="Email"
+						type="email"
+						placeHolder="JohnDoe@yahoo.com"
+						className="mb-3 mt-14"
+						id="email"
+						isValid={formErrors.email?.length}
+						errorText={formErrors.email?.[0]}
+						onChange={val => setEmail(val)} 
+						/>
 
-				<p className="text-xl mb-3 text-center">Or</p>
+						<Input label="Password"
+						type="password"
+						placeHolder="JohnDoePassword"
+						className="mb-3"
+						id="password"
+						isValid={formErrors.password?.length}
+						errorText={formErrors.password?.[0]}
+						onChange={val => setPassword(val)} 
+						/>
 
-				<div className="block mb-5">
-					<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Continue with Google</Button>
-				</div>
+						<p className="text-xl mb-3 text-center">Or</p>
 
-				<div className="mb-6 flex items-center justify-center">
-					<Link 
-						to="/login" 
-						className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit"
-						state={{from: {pathname: origin}}}
-					>Already have an account?</Link>
-				</div>
+						<div className="block mb-5">
+							<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Continue with Google</Button>
+						</div>
 
-				<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
+						<div className="mb-6 flex items-center justify-center">
+							<Link 
+								to="/login" 
+								className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit"
+								state={{from: {pathname: origin}}}
+							>Already have an account?</Link>
+						</div>
+
+						<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
+					</div> 
+
 			</form>
 		</div>
 	)

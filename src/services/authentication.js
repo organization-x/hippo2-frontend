@@ -48,16 +48,6 @@ const blankUser = {
 	isLoggedIn: false
 };
 
-const GoogleBaseAuth = async (code) => {
-	const url = baseUrl + '/api/v1/auth/google/';
-	const options = {
-		method: 'POST',
-		body: { code: code }
-	};
-	// signup/login
-	await sendReq(url, options);
-};
-
 export function useAuth() {
 	return useContext(AuthContext);
 }
@@ -164,23 +154,25 @@ export function AuthProvider({ children }) {
 
 	// TODO: add state param to google redirect uri for redirect memory
 	const handleGoogleLogin = async (code, type=null, redirect = '/') => {
-		await GoogleBaseAuth(code);
+		const loginUrl = baseUrl + '/api/v1/auth/google/';
+		const loginOptions = {
+			method: 'POST',
+			body: { 
+				code: code 
+			}
+		};
+		if (type) {
+			loginOptions.body.type = type;
+		}
+		// signup/login
+		const loginRes = await sendReq(loginUrl, loginOptions);
 
 		// if user type provided, update user type
 		// either way, get user info
-		const url = baseUrl + '/api/v1/userinfo/';
-		let options;
-		if (type) {
-			options = {
-				method: 'POST',
-				body: { type: type }
-			};
-		} else {
-			options = { method: 'GET' };
-		}
-		const res = await sendReq(url, options);
+		const infoUrl = baseUrl + '/api/v1/userinfo/';
+		const infoRes = await sendReq(infoUrl, { method: 'GET' });
 
-		const data = res.data;
+		const data = infoRes.data;
 		setUser({
 			id: data.id,
 			email: data.email,
@@ -196,7 +188,7 @@ export function AuthProvider({ children }) {
 		});
 
 		navigate(redirect);
-		return res;
+		return loginRes;
 	};
 
 	const handleLogout = async () => {

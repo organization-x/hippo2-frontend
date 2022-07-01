@@ -41,7 +41,7 @@ function InviteUser({type, onBack}) {
 		}
 		setFormErrors(errors);
 		if (!hasError) {
-			const url = baseUrl + '/api/v1/group/invite/';
+			const url = baseUrl + '/api/v1/groups/invite/';
 			setProcessing(true);
 			for (let i = 0; i < validEmails.length; i++) {
 				const options = {

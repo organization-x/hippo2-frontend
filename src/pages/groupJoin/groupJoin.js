@@ -14,7 +14,7 @@ function GroupJoin() {
 
 	useEffect(() => {
 		if (token) {
-			const url = baseUrl + '/api/v1/group/join/';
+			const url = baseUrl + '/api/v1/groups/join/';
 			const options = {
 				method: 'POST',
 				body: {

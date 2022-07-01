@@ -89,7 +89,7 @@ export function AuthProvider({ children }) {
 		await sendReq(newUrl, newOptions);
 
 		// update user's info (type)
-		const userUrl = baseUrl + '/api/v1/userinfo/';
+		const userUrl = baseUrl + '/api/v1/users/';
 		const updateOptions = {
 			method: 'POST',
 			body: {
@@ -130,7 +130,7 @@ export function AuthProvider({ children }) {
 		await sendReq(lUrl, lOptions);
 
 		// get user info
-		const userUrl = baseUrl + '/api/v1/userinfo/';
+		const userUrl = baseUrl + '/api/v1/users/';
 		const userRes = await sendReq(userUrl, { method: 'GET' });
 
 		const data = userRes.data;
@@ -168,7 +168,7 @@ export function AuthProvider({ children }) {
 		const loginRes = await sendReq(loginUrl, loginOptions);
 
 		// get user info
-		const infoUrl = baseUrl + '/api/v1/userinfo/';
+		const infoUrl = baseUrl + '/api/v1/users/';
 		const infoRes = await sendReq(infoUrl, { method: 'GET' });
 
 		const data = infoRes.data;
@@ -204,7 +204,7 @@ export function AuthProvider({ children }) {
 	};
 
 	const handleUserInitiation = async (fName, lName, dob, phoneNum, redirect = '/') => {
-		const userUrl = baseUrl + '/api/v1/userinfo/';
+		const userUrl = baseUrl + '/api/v1/users/';
 		const updateOptions = {
 			method: 'POST',
 			body: {
@@ -236,7 +236,7 @@ export function AuthProvider({ children }) {
 	};
 
 	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect='/') => {
-		const url = baseUrl + '/api/v1/group/invite/';
+		const url = baseUrl + '/api/v1/groups/invite/';
 		const options = {
 			method: 'POST',
 			body: {
@@ -259,7 +259,7 @@ export function AuthProvider({ children }) {
 		if (excludeChecks.includes(location.pathname)) {
 			return setCheckLogin(true);
 		}
-		const url = baseUrl + '/api/v1/userinfo/';
+		const url = baseUrl + '/api/v1/users/';
 		const options = {
 			method: 'GET'
 		};

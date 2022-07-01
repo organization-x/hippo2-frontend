@@ -1,0 +1,66 @@
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+		height: 0;
+		font-size: 0;
+		padding: 0;
+		margin-top: 0;
+	}
+}
+
+.toast-container {
+	position: absolute;
+	right: 1rem;
+	z-index: 10;
+	font-size: 1rem;
+	pointer-events: none;
+	background: none;
+}
+
+.toast-container .toast {
+	padding: 0.4rem 0.5rem;
+	margin-top: 0.5rem;
+	border-radius: 0.5rem;
+	min-width: 13rem;
+}
+
+.toast-container .toast span {
+	margin-left: 0.5rem;
+}
+
+.toast.success {
+	background-color: #D4EAE1;
+	border: 1px solid #33C58E;
+	color: #2cb07d;
+}
+
+.toast.error {
+	background-color: #EED8D8;
+	border: 1px solid #E25353;
+	color: #bc4646;
+}
+
+.toast.display {
+	animation: fade-in ease 0.5s;
+	animation-fill-mode: forwards;
+}
+
+.toast.fadeout {
+	animation: fade-out ease 0.5s;
+	animation-fill-mode: forwards;
+}

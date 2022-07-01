@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../services/authentication';
+import { useFlashMsg } from '../../services/flashMsg';
 import { googleSocialUrl } from '../../apiUrls';
 import validateUserSignup from '../../validation/signup';
 import formatApiErrors from '../../validation/formatApiErrors';
@@ -14,6 +15,7 @@ function Signup() {
 	const [email, setEmail] = useState('');
 	const [formErrors, setFormErrors] = useState({});
 	const auth = useAuth();
+	const { flashMsg } = useFlashMsg();
 	const location = useLocation();
 	const [fade, setFade] = useState(false);
 
@@ -46,13 +48,17 @@ function Signup() {
 			data.type,
 			data.password, 
 			origin
-		).catch(err => {
+		).then(res => {
+			flashMsg('success', 'Welcome to AI Camp!');
+		}).catch(err => {
 			if (err.status === 400) {
 				const keyMap = {
 					'password1': 'password',
 					'non_field_errors': 'nonFieldErrors'
 				};
 				setFormErrors(formatApiErrors(err.data, keyMap));
+			} else {
+				flashMsg('error', 'Unable to Sign up');
 			}
 		});
 	}

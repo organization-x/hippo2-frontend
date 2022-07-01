@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import baseUrl from "../../apiUrls";
 import validatePassword from "../../validation/password";
 import { useAuth } from "../../services/authentication";
+import { useFlashMsg } from "../../services/flashMsg";
 import sendReq from "../../services/sendReq";
 
 import Loading from "../loading/loading";
@@ -19,6 +20,7 @@ function SignUpInvite() {
 	const [formErrors, setFormErrors] = useState('');
 	const [search] = useSearchParams();
 	const { handleLogin } = useAuth();
+	const { flashMsg } = useFlashMsg();
 	const resetToken = search.get('resettoken');
 	const inviteToken = search.get('invitetoken');
 
@@ -56,8 +58,18 @@ function SignUpInvite() {
 			await sendReq(url, options);
 			// login user
 			await handleLogin(data.invite_to.email, vPassword, '/');
-		})().catch(err => {
-			// TODO: handle error
+		})().then(res => {
+			flashMsg('success', 'Welcome to AI Camp!');
+		}).catch(err => {
+			if (err.status === 400) {
+				if (
+					err.data?.new_password1 && Array.isArray(err.data.new_password1) && 
+					err.data.new_password1.length
+				) {
+					return setFormErrors(err.data.new_password1[0]);
+				}
+			}
+			flashMsg('error', 'Error signing up');
 		});
 	};
 

@@ -13,6 +13,7 @@ function BatchPayFor() {
 	const [searchParams] = useSearchParams();
 	const [payForUser, setPayForUser] = useState(null);
 	const auth = useAuth();
+	const forUserId = searchParams.get('for') ? searchParams.get('for') : auth.user.id
 
 	const batchInfoDisplay = batchInfo ? (
 		<div className="mb-8">
@@ -31,19 +32,18 @@ function BatchPayFor() {
 		</div>
 	) : null;
 	useEffect(() => {
-		console.log(1)
 		// fetch user that is being paid for
-		auth.autoAuthReq(baseUrl + `/api/v1/users/${searchParams.get('for')}/`, {method: 'GET'})
+		auth.autoAuthReq(baseUrl + `/api/v1/users/${forUserId}/`, {method: 'GET'})
 			.then(res => setPayForUser(res.data)).catch();
 
 		// fetch batch info
 		auth.autoAuthReq(baseUrl + `/api/v1/batches/${batchId}/`, {method: 'GET'})
 			.then(res => setBatchInfo(res.data)).catch();
-	}, [auth, batchId, searchParams]);
+	}, [auth, batchId, forUserId, searchParams]);
 
 
 	const onPayNow = () => {
-		auth.autoAuthReq(baseUrl + `/api/v1/batches/${batchId}/payment/`, {method: 'POST', body: {user: payForUser.email}})
+		auth.autoAuthReq(baseUrl + `/api/v1/batches/${batchId}/payment/`, {method: 'POST', body: {user: payForUser.id}})
 			.then(res => {
 				const checkoutURL = res.data.checkout_url;
 				window.location.replace(checkoutURL);

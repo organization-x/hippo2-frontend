@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import baseUrl from "../../apiUrls";
 import validatePassword from "../../validation/password";
@@ -23,11 +23,11 @@ function SignUpInvite() {
 	const { flashMsg } = useFlashMsg();
 	const resetToken = search.get('resettoken');
 	const inviteToken = search.get('invitetoken');
+	const flashMsgRef = useRef(flashMsg).current;
 
 	useEffect(() => {
 		if (!resetToken || !inviteToken) {
-			// TODO: error handling
-			return;
+			return flashMsgRef('error', 'Invalid invite link');
 		}
 		// get invite information
 		const url = baseUrl + `/api/v1/group/invite/${inviteToken}/`;
@@ -35,7 +35,7 @@ function SignUpInvite() {
 			setData(res.data);
 			setLoading(false);
 		});
-	}, [resetToken, inviteToken]);
+	}, [resetToken, inviteToken, flashMsgRef]);
 
 	const setupUser = () => {
 		setFormErrors('');

@@ -1,22 +1,26 @@
-import Loading from "../../loading/loading";
-import {useEffect, useState} from "react";
+import { useEffect, useState, useRef } from "react";
+import { useAuth } from "../../../services/authentication";
+import { useFlashMsg } from "../../../services/flashMsg";
 import baseUrl from "../../../apiUrls";
-import {useAuth} from "../../../services/authentication";
 import Button from "../../../components/button/button";
+import Loading from "../../loading/loading";
 
 function DashboardCourseDetails() {
 	const [courses, setCourses] = useState(null);
 	const auth = useAuth();
+	const { flashMsg } = useFlashMsg();
+	const flashMsgRef = useRef(flashMsg).current;
 
 	useEffect(() => {
 		auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`)
 			.then(data => {
 				setCourses(data.data)
-			}).catch(() => {
+			}).catch((err) => {
 			// API request was not successful
 			// TODO: handle API error
+			flashMsgRef('error', 'Something went wrong');
 		});
-	}, [auth]);
+	}, [auth, flashMsgRef]);
 	
 	const coursesList = [];
 	if (courses !== null) {

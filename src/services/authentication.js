@@ -152,7 +152,6 @@ export function AuthProvider({ children }) {
 		return userRes;
 	};
 
-	// TODO: add state param to google redirect uri for redirect memory
 	const handleGoogleLogin = async (code, type=null, redirect = '/') => {
 		const loginUrl = baseUrl + '/api/v1/auth/google/';
 		const loginOptions = {
@@ -289,7 +288,9 @@ export function AuthProvider({ children }) {
 			navigate(origin);
 		}).catch(err => {
 			setCheckLogin(true);
-			// TODO: error handling for non-unauthenticated messages
+			if (err.status !== 401 && err.status !== 403) {
+				console.log('Could not get user info');
+			}
 		});
 	}, [autoAuthReq, location, navigate]);
 

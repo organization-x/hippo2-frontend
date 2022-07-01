@@ -28,6 +28,14 @@
 	border: 1px solid red;
 }
 
+.react-tel-input .country-list .country {
+	padding: 7px 30px;
+}
+
+.react-tel-input .country-list .search-box {
+	margin-left: 42px;
+}
+
 @media (min-width: 768px) {
 	.react-tel-input .form-control {
 		width: 75%;

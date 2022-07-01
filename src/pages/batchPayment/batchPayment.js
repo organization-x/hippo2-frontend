@@ -1,14 +1,17 @@
 import Input from "../../components/form/input";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import Button from "../../components/button/button";
 import {useParams} from "react-router-dom";
 import baseUrl from "../../apiUrls";
 import {useAuth} from "../../services/authentication";
+import { useFlashMsg } from "../../services/flashMsg";
 
 function BatchPayment() {
 	const {batchId} = useParams();
 	const [batchInfo, setBatchInfo] = useState(null);
 	const auth = useAuth();
+	const { flashMsg } = useFlashMsg();
+	const flashMsgRef = useRef(flashMsg).current;
 
 	const batchInfoDisplay = batchInfo ? (
 		<div>
@@ -33,10 +36,10 @@ function BatchPayment() {
 			.catch(data => {
 				if (data.status === 404) {
 					// batch does not exist
-					// TODO
+					flashMsgRef('error', 'Batch not found');
 				}
 			});
-	}, [endpoint, auth]);
+	}, [endpoint, auth, flashMsgRef]);
 
 	const [promoCode, setPromoCode] = useState('');
 

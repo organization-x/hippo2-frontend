@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import baseUrl from "../../apiUrls";
 import validatePassword from "../../validation/password";
 import { useAuth } from "../../services/authentication";
+import { useFlashMsg } from "../../services/flashMsg";
 import sendReq from "../../services/sendReq";
 
 import Loading from "../loading/loading";
@@ -19,13 +20,14 @@ function SignUpInvite() {
 	const [formErrors, setFormErrors] = useState('');
 	const [search] = useSearchParams();
 	const { handleLogin } = useAuth();
+	const { flashMsg } = useFlashMsg();
 	const resetToken = search.get('resettoken');
 	const inviteToken = search.get('invitetoken');
+	const flashMsgRef = useRef(flashMsg).current;
 
 	useEffect(() => {
 		if (!resetToken || !inviteToken) {
-			// TODO: error handling
-			return;
+			return flashMsgRef('error', 'Invalid invite link');
 		}
 		// get invite information
 		const url = baseUrl + `/api/v1/groups/invite/${inviteToken}/`;
@@ -33,7 +35,7 @@ function SignUpInvite() {
 			setData(res.data);
 			setLoading(false);
 		});
-	}, [resetToken, inviteToken]);
+	}, [resetToken, inviteToken, flashMsgRef]);
 
 	const setupUser = () => {
 		setFormErrors('');
@@ -56,8 +58,18 @@ function SignUpInvite() {
 			await sendReq(url, options);
 			// login user
 			await handleLogin(data.invite_to.email, vPassword, '/');
-		})().catch(err => {
-			// TODO: handle error
+		})().then(res => {
+			flashMsg('success', 'Welcome to AI Camp!');
+		}).catch(err => {
+			if (err.status === 400) {
+				if (
+					err.data?.new_password1 && Array.isArray(err.data.new_password1) && 
+					err.data.new_password1.length
+				) {
+					return setFormErrors(err.data.new_password1[0]);
+				}
+			}
+			flashMsg('error', 'Error signing up');
 		});
 	};
 

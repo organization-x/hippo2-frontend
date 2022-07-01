@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { googleSocialUrl } from '../../apiUrls';
 import { useAuth } from "../../services/authentication";
+import { useFlashMsg } from '../../services/flashMsg';
 import validateUserLogin from '../../validation/login';
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
@@ -14,6 +15,7 @@ function Login() {
 	const [formErrors, setFormErrors] = useState({});
 	const auth = useAuth();
 	const location = useLocation();
+	const { flashMsg } = useFlashMsg();
 
 	const origin = location.state?.from?.pathname || '/';
 
@@ -32,13 +34,17 @@ function Login() {
 		if (err) {
 			return setFormErrors(err);
 		}
-		auth.handleLogin(data.email, data.password, origin).catch(err => {
+		auth.handleLogin(data.email, data.password, origin).then(res => {
+			flashMsg('success', 'Welcome back!');
+		}).catch(err => {
 			if (err.status === 400) {
 				const keyMap = {
 					password1: 'password',
 					non_field_errors: 'nonFieldErrors'
 				};
 				setFormErrors(formatApiErrors(err.data, keyMap));
+			} else {
+				flashMsg('error', 'Unable to login');
 			}
 		});
 	}

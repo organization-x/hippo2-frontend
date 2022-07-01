@@ -26,6 +26,7 @@ import Dashboard from './pages/dashboard/dashboard'
 import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
 import SelectionPage from './pages/selection/selection';
+import ToastContainer from './components/toasts/toastContainer';
 import './App.css';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 			<AuthProvider>
 				<FlashMsgProvider>
 					<Navbar />
+					<ToastContainer />
 					<Routes>
 						<Route path='/' element={
 							<ProtectedRoute>

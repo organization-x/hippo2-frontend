@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../services/authentication';
+import { useFlashMsg } from '../../services/flashMsg';
 import { googleSocialUrl } from '../../apiUrls';
 import validateUserSignup from '../../validation/signup';
 import formatApiErrors from '../../validation/formatApiErrors';
@@ -14,6 +15,7 @@ function Signup() {
 	const [email, setEmail] = useState('');
 	const [formErrors, setFormErrors] = useState({});
 	const auth = useAuth();
+	const { flashMsg } = useFlashMsg();
 	const location = useLocation();
 	const [fade, setFade] = useState(false);
 
@@ -46,13 +48,17 @@ function Signup() {
 			data.type,
 			data.password, 
 			origin
-		).catch(err => {
+		).then(res => {
+			flashMsg('success', 'Welcome to AI Camp!');
+		}).catch(err => {
 			if (err.status === 400) {
 				const keyMap = {
 					'password1': 'password',
 					'non_field_errors': 'nonFieldErrors'
 				};
 				setFormErrors(formatApiErrors(err.data, keyMap));
+			} else {
+				flashMsg('error', 'Unable to Sign up');
 			}
 		});
 	}
@@ -92,7 +98,7 @@ function Signup() {
 								setType('STUDENT');
 								handleFade();
 							}}
-							className="w-28 md:w-36 mx-2 p-1"
+							className="w-28 md:w-36 mr-4 p-1"
 						>
 							Student
 						</Button>
@@ -103,7 +109,7 @@ function Signup() {
 								setType('PARENT');
 								handleFade();
 							}}
-							className="w-28 md:w-36 mx-2 p-1"
+							className="w-28 md:w-36 p-1"
 						>
 							Parent
 						</Button>
@@ -115,44 +121,51 @@ function Signup() {
 					: 
 						null
 				}
+				<Link 
+					to="/login" 
+					className={
+						`text-blue-700 hover:text-blue-600 my-5 underline decoration-inherit text-center ${fade ? 'hidden' : 'block'}`
+					}
+					state={{from: {pathname: origin}}}
+				>Already have an account?</Link>
 
-					<div className={`transition-all duration-1000 ${fade ? "opacity-100" : "opacity-0"}`}>
-						<Input label="Email"
-						type="email"
-						placeHolder="JohnDoe@yahoo.com"
-						className="mb-3 mt-14"
-						id="email"
-						isValid={formErrors.email?.length}
-						errorText={formErrors.email?.[0]}
-						onChange={val => setEmail(val)} 
-						/>
+				<div className={`${fade ? "block" : "hidden"}`}>
+					<Input label="Email"
+					type="email"
+					placeHolder="JohnDoe@yahoo.com"
+					className="mb-3 mt-6"
+					id="email"
+					isValid={formErrors.email?.length}
+					errorText={formErrors.email?.[0]}
+					onChange={val => setEmail(val)} 
+					/>
 
-						<Input label="Password"
-						type="password"
-						placeHolder="JohnDoePassword"
-						className="mb-3"
-						id="password"
-						isValid={formErrors.password?.length}
-						errorText={formErrors.password?.[0]}
-						onChange={val => setPassword(val)} 
-						/>
+					<Input label="Password"
+					type="password"
+					placeHolder="JohnDoePassword"
+					className="mb-3"
+					id="password"
+					isValid={formErrors.password?.length}
+					errorText={formErrors.password?.[0]}
+					onChange={val => setPassword(val)} 
+					/>
 
-						<p className="text-xl mb-3 text-center">Or</p>
+					<p className="text-xl mb-3 text-center">Or</p>
 
-						<div className="block mb-5">
-							<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Continue with Google</Button>
-						</div>
+					<div className="block mb-5">
+						<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Continue with Google</Button>
+					</div>
 
-						<div className="mb-6 flex items-center justify-center">
-							<Link 
-								to="/login" 
-								className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit"
-								state={{from: {pathname: origin}}}
-							>Already have an account?</Link>
-						</div>
+					<div className="mb-6 flex items-center justify-center opacity-100">
+						<Link 
+							to="/login" 
+							className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit"
+							state={{from: {pathname: origin}}}
+						>Already have an account?</Link>
+					</div>
 
-						<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
-					</div> 
+					<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
+				</div> 
 
 			</form>
 		</div>

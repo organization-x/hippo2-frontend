@@ -98,13 +98,13 @@ function InviteUser() {
 
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
-			<div className="flex-none md:flex-initial w-full md:w-1/2 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 				{panelText}
 				<p className="text-lg">Click "Next" to move onto the payment stage!</p>
 			</div>
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
-			}} className="flex-none md:flex-initial relative w-full md:w-1/2 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+			}} className="flex-none md:flex-initial relative w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-xl text-center">
 					{formTitle}
 				</h2>

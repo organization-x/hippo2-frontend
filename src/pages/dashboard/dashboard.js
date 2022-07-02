@@ -9,7 +9,7 @@ function Dashboard(){
 
     return (
         <div className="flex h-screen">
-            <div className="w-64 h-full bg-neutral-300 px-1">
+            <div className="w-64 h-full flex-none bg-neutral-300 px-1">
                 <ul className="mt-12">
                     <li className="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-5">
                         <button onClick = {() => setPage('dashboard-home')} className="flex items-start focus:outline-none focus:ring-2 focus:ring-white">
@@ -18,7 +18,7 @@ function Dashboard(){
                     </li>
                     <li className="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-5">
                         <button onClick = {() => setPage('account-settings')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                            <span className="font-medium text-base ml-5">Account Setings</span>
+                            <span className="font-medium text-base ml-5">Account Settings</span>
                         </button>
                     </li>
 
@@ -64,7 +64,7 @@ function Dashboard(){
                 </ul>
             </div>
 
-            <div>
+            <div className='grow'>
                 <DashboardBody page={page} />
             </div>
 

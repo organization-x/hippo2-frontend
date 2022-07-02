@@ -19,7 +19,7 @@ function AccountSettings() {
 	    for (let i = 0; i < res.data.length; i++) {
 	    	const groupUser = res.data[i];
 	        groupUsers.push(
-		    <GetInformation key={i} headerText={`${groupUser.first_name}'s Profile`} {...groupUser} className="md:w-full bg-white rounded-xl"/>
+		    <GetInformation key={i} headerText={`${groupUser.first_name}'s Profile`} {...groupUser} className="md:w-1/4 bg-white rounded-xl"/>
 		);
 	    }
 	    setGroup(groupUsers);
@@ -27,7 +27,7 @@ function AccountSettings() {
     }, []);
 
     return (
-	<div className="flex flex-row justify-center gap-3 flex-wrap p-4 auth rounded-xl">
+	<div className="flex flex-row flex-wrap gap-5 justify-around p-4 auth rounded-xl">
 	    {groupUsers}
 	</div>
     );

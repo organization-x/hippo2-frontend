@@ -28,7 +28,6 @@ function GetInformation({headerText, first_name, last_name, id, editing, classNa
             'phone': new_phone,
             'dob': new_birthday
         };
-	console.log(new_phone);
 
         const [err, data] = validateUserInformation(info);
 

@@ -1,20 +1,12 @@
 import { nonempty, object, pattern, string, validate } from "superstruct";
 import formatFormErrors from "./formatFormErrors";
 
-const StudentInformation = object({
+const UserInformation = object({
 	email: pattern(nonempty(string()), /^\S+@\S+\.\S+$/),
 	fName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
 	lName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
-	type: pattern(nonempty(string()), /^(STUDENT|PARENT)$/),
 	phone: pattern(nonempty(string()), /^\+?1?\d{9,15}$/),
 	dob: pattern(nonempty(string()), /^(0?[1-9]|1[0-2])\/(19|20)\d{2}$/)
-});
-const ParentInformation = object({
-	email: pattern(nonempty(string()), /^\S+@\S+\.\S+$/),
-	fName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
-	lName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
-	phone: pattern(nonempty(string()), /^\+?1?\d{9,15}$/),
-	type: pattern(nonempty(string()), /^(STUDENT|PARENT)$/)
 });
 
 const messages = {
@@ -27,8 +19,8 @@ const messages = {
 	}
 };
 
-function validateUserInformation(data, type) {
-	const schema = type !== 'PARENT' ? StudentInformation : ParentInformation;
+function validateUserInformation(data) {
+	const schema = UserInformation
 	const [err, vData] = validate(data, schema);
 	const formattedErr = formatFormErrors(err, messages);
 	return [formattedErr, vData];

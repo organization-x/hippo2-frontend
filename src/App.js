@@ -28,6 +28,7 @@ import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
 import SelectionPage from './pages/selection/selection';
 import ToastContainer from './components/toasts/toastContainer';
+import UserDetails from './pages/userInformation/userDetails';
 import './App.css';
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
 								<SelectionPage />
 							</ProtectedRoute>
 						}></Route>
+						<Route path='/user/details' element={<UserDetails />}></Route>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

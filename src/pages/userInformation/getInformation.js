@@ -9,11 +9,12 @@ import Button from "../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './getInformation.css';
 
-function GetInformation({headerText, init_first_name, init_last_name, id, editing, className, onNext, type}) {
+function GetInformation({headerText, init_first_name, init_last_name, init_email, init_phone, init_dob, id, editing, className, onNext, type}) {
     const [first_name, setFirstName] = useState(init_first_name || '');
     const [last_name, setLastName] = useState(init_last_name || '');
-    const [dob, setBirthday] = useState('');
-    const [phone, setPhone] = useState('');
+    const [dob, setBirthday] = useState(init_dob || '');
+    const [phone, setPhone] = useState(init_phone || '');
+    const [email, setEmail] = useState(init_email || '');
     const [formErrors, setFormErrors] = useState({});
     const [is_editing, toggleEditing] = useState(editing);
     
@@ -94,6 +95,18 @@ function GetInformation({headerText, init_first_name, init_last_name, id, editin
                     onChange={val => setLastName(val)}
                     readOnly={!is_editing}    
                 />
+
+		<Input label="Email"
+                    type="text"
+                    placeHolder={is_editing ? "example@email.com" : ''}
+                    className="mb-3"
+                    value={email}
+                    isValid={formErrors.email?.length}
+                    errorText={formErrors.email?.[0]}
+                    onChange={val => setEmail(val)}
+                    readOnly
+                />
+
                 <label className={`form-label mb-1`}>Mobile Phone Number</label>
                 <PhoneInput 
                     specialLabel="Phone Number"

@@ -18,6 +18,7 @@ function UserDetails() {
             <GetInformation headerText="Edit User Information" 
                 init_first_name={user.fName} 
                 init_last_name={user.lName} 
+	        init_email={user.email}
                 id={user.id} 
                 className="md:w-3/5 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none"
                 editing

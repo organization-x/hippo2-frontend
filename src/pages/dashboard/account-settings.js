@@ -24,6 +24,8 @@ function AccountSettings() {
 		    headerText={`${user.fName}'s Profile`}
 		    init_first_name={user.fName} 
 		    init_last_name={user.lName} 
+		    init_email={user.email}
+		    init_phone={user.phone}
 		    id={user.id} 
 		    type={user.type}
 		    className="md:w-80 w-min: bg-white rounded-xl"

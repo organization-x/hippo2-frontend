@@ -1,66 +1,105 @@
-import {useParams, useSearchParams} from "react-router-dom";
-import {useState, useEffect} from "react";
-import {useAuth} from "../../services/authentication";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../services/authentication";
+import { useFlashMsg } from "../../services/flashMsg";
 import Button from "../../components/button/button";
 import baseUrl from "../../apiUrls";
 import Loading from "../loading/loading";
 
 function BatchPayment() {
 	const { batchId } = useParams();
-	const [batchInfo, setBatchInfo] = useState({});
-	const [searchParams] = useSearchParams();
-	const [payForUser, setPayForUser] = useState({});
-	const auth = useAuth();
-	const forUserId = searchParams.get('for') ? searchParams.get('for') : auth.user.id;
+	const [search] = useSearchParams();
+	const [data, setData] = useState({});
+	const [loading, setLoading] = useState(true);
+	const [processing, setProcessing] = useState(false);
+	const { user, autoAuthReq } = useAuth();
+	const { flashMsg } = useFlashMsg();
+	const flashMsgRef = useRef(flashMsg).current;
+	const location = useLocation();
+	const navigate = useNavigate();
+	
+	const forUserId = search.get('for') ? search.get('for') : user.id;
+	const here = location.pathname + location.search;
 
-	const batchInfoDisplay = batchInfo ? (
-		<div className="mb-8">
-			<p className="text-lg font-semibold">{batchInfo.course_name}</p>
-			<p className="text-base">${batchInfo.course_price}</p>
-		</div>
-	) : (
-		<div>
-			<p className="text-lg font-semibold">Loading...</p>
-		</div>
-	);
-	const studentInfoDisplay = payForUser ? (
-		<div className="mb-8 text-lg font-semibold">
-			<p>Student Name: {payForUser.first_name} {payForUser.last_name}</p>
-			<p>Batch: {batchInfo.batch_name} ({batchInfo.time_zone}) {batchInfo.batch_start_date}-{batchInfo.batch_end_date}</p>
-		</div>
-	) : null;
 	useEffect(() => {
-		// fetch user that is being paid for
-		auth.autoAuthReq(baseUrl + `/api/v1/users/${forUserId}/`, {method: 'GET'})
-			.then(res => setPayForUser(res.data)).catch();
+		console.log('called');
+		// initialize order
+		const url = baseUrl + '/api/v1/orders/';
+		const options = {
+			method: 'POST',
+			body: {
+				user: forUserId,
+				batch: batchId
+			}
+		};
+		autoAuthReq(url, options, here).then(res => {
+			setData(res.data);
+			setLoading(false);
+		}).catch(err => {
+			if (err.data?.message) {
+				flashMsgRef('error', err.data.message);
+			} else {
+				flashMsgRef('error', 'Unable to fetch order info');
+			}
+			navigate('/courses');
+		});
+		
+	}, [autoAuthReq, batchId, forUserId, here, flashMsgRef, navigate]);
 
-		// fetch batch info
-		auth.autoAuthReq(baseUrl + `/api/v1/batches/${batchId}/`, {method: 'GET'})
-			.then(res => setBatchInfo(res.data)).catch();
-	}, [auth, batchId, forUserId, searchParams]);
-
+	if (loading) {
+		return <Loading />;
+	}
 
 	const onPayNow = () => {
-		auth.autoAuthReq(baseUrl + `/api/v1/batches/${batchId}/payment/`, {method: 'POST', body: {user: payForUser.id}})
-			.then(res => {
-				const checkoutURL = res.data.checkout_url;
-				window.location.replace(checkoutURL);
-			}).catch(); // TODO handle errors
+		setProcessing(true);
+		const url = baseUrl + `/api/v1/batches/${batchId}/payment/`;
+		const options = {
+			method: 'POST',
+			body: { user: forUserId }
+		};
+		autoAuthReq(url, options, here).then(res => {
+			const checkoutURL = res.data.checkout_url;
+			window.location.replace(checkoutURL);
+		}).catch(err => {
+			if (err.data?.message) {
+				flashMsg('error', err.data.message);
+			} else {
+				flashMsg('error', 'Unable to create payment session');
+			}
+			navigate('/courses');
+		});
 	};
 	const onPayLater = () => {
 		// TODO pay in installments
 	};
-	if ([payForUser, batchInfo].includes(null)) {
-		return (
-			<Loading />
-		);
-	}
+
+	
 
 	const reviewStars = [];
 	for (let i = 0; i < 5; i++) {
-		reviewStars.push(<svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-yellow-400 inline-block" viewBox="0 0 20 20" fill="currentColor">
-			<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-		</svg>)
+		reviewStars.push(
+			<FontAwesomeIcon key={i} className="h-4 w-4 text-yellow-400 inline-block" icon={faStar} />
+		);
+	}
+
+	let controls;
+	if (processing) {
+		controls = (
+			<p className="text-lg">Redirecting to payment screen. Please wait...</p>
+		);
+	} else {
+		controls = (<>
+			<Button 
+				bgColor="green" txtColor="white" className="col-span-3 py-4 w-full mb-3" 
+				onClick={() => onPayNow()}
+			>Submit Full Tuition</Button>
+			<Button 
+				bgColor="white" txtColor="black" className="col-span-3 py-4 w-full mb-8" 
+				onClick={() => onPayLater()}
+			>Pay in Installments</Button>
+		</>);
 	}
 
 	return (
@@ -73,12 +112,9 @@ function BatchPayment() {
 				<p className="mb-8 text-lg">Pay now by clicking "Submit Tuition".</p>
 				<p className="mb-5"><b>Note: Your spot is not reserved until you have paid the tuition. Courses are filling up fast!</b></p>
 				<hr className="mx-3 mb-4" />
-				<div className="mx-auto w-fit mb-4">
-					{/* star SVG */}
-					<svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-yellow-400 inline-block" viewBox="0 0 20 20" fill="currentColor">
-						<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-					</svg>
-					<p className="inline-block text-3xl align-middle">4.7/5 (208 reviews)</p>
+				<div className="flex flex-row justify-center items-center mb-4">
+					<FontAwesomeIcon className="h-10 w-10 text-yellow-400" icon={faStar} />
+					<p className="inline-block text-3xl ml-2">4.7/5 (208 reviews)</p>
 				</div>
 				<div className="bg-zinc-200 px-4 py-2 rounded-2xl text-black">
 					<div className="flex justify-between">
@@ -96,11 +132,18 @@ function BatchPayment() {
 			</div>
 			<div className="flex-none md:flex-initial relative w-full md:w-1/2 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 				<h2 className="text-xl mb-6 text-center">Submit payment to finalize registration.</h2>
-				{batchInfoDisplay}
-				{studentInfoDisplay}
+				<div className="mb-8">
+					<p className="text-lg font-semibold">{data.course.name}</p>
+					<p className="text-base">${data.course.price}</p>
+				</div>
+				<div className="mb-8 text-lg font-semibold">
+					<p>Student Name: {data.user.first_name} {data.user.last_name}</p>
+					<p>
+						Batch: {data.batch.name} ({data.batch.time_zone}) {data.batch.start_date}-{data.batch.end_date}
+					</p>
+				</div>
 
-				<Button bgColor="green" txtColor="white" className="col-span-3 py-4 w-full mb-3" onClick={onPayNow}>Submit Full Tuition</Button>
-				<Button bgColor="white" txtColor="black" className="col-span-3 py-4 w-full mb-8" onClick={onPayLater}>Pay in Installments</Button>
+				{controls}
 			</div>
 		</div>
 	);

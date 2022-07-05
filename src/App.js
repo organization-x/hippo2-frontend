@@ -34,51 +34,53 @@ function App() {
 		<BrowserRouter>
 			<AuthProvider>
 				<FlashMsgProvider>
-					<Navbar />
-					<ToastContainer />
-					<Routes>
-						<Route path='/' element={
-							<ProtectedRoute>
-								<Home />
-							</ProtectedRoute>
-						}></Route>
-						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
-						<Route path='/invite' element={
-							<ProtectedRoute inviteReq={false}>
-								<InviteUser /> 
-							</ProtectedRoute>
-						}></Route>
-						<Route path='/protected' element={
-							<ProtectedRoute>
-								<Protected />
-							</ProtectedRoute>
-						}></Route>
-						<Route path='/signup' element={<Signup />}></Route>
-						<Route path='/dashboard' element={<Dashboard />}></Route>
-						<Route path='/login' element={<Login />}></Route>
-						<Route path='/signup/invite' element={<SignUpInvite />}></Route>
-						<Route path='/password/reset' element={<ForgotPassword />}></Route>
-						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
-						<Route path='/group/join' element={
-							<ProtectedRoute detailsReq={false} inviteReq={false}>
-								<GroupJoin />
-							</ProtectedRoute>
-						}></Route>
-						<Route path='/batches/:batchId/payment' element={
-							<ProtectedRoute>
-								<BatchPayment />
-							</ProtectedRoute>
-						}></Route>
-						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
-						<Route path='/courses' element={<SelectCourses/>}></Route>
-						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
-						<Route path='/courseDetails' element={<DashboardCourseDetails />}></Route>
-						<Route path='/batches/:batchID/student-selection' element={
-							<ProtectedRoute>
-								<SelectionPage />
-							</ProtectedRoute>
-						}></Route>
-					</Routes>
+					<div className="main">
+						<Navbar />
+						<ToastContainer />
+						<Routes>
+							<Route path='/' element={
+								<ProtectedRoute>
+									<Home />
+								</ProtectedRoute>
+							}></Route>
+							<Route path='/auth/google/' element={<GoogleAuth />}></Route>
+							<Route path='/invite' element={
+								<ProtectedRoute inviteReq={false}>
+									<InviteUser /> 
+								</ProtectedRoute>
+							}></Route>
+							<Route path='/protected' element={
+								<ProtectedRoute>
+									<Protected />
+								</ProtectedRoute>
+							}></Route>
+							<Route path='/signup' element={<Signup />}></Route>
+							<Route path='/dashboard' element={<Dashboard />}></Route>
+							<Route path='/login' element={<Login />}></Route>
+							<Route path='/signup/invite' element={<SignUpInvite />}></Route>
+							<Route path='/password/reset' element={<ForgotPassword />}></Route>
+							<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
+							<Route path='/group/join' element={
+								<ProtectedRoute detailsReq={false} inviteReq={false}>
+									<GroupJoin />
+								</ProtectedRoute>
+							}></Route>
+							<Route path='/batches/:batchId/payment' element={
+								<ProtectedRoute>
+									<BatchPayment />
+								</ProtectedRoute>
+							}></Route>
+							<Route path='/payment/success' element={<PaymentSuccess />}></Route>
+							<Route path='/courses' element={<SelectCourses/>}></Route>
+							<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
+							<Route path='/courseDetails' element={<DashboardCourseDetails />}></Route>
+							<Route path='/batches/:batchID/student-selection' element={
+								<ProtectedRoute>
+									<SelectionPage />
+								</ProtectedRoute>
+							}></Route>
+						</Routes>
+					</div>
 					<Footer />
 				</FlashMsgProvider>
 			</AuthProvider>

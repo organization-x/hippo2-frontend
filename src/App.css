@@ -18,6 +18,8 @@
 body, html {
 	background-color: #f0f0f0;
 	font-family: 'Open Sans', sans-serif;
-	/* Padding for the footer */
-	padding-bottom: 3rem;
+}
+
+.main {
+	min-height: 100vh;
 }

@@ -9,30 +9,32 @@ import Button from "../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './getInformation.css';
 
-function GetInformation({headerText, first_name, last_name, id, editing, className, onNext}) {
-    const [new_first_name, setFirstName] = useState(first_name || '');
-    const [new_last_name, setLastName] = useState(last_name || '');
-    const [new_email, setEmail] = useState('');
-    const [new_birthday, setBirthday] = useState('');
-    const [new_phone, setPhone] = useState('');
+function GetInformation({headerText, init_first_name, init_last_name, id, editing, className, onNext, type}) {
+    const [first_name, setFirstName] = useState(init_first_name || '');
+    const [last_name, setLastName] = useState(init_last_name || '');
+    const [dob, setBirthday] = useState('');
+    const [phone, setPhone] = useState('');
     const [formErrors, setFormErrors] = useState({});
-    const [editing_toggle, toggleEditing] = useState(editing);
+    const [is_editing, toggleEditing] = useState(editing);
     
     const onSubmit = () => {
         // executes when the Next button is clicked or when form is submitted
         setFormErrors({});
         const info = {
-            'fName': new_first_name,
-            'lName': new_last_name,
-            'email': new_email,
-            'phone': new_phone,
-            'dob': new_birthday
+            first_name,
+            last_name,
+            phone,
+	    type
         };
 
-        const [err, data] = validateUserInformation(info);
+	if (type === 'STUDENT') {
+	    info.dob = dob;
+	}
+
+        const [err, data] = validateUserInformation(info, type);
 
         if (err) {
-            return setFormErrors(err);
+	    return setFormErrors(err);
         }
 
         const updateUrl = `${baseUrl}/api/v1/users/${id}/`
@@ -40,13 +42,16 @@ function GetInformation({headerText, first_name, last_name, id, editing, classNa
             method: 'POST',
             body: {  
                 id: id,
-                first_name: data.fName,
-                last_name: data.lName,
-                email: data.email,
+                first_name: data.first_name,
+                last_name: data.last_name,
                 phone_number: data.phone,
-                dob: data.dob,
+		type: data.type
             }
         }
+
+	if (type === 'STUDENT') {
+	    options.body.dob = dob;
+	}
 
         sendReq(updateUrl, options).then(() => { 
 	    toggleEditing(false);
@@ -54,8 +59,8 @@ function GetInformation({headerText, first_name, last_name, id, editing, classNa
 	}).catch(err => { 
             if (err.status === 400) {
                 const keyMap = {
-                    'first_name': 'firstName',
-                    'last_name': 'lastName',
+                    'first_name': 'first_name',
+                    'last_name': 'last_name',
                     'phone_number': 'phone'
                 };
                 setFormErrors(formatApiErrors(err.data, keyMap));
@@ -71,43 +76,35 @@ function GetInformation({headerText, first_name, last_name, id, editing, classNa
             <div className="mb-8 mt-5">
                 <Input label="First Name"
                     type="text"
-                    placeHolder="John"
+                    placeHolder={is_editing ? 'John': ''}
                     className="mb-3" 
-                    value={new_first_name}
-                    isValid={formErrors.firstName?.length}
-                    errorText={formErrors.firstName?.[0]}
+                    value={first_name}
+                    isValid={formErrors.first_name?.length}
+                    errorText={formErrors.first_name?.[0]}
                     onChange={val => setFirstName(val)}
-                    readOnly={!editing_toggle}    
+                    readOnly={!is_editing}    
                 />
                 <Input label="Last Name"
                     type="text"
-                    placeHolder="Doe"
+                    placeHolder={is_editing ? 'Doe' : ''}
                     className="mb-3"
-                    value={new_last_name}
-                    isValid={formErrors.lastName?.length}
-                    errorText={formErrors.lastName?.[0]}
+                    value={last_name}
+                    isValid={formErrors.last_name?.length}
+                    errorText={formErrors.last_name?.[0]}
                     onChange={val => setLastName(val)}
-                    readOnly={!editing_toggle}    
+                    readOnly={!is_editing}    
                 />
-                <Input label="Email"
-                    type="email"
-                    placeHolder="example@gmail.com"
-                    className="mb-3" 
-                    value={new_email}
-                    isValid={formErrors.email?.length}
-                    errorText={formErrors.email?.[0]}
-                    onChange={val => setEmail(val)}
-                    readOnly={!editing_toggle}    
-                />
-                <label className="form-label mb-1">Mobile Phone Number</label>
+                <label className={`form-label mb-1`}>Mobile Phone Number</label>
                 <PhoneInput 
                     specialLabel="Phone Number"
                     enableSearch
                     countryCodeEditable={false}
+	            inputClass={!is_editing && 'readonly'}
+	            buttonClass={!is_editing && 'hidden'}
                     country={'us'}
                     disableSearchIcon
-                    disabled={!editing_toggle}    
-                    value={new_phone}
+                    disabled={!is_editing}    
+                    value={phone}
                     onChange={value => {
                         setPhone(value);
                     }}
@@ -121,24 +118,28 @@ function GetInformation({headerText, first_name, last_name, id, editing, classNa
                 : 
                     null
                 }
-                <Input label="Birth Month and Year"
-                    type="text"
-                    placeHolder="MM/YYYY"
-                    value={new_birthday}
-                    isValid={formErrors.dob?.length}
-                    errorText={formErrors.dob?.[0]}
-                    onChange={val => setBirthday(val)}
-                    className="mt-3"
-                    readOnly={!editing_toggle}    
-                />
+	    	{type === 'STUDENT' ?
+                    <Input label="Birth Month and Year"
+                        type="text"
+                        placeHolder={!is_editing ? '' : 'MM/YYYY'}
+                        value={dob}
+                        isValid={formErrors.dob?.length}
+                        errorText={formErrors.dob?.[0]}
+                        onChange={val => setBirthday(val)}
+                        className="mt-3"
+                        readOnly={!is_editing}    
+                    />
+		:
+		    null
+		}
             </div>
 
-            <div className="flex">
-                <Button bgColor={editing_toggle ? "green" : "gray" } 
-                    txtColor="white" 
-                    className="w-full py-1" 
+            <div className='flex'>
+                <Button bgColor={ is_editing ? 'green' : 'white' } 
+                    txtColor={ is_editing ? 'white' : 'black' }
+                    className={`w-full py-1 ${is_editing || 'border-black border-2'}`}
                     onClick={ () => { 
-                                if (editing_toggle) { 
+                                if (is_editing) { 
                                     onSubmit();
                                 } 
                                 else {
@@ -146,7 +147,7 @@ function GetInformation({headerText, first_name, last_name, id, editing, classNa
                                 } 
                             }}
                 >
-                    {editing_toggle ? "Save" : "Edit Profile"}
+                    {is_editing ? "Save" : "Edit Profile"}
                 </Button>
             </div>
         </form>

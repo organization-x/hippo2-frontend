@@ -53,9 +53,9 @@ function GetInformation({headerText, init_first_name, init_last_name, id, editin
 	    options.body.dob = dob;
 	}
 
-        sendReq(updateUrl, options).then(() => { 
+        sendReq(updateUrl, options).then((res) => { 
 	    toggleEditing(false);
-	    onNext();
+	    onNext(res.data);
 	}).catch(err => { 
             if (err.status === 400) {
                 const keyMap = {

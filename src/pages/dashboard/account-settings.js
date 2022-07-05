@@ -7,23 +7,23 @@ import baseUrl from '../../apiUrls';
 
 function AccountSettings() {
     const [groupUsers, setGroup] = useState([]);
-    const { user }= useAuth();
+    const { user } = useAuth();
 
     useEffect(() => {
-	const groupUsers = [];
+	const users = [];
 
     	const groupUrl = `${baseUrl}/api/v1/users/groupstudents/`; 
         const options = {
             method: 'GET',
         };
 
-	// Add the parent if the user is one, can fetch the current student from the sendReq
+	// Add the parent if the current user is one, can fetch the current student from the sendReq
 	if (user.type === 'PARENT') {
-	    groupUsers.push(
+	    users.push(
 	        <GetInformation key={user.id} 
-		    headerText={`${user.first_name}'s Profile`}
-		    init_first_name={user.first_name} 
-		    init_last_name={user.last_name} 
+		    headerText={`${user.fName}'s Profile`}
+		    init_first_name={user.fName} 
+		    init_last_name={user.lName} 
 		    id={user.id} 
 		    type={user.type}
 		    className="md:w-80 w-min: bg-white rounded-xl"
@@ -34,7 +34,7 @@ function AccountSettings() {
     	sendReq(groupUrl, options).then(res => {
 	    for (let i = 0; i < res.data.length; i++) {
 	    	const groupUser = res.data[i];
-	        groupUsers.push(
+	        users.push(
 		    <GetInformation key={groupUser.id} 
 			headerText={`${groupUser.first_name}'s Profile`}
 			init_first_name={groupUser.first_name} 
@@ -45,9 +45,9 @@ function AccountSettings() {
 		    />
 		);
 	    }
-	    setGroup(groupUsers);
+	    setGroup(users);
         });
-    }, []);
+    }, [user]);
 
     return (
 	<div className="flex flex-row flex-wrap gap-5 p-4 auth rounded-xl">

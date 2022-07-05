@@ -22,7 +22,12 @@ function UserDetails() {
                 className="md:w-3/5 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none"
                 editing
 	    	type={user.type}
-	    	onNext={ () => navigate('/invite') }
+	    	onNext={ (data) => { 
+			     user.fName = data.first_name;
+			     user.lName = data.last_name;
+			     navigate('/invite');
+			 }
+		       }
             />
         </div>
     );

@@ -1,110 +1,111 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from "../../components/button/button";
-import sendReq from "../../services/sendReq";
 import { useParams } from "react-router-dom";
+import { useFlashMsg } from '../../services/flashMsg';
 import baseUrl from "../../apiUrls";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Loading from '../loading/loading';
+import { useAuth } from '../../services/authentication';
 
 function SelectionPage(){
     const [batchData, setBatchData] = useState({});
     const [studentData, setStudentData] = useState([]);
-    const [pendingInvites, setPendingInvites] = useState([]);
+	const [loading, setLoading] = useState(true);
     const { batchID } = useParams();
     const navigate = useNavigate();
+	const { flashMsg } = useFlashMsg();
+	const { autoAuthReq } = useAuth();
+	const flashMsgRef = useRef(flashMsg).current;
+	const here = useLocation().pathname;
 
     useEffect(() => {
-        if(batchID){
-            const batch_url = baseUrl + `/api/v1/batches/${batchID}/`;
-            const students_url = baseUrl + `/api/v1/users/groupstudents/`;
-            const pending_invites_url = baseUrl + `/api/v1/users/pendinginvites/`;
-            const options = {
-                method: 'GET',
-            };
-            sendReq(batch_url, options).then(res => {
-                setBatchData(res.data);
-            });
-            sendReq(students_url, options).then(res => {
-                setStudentData(res.data);
-            });
-            sendReq(pending_invites_url, options).then(res => {
-                setPendingInvites(res.data);
-            });
-        };
-    }, [batchID]);
+        if (!batchID) {
+			return flashMsgRef('error', 'Invalid Batch');
+		}
+		const batchUrl = baseUrl + `/api/v1/batches/${batchID}/`;
+		const studentsUrl = baseUrl + `/api/v1/users/groupstudents/`;
+		const pendingInvitesUrl = baseUrl + `/api/v1/users/pendinginvites/`;
+		const options = {
+			method: 'GET',
+		};
+		(async () => {
+			const batchRes = await autoAuthReq(batchUrl, options, here);
+			setBatchData(batchRes.data);
+
+			const studRes = await autoAuthReq(studentsUrl, options, here);
+			setStudentData(studRes.data);
+
+			const inviteRes = await autoAuthReq(pendingInvitesUrl, options, here);
+			const invited = inviteRes.data.map(invite => invite.invite_to);
+			setStudentData(prev => [...prev, ...invited]);
+
+			setLoading(false);
+		})().catch(err => {
+			flashMsgRef('error', 'Error fetching batch and student info');
+			navigate('/courses');
+		});
+    }, [batchID, flashMsgRef, navigate, autoAuthReq, here]);
     
-    function SideBar(){
-        return (
-            <div className="flex-none md:flex-initial w-full md:w-80 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-                    <h1 className="text-3xl mb-10 text-center">
-                        Select a Student
-                    </h1>
-                    <h1 className="text-1xl mx-4 my-3">You have chosen Batch {batchData.batch_name} ({batchData.batch_start_date} - {batchData.batch_end_date}) {batchData.time_zone} in the {batchData.course_name}.</h1>
-                    <h1 className="text-1xl mx-4 my-3">Select the student for whom you would like to reserve this spot for.</h1>
-                    <h1 className="text-1xl mx-4 mb-6">You may register for additional students afterwards.</h1>
-            </div>
-        )
-    }
+    const sideBar = (
+		<div className="flex-none md:flex-initial w-full md:w-80 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+			<h1 className="text-3xl mb-10 text-center">
+				Select a Student
+			</h1>
+			<h1 className="text-1xl mx-4 my-3">You have chosen Batch {batchData.batch_name} ({batchData.batch_start_date} - {batchData.batch_end_date}) {batchData.time_zone} in the {batchData.course_name}.</h1>
+			<h1 className="text-1xl mx-4 my-3">Select the student for whom you would like to reserve this spot for.</h1>
+			<h1 className="text-1xl mx-4 mb-6">You may register for additional students afterwards.</h1>
+		</div>
+	);
 
-    function Selection(){
-        const onNext = (id) => {
-            const path = `/batches/${batchID}/pay?for=${id}`;
-            navigate(path); 
-        };
-        const buttons = [];
-        if(studentData.length > 0){
-            for(let i = 0; i < studentData.length; i++){
-                buttons.push(
-                <Button key={i} onClick={() => onNext(studentData[i].id)} bgColor='white'
-                txtColor='black' 
-                className="mt-3 px-28 py-4 w-full">
-                <p className="text-lg">{studentData[i].first_name + ' ' + studentData[i].last_name}</p>
-                </Button>)
-            }
-        }
-        if(pendingInvites.length > 0){
-            for(let i = 0; i < pendingInvites.length; i++){
-                buttons.push(
-                <Button key={i} onClick={() => onNext(studentData[i].id)} bgColor='white'
-                txtColor='black' 
-                className="mt-3 px-28 py-4 w-full">
-                <p className="text-lg">{studentData[i].first_name + ' ' + studentData[i].last_name}</p>
-                </Button>)
-            }
-        }
-        return (
-            <div>
-	            <div className="my-2 text-center w-full">
-                    <h2 className="text-2xl mt-3">Reserve spot in the {batchData.course_name} for</h2>
-	            </div>
-                <div className="flex flex-wrap justify-center my-10">
-                    {buttons}
-                </div>                 
-            </div>
-        )
-    }
-    function BackButton(){
-        const onBack = () => {
-        };
-        return(
-            <div className="flex flex-wrap justify-between my-5">
-                 <Button 
-                    onClick={() => onBack()} 
-                    bgColor="gray" 
-                    txtColor="white" 
-                    className="w-full lg:w-1/4 h-12 mb-2 sm:ml-10 lg:my-3"
-                >
-                    <p className="text-lg">Back</p>
-                </Button>
-            </div>
-        )
-    }
+	const selection = [];
+	const ids = [];
+	for (let i = 0; i < studentData.length; i++) {
+		const student = studentData[i];
+		if (!ids.includes(student.id)) {
+			ids.push(student.id);
+			selection.push(
+				<Button 
+					key={i} 
+					onClick={() => navigate(`/batches/${batchID}/payment?for=${student.id}`)} bgColor='white'
+					txtColor='black' 
+					className="mt-3 py-4 w-full"
+				>
+					<p className="text-lg">{student.first_name + ' ' + student.last_name}</p>
+				</Button>
+			)
+		}
+	}
 
+	const onBack = () => {
+		navigate(`/courses/${batchData.course_id}/batches`);
+	};
+
+
+	if (loading) {
+		return <Loading />;
+	}
     return (
         <div className='container max-w-7xl mt-10 flex flex-wrap justify-center mx-auto auth md:px-10 px-3'>
-            <SideBar/>
+            {sideBar}
             <div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
-                <Selection/>
-                <BackButton/>
+				<div>
+					<div className="my-2 text-center w-full">
+						<h2 className="text-2xl mt-3">Reserve spot in {batchData.course_name} for</h2>
+					</div>
+					<div className="my-10">
+						{selection}
+					</div>                 
+				</div>
+                <div className="my-5">
+					<Button 
+						onClick={() => onBack()} 
+						bgColor="gray" 
+						txtColor="white" 
+						className="w-full lg:w-1/4 h-12 mb-2 lg:my-3"
+					>
+						<p className="text-lg">Back</p>
+					</Button>
+				</div>
             </div>
         </div>
     );

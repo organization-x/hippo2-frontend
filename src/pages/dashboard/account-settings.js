@@ -41,6 +41,7 @@ function AccountSettings() {
 			headerText={`${groupUser.first_name}'s Profile`}
 			init_first_name={groupUser.first_name} 
 			init_last_name={groupUser.last_name} 
+			init_email=" "
 			id={groupUser.id} 
 			type="STUDENT" 
 			className="md:w-80 w-min: bg-white rounded-xl"

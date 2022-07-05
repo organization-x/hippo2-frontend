@@ -96,16 +96,20 @@ function GetInformation({headerText, init_first_name, init_last_name, init_email
                     readOnly={!is_editing}    
                 />
 
-		<Input label="Email"
-                    type="text"
-                    placeHolder={is_editing ? "example@email.com" : ''}
-                    className="mb-3"
-                    value={email}
-                    isValid={formErrors.email?.length}
-                    errorText={formErrors.email?.[0]}
-                    onChange={val => setEmail(val)}
-                    readOnly
-                />
+		{ init_email ? 
+		  <Input label="Email"
+                      type="text"
+                      placeHolder={is_editing ? "example@email.com" : ''}
+                      className="mb-3"
+                      value={email}
+                      isValid={formErrors.email?.length}
+                      errorText={formErrors.email?.[0]}
+                      onChange={val => setEmail(val)}
+                      readOnly
+                  />
+		  :
+		  null
+		}
 
                 <label className={`form-label mb-1`}>Mobile Phone Number</label>
                 <PhoneInput 

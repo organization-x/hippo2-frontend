@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 
 import { useAuth } from "../../services/authentication";
 import validateUserInformation from "../../validation/userInformation";
@@ -28,12 +28,10 @@ function InviteUser() {
 	const [formErrors, setFormErrors] = useState({});
 
 	const origin = location.state?.from?.pathname || '/';
-	const here = location.pathname;
 
-	const backButton = () => {
-		// return to confirm your details page
-		navigate('/details', { state: { from: { pathname: location.pathname + location.search } } });
-	};
+	if (user.filledInvite) {
+		return <Navigate to={origin} replace />
+	}
 
 	const onSubmit = () => {
 		setFormErrors({});
@@ -55,7 +53,7 @@ function InviteUser() {
 		// send invite
 		handleUserInvite(
 			vData.email, vData.fName, vData.lName, vData.type, 
-			vData.phone, vData.dob, here
+			vData.phone, vData.dob
 		).then(res => {
 			navigate(origin);
 		}).catch(err => {
@@ -170,10 +168,7 @@ function InviteUser() {
 					}
 				</div>
 
-				<div className="flex">
-					<Button bgColor="gray" txtColor="white" className="w-1/3 mx-2 py-1" onClick={() => backButton()}>Back</Button>
-					<Button bgColor="green" txtColor="white" className="w-2/3 mx-2 py-1" onClick={() => onSubmit()}>Next</Button>
-				</div>
+				<Button bgColor="green" txtColor="white" className="w-full py-1" onClick={() => onSubmit()}>Next</Button>
 			</form>
 		</div>
 	);

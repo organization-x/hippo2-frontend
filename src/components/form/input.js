@@ -16,7 +16,8 @@ function Input({placeHolder, label, type, value, onChange, isValid, errorText, c
             onChange={(e) => {
 				if (onChange) onChange(e.target.value)
 			} }
-			readOnly={readOnly}
+	    readOnly={readOnly}
+	    disabled={readOnly}
             placeholder={placeHolder}
             className={style + ' w-full md:w-9/12'}
             value={value}

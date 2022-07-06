@@ -8,7 +8,6 @@ import { FlashMsgProvider } from './services/flashMsg';
 
 import Navbar from './components/navbar/navbar';
 import SelectCourses from './pages/selectCourse/selectCourses';
-import Home from './pages/dashboard/screens/Home'
 import DashboardCourseDetails from './pages/dashboard/screens/courseDetails'
 
 import Signup from './pages/signup/signup';
@@ -41,7 +40,7 @@ function App() {
 					<Routes>
 						<Route path='/' element={
 							<ProtectedRoute>
-								<Home />
+								<Dashboard />
 							</ProtectedRoute>
 						}/>
 						<Route path='/auth/google/' element={<GoogleAuth />}/>
@@ -61,7 +60,6 @@ function App() {
 							</ProtectedRoute>
 						}/>
 						<Route path='/signup' element={<Signup />}/>
-						<Route path='/dashboard' element={<Dashboard />}/>
 						<Route path='/login' element={<Login />}/>
 						<Route path='/signup/invite' element={<SignUpInvite />}/>
 						<Route path='/password/reset' element={<ForgotPassword />}/>

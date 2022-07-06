@@ -1,6 +1,7 @@
 import React from "react";
 import DashboardBody from "./dashboard-body";
 import { useState } from 'react';
+import AlertBanner from './alertBanner';
 
 
 function Dashboard(){
@@ -56,8 +57,17 @@ function Dashboard(){
                 </ul>
             </div>
 
-            <div className='w-full px-3'>
-                <DashboardBody page={page} />
+            
+            
+            <div className='w-full'>
+                <div className='w-full'>
+                        <AlertBanner />
+                </div>
+
+                <div className='w-full px-3'>
+                    <DashboardBody page={page}/>
+                </div>
+                
             </div>
 
         </div>

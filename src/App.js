@@ -10,6 +10,7 @@ import Navbar from './components/navbar/navbar';
 import SelectCourses from './pages/selectCourse/selectCourses';
 import DashboardCourseDetails from './pages/dashboard/screens/courseDetails'
 
+import OrderCancel from './pages/orderCancel/order-cancel';
 import Signup from './pages/signup/signup';
 import Login from './pages/login/login';
 import Protected from './pages/protected/protected';
@@ -73,6 +74,11 @@ function App() {
 						<Route path='/courses' element={<SelectCourses/>}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
 						<Route path='/courseDetails' element={<DashboardCourseDetails />}></Route>
+						<Route path='/orders/:orderID/refund' element={
+							<ProtectedRoute>
+								<OrderCancel />
+							</ProtectedRoute>
+							}/>
 						<Route path='/batches/:batchID/student-selection' element={
 							<ProtectedRoute>
 								<SelectionPage />

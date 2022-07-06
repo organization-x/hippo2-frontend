@@ -29,7 +29,7 @@ function Dashboard(){
 
                     <li className="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-5">
                         <button onClick = {() => setPage('account-settings')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                            <span className="font-medium text-base ml-5">Account Setings</span>
+                            <span className="font-medium text-base ml-5">Account Settings</span>
                         </button>
                     </li>
                     <li className="flex w-full justify-between text-gray-800 hover:text-gray-500 cursor-pointer items-center mb-5">

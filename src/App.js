@@ -28,7 +28,7 @@ import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
 import SelectionPage from './pages/selection/selection';
 import ToastContainer from './components/toasts/toastContainer';
-import UserDetails from './pages/userInformation/userDetails';
+import ConfirmDetails from './pages/confirmDetails/confirmDetails';
 import './App.css';
 
 function App() {
@@ -43,45 +43,49 @@ function App() {
 							<ProtectedRoute>
 								<Home />
 							</ProtectedRoute>
-						}></Route>
-						<Route path='/auth/google/' element={<GoogleAuth />}></Route>
+						}/>
+						<Route path='/auth/google/' element={<GoogleAuth />}/>
 						<Route path='/invite' element={
 							<ProtectedRoute inviteReq={false}>
 								<InviteUser /> 
 							</ProtectedRoute>
-						}></Route>
+						}/>
+						<Route path='/user/details' element={
+							<ProtectedRoute detailsReq={false} inviteReq={false} >
+								<ConfirmDetails />
+							</ProtectedRoute>
+						}/>
 						<Route path='/protected' element={
 							<ProtectedRoute>
 								<Protected />
 							</ProtectedRoute>
-						}></Route>
-						<Route path='/signup' element={<Signup />}></Route>
-						<Route path='/dashboard' element={<Dashboard />}></Route>
-						<Route path='/login' element={<Login />}></Route>
-						<Route path='/signup/invite' element={<SignUpInvite />}></Route>
-						<Route path='/password/reset' element={<ForgotPassword />}></Route>
-						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}></Route>
+						}/>
+						<Route path='/signup' element={<Signup />}/>
+						<Route path='/dashboard' element={<Dashboard />}/>
+						<Route path='/login' element={<Login />}/>
+						<Route path='/signup/invite' element={<SignUpInvite />}/>
+						<Route path='/password/reset' element={<ForgotPassword />}/>
+						<Route path='/password/reset/confirm' element={<ForgotPasswordConfirm />}/>
 						<Route path='/group/join' element={
 							<ProtectedRoute detailsReq={false} inviteReq={false}>
 								<GroupJoin />
 							</ProtectedRoute>
-						}></Route>
-						<Route path='/batches/:batchId/payment' element={<BatchPayment />}></Route>
+						}/>
+						<Route path='/batches/:batchId/payment' element={<BatchPayment />}/>
 						<Route path='/batches/:batchId/pay' element={
 							<ProtectedRoute>
 								<BatchPayFor />
 							</ProtectedRoute>
-						}></Route>
-						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
-						<Route path='/courses' element={<SelectCourses/>}></Route>
-						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>
-						<Route path='/courseDetails' element={<DashboardCourseDetails />}></Route>
+						}/>
+						<Route path='/payment/success' element={<PaymentSuccess />}/>
+						<Route path='/courses' element={<SelectCourses/>}/>
+						<Route path='/courses/:courseID/batches' element={<BatchPage />}/>
+						<Route path='/courseDetails' element={<DashboardCourseDetails />}/>
 						<Route path='/batches/:batchID/student-selection' element={
 							<ProtectedRoute>
 								<SelectionPage />
 							</ProtectedRoute>
-						}></Route>
-						<Route path='/user/details' element={<UserDetails />}></Route>
+						}/>
 					</Routes>
 					<Footer />
 				</FlashMsgProvider>

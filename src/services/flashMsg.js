@@ -24,7 +24,7 @@ export function useFlashMsg() {
 export function FlashMsgProvider({ children }) {
 	const [msg, setMsg] = useState({});
 	const [idCount, setIdCount] = useState(0);
-
+	
 	const flashMsg = (type, text) => {
 		const newMsg = {
 			status: 'display',
@@ -34,7 +34,7 @@ export function FlashMsgProvider({ children }) {
 		setMsg((prev) => {
 			return {
 				...prev,
-				...{ [idCount]: newMsg }
+				[idCount]: newMsg
 			};
 		});
 		// fade message out after certain duration
@@ -44,7 +44,7 @@ export function FlashMsgProvider({ children }) {
 			setMsg((prev) => {
 				return {
 					...prev,
-					...{ [idCount]: fadeMsg }
+					[idCount]: fadeMsg
 				};
 			});
 		}, DURATION);

@@ -2,15 +2,17 @@ import { nonempty, object, pattern, string, validate } from "superstruct";
 import formatFormErrors from "./formatFormErrors";
 
 const StudentInformation = object({
-	first_name: pattern(nonempty(string()), /^[a-zA-Z]*$/),
-	last_name: pattern(nonempty(string()), /^[a-zA-Z]*$/),
+	fName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
+	lName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
+	email: pattern(nonempty(string()), /^\S+@\S+\.\S+$/),
 	type: pattern(nonempty(string()), /^(STUDENT|PARENT)$/),
 	phone: pattern(nonempty(string()), /^\+?1?\d{9,15}$/),
 	dob: pattern(nonempty(string()), /^(0?[1-9]|1[0-2])\/(19|20)\d{2}$/)
 });
 const ParentInformation = object({
-	first_name: pattern(nonempty(string()), /^[a-zA-Z]*$/),
-	last_name: pattern(nonempty(string()), /^[a-zA-Z]*$/),
+	fName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
+	lName: pattern(nonempty(string()), /^[a-zA-Z]*$/),
+	email: pattern(nonempty(string()), /^\S+@\S+\.\S+$/),
 	phone: pattern(nonempty(string()), /^\+?1?\d{9,15}$/),
 	type: pattern(nonempty(string()), /^(STUDENT|PARENT)$/)
 });

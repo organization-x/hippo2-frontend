@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardHome from "./dashboard-home"
-import AccountSettings from "./account-settings";
+import AccountSettings from "./screens/accountSettings";
 
 function DashboardBody({page}){
         switch(page) {

@@ -1,11 +1,14 @@
 import React from "react";
 import DashboardHome from "./dashboard-home"
 import AccountSettings from "./account-settings";
+import ToDo from "./screens/ToDo";
 
 function DashboardBody({page}){
         switch(page) {
             case 'dashboard-home':
                 return (<DashboardHome />);
+            case 'To Do List':
+                return (<ToDo />);
             case 'account-settings':
                 return (<AccountSettings />);
             case 'course-details':
@@ -16,9 +19,6 @@ function DashboardBody({page}){
                 break;
             case 'register-for-courses':
                 //return (<RegisterForCourses />);
-                break;
-            case 'upcoming-events':
-                //return (<UpcomingEvents />);
                 break;
             case 'explore-student-products':
                 //return (<ExploreStudentProducts />);

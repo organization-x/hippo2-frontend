@@ -3,11 +3,11 @@ import Button from "../../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './Home.css';
 import baseUrl from '../../../apiUrls';
-import Loading from "../../../pages/loading/loading"
+import Loading from "../../loading/loading"
 import { useAuth } from "../../../services/authentication";
 
 
-function Home() {
+function ToDo() {
 	const [tasksList, setTasksList] = useState([]);
 	const [userCompletedTasks, setUserCompletedTasks] = useState([]);
 	const [isLoaded,setisLoaded] = useState(true);
@@ -111,4 +111,4 @@ function Home() {
 
 }
 
-export default Home;
+export default ToDo;

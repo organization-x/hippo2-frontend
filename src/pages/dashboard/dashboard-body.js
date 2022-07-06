@@ -7,7 +7,7 @@ function DashboardBody({page}){
         switch(page) {
             case 'dashboard-home':
                 return (<DashboardHome />);
-            case 'To Do List':
+            case 'To-Do':
                 return (<ToDo />);
             case 'account-settings':
                 return (<AccountSettings />);

@@ -11,12 +11,6 @@ function DashboardBody({page}){
                 return (<ToDo />);
             case 'account-settings':
                 return (<AccountSettings />);
-            case 'course-details':
-                //return (<CourseDetails />);
-                break;
-            case 'payment-details':
-                //return (<PaymentDetails />);
-                break;
             case 'register-for-courses':
                 //return (<RegisterForCourses />);
                 break;

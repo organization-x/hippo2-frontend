@@ -11,7 +11,7 @@ function ProtectedRoute({ children, detailsReq=true, inviteReq=true }) {
 			{ from: { pathname: location.pathname + location.search } }
 		} />;
 	} else if (detailsReq && !user.filledDetails) {
-		return <Navigate to={'/details'} replace state={
+		return <Navigate to={'/user/details'} replace state={
 			{ from: { pathname: location.pathname + location.search } }
 		} />;
 	} else if (inviteReq && !user.filledInvite) {

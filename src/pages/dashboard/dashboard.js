@@ -56,7 +56,7 @@ function Dashboard(){
                 </ul>
             </div>
 
-            <div className='w-full px-3'>
+            <div className='grow'>
                 <DashboardBody page={page} />
             </div>
 

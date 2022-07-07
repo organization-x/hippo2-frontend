@@ -21,6 +21,7 @@ import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordC
 import GroupJoin from './pages/groupJoin/groupJoin';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import BatchPayFor from "./pages/batchPayFor/batchPayFor";
+import BatchChange from './pages/batchChange/batchChange';
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
 import Dashboard from './pages/dashboard/dashboard'
@@ -80,6 +81,7 @@ function App() {
 						<Route path='/courses' element={<SelectCourses/>}/>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}/>
 						<Route path='/courseDetails' element={<DashboardCourseDetails />}/>
+						<Route path='/orders/:orderID/change-batch' element={<BatchChange />}></Route>
 						<Route path='/orders/:orderID/refund' element={
 							<ProtectedRoute>
 								<OrderCancel />

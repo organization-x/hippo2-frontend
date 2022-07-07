@@ -202,39 +202,42 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
-	const handleUserInitiation = async (fName, lName, dob, phoneNum, redirect = '/') => {
-		const userUrl = baseUrl + '/api/v1/users/';
+	const handleUserUpdate = async (fName, lName, dob, phoneNum, init, id, redirect='/') => {
+		const userUrl = baseUrl + `/api/v1/users/${id}/`;
 		const updateOptions = {
 			method: 'POST',
 			body: {
 				first_name: fName,
 				last_name: lName,
 				dob: dob,
-				phone_number: phoneNum,
-				initiate: true
+				phone_number: phoneNum
 			}
 		};
+		if (init) {
+			updateOptions.body.initiate = true;
+		}
 		const res = await autoAuthReq(userUrl, updateOptions, redirect);
-		const data = res.data
-		// set user's info on frontend
-		setUser({
-			id: data.id,
-			email: data.email,
-			fName: data.first_name || '',
-			lName: data.last_name || '',
-			type: data.type || '',
-			phone: data.phone_number || '',
-			dob: data.dob || '',
-			filledDetails: data.filled_details,
-			filledInvite: data.filled_invite,
-			passwordSet: data.password_set,
-			isLoggedIn: true
-		});
-
+		if (id === user.id) {
+			const data = res.data;
+			// set user's info on frontend
+			setUser({
+				id: data.id,
+				email: data.email,
+				fName: data.first_name || '',
+				lName: data.last_name || '',
+				type: data.type || '',
+				phone: data.phone_number || '',
+				dob: data.dob || '',
+				filledDetails: true,
+				filledInvite: data.filled_invite,
+				passwordSet: data.password_set,
+				isLoggedIn: true
+			});
+		}
 		return res;
 	};
 
-	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect='/') => {
+	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect='/invite') => {
 		const url = baseUrl + '/api/v1/groups/invite/';
 		const options = {
 			method: 'POST',
@@ -250,7 +253,12 @@ export function AuthProvider({ children }) {
 			options.body.dob = dob;
 		}
 		const res = await autoAuthReq(url, options, redirect);
-		navigate(redirect);
+		setUser(prev => {
+			return {
+				...prev,
+				'filledInvite': true
+			};
+		});
 		return res;
 	};
 
@@ -301,7 +309,7 @@ export function AuthProvider({ children }) {
 		handleLogin,
 		handleGoogleLogin,
 		handleLogout,
-		handleUserInitiation,
+		handleUserUpdate,
 		handleUserInvite
 	};
 

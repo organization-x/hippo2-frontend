@@ -75,7 +75,7 @@ function App() {
 							<ProtectedRoute>
 								<BatchPayFor />
 							</ProtectedRoute>
-						}></Route>
+						}/>
 						<Route path='/payment/success' element={<PaymentSuccess />}></Route>
 						<Route path='/courses' element={<SelectCourses/>}></Route>
 						<Route path='/courses/:courseID/batches' element={<BatchPage />}></Route>

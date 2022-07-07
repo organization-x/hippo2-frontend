@@ -40,13 +40,18 @@ const ColumnHeader = ({start_date, end_date, name, onClick}) => {
 
 function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
     // returns table data formatted with times, seats, and price
-    const CellData = ({batch_no, start_time, end_time, seats, time_zone, batchID, name, className}) => {
+    const CellData = ({batch_no, start_time, end_time, seats, time_zone, batchID, name, className, selected_batch_id=""}) => {
         let disabled = false;
         if (seats < 1) {
             disabled = true;
         }
+
+        if (batchID === selected_batch_id) {
+            disabled = true;
+        }
+
         return (
-            <div key={batch_no} onClick={() => disabled ? null : onChange(batch_no, batchID)} className={`border-t-2 px-4 lg:px-0 md:border-gray-300 lg:border-black ${className} ${batch_no === batchIndex ? 'bg-gray-300' : 'hover:bg-gray-200'}`}>
+            <div id={batchID} key={batch_no} onClick={() => disabled ? null : onChange(batch_no, batchID)} className={`border-t-2 px-4 lg:px-0 md:border-gray-300 lg:border-black ${className} ${batch_no === batchIndex || batchID === selected_batch_id ? 'bg-gray-300' : 'hover:bg-gray-200'}`}>
                 <p className="text-xs text-gray-800 mt-4 hidden lg:block lg:p-0">{start_time} - {end_time} <b>{time_zone}</b></p>
 		<div className="selectBody">
                     <p className='text-xs inline lg:hidden text-gray-800'>
@@ -70,6 +75,12 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
 	
 	let visibility = clicked ? 'block' : 'hidden lg:block';
 
+    let selected_batch_id = "";
+
+    if (batchData.current_batch_id !== null){
+        selected_batch_id = batchData.current_batch_id
+    }
+
         return isLoading ? (
             <Loading/>
             ) : (
@@ -83,6 +94,7 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
                     time_zone={batchPST.time_zone} 
                     batchID={batchPST.id}
                     name={batchPST.name}
+                    selected_batch_id={selected_batch_id}
                     className={visibility}
                 />
                 <CellData 

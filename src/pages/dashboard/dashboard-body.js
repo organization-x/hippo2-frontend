@@ -1,6 +1,6 @@
 import React from "react";
 import DashboardCourseDetails from "./screens/courseDetails";
-import AccountSettings from "./account-settings";
+import AccountSettings from "./screens/accountSettings";
 import ToDo from "./screens/ToDo";
 
 function DashboardBody({page}) {

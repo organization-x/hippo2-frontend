@@ -8,7 +8,7 @@ import validateUuid from "../../validation/uuid";
 import { useNavigate } from 'react-router-dom';
 
 function BatchChange() {
-    const [batch_no, selectBatchNo] = useState(-1);    
+    const [batchNo, selectBatchNo] = useState(-1);    
     const [batchID, selectBatchID] = useState('');    
     const [batchData, setBatchData] = useState([]);  
     
@@ -38,7 +38,7 @@ function BatchChange() {
     }, [orderID]);
 
     function SideBarContent() {
-        if (batch_no === -1) {
+        if (batchNo === -1) {
             return (
                 <div className="flex-none md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                     <h1 className="text-3xl mb-10 text-center">
@@ -56,9 +56,8 @@ function BatchChange() {
                 </div>);
         }
         else {
-	    let duration = Math.round((new Date(batchData.batches[batch_no].end_date).getTime() - new Date(batchData.batches[batch_no].start_date).getTime()) / (1000 * 60 * 60 * 24));
-	    let batch = batchData.batches[batch_no];
-	    duration = duration > 7 ? `${Math.round(duration / 7)} weeks` : `${duration} day(s)`;
+	    let batch = batchData.batches[batchNo];
+        const duration = batches[batchNo].duration;
             return (
                 <div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                     <h1 className="text-3xl mb-10 text-center">
@@ -71,7 +70,7 @@ function BatchChange() {
                         New Batch Details
                     </h1>
                     <p className="text-lg ml-8">
-                        Batch {batchData.batches[batch_no].name} ({batchData.batches[batch_no].time_zone}):
+                        Batch {batchData.batches[batchNo].name} ({batchData.batches[batchNo].time_zone}):
                     </p>
                     <ul className="list-disc list-inside text-1xl mx-9 mb-3">
                         <li className="my-3">Program Dates: {batch.start_date} - {batch.end_date}</li>
@@ -147,13 +146,13 @@ function BatchChange() {
                 <BatchSelect 
                     batchData={batchData} 
                     onChange={
-                        (batch_no, batchID) => { 
-                            selectBatchNo(batch_no);
+                        (batchNo, batchID) => { 
+                            selectBatchNo(batchNo);
                             selectBatchID(batchID); 
                         } 
                     }
                     batch_id = {batchID}
-                    batchIndex={batch_no}
+                    batchIndex={batchNo}
                     isLoading = {isLoading}/>
                 <NextAndBackButtons/>
             </div>

@@ -84,7 +84,7 @@ function App() {
 							<ProtectedRoute>
 								<OrderCancel />
 							</ProtectedRoute>
-							}/>
+						}/>
 						<Route path='/batches/:batchID/student-selection' element={
 							<ProtectedRoute>
 								<SelectionPage />

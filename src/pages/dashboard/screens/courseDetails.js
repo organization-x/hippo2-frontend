@@ -22,7 +22,20 @@ function DashboardCourseDetails() {
 	useEffect(() => {
 		auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`,{method: 'GET'})
 			.then(data => {
-				setCourses(data.data)
+				// fetch incomplete tasks from API
+				(async () => {
+					const courseTaskDict = {};
+
+					for (let course of data.data) {
+						courseTaskDict[course.id] = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, {method: 'GET'})).data.count > 0;
+					}
+
+					setCourseTasks(courseTaskDict);
+				})().catch(err => {
+					flashMsgRef('error', 'Unable to retrieve course info')
+				});
+
+				setCourses(data.data);
 			}).catch((err) => {
 			// API request was not successful
 			// TODO: handle API error
@@ -30,15 +43,6 @@ function DashboardCourseDetails() {
 		});
 	}, [auth, flashMsgRef]);
 
-	if (courses !== null && courseTasks === null) {
-		(async () => {
-			const courseTaskDict = {}
-			for (let course of courses) {
-				courseTaskDict[course.id] = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, {method: 'GET'})).data.count > 0
-			}
-			setCourseTasks(courseTaskDict)
-		})();
-	}
 	let coursesList = null;
 
 	if (courseTasks !== null) {

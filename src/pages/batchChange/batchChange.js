@@ -57,7 +57,7 @@ function BatchChange() {
         }
         else {
 	    let batch = batchData.batches[batchNo];
-        const duration = batches[batchNo].duration;
+        const duration = batchData.batches[batchNo].duration;
             return (
                 <div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                     <h1 className="text-3xl mb-10 text-center">

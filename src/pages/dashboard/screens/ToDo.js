@@ -3,11 +3,11 @@ import Button from "../../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './Home.css';
 import baseUrl from '../../../apiUrls';
-import Loading from "../../../pages/loading/loading"
+import Loading from "../../loading/loading"
 import { useAuth } from "../../../services/authentication";
 
 
-function Home() {
+function ToDo() {
 	const [tasksList, setTasksList] = useState([]);
 	const [userCompletedTasks, setUserCompletedTasks] = useState([]);
 	const [isLoaded,setisLoaded] = useState(true);
@@ -77,7 +77,7 @@ function Home() {
 	
 	return (
 		<>
-			<div className="container w-full md:max-w-4xl  md:w-8/12 flex flex-wrap mx-auto pt-12 px-3 "> 			
+			<div className="container w-full md:max-w-4xl  md:w-8/12 flex flex-wrap mx-auto pt-12 px-3"> 			
 				<div className="flex-none md:flex-initial w-full md:w-full py-5 px-8 bg-white text-black rounded-t-xl md:rounded-t-xl md:rounded-none">
 					<h1 className="text-2xl mb-8 text-center">To Do List</h1>
 					<form>
@@ -89,8 +89,8 @@ function Home() {
 				<div className="flex-none md:flex-initial w-full py-5 px-8 bg-gray-300 rounded-b-xl rounded-none">
 				<div className="flex items-center justify-center h-0">
 					<Button className="text-2xl flex font-semibold items-center justify-center px-20" onClick={() => hideView()}>
-						{blockHidden ? <p id='hideViewText' className='text-base md:text-xl'>Hide Completed Tasks</p>:null}
-						{!blockHidden ? <p id='hideViewText'className='text-base md:text-xl'>View Completed Tasks</p>:null}
+						{blockHidden ? <p id='hideViewText' className='text-base md:text-xl whitespace-nowrap'>Hide Completed Tasks</p>:null}
+						{!blockHidden ? <p id='hideViewText'className='text-base md:text-xl whitespace-nowrap'>View Completed Tasks</p>:null}
 						{!blockHidden ? <div className='arrow downArrow relative left-3 bottom-1' id='downArrow'></div>:null}
 						{blockHidden ? <div className='arrow upArrow relative left-3 top-1' id='upArrow'></div>:null}
 					</Button>
@@ -111,4 +111,4 @@ function Home() {
 
 }
 
-export default Home;
+export default ToDo;

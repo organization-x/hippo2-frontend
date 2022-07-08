@@ -1,24 +1,18 @@
 import React from "react";
-import DashboardHome from "./dashboard-home"
-import AccountSettings from "./account-settings";
+import DashboardCourseDetails from "./screens/courseDetails";
+import AccountSettings from "./screens/accountSettings";
+import ToDo from "./screens/ToDo";
 
-function DashboardBody({page}){
+function DashboardBody({page}) {
         switch(page) {
             case 'dashboard-home':
-                return (<DashboardHome />);
+                return (<DashboardCourseDetails />);
+            case 'To-Do':
+                return (<ToDo />);
             case 'account-settings':
                 return (<AccountSettings />);
-            case 'course-details':
-                //return (<CourseDetails />);
-                break;
-            case 'payment-details':
-                //return (<PaymentDetails />);
-                break;
             case 'register-for-courses':
                 //return (<RegisterForCourses />);
-                break;
-            case 'upcoming-events':
-                //return (<UpcomingEvents />);
                 break;
             case 'explore-student-products':
                 //return (<ExploreStudentProducts />);

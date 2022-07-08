@@ -6,6 +6,7 @@ import Input from "../../components/form/input";
 import Button from "../../components/button/button";
 import validatePassword from '../../validation/password';
 import { useFlashMsg } from "../../services/flashMsg";
+import { useNavigate } from "react-router-dom";
 
 
 function ForgotPasswordConfirm() {
@@ -16,6 +17,7 @@ function ForgotPasswordConfirm() {
 	const [search] = useSearchParams();
 	const uid = search.get('uid');
 	const token = search.get('token');
+	const navigate = useNavigate();
 
 
 	const resetPassword = () => {
@@ -42,6 +44,7 @@ function ForgotPasswordConfirm() {
 			};
 			sendReq(url, options).then(res => {
 				flashMsg('success','Password Reset Successfully!');
+				navigate('/login');
 			}).catch(err => {
 				if (err.data?.message){
 					return flashMsg('error',err.data.message);

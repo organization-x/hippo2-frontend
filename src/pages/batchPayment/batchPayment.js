@@ -24,7 +24,6 @@ function BatchPayment() {
 	const here = location.pathname + location.search;
 
 	useEffect(() => {
-		console.log('called');
 		// initialize order
 		const url = baseUrl + '/api/v1/orders/';
 		const options = {

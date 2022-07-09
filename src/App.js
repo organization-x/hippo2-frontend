@@ -8,7 +8,6 @@ import { FlashMsgProvider } from './services/flashMsg';
 
 import Navbar from './components/navbar/navbar';
 import SelectCourses from './pages/selectCourse/selectCourses';
-import DashboardCourseDetails from './pages/dashboard/screens/courseDetails'
 
 import OrderCancel from './pages/orderCancel/order-cancel';
 import Signup from './pages/signup/signup';
@@ -28,6 +27,7 @@ import SignUpInvite from './pages/signupInvite/signupInvite';
 import SelectionPage from './pages/selection/selection';
 import ToastContainer from './components/toasts/toastContainer';
 import ConfirmDetails from './pages/confirmDetails/confirmDetails';
+import BatchChange from './pages/batchChange/batchChange';
 import './App.css';
 
 function App() {
@@ -71,16 +71,14 @@ function App() {
 								</ProtectedRoute>
 							}/>
 							<Route path='/batches/:batchId/payment' element={<BatchPayment />}/>
-							<Route path='/batches/:batchId/pay' element={
-								<ProtectedRoute>
-									<BatchPayFor />
-								</ProtectedRoute>
-							}/>
 							<Route path='/payment/success' element={<PaymentSuccess />}/>
 							<Route path='/courses' element={<SelectCourses/>}/>
 							<Route path='/courses/:courseID/batches' element={<BatchPage />}/>
-							<Route path='/courseDetails' element={<DashboardCourseDetails />}/>
-							<Route path='/orders/:orderID/change-batch' element={<BatchChange />}></Route>
+							<Route path='/orders/:orderID/change-batch' element={
+								<ProtectedRoute>
+									<BatchChange />
+								</ProtectedRoute>
+							}/>
 							<Route path='/orders/:orderID/refund' element={
 								<ProtectedRoute>
 									<OrderCancel />

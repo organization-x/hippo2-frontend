@@ -4,7 +4,7 @@ import AccountSettings from "./screens/accountSettings";
 import ToDo from "./screens/ToDo";
 
 function DashboardBody({ page }) {
-        switch(page) {
+        switch (page) {
             case 'dashboard-home':
                 return (<DashboardCourseDetails />);
             case 'To-Do':

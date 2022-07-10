@@ -28,23 +28,23 @@ function ToDo() {
 	
 	//Create ToDO Containers
 	const toDoTasks = tasksList.map((task) =>{
-		if(!userCompletedTasks.includes(task.id)){
+		if (!userCompletedTasks.includes(task.id)){
 			return <label className="containertask" key={task.id} >{task.text}
 						<input type="checkbox" value = {task.id} onClick={onClick}></input>
 						<span className="checkmark"></span>
 						<p className='text-sm text-red-500 italic'>Deadline: {task.deadline}</p>
 					</label>;
-		}else{
+		} else {
 			return null;
 		}
 	});
 	const ToDoCompletedTasks = tasksList.map((task) =>{
-		if(userCompletedTasks.includes(task.id)){
+		if (userCompletedTasks.includes(task.id)){
 			return <label className="containertask" key={task.id}>{task.text}
 						<input type="checkbox" value = {task.id} checked={true}></input>
 						<span className="checkmark"></span>
 					</label>;
-		}else{
+		} else {
 			return null;
 		}
 	});

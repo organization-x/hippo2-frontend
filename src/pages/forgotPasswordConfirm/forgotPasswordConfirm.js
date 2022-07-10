@@ -25,11 +25,10 @@ function ForgotPasswordConfirm() {
 		if (err) {
 			//validate password
 			setErrorMessage(err);
-		}
-		else if (password!==confirmPassword) { 
+		} else if (password!==confirmPassword) { 
 			//check if the 2 passwords match
 			setErrorMessage('Passwords do not Match');
-		}else if (uid && token) {
+		} else if (uid && token) {
 			//update password if we have uid and token
 			setErrorMessage('');
 			const url = baseUrl + '/auth/password/reset/confirm/';
@@ -51,7 +50,7 @@ function ForgotPasswordConfirm() {
 				}
 				flashMsg('error', 'Unable to connect to server');
 			});	
-		}else{
+		} else {
 			// no UID or token but passwords are correct format
 			setErrorMessage('');
 			flashMsg('error', 'Error Resetting Password');

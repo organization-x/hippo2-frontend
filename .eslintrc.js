@@ -23,7 +23,9 @@ module.exports = {
         "promise/no-nesting": "warn",
         "semi": ["error", "always"],
         "camelcase": ["error", { properties: "never" }],
-        "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }]
+        "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }],
+        "keyword-spacing": ["error"],
+        "brace-style": "error",
         // "max-len": ["error", { "code": 100 }]
     }
 }

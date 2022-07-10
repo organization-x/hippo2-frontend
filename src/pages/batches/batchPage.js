@@ -24,7 +24,7 @@ function BatchPage() {
     const { user } = useAuth();
 
     useEffect(() => {
-        if(courseID){
+        if (courseID){
             const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
             const options = {
                 method: 'GET',
@@ -50,8 +50,7 @@ function BatchPage() {
                         Some batch choices will be limited due to our capacity. 
                     </p>
                 </div>);
-        }
-        else {
+        } else {
 			const batch = batchData.batches[batch_no];
             return (
                 <div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
@@ -74,7 +73,7 @@ function BatchPage() {
         const onNext = () => {
             setFormErrors('');
             const [ err ] = validateUuid(batchID);
-            if(err){
+            if (err){
                 return setFormErrors(err);
             } else if (user.type==="PARENT") {
                 const path = `/batches/${batchID}/student-selection`;

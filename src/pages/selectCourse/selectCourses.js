@@ -23,10 +23,9 @@ function SelectCourses() {
 
 	const onSubmit = () => {
 		const [err] = validateUuid(courseId);
-		if(err){
+		if (err){
 			setErrorMessage('Please choose a course');
-		}
-		else{
+		} else {
 			navigate('/courses/'+courseId+'/batches');
 		}
 	};

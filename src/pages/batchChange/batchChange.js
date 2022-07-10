@@ -23,7 +23,7 @@ function BatchChange() {
     const [formErrors, setFormErrors] = useState('');
 
     useEffect(() => {
-        if(orderID){
+        if (orderID){
             const url = baseUrl + `/api/v1/orders/${orderID}/change-batch/`;
             const options = {
                 method: 'GET',
@@ -54,8 +54,7 @@ function BatchChange() {
                         Select another batch in the calendar to find a batch that best fits your schedule. Batch details will be updated here depending on which batch you choose.
                     </p>
                 </div>);
-        }
-        else {
+        } else {
 	    let batch = batchData.batches[batchNo];
         const duration = batchData.batches[batchNo].duration;
             return (
@@ -88,9 +87,9 @@ function BatchChange() {
         const onNext = () => {
             setFormErrors('');
             const [ err ] = validateUuid(batchID);
-            if(err){
+            if (err){
                 return setFormErrors(err); 
-            }else{
+            } else {
                 const url = baseUrl + `/api/v1/orders/${orderID}/change-batch/`;
                 const options = {
                     method: 'POST',

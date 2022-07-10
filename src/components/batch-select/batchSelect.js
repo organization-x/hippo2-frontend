@@ -111,7 +111,7 @@ function BatchSelect({ batchData, onChange, batch_id, batchIndex, isLoading }) {
     };
 
     const columns = [];
-    if(!isLoading) {
+    if (!isLoading) {
         for (let i = 0; i < batchData.batches.length / 2; i++) {
             columns.push(<Column key={i} column_no={i} />);
         }

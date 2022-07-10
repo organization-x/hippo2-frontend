@@ -50,15 +50,13 @@ function Dashboard(){
                 </ul>
             </div>
     
-            <div className='w-full'>
+            <div className='w-full flex flex-col grow'>
                 <div className='w-full'>
                         <AlertBanner />
                 </div>
-
-                <div className='grow'>
-                    <DashboardBody page={page}/>
-                </div>
-  
+				<div className="grow overflow-y-scroll">
+					<DashboardBody page={page}/>
+				</div>
             </div>
 
         </div>

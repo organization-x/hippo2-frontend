@@ -52,9 +52,7 @@ function BatchPage() {
                 </div>);
         }
         else {
-	    let duration = Math.round((new Date(batchData.batches[batch_no].end_date).getTime() - new Date(batchData.batches[batch_no].start_date).getTime()) / (1000 * 60 * 60 * 24));
-	    let batch = batchData.batches[batch_no];
-	    duration = duration > 7 ? `${Math.round(duration / 7)} weeks` : `${duration} day(s)`;
+			const batch = batchData.batches[batch_no];
             return (
                 <div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                     <h1 className="text-3xl mb-10 text-center">
@@ -62,7 +60,7 @@ function BatchPage() {
                     </h1>
                     <ul className="list-disc list-inside text-1xl mx-4 mb-3">
                         <li className="my-3">Program Dates: {batch.start_date} - {batch.end_date}</li>
-                        <li className="my-3">Duration: {duration}</li>
+                        <li className="my-3">Duration: {batch.duration}</li>
                         <li className="mb-6">Time: {batch.start_time} - {batch.end_time} {batch.time_zone}</li>
                     </ul>
                     <p className="text-2xl mx-4 mb-3">

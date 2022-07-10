@@ -116,8 +116,8 @@ function Profile({
 					}}
 				/>
 				{
-					formErrors.p?.length ? 
-						<span className='mt-1 block form-error text-sm'>{formErrors.p[0]}</span> 
+					formErrors.phone?.length ? 
+						<span className='mt-1 block form-error text-sm'>{formErrors.phone[0]}</span> 
 					: null
 				}
 				{type !== 'PARENT' ?

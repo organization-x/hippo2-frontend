@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCircleCheck, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 
 function Toast({ msg }) {
 	let icon;

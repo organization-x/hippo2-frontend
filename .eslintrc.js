@@ -14,8 +14,16 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "promise"
     ],
     "rules": {
+        // "promise/catch-or-return": "error",
+        // "promise/valid-params": "warn",
+        // "promise/no-nesting": "warn",
+        // "semi": ["error", "always"],
+        // "camelcase": ["error", { properties: "never" }],
+        // "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }],
+        // "max-len": ["error", { "code": 100 }]
     }
 }

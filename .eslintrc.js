@@ -34,5 +34,7 @@ module.exports = {
         "no-var": "warn",
         "prefer-arrow-callback": "warn",
         // "max-len": ["error", { "code": 100 }]
+
+        "react/destructuring-assignment": ["warn", 'always'],
     }
 }

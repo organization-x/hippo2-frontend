@@ -23,6 +23,7 @@ module.exports = {
         "promise/valid-params": "warn",
         "promise/no-nesting": "warn",
         "semi": ["warn", "always"],
+        "no-extra-semi": "warn",
         "camelcase": ["warn", { properties: "never" }],
         "object-curly-spacing": ["warn", "always", { "arraysInObjects": false, "objectsInObjects": false }],
         "keyword-spacing": ["warn"],
@@ -30,6 +31,8 @@ module.exports = {
         "brace-style": "warn",
         "arrow-body-style": ["warn", "as-needed"],
         "no-console": "warn",
+        "no-var": "warn",
+        "prefer-arrow-callback": "warn",
         // "max-len": ["error", { "code": 100 }]
     }
 }

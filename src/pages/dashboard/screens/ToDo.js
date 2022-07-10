@@ -67,9 +67,7 @@ function ToDo() {
 		});
 		auth.autoAuthReq(completedTasksAPI,options).then(res => {
 			//Res.data looks like {task_id:id}, below creates a list of task IDs from res.data
-			const only_ids = res.data.map(function (task) {
-				return task.task_id;
-			});
+			const only_ids = res.data.map((task) => task.task_id);
 			setUserCompletedTasks(only_ids);
 		});
 		setisLoaded(false);

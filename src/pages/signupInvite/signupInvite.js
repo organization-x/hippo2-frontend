@@ -34,6 +34,8 @@ function SignUpInvite() {
 		sendReq(url, { method: 'GET' }).then(res => {
 			setData(res.data);
 			setLoading(false);
+		}).catch(err => {
+			flashMsgRef('error', 'Failed to retrieve invite info');
 		});
 	}, [resetToken, inviteToken, flashMsgRef]);
 

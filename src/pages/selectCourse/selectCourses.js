@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useFlashMsg } from "../../services/flashMsg";
 import Button from "../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './selectCourses.css';
@@ -9,6 +10,9 @@ import validateUuid from "../../validation/uuid";
 
 function SelectCourses() {
 	const navigate = useNavigate();
+	const { flashMsg } = useFlashMsg();
+	const flashMsgRef = useRef(flashMsg).current;
+
 	const [courseList, setCourseList] = useState([]);
 	const [courseId,setCourseId] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
@@ -30,10 +34,6 @@ function SelectCourses() {
 		}
 	};
 
-	const onBack = () => {
-		//dummy onback function for now
-	};
-
 	useEffect(() => {
 		// Runs after the first render() lifecycle
 		const urlCoursesApi = baseUrl +'/api/v1/courses/';
@@ -43,8 +43,11 @@ function SelectCourses() {
 
 		sendReq(urlCoursesApi,options).then(res => {
 			setCourseList(res.data);
+		}).catch(err => {
+			flashMsgRef('error', 'Failed to retrieve courses');
+			navigate('/');
 		});
-	}, []);
+	}, [flashMsgRef]);
 	
 	return (
 		<>
@@ -97,14 +100,7 @@ function SelectCourses() {
 						{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
 					</div>
 					
-					<div className="flex pb-2.5">
-						<Button bgColor="green" txtColor="white" className="w-full py-1" onClick={() => onSubmit()}>Next</Button>
-					</div>
-
-					<div className="flex pt-2.5">
-						<Button bgColor="gray" txtColor="white" className="w-full py-1" onClick={() => onBack()}>Back</Button>
-					</div>
-
+					<Button bgColor="green" txtColor="white" className="w-full py-1 mb-2.5" onClick={() => onSubmit()}>Next</Button>
 				</div>	
 			</div>
 		</>

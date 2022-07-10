@@ -40,7 +40,7 @@ function BatchPayment() {
 			if (err.data?.message) {
 				flashMsgRef('error', err.data.message);
 			} else {
-				flashMsgRef('error', 'Unable to fetch order info');
+				flashMsgRef('error', 'Failed to fetch order info');
 			}
 			navigate('/courses');
 		});
@@ -65,7 +65,7 @@ function BatchPayment() {
 			if (err.data?.message) {
 				flashMsg('error', err.data.message);
 			} else {
-				flashMsg('error', 'Unable to create payment session');
+				flashMsg('error', 'Failed to create payment session');
 			}
 			navigate('/courses');
 		});

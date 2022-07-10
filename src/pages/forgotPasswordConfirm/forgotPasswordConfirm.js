@@ -48,7 +48,7 @@ function ForgotPasswordConfirm() {
 				if (err.data?.message) {
 					return flashMsg('error',err.data.message);
 				}
-				flashMsg('error', 'Unable to connect to server');
+				flashMsg('error', 'Failed to connect to server');
 			});	
 		} else {
 			// no UID or token but passwords are correct format

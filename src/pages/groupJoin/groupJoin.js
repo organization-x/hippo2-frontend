@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../services/authentication";
+import { useFlashMsg } from "../../services/flashMsg";
 import baseUrl from "../../apiUrls";
 import Loading from "../loading/loading";
 
@@ -9,7 +10,9 @@ function GroupJoin() {
 	const navigate = useNavigate();
 	const [search] = useSearchParams();
 	const token = search.get('token');
-	const auth = useAuth();
+	const { autoAuthReq } = useAuth();
+	const { flashMsg } = useFlashMsg();
+	const flashMsgRef = useRef(flashMsg).current;
 	const here = location.pathname + location.search;
 
 	useEffect(() => {
@@ -21,11 +24,14 @@ function GroupJoin() {
 					token: token
 				}
 			};
-			auth.autoAuthReq(url, options, here).then(res => {
+			autoAuthReq(url, options, here).then(res => {
+				flashMsgRef('error', 'Successfully joined group');
 				navigate('/');
+			}).catch(err => {
+				flashMsgRef('error', 'Failed to join group');
 			});
 		}
-	}, [token, auth, here, navigate]);
+	}, [token, autoAuthReq, here, navigate, flashMsgRef]);
 
 	return (
 		<Loading />

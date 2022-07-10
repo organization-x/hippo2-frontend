@@ -44,7 +44,7 @@ function Login() {
 				};
 				setFormErrors(formatApiErrors(err.data, keyMap));
 			} else {
-				flashMsg('error', 'Unable to login');
+				flashMsg('error', 'Failed to login');
 			}
 		});
 	};

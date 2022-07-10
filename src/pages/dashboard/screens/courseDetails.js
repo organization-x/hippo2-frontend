@@ -32,7 +32,7 @@ function DashboardCourseDetails() {
 			setCourseTasks(courseTaskDict);
 			setCourses(data.data);
 		})().catch(err => {
-			flashMsgRef('error', 'Unable to retrieve course info');
+			flashMsgRef('error', 'Failed to retrieve course info');
 		});
 	}, [auth, flashMsgRef]);
 

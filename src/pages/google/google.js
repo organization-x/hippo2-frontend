@@ -46,7 +46,7 @@ function GoogleAuth() {
 						navigate(origin);
 					}
 				} else {
-					flashMsgRef('error', 'Unable to Sign in');
+					flashMsgRef('error', 'Failed to Sign in');
 				}
 			});
 		}

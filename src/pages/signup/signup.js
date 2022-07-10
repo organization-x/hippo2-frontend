@@ -58,7 +58,7 @@ function Signup() {
 				};
 				setFormErrors(formatApiErrors(err.data, keyMap));
 			} else {
-				flashMsg('error', 'Unable to Sign up');
+				flashMsg('error', 'Failed to Sign up');
 			}
 		});
 	};

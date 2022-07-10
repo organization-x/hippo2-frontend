@@ -19,7 +19,7 @@ function AlertBanner() {
                 setCompleted(data.data.completed);
 			}).catch(err => {
                 // API request was not successful
-                flashMsgRef('error', 'Unable to load Completed Tasks');
+                flashMsgRef('error', 'Failed to load Completed Tasks');
             });
       }, [auth,flashMsgRef]);
     

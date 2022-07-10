@@ -19,9 +19,7 @@ module.exports = {
     ],
     "ignorePatterns": ["reportWebVitals.js"],
     "rules": {
-        "promise/catch-or-return": "warn",
-        "promise/valid-params": "warn",
-        "promise/no-nesting": "warn",
+        // eslint
         "semi": ["warn", "always"],
         "no-extra-semi": "warn",
         "camelcase": ["warn", { properties: "never" }],
@@ -35,6 +33,14 @@ module.exports = {
         "prefer-arrow-callback": "warn",
         // "max-len": ["error", { "code": 100 }]
 
+        // promise plugin
+        "promise/catch-or-return": "warn",
+        "promise/valid-params": "warn",
+        "promise/no-nesting": "warn",
+
+        // react plugin
         "react/destructuring-assignment": ["warn", 'always'],
+        "react/function-component-definition": ["warn", { "namedComponents": ["function-declaration"] }],
+        "react/hook-use-state": "warn",
     }
 }

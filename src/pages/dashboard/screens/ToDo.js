@@ -28,7 +28,7 @@ function ToDo() {
 	
 	//Create ToDO Containers
 	const toDoTasks = tasksList.map((task) =>{
-		if (!userCompletedTasks.includes(task.id)){
+		if (!userCompletedTasks.includes(task.id)) {
 			return <label className="containertask" key={task.id} >{task.text}
 						<input type="checkbox" value = {task.id} onClick={onClick}></input>
 						<span className="checkmark"></span>
@@ -39,7 +39,7 @@ function ToDo() {
 		}
 	});
 	const ToDoCompletedTasks = tasksList.map((task) =>{
-		if (userCompletedTasks.includes(task.id)){
+		if (userCompletedTasks.includes(task.id)) {
 			return <label className="containertask" key={task.id}>{task.text}
 						<input type="checkbox" value = {task.id} checked={true}></input>
 						<span className="checkmark"></span>
@@ -67,7 +67,7 @@ function ToDo() {
 		});
 		auth.autoAuthReq(completedTasksAPI,options).then(res => {
 			//Res.data looks like {task_id:id}, below creates a list of task IDs from res.data
-			const only_ids = res.data.map(function (task){
+			const only_ids = res.data.map(function (task) {
 				return task.task_id;
 			});
 			setUserCompletedTasks(only_ids);

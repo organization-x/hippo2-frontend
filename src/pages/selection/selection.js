@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import Loading from '../loading/loading';
 import { useAuth } from '../../services/authentication';
 
-function SelectionPage(){
+function SelectionPage() {
     const [batchData, setBatchData] = useState({});
     const [studentData, setStudentData] = useState([]);
 	const [loading, setLoading] = useState(true);

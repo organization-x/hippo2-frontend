@@ -45,7 +45,7 @@ function ForgotPasswordConfirm() {
 				flashMsg('success','Password Reset Successfully!');
 				navigate('/login');
 			}).catch(err => {
-				if (err.data?.message){
+				if (err.data?.message) {
 					return flashMsg('error',err.data.message);
 				}
 				flashMsg('error', 'Unable to connect to server');

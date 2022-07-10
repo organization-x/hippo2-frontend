@@ -5,7 +5,7 @@ import { useAuth } from "../../services/authentication";
 import baseUrl from '../../apiUrls';
 
 
-function AlertBanner(){
+function AlertBanner() {
     const auth = useAuth();
     const isParent = auth.user.type === 'PARENT';
     const [completed,setCompleted] = useState(true);

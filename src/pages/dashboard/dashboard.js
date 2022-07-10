@@ -4,7 +4,7 @@ import { useState } from 'react';
 import AlertBanner from './alertBanner';
 
 
-function Dashboard(){
+function Dashboard() {
 
     const [page, setPage] = useState('dashboard-home');
 

@@ -23,7 +23,7 @@ function BatchChange() {
     const [formErrors, setFormErrors] = useState('');
 
     useEffect(() => {
-        if (orderID){
+        if (orderID) {
             const url = baseUrl + `/api/v1/orders/${orderID}/change-batch/`;
             const options = {
                 method: 'GET',
@@ -87,7 +87,7 @@ function BatchChange() {
         const onNext = () => {
             setFormErrors('');
             const [ err ] = validateUuid(batchID);
-            if (err){
+            if (err) {
                 return setFormErrors(err); 
             } else {
                 const url = baseUrl + `/api/v1/orders/${orderID}/change-batch/`;

@@ -24,7 +24,7 @@ function BatchPage() {
     const { user } = useAuth();
 
     useEffect(() => {
-        if (courseID){
+        if (courseID) {
             const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
             const options = {
                 method: 'GET',
@@ -73,7 +73,7 @@ function BatchPage() {
         const onNext = () => {
             setFormErrors('');
             const [ err ] = validateUuid(batchID);
-            if (err){
+            if (err) {
                 return setFormErrors(err);
             } else if (user.type==="PARENT") {
                 const path = `/batches/${batchID}/student-selection`;

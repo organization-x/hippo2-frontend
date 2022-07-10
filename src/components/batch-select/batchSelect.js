@@ -77,7 +77,7 @@ function BatchSelect({ batchData, onChange, batch_id, batchIndex, isLoading }) {
 
     let selected_batch_id = "";
 
-    if (batchData.batch_id !== null){
+    if (batchData.batch_id !== null) {
         selected_batch_id = batchData.batch_id;
     }
 

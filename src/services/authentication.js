@@ -58,8 +58,8 @@ export function AuthProvider({ children }) {
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
 
-	const autoAuthReq = useRef((url, options, redirect = null) => {
-		return new Promise((resolve, reject) => {
+	const autoAuthReq = useRef((url, options, redirect = null) => (
+		new Promise((resolve, reject) => {
 			sendReq(
 				url, options
 			).then(res => {
@@ -72,8 +72,8 @@ export function AuthProvider({ children }) {
 				}
 				reject(err);
 			});
-		});
-	}).current;
+		})
+	)).current;
 
 	const handleSignup = async (email, type, password, redirect = '/') => {
 		const newUrl = baseUrl + '/auth/registration/';
@@ -253,12 +253,10 @@ export function AuthProvider({ children }) {
 			options.body.dob = dob;
 		}
 		const res = await autoAuthReq(url, options, redirect);
-		setUser(prev => {
-			return {
+		setUser(prev => ({
 				...prev,
 				'filledInvite': true
-			};
-		});
+			}));
 		return res;
 	};
 

@@ -25,18 +25,17 @@ const AvailabilityButton = ({ seats }) => {
 };
 
 // returns the table's header with the date range and batch name
-const ColumnHeader = ({ start_date, end_date, name, onClick }) => {
-    return (
-        <div className='selectHeader' onClick={onClick}>
-            <p className='text-xl my-4 ml-8 lg:ml-0 text-black md:inline-block lg:block'>{start_date} - {end_date}</p>
-    	    <svg className="inline-block lg:hidden mr-8 lg:mr-0 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-            <p className='text-xs hidden lg:block text-gray-800 mb-4'>
-                {`Batch ${name}`}
-            </p>
-        </div>);
-};
+const ColumnHeader = ({ start_date, end_date, name, onClick }) => (
+	<div className='selectHeader' onClick={onClick}>
+		<p className='text-xl my-4 ml-8 lg:ml-0 text-black md:inline-block lg:block'>{start_date} - {end_date}</p>
+		<svg className="inline-block lg:hidden mr-8 lg:mr-0 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+			<path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+		</svg>
+		<p className='text-xs hidden lg:block text-gray-800 mb-4'>
+			{`Batch ${name}`}
+		</p>
+	</div>
+);
 
 function BatchSelect({ batchData, onChange, batch_id, batchIndex, isLoading }) {
     // returns table data formatted with times, seats, and price

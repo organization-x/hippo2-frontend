@@ -28,6 +28,7 @@ module.exports = {
         "keyword-spacing": ["error"],
         "space-before-blocks": "error",
         "brace-style": "error",
+        "arrow-body-style": ["error", "as-needed"],
         // "max-len": ["error", { "code": 100 }]
     }
 }

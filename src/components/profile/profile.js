@@ -111,9 +111,7 @@ function Profile({
 					onChange={value => {
 						setP(value);
 					}}
-					isValid={() => {
-						return !formErrors.phone?.length;
-					}}
+					isValid={() => !formErrors.phone?.length}
 				/>
 				{
 					formErrors.phone?.length ? 

@@ -42,8 +42,8 @@ function DashboardCourseDetails() {
 		coursesList = [];
 		for (let course of courses) {
 			// TODO: remove dummy deadline - API does not return a deadline yet
-			const transactionsTable = course.transactions.map((transaction) => {
-				return <div className='grid grid-cols-4 gap-4 text-center text-xs md:text-base pb-2'>
+			const transactionsTable = course.transactions.map((transaction) => (
+				<div className='grid grid-cols-4 gap-4 text-center text-xs md:text-base pb-2'>
 					<div>{transaction.created_at.substring(0,10)}</div>
 					<div>${course.course.price}</div>
 					<div>{transaction.name}</div>
@@ -53,8 +53,8 @@ function DashboardCourseDetails() {
 							{{ unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded' }[transaction.status]}
 						</span>
 					</div>
-				</div>;
-			});
+				</div>
+			));
 
 			coursesList.push((
 				<div key={course.id} className="container flex flex-wrap mx-auto mt-10 px-5 mb-10">

@@ -31,22 +31,18 @@ export function FlashMsgProvider({ children }) {
 			text: text,
 			type: type
 		};
-		setMsg((prev) => {
-			return {
-				...prev,
-				[idCount]: newMsg
-			};
-		});
+		setMsg((prev) => ({
+			...prev,
+			[idCount]: newMsg
+		}));
 		// fade message out after certain duration
 		setTimeout(() => {
 			const fadeMsg = { ...newMsg };
 			fadeMsg.status = 'fadeout';
-			setMsg((prev) => {
-				return {
-					...prev,
-					[idCount]: fadeMsg
-				};
-			});
+			setMsg((prev) => ({
+				...prev,
+				[idCount]: fadeMsg
+			}));
 		}, DURATION);
 		// completely remove after fadeout
 		setTimeout(() => {

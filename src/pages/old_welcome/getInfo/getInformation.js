@@ -142,9 +142,7 @@ function GetInformation({ onNext }) {
 							onChange={value => {
 								setPhone(value);
 							}}
-							isValid={() => {
-								return !formErrors.phone?.length;
-							}}
+							isValid={() => !formErrors.phone?.length}
 						/>
 						{
 							formErrors.phone?.length ? 

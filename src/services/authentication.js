@@ -1,6 +1,5 @@
 import { useState, createContext, useEffect, useRef, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useFlashMsg } from "./flashMsg";
 import sendReq from "./sendReq";
 import baseUrl from "../apiUrls";
 
@@ -56,11 +55,9 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	const [user, setUser] = useState(blankUser);
 	const [checkLogin, setCheckLogin] = useState(false);
-	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
-
+	
 	const autoAuthReq = useRef((url, options, redirect = null) => (
 		new Promise((resolve, reject) => {
 			sendReq(
@@ -298,12 +295,11 @@ export function AuthProvider({ children }) {
 		}).catch(err => {
 			if (err.status !== 403 && err.status !== 401) {
 				setUser(blankUser);
-				flashMsgRef('error', 'Unable to retrieve user info');
 				navigate('/signup');
 			}
 			setCheckLogin(true);
 		});
-	}, [autoAuthReq, location, navigate, flashMsgRef]);
+	}, [autoAuthReq, location, navigate]);
 
 	const value = {
 		user,

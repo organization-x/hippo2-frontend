@@ -11,7 +11,6 @@ import validateUuid from "../../validation/uuid";
 function SelectCourses() {
 	const navigate = useNavigate();
 	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
 
 	const [courseList, setCourseList] = useState([]);
 	const [courseId,setCourseId] = useState('');
@@ -44,10 +43,10 @@ function SelectCourses() {
 		sendReq(urlCoursesApi,options).then(res => {
 			setCourseList(res.data);
 		}).catch(err => {
-			flashMsgRef('error', 'Failed to retrieve courses');
+			flashMsg('error', 'Failed to retrieve courses');
 			navigate('/');
 		});
-	}, [flashMsgRef]);
+	}, [flashMsg]);
 	
 	return (
 		<>

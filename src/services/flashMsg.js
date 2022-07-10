@@ -1,4 +1,4 @@
-const { useContext, createContext, useState } = require("react");
+const { useContext, createContext, useState, useRef } = require("react");
 
 /**
  * ==============================================
@@ -24,8 +24,11 @@ export function useFlashMsg() {
 export function FlashMsgProvider({ children }) {
 	const [msg, setMsg] = useState({});
 	const [idCount, setIdCount] = useState(0);
-	
-	const flashMsg = (type, text) => {
+	const idCountRef = useRef();
+	idCountRef.current = idCount;
+
+	const flashMsg = useRef((type, text) => {
+		const id = idCountRef.current;
 		const newMsg = {
 			status: 'display',
 			text: text,
@@ -33,7 +36,7 @@ export function FlashMsgProvider({ children }) {
 		};
 		setMsg((prev) => ({
 			...prev,
-			[idCount]: newMsg
+			[id]: newMsg
 		}));
 		// fade message out after certain duration
 		setTimeout(() => {
@@ -41,20 +44,20 @@ export function FlashMsgProvider({ children }) {
 			fadeMsg.status = 'fadeout';
 			setMsg((prev) => ({
 				...prev,
-				[idCount]: fadeMsg
+				[id]: fadeMsg
 			}));
 		}, DURATION);
 		// completely remove after fadeout
 		setTimeout(() => {
 			setMsg((prev) => {
 				const prevCopy = { ...prev };
-				delete prevCopy[idCount];
+				delete prevCopy[id];
 				return prevCopy;
 			});
 		}, DURATION + FADE);
 		// increment id tracker
 		setIdCount(prev => prev + 1);
-	};
+	}).current;
 
 	const value = {
 		msg,

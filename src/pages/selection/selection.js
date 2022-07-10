@@ -15,12 +15,12 @@ function SelectionPage() {
     const navigate = useNavigate();
 	const { flashMsg } = useFlashMsg();
 	const { autoAuthReq } = useAuth();
-	const flashMsgRef = useRef(flashMsg).current;
+	
 	const here = useLocation().pathname;
 
     useEffect(() => {
         if (!batchID) {
-			return flashMsgRef('error', 'Invalid Batch');
+			return flashMsg('error', 'Invalid Batch');
 		}
 		const batchUrl = baseUrl + `/api/v1/batches/${batchID}/`;
 		const studentsUrl = baseUrl + `/api/v1/users/groupstudents/`;
@@ -41,10 +41,10 @@ function SelectionPage() {
 
 			setLoading(false);
 		})().catch(err => {
-			flashMsgRef('error', 'Error fetching batch and student info');
+			flashMsg('error', 'Error fetching batch and student info');
 			navigate('/courses');
 		});
-    }, [batchID, flashMsgRef, navigate, autoAuthReq, here]);
+    }, [batchID, flashMsg, navigate, autoAuthReq, here]);
 
 	if (loading) {
 		return <Loading />;

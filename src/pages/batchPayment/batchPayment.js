@@ -16,7 +16,7 @@ function BatchPayment() {
 	const [processing, setProcessing] = useState(false);
 	const { user, autoAuthReq } = useAuth();
 	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
+	
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -38,14 +38,14 @@ function BatchPayment() {
 			setLoading(false);
 		}).catch(err => {
 			if (err.data?.message) {
-				flashMsgRef('error', err.data.message);
+				flashMsg('error', err.data.message);
 			} else {
-				flashMsgRef('error', 'Failed to fetch order info');
+				flashMsg('error', 'Failed to fetch order info');
 			}
 			navigate('/courses');
 		});
 		
-	}, [autoAuthReq, batchId, forUserId, here, flashMsgRef, navigate]);
+	}, [autoAuthReq, batchId, forUserId, here, flashMsg, navigate]);
 
 	if (loading) {
 		return <Loading />;

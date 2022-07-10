@@ -12,7 +12,7 @@ function DashboardCourseDetails() {
 	const [courseTasks, setCourseTasks] = useState(null);
 	const auth = useAuth();
 	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
+	
 	const [blockHidden, setBlockHidden] = useState(false);
  
 	function hideView() {
@@ -32,9 +32,9 @@ function DashboardCourseDetails() {
 			setCourseTasks(courseTaskDict);
 			setCourses(data.data);
 		})().catch(err => {
-			flashMsgRef('error', 'Failed to retrieve course info');
+			flashMsg('error', 'Failed to retrieve course info');
 		});
-	}, [auth, flashMsgRef]);
+	}, [auth, flashMsg]);
 
 	let coursesList = null;
 

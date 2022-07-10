@@ -10,7 +10,7 @@ function AlertBanner() {
     const isParent = auth.user.type === 'PARENT';
     const [completed,setCompleted] = useState(true);
     const { flashMsg } = useFlashMsg(); 
-    const flashMsgRef = useRef(flashMsg).current;
+    
 
     useEffect(() => {
         const url =  baseUrl+'/api/v1/users/'+auth.user.id+'/tasks/';
@@ -19,9 +19,9 @@ function AlertBanner() {
                 setCompleted(data.data.completed);
 			}).catch(err => {
                 // API request was not successful
-                flashMsgRef('error', 'Failed to load Completed Tasks');
+                flashMsg('error', 'Failed to load Completed Tasks');
             });
-      }, [auth,flashMsgRef]);
+      }, [auth,flashMsg]);
     
     return (
         <>

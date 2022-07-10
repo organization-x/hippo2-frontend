@@ -12,7 +12,7 @@ function GroupJoin() {
 	const token = search.get('token');
 	const { autoAuthReq } = useAuth();
 	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
+	
 	const here = location.pathname + location.search;
 
 	useEffect(() => {
@@ -25,13 +25,13 @@ function GroupJoin() {
 				}
 			};
 			autoAuthReq(url, options, here).then(res => {
-				flashMsgRef('error', 'Successfully joined group');
+				flashMsg('error', 'Successfully joined group');
 				navigate('/');
 			}).catch(err => {
-				flashMsgRef('error', 'Failed to join group');
+				flashMsg('error', 'Failed to join group');
 			});
 		}
-	}, [token, autoAuthReq, here, navigate, flashMsgRef]);
+	}, [token, autoAuthReq, here, navigate, flashMsg]);
 
 	return (
 		<Loading />

@@ -9,10 +9,11 @@ function AccountSettings() {
     const [profiles, setProfiles] = useState([]);
     const { user, autoAuthReq } = useAuth();
 	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
+	
 	const here = useLocation().pathname;
 
     useEffect(() => {
+		console.log('called');
 		const data = [];
 
 		const url = baseUrl + '/api/v1/users/groupstudents/'; 
@@ -53,9 +54,9 @@ function AccountSettings() {
 			}
 			setProfiles(data);
 		}).catch(err => {
-			flashMsgRef('error', 'Could not retrieve student info');
+			flashMsg('error', 'Could not retrieve student info');
 		});
-    }, [user, autoAuthReq, here, flashMsgRef]);
+    }, [user, autoAuthReq, here, flashMsg]);
 
     return (
 		<div className="flex flex-row flex-wrap rounded-xl">

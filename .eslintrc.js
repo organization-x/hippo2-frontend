@@ -19,16 +19,17 @@ module.exports = {
     ],
     "ignorePatterns": ["reportWebVitals.js"],
     "rules": {
-        "promise/catch-or-return": "error",
+        "promise/catch-or-return": "warn",
         "promise/valid-params": "warn",
         "promise/no-nesting": "warn",
-        "semi": ["error", "always"],
-        "camelcase": ["error", { properties: "never" }],
-        "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }],
-        "keyword-spacing": ["error"],
-        "space-before-blocks": "error",
-        "brace-style": "error",
-        "arrow-body-style": ["error", "as-needed"],
+        "semi": ["warn", "always"],
+        "camelcase": ["warn", { properties: "never" }],
+        "object-curly-spacing": ["warn", "always", { "arraysInObjects": false, "objectsInObjects": false }],
+        "keyword-spacing": ["warn"],
+        "space-before-blocks": "warn",
+        "brace-style": "warn",
+        "arrow-body-style": ["warn", "as-needed"],
+        "no-console": "warn",
         // "max-len": ["error", { "code": 100 }]
     }
 }

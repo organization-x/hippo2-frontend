@@ -33,8 +33,8 @@ import './App.css';
 function App() {
 	return (
 		<BrowserRouter>
-			<AuthProvider>
-				<FlashMsgProvider>
+			<FlashMsgProvider>
+				<AuthProvider>
 					<div className="main">
 						<Navbar />
 						<ToastContainer />
@@ -92,8 +92,8 @@ function App() {
 						</Routes>
 					</div>
 					<Footer />
-				</FlashMsgProvider>
-			</AuthProvider>
+				</AuthProvider>
+			</FlashMsgProvider>
 		</BrowserRouter>
 	);
 }

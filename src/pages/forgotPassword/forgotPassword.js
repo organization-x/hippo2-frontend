@@ -13,7 +13,7 @@ function ForgotPassword() {
 			body: { email: email }
 		};
 		sendReq(url, options).then( _ => setSent(true));
-	}
+	};
 
 	let content;
 	if (sent) {

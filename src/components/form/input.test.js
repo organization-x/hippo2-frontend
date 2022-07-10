@@ -4,7 +4,7 @@ import Input from './input.js';
 test('valid input test', () => {
     render(
         <Input label='First Name' placeHolder='John' type='text' isValid='true' errorText='invalid'></Input>
-    )
+    );
     const input = screen.getByRole('textbox', { placeholder: 'John' });
     expect(
         input.className.includes('input') &&
@@ -16,7 +16,7 @@ test('valid input test', () => {
 test('invalid input test', () => {
     render(
         <Input label='First Name' placeHolder='John' type='text' isValid='false' errorText='invalid'></Input>
-    )
+    );
     const input = screen.getByRole('textbox', { placeholder: 'John' });
     expect(
         input.className.includes('invalid-border') &&

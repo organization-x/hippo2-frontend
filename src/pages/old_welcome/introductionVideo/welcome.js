@@ -1,7 +1,7 @@
 import './welcome.css';
 import Button from "../../../components/button/button";
 
-function WelcomeComponent({onNext}) {
+function WelcomeComponent({ onNext }) {
 	return (
 		<div>
 			<div className="bg-banner w-full flex items-center justify-center">
@@ -17,7 +17,7 @@ function WelcomeComponent({onNext}) {
 				<Button onClick={() => onNext()} bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center">Next</Button>
 			</div>
 		</div>
-	)
+	);
 }
 
 export default WelcomeComponent;

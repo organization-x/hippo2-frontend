@@ -35,7 +35,7 @@ function formatFormErrors(err, messages, singleField=false) {
 		}
 		return formattedErrors;
 	}
-	return err
+	return err;
 }
 
 export default formatFormErrors;

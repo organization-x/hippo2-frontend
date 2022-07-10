@@ -31,7 +31,7 @@ function SignUpInvite() {
 		}
 		// get invite information
 		const url = baseUrl + `/api/v1/groups/invite/${inviteToken}/`;
-		sendReq(url, {method: 'GET'}).then(res => {
+		sendReq(url, { method: 'GET' }).then(res => {
 			setData(res.data);
 			setLoading(false);
 		});

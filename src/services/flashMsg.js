@@ -15,7 +15,7 @@ const { useContext, createContext, useState } = require("react");
 const FlashMessageContext = createContext();
 
 const DURATION = 5000; // flash message duration (ms)
-const FADE = 500 // how fast to fadeout the message
+const FADE = 500; // how fast to fadeout the message
 
 export function useFlashMsg() {
 	return useContext(FlashMessageContext);

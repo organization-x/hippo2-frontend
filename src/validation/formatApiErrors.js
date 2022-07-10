@@ -9,7 +9,7 @@ function formatApiErrors(errors, keyMap) {
 			formattedErrors[key] = errors[key];
 		}
 	}
-	return formattedErrors
+	return formattedErrors;
 }
 
 export default formatApiErrors;

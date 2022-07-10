@@ -110,7 +110,7 @@ function SelectCourses() {
 			</div>
 		</>
 		
-	)
+	);
 }
 
 export default SelectCourses;

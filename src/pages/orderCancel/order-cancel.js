@@ -8,11 +8,11 @@ import baseUrl from '../../apiUrls';
 
 function OrderCancel () {
 
-    const {autoAuthReq} = useAuth(); // import this
-    const {flashMsg} = useFlashMsg(); // this too
+    const { autoAuthReq } = useAuth(); // import this
+    const { flashMsg } = useFlashMsg(); // this too
     const navigate = useNavigate(); // this too
     const here = useLocation().pathname; // this too
-    const {orderID} = useParams(); // this too
+    const { orderID } = useParams(); // this too
 
     const onConfirm = () => {
         // import baseUrl

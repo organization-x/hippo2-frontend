@@ -8,15 +8,15 @@ function ProtectedRoute({ children, detailsReq=true, inviteReq=true }) {
 	const location = useLocation();
 	if (!user.isLoggedIn) {
 		return <Navigate to={'/signup'} replace state={
-			{ from: { pathname: location.pathname + location.search } }
+			{ from: { pathname: location.pathname + location.search }}
 		} />;
 	} else if (detailsReq && !user.filledDetails) {
 		return <Navigate to={'/user/details'} replace state={
-			{ from: { pathname: location.pathname + location.search } }
+			{ from: { pathname: location.pathname + location.search }}
 		} />;
 	} else if (inviteReq && !user.filledInvite) {
 		return <Navigate to={'/invite'} replace state={
-			{ from: { pathname: location.pathname + location.search } }
+			{ from: { pathname: location.pathname + location.search }}
 		} />;
 	}
 	return children;

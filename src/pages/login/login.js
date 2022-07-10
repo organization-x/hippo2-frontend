@@ -47,7 +47,7 @@ function Login() {
 				flashMsg('error', 'Unable to login');
 			}
 		});
-	}
+	};
 
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
@@ -105,7 +105,7 @@ function Login() {
 					<Link 
 						to="/signup" 
 						className="mx-auto text-blue-700 hover:text-blue-600"
-						state={{from: { pathname: origin }}}
+						state={{ from: { pathname: origin }}}
 					>Create an account</Link>
 				</div>
 

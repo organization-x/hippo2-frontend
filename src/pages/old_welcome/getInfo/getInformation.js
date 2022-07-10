@@ -10,7 +10,7 @@ import 'react-phone-input-2/lib/style.css';
 import './getInformation.css';
 
 function GetInformation({ onNext }) {
-	const {user, handleUserInitiation} = useAuth();
+	const { user, handleUserInitiation } = useAuth();
 	const location = useLocation();
 
 	const [firstName, setFirstName] = useState(user.fName);
@@ -55,7 +55,7 @@ function GetInformation({ onNext }) {
 			}
 		});
 
-	}
+	};
 
 	return (
 		<div>
@@ -171,7 +171,7 @@ function GetInformation({ onNext }) {
 				</form>
 			</div>
 		</div>
-	)
+	);
 }
 
 export default GetInformation;

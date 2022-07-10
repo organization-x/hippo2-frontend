@@ -21,7 +21,7 @@ function BatchPage() {
 
     const [formErrors, setFormErrors] = useState('');
 
-    const {user} = useAuth();
+    const { user } = useAuth();
 
     useEffect(() => {
         if(courseID){

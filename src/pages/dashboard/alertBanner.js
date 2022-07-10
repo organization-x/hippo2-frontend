@@ -9,12 +9,12 @@ function AlertBanner(){
     const auth = useAuth();
     const isParent = auth.user.type === 'PARENT';
     const [completed,setCompleted] = useState(true);
-    const {flashMsg} = useFlashMsg(); 
+    const { flashMsg } = useFlashMsg(); 
     const flashMsgRef = useRef(flashMsg).current;
 
     useEffect(() => {
         const url =  baseUrl+'/api/v1/users/'+auth.user.id+'/tasks/';
-        auth.autoAuthReq(url,{method:'GET'})
+        auth.autoAuthReq(url,{ method:'GET' })
 			.then(data => {
                 setCompleted(data.data.completed);
 			}).catch(err => {
@@ -40,7 +40,7 @@ function AlertBanner(){
                 </div>:null
             }
         </>
-    )
+    );
 }
 
 export default AlertBanner;

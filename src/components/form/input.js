@@ -1,6 +1,6 @@
 import './input.css';
 
-function Input({placeHolder, label, type, value, onChange, isValid, errorText, className, id, readOnly}) {
+function Input({ placeHolder, label, type, value, onChange, isValid, errorText, className, id, readOnly }) {
     let error = '';
     let style = 'input';
 
@@ -14,7 +14,7 @@ function Input({placeHolder, label, type, value, onChange, isValid, errorText, c
             <label className='form-label' htmlFor={id}>{label}</label>
             <input type={type} 
             onChange={(e) => {
-				if (onChange) onChange(e.target.value)
+				if (onChange) onChange(e.target.value);
 			} }
 	    readOnly={readOnly}
 	    disabled={readOnly}

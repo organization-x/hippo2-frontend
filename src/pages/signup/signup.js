@@ -22,7 +22,7 @@ function Signup() {
 	
 	const handleFade = () => {
 		setFade(true);
-	}
+	};
 
 	const origin = location.state?.from?.pathname || '/';
 
@@ -61,7 +61,7 @@ function Signup() {
 				flashMsg('error', 'Unable to Sign up');
 			}
 		});
-	}
+	};
 
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
@@ -126,7 +126,7 @@ function Signup() {
 					className={
 						`text-blue-700 hover:text-blue-600 my-5 underline decoration-inherit text-center ${fade ? 'hidden' : 'block'}`
 					}
-					state={{from: {pathname: origin}}}
+					state={{ from: { pathname: origin }}}
 				>Already have an account?</Link>
 
 				<div className={`${fade ? "block" : "hidden"}`}>
@@ -160,7 +160,7 @@ function Signup() {
 						<Link 
 							to="/login" 
 							className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit"
-							state={{from: {pathname: origin}}}
+							state={{ from: { pathname: origin }}}
 						>Already have an account?</Link>
 					</div>
 
@@ -169,7 +169,7 @@ function Signup() {
 
 			</form>
 		</div>
-	)
+	);
 }
 
 export default Signup;

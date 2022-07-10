@@ -104,7 +104,7 @@ test('batch select test', () => {
       <BatchSelect 
         batchData={testData} 
         batchIndex={batch_no}/>
-    )
+    );
     const seats_left = screen.getByRole('button', { name: '20 LEFT' });
     const open = screen.getByRole('button', { name: 'OPEN' });
     const sold_out = screen.getByRole('button', { name: 'SOLD OUT' });

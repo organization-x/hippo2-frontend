@@ -76,7 +76,7 @@ function SelectionPage(){
 				>
 					<p className="text-lg">{student.first_name + ' ' + student.last_name}</p>
 				</Button>
-			)
+			);
 		}
 	}
 

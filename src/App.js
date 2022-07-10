@@ -21,7 +21,7 @@ import GroupJoin from './pages/groupJoin/groupJoin';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchPage from './pages/batches/batchPage';
-import Dashboard from './pages/dashboard/dashboard'
+import Dashboard from './pages/dashboard/dashboard';
 import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
 import SelectionPage from './pages/selection/selection';

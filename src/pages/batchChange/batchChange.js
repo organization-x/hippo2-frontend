@@ -101,7 +101,7 @@ function BatchChange() {
                 sendReq(url, options).then(res => {
                     const path = `/`;
                     navigate(path); 
-                })
+                });
             }
         };
     

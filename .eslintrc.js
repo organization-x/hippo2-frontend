@@ -18,12 +18,12 @@ module.exports = {
         "promise"
     ],
     "rules": {
-        // "promise/catch-or-return": "error",
-        // "promise/valid-params": "warn",
-        // "promise/no-nesting": "warn",
-        // "semi": ["error", "always"],
-        // "camelcase": ["error", { properties: "never" }],
-        // "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }],
+        "promise/catch-or-return": "error",
+        "promise/valid-params": "warn",
+        "promise/no-nesting": "warn",
+        "semi": ["error", "always"],
+        "camelcase": ["error", { properties: "never" }],
+        "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }]
         // "max-len": ["error", { "code": 100 }]
     }
 }

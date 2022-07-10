@@ -3,7 +3,7 @@ import Button from "../../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './Home.css';
 import baseUrl from '../../../apiUrls';
-import Loading from "../../loading/loading"
+import Loading from "../../loading/loading";
 import { useAuth } from "../../../services/authentication";
 
 
@@ -20,11 +20,11 @@ function ToDo() {
 		const postUpdateTasks = baseUrl +'/api/v1/users/'+auth.user.id+'/tasks/';
 		const options = {
 			method:'POST',
-			body:{task_id:taskValue}
+			body:{ task_id:taskValue }
 		};
 		setUserCompletedTasks([...userCompletedTasks,taskValue]);
 		auth.autoAuthReq(postUpdateTasks,options);
-	  }
+	  };
 	
 	//Create ToDO Containers
 	const toDoTasks = tasksList.map((task) =>{
@@ -33,7 +33,7 @@ function ToDo() {
 						<input type="checkbox" value = {task.id} onClick={onClick}></input>
 						<span className="checkmark"></span>
 						<p className='text-sm text-red-500 italic'>Deadline: {task.deadline}</p>
-					</label>
+					</label>;
 		}else{
 			return null;
 		}
@@ -43,7 +43,7 @@ function ToDo() {
 			return <label className="containertask" key={task.id}>{task.text}
 						<input type="checkbox" value = {task.id} checked={true}></input>
 						<span className="checkmark"></span>
-					</label>
+					</label>;
 		}else{
 			return null;
 		}
@@ -107,7 +107,7 @@ function ToDo() {
 			</div>
 		</>
 		
-	)
+	);
 
 }
 

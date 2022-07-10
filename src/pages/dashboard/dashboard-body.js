@@ -3,7 +3,7 @@ import DashboardCourseDetails from "./screens/courseDetails";
 import AccountSettings from "./screens/accountSettings";
 import ToDo from "./screens/ToDo";
 
-function DashboardBody({page}) {
+function DashboardBody({ page }) {
         switch(page) {
             case 'dashboard-home':
                 return (<DashboardCourseDetails />);

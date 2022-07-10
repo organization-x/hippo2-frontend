@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import Input from "../../../components/form/input";
 import Button from "../../../components/button/button";
 import validateEmail from "../../../validation/email";
@@ -6,7 +6,7 @@ import { useAuth } from "../../../services/authentication";
 import baseUrl from "../../../apiUrls";
 import { useNavigate } from "react-router-dom";
 
-function InviteUser({type, onBack}) {
+function InviteUser({ type, onBack }) {
 	const { autoAuthReq } = useAuth();
 	const navigate = useNavigate();
 	const [emails, setEmails] = useState(['']);

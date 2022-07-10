@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 
 import { useAuth } from "../../services/authentication";
@@ -30,7 +30,7 @@ function InviteUser() {
 	const origin = location.state?.from?.pathname || '/';
 
 	if (user.filledInvite) {
-		return <Navigate to={origin} replace />
+		return <Navigate to={origin} replace />;
 	}
 
 	const onSubmit = () => {

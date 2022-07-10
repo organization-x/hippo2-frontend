@@ -1,11 +1,11 @@
-import {useEffect, useRef, useState} from "react";
-import {useAuth} from "../../../services/authentication";
-import {useFlashMsg} from "../../../services/flashMsg";
+import { useEffect, useRef, useState } from "react";
+import { useAuth } from "../../../services/authentication";
+import { useFlashMsg } from "../../../services/flashMsg";
 import baseUrl from "../../../apiUrls";
 import Button from "../../../components/button/button";
 import Loading from "../../loading/loading";
 import './Home.css';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function DashboardCourseDetails() {
 	const [courses, setCourses] = useState(null);
@@ -21,18 +21,18 @@ function DashboardCourseDetails() {
 
 	useEffect(() => {
 		(async () => {
-			const data = await auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`,{method: 'GET'})
+			const data = await auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`,{ method: 'GET' });
 
 			// fetch incomplete tasks from API
 			const courseTaskDict = {};
 			for (let course of data.data) {
-				courseTaskDict[course.id] = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, {method: 'GET'})).data.count > 0;
+				courseTaskDict[course.id] = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, { method: 'GET' })).data.count > 0;
 			}
 
 			setCourseTasks(courseTaskDict);
 			setCourses(data.data);
 		})().catch(err => {
-			flashMsgRef('error', 'Unable to retrieve course info')
+			flashMsgRef('error', 'Unable to retrieve course info');
 		});
 	}, [auth, flashMsgRef]);
 
@@ -49,11 +49,11 @@ function DashboardCourseDetails() {
 					<div>{transaction.name}</div>
 					<div>
 						<span className=
-							{{unpaid: 'text-red-400', paid: 'text-green-500', cancelled: 'text-yellow-400', refunded: 'text-gray-500'}[transaction.status]}>
-							{{unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded'}[transaction.status]}
+							{{ unpaid: 'text-red-400', paid: 'text-green-500', cancelled: 'text-yellow-400', refunded: 'text-gray-500' }[transaction.status]}>
+							{{ unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded' }[transaction.status]}
 						</span>
 					</div>
-				</div>
+				</div>;
 			});
 
 			coursesList.push((

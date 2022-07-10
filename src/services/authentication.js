@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
 				// redirect if unauthenticated
 				if (err.status && [401, 403].includes(err.status)) {
 					setUser(blankUser);
-					navigate('/signup', { state: { from: { pathname: redirect } } });
+					navigate('/signup', { state: { from: { pathname: redirect }}});
 				}
 				reject(err);
 			});

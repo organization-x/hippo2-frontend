@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Loading from "../../pages/loading/loading";
 
 // returns a Button Component indicating the availabilty of a batch
-const AvailabilityButton = ({seats}) => {
+const AvailabilityButton = ({ seats }) => {
     const buttonClassName = "my-4 w-1/4 text-center lg:w-11/12 p-2 lg:p-1 inline-block";
     let text;
     let color;
@@ -15,17 +15,17 @@ const AvailabilityButton = ({seats}) => {
         text = seats + ' LEFT';
         color = 'yellow';
     } else {
-        text = 'SOLD OUT'
+        text = 'SOLD OUT';
         color = 'red';
     }
     return (
         <Button bgColor={color} txtColor="white" className={buttonClassName}>{text}</Button>
     );
     
-}
+};
 
 // returns the table's header with the date range and batch name
-const ColumnHeader = ({start_date, end_date, name, onClick}) => {
+const ColumnHeader = ({ start_date, end_date, name, onClick }) => {
     return (
         <div className='selectHeader' onClick={onClick}>
             <p className='text-xl my-4 ml-8 lg:ml-0 text-black md:inline-block lg:block'>{start_date} - {end_date}</p>
@@ -36,11 +36,11 @@ const ColumnHeader = ({start_date, end_date, name, onClick}) => {
                 {`Batch ${name}`}
             </p>
         </div>);
-}
+};
 
-function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
+function BatchSelect({ batchData, onChange, batch_id, batchIndex, isLoading }) {
     // returns table data formatted with times, seats, and price
-    const CellData = ({batch_no, start_time, end_time, seats, time_zone, batchID, name, className, selected_batch_id=""}) => {
+    const CellData = ({ batch_no, start_time, end_time, seats, time_zone, batchID, name, className, selected_batch_id="" }) => {
         let disabled = false;
         if (seats < 1) {
             disabled = true;
@@ -63,9 +63,9 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
 
                 <p className='hidden lg:block text-xs text-gray-800 pb-12'>from <br className='hidden lg:block'/><b className='text-md text-gray-500'>${batchData.price}</b><br className='hidden lg:block'/> (Early Bird)</p>
             </div>);
-    }
+    };
 
-    const Column = ({column_no, className}) => {
+    const Column = ({ column_no, className }) => {
 	const [clicked, setClicked] = useState(false);
         const batchNoPST = 2*column_no;
         const batchNoEST = batchNoPST+1;
@@ -78,7 +78,7 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
     let selected_batch_id = "";
 
     if (batchData.batch_id !== null){
-        selected_batch_id = batchData.batch_id
+        selected_batch_id = batchData.batch_id;
     }
 
         return isLoading ? (
@@ -108,7 +108,7 @@ function BatchSelect({batchData, onChange, batch_id, batchIndex, isLoading}) {
                     className={`${visibility} rounded-b-3xl lg:rounded-none`}
                 />
             </div>);
-    }
+    };
 
     const columns = [];
     if(!isLoading) {

@@ -53,7 +53,7 @@ function AccountSettings() {
 			}
 			setProfiles(data);
 		}).catch(err => {
-			flashMsgRef('error', 'Could not retrieve student info')
+			flashMsgRef('error', 'Could not retrieve student info');
 		});
     }, [user, autoAuthReq, here, flashMsgRef]);
 

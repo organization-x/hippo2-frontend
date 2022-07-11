@@ -1,7 +1,7 @@
-import './batchSelect.css';
-import Button from '../button/button';
 import { useState } from 'react';
+import Button from '../button/button';
 import Loading from "../../pages/loading/loading";
+import './batchSelect.css';
 
 // returns a Button Component indicating the availabilty of a batch
 function AvailabilityButton({ seats }) {

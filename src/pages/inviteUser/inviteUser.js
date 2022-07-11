@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
-
 import { useAuth } from "../../services/authentication";
 import validateUserInformation from "../../validation/userInformation";
 import formatApiErrors from "../../validation/formatApiErrors";
-
 import PhoneInput from "react-phone-input-2";
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
-
 import 'react-phone-input-2/lib/style.css';
 import './inviteUser.css';
 

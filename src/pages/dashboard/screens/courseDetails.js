@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../../services/authentication";
 import { useFlashMsg } from "../../../services/flashMsg";
 import baseUrl from "../../../apiUrls";
 import Button from "../../../components/button/button";
 import Loading from "../../loading/loading";
 import './Home.css';
-import { Link } from "react-router-dom";
 
 function DashboardCourseDetails() {
 	const [courses, setCourses] = useState(null);

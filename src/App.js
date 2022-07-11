@@ -1,22 +1,18 @@
-import {
-	BrowserRouter, Routes, Route
-} from 'react-router-dom';
-import ProtectedRoute from './components/protectedRoute/protectedRoute';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './services/authentication';
 import { FlashMsgProvider } from './services/flashMsg';
 
 import Navbar from './components/navbar/navbar';
-import SelectCourses from './pages/selectCourse/selectCourses';
-
-import OrderCancel from './pages/orderCancel/order-cancel';
-import Signup from './pages/signup/signup';
-import Login from './pages/login/login';
-import Protected from './pages/protected/protected';
-import GoogleAuth from './pages/google/google';
 import Footer from './components/footer/footer';
+import ToastContainer from './components/toasts/toastContainer';
+import Login from './pages/login/login';
+import Signup from './pages/signup/signup';
+import GoogleAuth from './pages/google/google';
 import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
+import SelectCourses from './pages/selectCourse/selectCourses';
+import OrderCancel from './pages/orderCancel/order-cancel';
+import Protected from './pages/protected/protected';
 import GroupJoin from './pages/groupJoin/groupJoin';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
@@ -25,9 +21,9 @@ import Dashboard from './pages/dashboard/dashboard';
 import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
 import SelectionPage from './pages/selection/selection';
-import ToastContainer from './components/toasts/toastContainer';
 import ConfirmDetails from './pages/confirmDetails/confirmDetails';
 import BatchChange from './pages/batchChange/batchChange';
+import ProtectedRoute from './components/protectedRoute/protectedRoute';
 import './App.css';
 
 function App() {

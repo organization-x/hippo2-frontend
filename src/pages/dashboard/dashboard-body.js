@@ -1,4 +1,3 @@
-import React from "react";
 import DashboardCourseDetails from "./screens/courseDetails";
 import AccountSettings from "./screens/accountSettings";
 import ToDo from "./screens/ToDo";

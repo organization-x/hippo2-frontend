@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import baseUrl from "../../apiUrls";
-import sendReq from "../../services/sendReq";
 import validateUuid from "../../validation/uuid";
+import sendReq from "../../services/sendReq";
+import baseUrl from "../../apiUrls";
 import Button from "../../components/button/button";
 
 function PaymentSuccess() {

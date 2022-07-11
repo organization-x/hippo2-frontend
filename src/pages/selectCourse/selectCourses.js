@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFlashMsg } from "../../services/flashMsg";
+import sendReq from "../../services/sendReq";
+import validateUuid from "../../validation/uuid";
+import baseUrl from '../../apiUrls';
 import Button from "../../components/button/button";
 import 'react-phone-input-2/lib/style.css';
 import './selectCourses.css';
-import sendReq from "../../services/sendReq";
-import baseUrl from '../../apiUrls';
-import validateUuid from "../../validation/uuid";
 
 function SelectCourses() {
 	const navigate = useNavigate();

@@ -1,11 +1,10 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import Button from "../../components/button/button";
-import { useParams } from "react-router-dom";
-import { useFlashMsg } from '../../services/flashMsg';
-import baseUrl from "../../apiUrls";
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import Loading from '../loading/loading';
+import { useFlashMsg } from '../../services/flashMsg';
 import { useAuth } from '../../services/authentication';
+import baseUrl from "../../apiUrls";
+import Button from "../../components/button/button";
+import Loading from '../loading/loading';
 
 function SelectionPage() {
     const [batchData, setBatchData] = useState({});

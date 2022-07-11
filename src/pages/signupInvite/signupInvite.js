@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import baseUrl from "../../apiUrls";
-import validatePassword from "../../validation/password";
 import { useAuth } from "../../services/authentication";
 import { useFlashMsg } from "../../services/flashMsg";
+import validatePassword from "../../validation/password";
 import sendReq from "../../services/sendReq";
+import baseUrl from "../../apiUrls";
 
 import Loading from "../loading/loading";
 import Button from "../../components/button/button";

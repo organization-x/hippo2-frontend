@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import baseUrl from "../../apiUrls";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { useFlashMsg } from "../../services/flashMsg";
 import sendReq from "../../services/sendReq";
+import validatePassword from '../../validation/password';
+import baseUrl from "../../apiUrls";
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
-import validatePassword from '../../validation/password';
-import { useFlashMsg } from "../../services/flashMsg";
-import { useNavigate } from "react-router-dom";
 
 
 function ForgotPasswordConfirm() {

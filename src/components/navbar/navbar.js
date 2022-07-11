@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import logo from '../../logo.svg';
 import { useAuth } from '../../services/authentication';
+import logo from '../../logo.svg';
 import './navbar.css';
 
 function Navbar() {

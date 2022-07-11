@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from 'react';
 import { useFlashMsg } from "../../services/flashMsg";
 import { useAuth } from "../../services/authentication";

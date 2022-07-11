@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import baseUrl from "../../apiUrls";
-import { useParams } from "react-router-dom";
-import sendReq from "../../services/sendReq";
+import { useLocation, useParams } from "react-router-dom";
 import BatchSelect from "../../components/batch-select/batchSelect";
 import Button from "../../components/button/button";
 import validateUuid from "../../validation/uuid";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../services/authentication";
+import { useFlashMsg } from "../../services/flashMsg";
 
 function BatchChange() {
-    const [batchNo, selectBatchNo] = useState(-1);    
-    const [batchID, selectBatchID] = useState('');    
+    const [batchNo, setBatchNo] = useState(-1);    
+    const [batchID, setBatchID] = useState('');    
     const [batchData, setBatchData] = useState([]);  
     
     const [currentBatch, setCurrentBatch] = useState({});
-    	
-	const { orderID } = useParams();
-
-    const [isLoading, setIsLoading] = useState(true);
-
-    const navigate = useNavigate();
-
     const [formErrors, setFormErrors] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+	const { orderID } = useParams();
+	const { autoAuthReq } = useAuth();
+	const { flashMsg } = useFlashMsg();
+    const navigate = useNavigate();
+	const location = useLocation();
+
 
     useEffect(() => {
         if (orderID) {
@@ -28,14 +29,16 @@ function BatchChange() {
             const options = {
                 method: 'GET',
             };
-            sendReq(url, options).then(res => {
+            autoAuthReq(url, options, location.pathname).then(res => {
                 setBatchData(res.data);
                 setIsLoading(false);
                 const currentBatch = res.data.batches.find(batch => batch.id === res.data.batch_id);
                 setCurrentBatch(currentBatch);
-            });
+            }).catch(err => {
+				flashMsg('error', 'Failed to get batch info');
+			});
         }
-    }, [orderID]);
+    }, [orderID, autoAuthReq, location, flashMsg]);
 
     function SideBarContent() {
         if (batchNo === -1) {
@@ -95,18 +98,23 @@ function BatchChange() {
                     method: 'POST',
                     body: {
                         batch_id: batchID
-                    },
+                    }
                 };
-                sendReq(url, options).then(res => {
-                    const path = `/`;
-                    navigate(path); 
-                });
+                autoAuthReq(url, options, location.pathname).then(res => {
+					flashMsg('success', 'Successfully changed batch');
+                    navigate('/'); 
+                }).catch(err => {
+					if (err.data?.message) {
+						flashMsg('error', err.data?.message);
+					} else {
+						flashMsg('error', 'Failed to change batch');
+					}
+				});
             }
         };
     
         const onBack = () => {
-            const back_path =`/`;
-            navigate(back_path);   
+            navigate('/');   
         };
         return (
             <div>
@@ -146,8 +154,8 @@ function BatchChange() {
                     batchData={batchData} 
                     onChange={
                         (batchNo, batchID) => { 
-                            selectBatchNo(batchNo);
-                            selectBatchID(batchID); 
+                            setBatchNo(batchNo);
+                            setBatchID(batchID); 
                         } 
                     }
                     batch_id = {batchID}

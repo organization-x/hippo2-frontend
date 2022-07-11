@@ -25,7 +25,7 @@ function ForgotPasswordConfirm() {
 		if (err) {
 			//validate password
 			setErrorMessage(err);
-		} else if (password!==confirmPassword) { 
+		} else if (password !== confirmPassword) { 
 			//check if the 2 passwords match
 			setErrorMessage('Passwords do not Match');
 		} else if (uid && token) {
@@ -42,11 +42,11 @@ function ForgotPasswordConfirm() {
 				}
 			};
 			sendReq(url, options).then(res => {
-				flashMsg('success','Password Reset Successfully!');
+				flashMsg('success', 'Password Reset Successfully!');
 				navigate('/login');
 			}).catch(err => {
 				if (err.data?.message) {
-					return flashMsg('error',err.data.message);
+					return flashMsg('error', err.data.message);
 				}
 				flashMsg('error', 'Failed to connect to server');
 			});	

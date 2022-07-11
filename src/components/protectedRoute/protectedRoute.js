@@ -3,7 +3,7 @@ import { useAuth } from '../../services/authentication';
 
 // A wrapper for <Route> that redirects if 
 // login, details, invite, or passwordset conditions are not met.
-function ProtectedRoute({ children, detailsReq=true, inviteReq=true }) {
+function ProtectedRoute({ children, detailsReq = true, inviteReq = true }) {
 	const { user } = useAuth();
 	const location = useLocation();
 	if (!user.isLoggedIn) {

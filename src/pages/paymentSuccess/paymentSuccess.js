@@ -21,7 +21,7 @@ function PaymentSuccess() {
 		sendReq(url, options).then(res => {
 			setData(res.data);
 		}).catch(err => {
-			setErrorText('Could not retrieve order information');
+			setErrorText('Could not get order information');
 		});
 	}, [orderID]);
 

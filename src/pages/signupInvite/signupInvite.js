@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import baseUrl from "../../apiUrls";
 import validatePassword from "../../validation/password";
@@ -35,7 +35,7 @@ function SignUpInvite() {
 			setData(res.data);
 			setLoading(false);
 		}).catch(err => {
-			flashMsg('error', 'Failed to retrieve invite info');
+			flashMsg('error', 'Failed to get invite info');
 		});
 	}, [resetToken, inviteToken, flashMsg]);
 
@@ -80,7 +80,7 @@ function SignUpInvite() {
 	}
 
 	const formTitle = `
-		Your ${data.invited_by.type === 'STUDENT' ? 'student': 'parent or guardian'}, 
+		Your ${data.invited_by.type === 'STUDENT' ? 'student' : 'parent or guardian'}, 
 		${data.invited_by.first_name}, has invited you to create a 
 		${data.invite_to.type === 'STUDENT' ? 'student' : 'parent'} account.
 	`;

@@ -3,7 +3,7 @@ import Button from "../../components/button/button";
 import { useParams } from "react-router-dom";
 import { useFlashMsg } from '../../services/flashMsg';
 import baseUrl from "../../apiUrls";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from '../loading/loading';
 import { useAuth } from '../../services/authentication';
 
@@ -15,7 +15,6 @@ function SelectionPage() {
     const navigate = useNavigate();
 	const { flashMsg } = useFlashMsg();
 	const { autoAuthReq } = useAuth();
-	
 	const here = useLocation().pathname;
 
     useEffect(() => {

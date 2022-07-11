@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../../services/authentication";
 import { useFlashMsg } from "../../../services/flashMsg";
 import baseUrl from "../../../apiUrls";
@@ -10,10 +10,9 @@ import { Link } from "react-router-dom";
 function DashboardCourseDetails() {
 	const [courses, setCourses] = useState(null);
 	const [courseTasks, setCourseTasks] = useState(null);
+	const [blockHidden, setBlockHidden] = useState(false);
 	const auth = useAuth();
 	const { flashMsg } = useFlashMsg();
-	
-	const [blockHidden, setBlockHidden] = useState(false);
  
 	function hideView() {
 		setBlockHidden(e => !e);
@@ -21,7 +20,10 @@ function DashboardCourseDetails() {
 
 	useEffect(() => {
 		(async () => {
-			const data = await auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`,{ method: 'GET' });
+			const data = await auth.autoAuthReq(
+				baseUrl + `/api/v1/users/${auth.user.id}/orders/`, 
+				{ method: 'GET' }
+			);
 
 			// fetch incomplete tasks from API
 			const courseTaskDict = {};
@@ -32,7 +34,7 @@ function DashboardCourseDetails() {
 			setCourseTasks(courseTaskDict);
 			setCourses(data.data);
 		})().catch(err => {
-			flashMsg('error', 'Failed to retrieve course info');
+			flashMsg('error', 'Failed to get course info');
 		});
 	}, [auth, flashMsg]);
 
@@ -44,7 +46,7 @@ function DashboardCourseDetails() {
 			// TODO: remove dummy deadline - API does not return a deadline yet
 			const transactionsTable = course.transactions.map((transaction) => (
 				<div className='grid grid-cols-4 gap-4 text-center text-xs md:text-base pb-2'>
-					<div>{transaction.created_at.substring(0,10)}</div>
+					<div>{transaction.created_at.substring(0, 10)}</div>
 					<div>${course.course.price}</div>
 					<div>{transaction.name}</div>
 					<div>

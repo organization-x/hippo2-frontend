@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../../services/authentication";
 import { useFlashMsg } from "../../../services/flashMsg";
@@ -9,11 +9,9 @@ function AccountSettings() {
     const [profiles, setProfiles] = useState([]);
     const { user, autoAuthReq } = useAuth();
 	const { flashMsg } = useFlashMsg();
-	
 	const here = useLocation().pathname;
 
     useEffect(() => {
-		console.log('called');
 		const data = [];
 
 		const url = baseUrl + '/api/v1/users/groupstudents/'; 
@@ -40,7 +38,7 @@ function AccountSettings() {
 				const student = res.data[i];
 				data.push(
 					<Profile 
-						key={i+1}
+						key={i + 1}
 						fName={student.first_name}
 						lName={student.last_name}
 						email={student.email}
@@ -54,7 +52,7 @@ function AccountSettings() {
 			}
 			setProfiles(data);
 		}).catch(err => {
-			flashMsg('error', 'Could not retrieve student info');
+			flashMsg('error', 'Could not get student info');
 		});
     }, [user, autoAuthReq, here, flashMsg]);
 

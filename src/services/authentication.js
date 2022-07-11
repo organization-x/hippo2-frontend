@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
 	const [checkLogin, setCheckLogin] = useState(false);
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
-	
+
 	const autoAuthReq = useRef((url, options, redirect = null) => (
 		new Promise((resolve, reject) => {
 			sendReq(
@@ -152,7 +152,7 @@ export function AuthProvider({ children }) {
 		return userRes;
 	};
 
-	const handleGoogleLogin = async (code, type=null, redirect = '/') => {
+	const handleGoogleLogin = async (code, type = null, redirect = '/') => {
 		const loginUrl = baseUrl + '/api/v1/auth/google/';
 		const loginOptions = {
 			method: 'POST',
@@ -202,7 +202,7 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
-	const handleUserUpdate = async (fName, lName, dob, phoneNum, init, id, redirect='/') => {
+	const handleUserUpdate = async (fName, lName, dob, phoneNum, init, id, redirect = '/') => {
 		const userUrl = baseUrl + `/api/v1/users/${id}/`;
 		const updateOptions = {
 			method: 'POST',
@@ -237,7 +237,7 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
-	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect='/invite') => {
+	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect = '/invite') => {
 		const url = baseUrl + '/api/v1/groups/invite/';
 		const options = {
 			method: 'POST',

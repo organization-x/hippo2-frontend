@@ -1,6 +1,6 @@
 import './button.css';
 
-function Button({ onClick, bgColor, children, className, txtColor, href, isLink=false, disabled=false, button='button' }) {
+function Button({ onClick, bgColor, children, className, txtColor, href, isLink = false, disabled = false, button = 'button' }) {
 	if (isLink) {
 		return (
 			<a href={href} className={`btn ${'bg-' + bgColor} ${className} ${'txt-' + txtColor} ${button} ${disabled ? '' : 'active'}`}>{children}</a>

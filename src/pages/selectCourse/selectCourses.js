@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFlashMsg } from "../../services/flashMsg";
 import Button from "../../components/button/button";
@@ -13,7 +13,7 @@ function SelectCourses() {
 	const { flashMsg } = useFlashMsg();
 
 	const [courseList, setCourseList] = useState([]);
-	const [courseId,setCourseId] = useState('');
+	const [courseId, setCourseId] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleChange = (courseId) => {
@@ -29,24 +29,24 @@ function SelectCourses() {
 		if (err) {
 			setErrorMessage('Please choose a course');
 		} else {
-			navigate('/courses/'+courseId+'/batches');
+			navigate(`/courses/${courseId}/batches`);
 		}
 	};
 
 	useEffect(() => {
 		// Runs after the first render() lifecycle
-		const urlCoursesApi = baseUrl +'/api/v1/courses/';
+		const urlCoursesApi = baseUrl + '/api/v1/courses/';
 		const options = {
-			method:'GET',
+			method: 'GET',
 		};
 
-		sendReq(urlCoursesApi,options).then(res => {
+		sendReq(urlCoursesApi, options).then(res => {
 			setCourseList(res.data);
 		}).catch(err => {
-			flashMsg('error', 'Failed to retrieve courses');
+			flashMsg('error', 'Failed to get courses');
 			navigate('/');
 		});
-	}, [flashMsg]);
+	}, [flashMsg, navigate]);
 	
 	return (
 		<>

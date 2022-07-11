@@ -5,7 +5,7 @@ import { useFlashMsg } from "../../services/flashMsg";
 import sendReq from "../../services/sendReq";
 import validateUuid from "../../validation/uuid";
 import baseUrl from "../../apiUrls";
-import BatchSelect from "../../components/batch-select/batchSelect";
+import BatchSelect from "../../components/old_batch-select/batchSelect";
 import Button from "../../components/button/button";
 
 function BatchPage() {

@@ -4,7 +4,7 @@ import { useAuth } from "../../services/authentication";
 import { useFlashMsg } from "../../services/flashMsg";
 import validateUuid from "../../validation/uuid";
 import baseUrl from "../../apiUrls";
-import BatchSelect from "../../components/batch-select/batchSelect";
+import BatchSelect from "../../components/old_batch-select/batchSelect";
 import Button from "../../components/button/button";
 
 function BatchChange() {

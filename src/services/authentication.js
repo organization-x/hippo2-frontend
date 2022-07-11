@@ -31,7 +31,7 @@ const excludeRedirects = [
 // routes that don't require check to see if user is authenticated
 // prevents navigate from removing query string
 const excludeChecks = [
-	'/auth/google/', '/password/reset', '/password/reset/confirm', '/signup/invite'
+	'/auth/google/', '/password/reset', '/password/reset/confirm', '/signup/invite',
 ];
 
 const blankUser = {

@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect, useRef, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, matchPath } from "react-router-dom";
 import sendReq from "./sendReq";
 import baseUrl from "../apiUrls";
 
@@ -31,7 +31,7 @@ const excludeRedirects = [
 // routes that don't require check to see if user is authenticated
 // prevents navigate from removing query string
 const excludeChecks = [
-	'/auth/google/', '/password/reset', '/password/reset/confirm', '/signup/invite'
+	'/auth/google/', '/password/reset', '/password/reset/confirm', '/signup/invite', '/courses'
 ];
 
 const blankUser = {
@@ -261,7 +261,10 @@ export function AuthProvider({ children }) {
 	};
 
 	useEffect(() => {
-		if (excludeChecks.includes(location.pathname)) {
+		if (
+			excludeChecks.includes(location.pathname) || 
+			matchPath('/courses/:id/batches', location.pathname)
+		) {
 			return setCheckLogin(true);
 		}
 		const url = baseUrl + '/api/v1/users/';

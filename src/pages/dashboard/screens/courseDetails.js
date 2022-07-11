@@ -73,12 +73,12 @@ function DashboardCourseDetails() {
 					<div className="flex-none md:flex-initial w-full md:w-5/12 py-8 px-16 pb-10 bg-stone-300  md:rounded-tr-xl md:rounded-none">
 						<h1 className="font-semibold text-2xl mb-10 text-center">Course Materials</h1>
 						{courseTasks[course.id] ? <Button bgColor="white" txtColor="black" className="w-full py-3 mb-4">Student To Do List</Button> :
-						<>
-							<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Zoom Link</Button>
-							<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Discord Server</Button>
-							<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Class Schedule</Button>
-							<Button bgColor="white" txtColor="black" className="w-full py-2">Slideshow Presentations</Button>
-						</>}
+							<>
+								<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Zoom Link</Button>
+								<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Discord Server</Button>
+								<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Class Schedule</Button>
+								<Button bgColor="white" txtColor="black" className="w-full py-2">Slideshow Presentations</Button>
+							</>}
 					</div>
 
 					<div className="flex-none md:flex-initial w-full py-5 px-8 bg-zinc-400/75 rounded-b-xl rounded-none">

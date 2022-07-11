@@ -51,11 +51,6 @@ function App() {
 									<ConfirmDetails />
 								</ProtectedRoute>
 							}/>
-							<Route path='/protected' element={
-								<ProtectedRoute>
-									<Protected />
-								</ProtectedRoute>
-							}/>
 							<Route path='/signup' element={<Signup />}/>
 							<Route path='/login' element={<Login />}/>
 							<Route path='/signup/invite' element={<SignUpInvite />}/>

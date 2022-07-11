@@ -32,7 +32,7 @@ function Navbar() {
 								<li>
 									<span className='user-text'>Logged in as {user.fName}</span>
 								</li>
-							: null
+								: null
 						}
 						{/* <li className='text-white hover:text-gray-300'>
 							<Link to='/'>Page 1</Link>
@@ -56,7 +56,7 @@ function Navbar() {
 								<li className='logout'>
 									<button onClick={() => onLogout()} >Logout</button>
 								</li>
-							: null
+								: null
 						}
 					</ul>
 				</nav>

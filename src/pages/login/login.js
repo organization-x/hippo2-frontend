@@ -71,7 +71,7 @@ function Login() {
 						<span className='block form-error'>
 							{formErrors.nonFieldErrors[0]}
 						</span> 
-					:
+						:
 						null
 				}
 

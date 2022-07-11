@@ -147,7 +147,7 @@ function InviteUser() {
 					{
 						formErrors.phone?.length ? 
 							<span className='mt-1 block form-error text-sm'>{formErrors.phone[0]}</span> 
-						: 
+							: 
 							null
 					}
 					{type !== 'PARENT' &&

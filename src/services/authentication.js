@@ -254,9 +254,9 @@ export function AuthProvider({ children }) {
 		}
 		const res = await autoAuthReq(url, options, redirect);
 		setUser(prev => ({
-				...prev,
-				'filledInvite': true
-			}));
+			...prev,
+			'filledInvite': true
+		}));
 		return res;
 	};
 

@@ -118,7 +118,7 @@ function Signup() {
 				{
 					formErrors.type?.length ? 
 						<span className='mt-3 block text-center form-error'>{formErrors.type[0]}</span> 
-					: 
+						: 
 						null
 				}
 				<Link 
@@ -131,23 +131,23 @@ function Signup() {
 
 				<div className={`${fade ? "block" : "hidden"}`}>
 					<Input label="Email"
-					type="email"
-					placeHolder="JohnDoe@yahoo.com"
-					className="mb-3 mt-6"
-					id="email"
-					isValid={formErrors.email?.length}
-					errorText={formErrors.email?.[0]}
-					onChange={val => setEmail(val)} 
+						type="email"
+						placeHolder="JohnDoe@yahoo.com"
+						className="mb-3 mt-6"
+						id="email"
+						isValid={formErrors.email?.length}
+						errorText={formErrors.email?.[0]}
+						onChange={val => setEmail(val)} 
 					/>
 
 					<Input label="Password"
-					type="password"
-					placeHolder="JohnDoePassword"
-					className="mb-3"
-					id="password"
-					isValid={formErrors.password?.length}
-					errorText={formErrors.password?.[0]}
-					onChange={val => setPassword(val)} 
+						type="password"
+						placeHolder="JohnDoePassword"
+						className="mb-3"
+						id="password"
+						isValid={formErrors.password?.length}
+						errorText={formErrors.password?.[0]}
+						onChange={val => setPassword(val)} 
 					/>
 
 					<Button bgColor="green" txtColor="white" className="w-full mb-3 mt-6 py-1" onClick={() => signUpUser()}>Next</Button>

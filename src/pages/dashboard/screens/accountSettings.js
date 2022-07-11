@@ -6,12 +6,12 @@ import Profile from "../../../components/profile/profile";
 import baseUrl from "../../../apiUrls";
 
 function AccountSettings() {
-    const [profiles, setProfiles] = useState([]);
-    const { user, autoAuthReq } = useAuth();
+	const [profiles, setProfiles] = useState([]);
+	const { user, autoAuthReq } = useAuth();
 	const { flashMsg } = useFlashMsg();
 	const here = useLocation().pathname;
 
-    useEffect(() => {
+	useEffect(() => {
 		const data = [];
 
 		const url = baseUrl + '/api/v1/users/groupstudents/'; 
@@ -54,13 +54,13 @@ function AccountSettings() {
 		}).catch(err => {
 			flashMsg('error', 'Could not get student info');
 		});
-    }, [user, autoAuthReq, here, flashMsg]);
+	}, [user, autoAuthReq, here, flashMsg]);
 
-    return (
+	return (
 		<div className="flex flex-row flex-wrap rounded-xl">
 			{profiles}
 		</div>
-    );
+	);
 }
 
 export default AccountSettings;

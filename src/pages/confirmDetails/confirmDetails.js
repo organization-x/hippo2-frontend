@@ -121,7 +121,7 @@ function ConfirmDetails() {
 						{
 							formErrors.phone?.length ? 
 								<span className='mt-1 block form-error text-sm'>{formErrors.phone[0]}</span> 
-							: null
+								: null
 						}
 						{user.type !== 'PARENT' &&
 							<Input label="Birth Month and Year"

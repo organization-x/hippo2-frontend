@@ -25,7 +25,7 @@ function GroupJoin() {
 				}
 			};
 			autoAuthReq(url, options, here).then(res => {
-				flashMsg('error', 'Successfully joined group');
+				flashMsg('success', 'Successfully joined group');
 				navigate('/');
 			}).catch(err => {
 				flashMsg('error', 'Failed to join group');

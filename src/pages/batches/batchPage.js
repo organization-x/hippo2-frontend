@@ -1,30 +1,27 @@
 import { useEffect, useState } from "react";
-import baseUrl from "../../apiUrls";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "../../services/authentication";
+import { useFlashMsg } from "../../services/flashMsg";
 import sendReq from "../../services/sendReq";
+import validateUuid from "../../validation/uuid";
+import baseUrl from "../../apiUrls";
 import BatchSelect from "../../components/batch-select/batchSelect";
 import Button from "../../components/button/button";
-import validateUuid from "../../validation/uuid";
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../../services/authentication";
 
 function BatchPage() {
-    const [batch_no, selectBatchNo] = useState(-1);    
-    const [batchID, selectBatchID] = useState('');    
+    const [batchNo, setBatchNo] = useState(-1);    
+    const [batchID, setBatchID] = useState('');    
     const [batchData, setBatchData] = useState([]);    
-    	
-	const { courseID } = useParams();
 
     const [isLoading, setIsLoading] = useState(true);
-
+    const [formErrors, setFormErrors] = useState('');
+	const { courseID } = useParams();
+    const { user } = useAuth();
+	const { flashMsg } = useFlashMsg();
     const navigate = useNavigate();
 
-    const [formErrors, setFormErrors] = useState('');
-
-    const {user} = useAuth();
-
     useEffect(() => {
-        if(courseID){
+        if (courseID) {
             const url = baseUrl + `/api/v1/courses/${courseID}/batches/`;
             const options = {
                 method: 'GET',
@@ -32,12 +29,14 @@ function BatchPage() {
             sendReq(url, options).then(res => {
                 setBatchData(res.data);
                 setIsLoading(false);
-            });
+            }).catch(err => {
+				flashMsg('error', 'Failed to get batch info');
+			});
         }
-    }, [courseID]);
+    }, [courseID, flashMsg]);
 
     function SideBarContent() {
-        if (batch_no === -1) {
+        if (batchNo === -1) {
             return (
                 <div className="flex-none md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                     <h1 className="text-3xl mb-10 text-center">
@@ -50,13 +49,12 @@ function BatchPage() {
                         Some batch choices will be limited due to our capacity. 
                     </p>
                 </div>);
-        }
-        else {
-			const batch = batchData.batches[batch_no];
+        } else {
+			const batch = batchData.batches[batchNo];
             return (
                 <div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
                     <h1 className="text-3xl mb-10 text-center">
-                        Batch {batchData.batches[batch_no].name}
+                        Batch {batchData.batches[batchNo].name}
                     </h1>
                     <ul className="list-disc list-inside text-1xl mx-4 mb-3">
                         <li className="my-3">Program Dates: {batch.start_date} - {batch.end_date}</li>
@@ -74,9 +72,9 @@ function BatchPage() {
         const onNext = () => {
             setFormErrors('');
             const [ err ] = validateUuid(batchID);
-            if(err){
+            if (err) {
                 return setFormErrors(err);
-            } else if (user.type==="PARENT") {
+            } else if (user.type === "PARENT") {
                 const path = `/batches/${batchID}/student-selection`;
                 navigate(path); 
             } else {
@@ -86,8 +84,7 @@ function BatchPage() {
         };
     
         const onBack = () => {
-            const back_path =`/courses`;
-            navigate(back_path);   
+            navigate('/courses');   
         };
         return (
             <div>
@@ -126,14 +123,13 @@ function BatchPage() {
                 <BatchSelect 
                     batchData={batchData} 
                     onChange={
-                        (batch_no, batchID) => { 
-                            selectBatchNo(batch_no);
-                            selectBatchID(batchID); 
+                        (batchNo, batchID) => { 
+                            setBatchNo(batchNo);
+                            setBatchID(batchID); 
                         } 
                     }
-                    batch_id = {batchID}
-                    batchIndex={batch_no}
-                    isLoading = {isLoading}/>
+                    batchIndex={batchNo}
+                    isLoading={isLoading}/>
                 <NextAndBackButtons/>
             </div>
         </div>

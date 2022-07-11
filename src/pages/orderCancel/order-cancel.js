@@ -1,18 +1,17 @@
-import Button from "../../components/button/button";
-import React from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useAuth } from "../../services/authentication";
 import { useFlashMsg } from "../../services/flashMsg";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
 import baseUrl from '../../apiUrls';
+import Button from "../../components/button/button";
 
 
 function OrderCancel () {
 
-    const {autoAuthReq} = useAuth(); // import this
-    const {flashMsg} = useFlashMsg(); // this too
+    const { autoAuthReq } = useAuth(); // import this
+    const { flashMsg } = useFlashMsg(); // this too
     const navigate = useNavigate(); // this too
     const here = useLocation().pathname; // this too
-    const {orderID} = useParams(); // this too
+    const { orderID } = useParams(); // this too
 
     const onConfirm = () => {
         // import baseUrl

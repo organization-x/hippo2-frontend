@@ -72,7 +72,7 @@ function Profile({
 				<h2 className="text-xl mb-7 text-center">{header}</h2>
 				<Input label="First Name"
 					type="text"
-					placeHolder={editing ? 'John': ''}
+					placeHolder={editing ? 'John' : ''}
 					className="mb-3" 
 					value={f}
 					isValid={formErrors.fName?.length}
@@ -111,9 +111,7 @@ function Profile({
 					onChange={value => {
 						setP(value);
 					}}
-					isValid={() => {
-						return !formErrors.phone?.length;
-					}}
+					isValid={() => !formErrors.phone?.length}
 				/>
 				{
 					formErrors.phone?.length ? 

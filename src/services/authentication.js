@@ -58,8 +58,8 @@ export function AuthProvider({ children }) {
 	const navigate = useRef(useNavigate()).current;
 	const location = useRef(useLocation()).current;
 
-	const autoAuthReq = useRef((url, options, redirect = null) => {
-		return new Promise((resolve, reject) => {
+	const autoAuthReq = useRef((url, options, redirect = null) => (
+		new Promise((resolve, reject) => {
 			sendReq(
 				url, options
 			).then(res => {
@@ -68,12 +68,12 @@ export function AuthProvider({ children }) {
 				// redirect if unauthenticated
 				if (err.status && [401, 403].includes(err.status)) {
 					setUser(blankUser);
-					navigate('/signup', { state: { from: { pathname: redirect } } });
+					navigate('/signup', { state: { from: { pathname: redirect }}});
 				}
 				reject(err);
 			});
-		});
-	}).current;
+		})
+	)).current;
 
 	const handleSignup = async (email, type, password, redirect = '/') => {
 		const newUrl = baseUrl + '/auth/registration/';
@@ -152,7 +152,7 @@ export function AuthProvider({ children }) {
 		return userRes;
 	};
 
-	const handleGoogleLogin = async (code, type=null, redirect = '/') => {
+	const handleGoogleLogin = async (code, type = null, redirect = '/') => {
 		const loginUrl = baseUrl + '/api/v1/auth/google/';
 		const loginOptions = {
 			method: 'POST',
@@ -202,7 +202,7 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
-	const handleUserUpdate = async (fName, lName, dob, phoneNum, init, id, redirect='/') => {
+	const handleUserUpdate = async (fName, lName, dob, phoneNum, init, id, redirect = '/') => {
 		const userUrl = baseUrl + `/api/v1/users/${id}/`;
 		const updateOptions = {
 			method: 'POST',
@@ -237,7 +237,7 @@ export function AuthProvider({ children }) {
 		return res;
 	};
 
-	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect='/invite') => {
+	const handleUserInvite = async (email, fName, lName, type, phone, dob, redirect = '/invite') => {
 		const url = baseUrl + '/api/v1/groups/invite/';
 		const options = {
 			method: 'POST',
@@ -253,12 +253,10 @@ export function AuthProvider({ children }) {
 			options.body.dob = dob;
 		}
 		const res = await autoAuthReq(url, options, redirect);
-		setUser(prev => {
-			return {
+		setUser(prev => ({
 				...prev,
 				'filledInvite': true
-			};
-		});
+			}));
 		return res;
 	};
 
@@ -295,10 +293,11 @@ export function AuthProvider({ children }) {
 			// if they're signed in already
 			navigate(origin);
 		}).catch(err => {
-			setCheckLogin(true);
-			if (err.status !== 401 && err.status !== 403) {
-				console.log('Could not get user info');
+			if (err.status !== 403 && err.status !== 401) {
+				setUser(blankUser);
+				navigate('/signup');
 			}
+			setCheckLogin(true);
 		});
 	}, [autoAuthReq, location, navigate]);
 

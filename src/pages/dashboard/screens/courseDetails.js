@@ -1,19 +1,18 @@
-import {useEffect, useRef, useState} from "react";
-import {useAuth} from "../../../services/authentication";
-import {useFlashMsg} from "../../../services/flashMsg";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../../services/authentication";
+import { useFlashMsg } from "../../../services/flashMsg";
 import baseUrl from "../../../apiUrls";
 import Button from "../../../components/button/button";
 import Loading from "../../loading/loading";
 import './Home.css';
-import {Link} from "react-router-dom";
 
 function DashboardCourseDetails() {
 	const [courses, setCourses] = useState(null);
 	const [courseTasks, setCourseTasks] = useState(null);
+	const [blockHidden, setBlockHidden] = useState(false);
 	const auth = useAuth();
 	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
-	const [blockHidden, setBlockHidden] = useState(false);
  
 	function hideView() {
 		setBlockHidden(e => !e);
@@ -21,20 +20,23 @@ function DashboardCourseDetails() {
 
 	useEffect(() => {
 		(async () => {
-			const data = await auth.autoAuthReq(baseUrl + `/api/v1/users/${auth.user.id}/orders/`,{method: 'GET'})
+			const data = await auth.autoAuthReq(
+				baseUrl + `/api/v1/users/${auth.user.id}/orders/`, 
+				{ method: 'GET' }
+			);
 
 			// fetch incomplete tasks from API
 			const courseTaskDict = {};
 			for (let course of data.data) {
-				courseTaskDict[course.id] = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, {method: 'GET'})).data.count > 0;
+				courseTaskDict[course.id] = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, { method: 'GET' })).data.count > 0;
 			}
 
 			setCourseTasks(courseTaskDict);
 			setCourses(data.data);
 		})().catch(err => {
-			flashMsgRef('error', 'Unable to retrieve course info')
+			flashMsg('error', 'Failed to get course info');
 		});
-	}, [auth, flashMsgRef]);
+	}, [auth, flashMsg]);
 
 	let coursesList = null;
 
@@ -42,19 +44,19 @@ function DashboardCourseDetails() {
 		coursesList = [];
 		for (let course of courses) {
 			// TODO: remove dummy deadline - API does not return a deadline yet
-			const transactionsTable = course.transactions.map((transaction) => {
-				return <div className='grid grid-cols-4 gap-4 text-center text-xs md:text-base pb-2'>
-					<div>{transaction.created_at.substring(0,10)}</div>
+			const transactionsTable = course.transactions.map((transaction) => (
+				<div className='grid grid-cols-4 gap-4 text-center text-xs md:text-base pb-2'>
+					<div>{transaction.created_at.substring(0, 10)}</div>
 					<div>${course.course.price}</div>
 					<div>{transaction.name}</div>
 					<div>
 						<span className=
-							{{unpaid: 'text-red-400', paid: 'text-green-500', cancelled: 'text-yellow-400', refunded: 'text-gray-500'}[transaction.status]}>
-							{{unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded'}[transaction.status]}
+							{{ unpaid: 'text-red-400', paid: 'text-green-500', cancelled: 'text-yellow-400', refunded: 'text-gray-500' }[transaction.status]}>
+							{{ unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded' }[transaction.status]}
 						</span>
 					</div>
 				</div>
-			});
+			));
 
 			coursesList.push((
 				<div key={course.id} className="container flex flex-wrap mx-auto mt-10 px-5 mb-10">

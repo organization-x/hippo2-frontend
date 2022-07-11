@@ -12,8 +12,10 @@ function ForgotPassword() {
 			method: 'POST',
 			body: { email: email }
 		};
-		sendReq(url, options).then( _ => setSent(true));
-	}
+		sendReq(url, options).then( res => setSent(true)).catch(err => {
+			// error handling
+		});
+	};
 
 	let content;
 	if (sent) {

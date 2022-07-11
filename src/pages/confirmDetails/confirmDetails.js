@@ -11,8 +11,8 @@ import 'react-phone-input-2/lib/style.css';
 import './confirmDetails.css';
 
 function ConfirmDetails() {
-	const {user, handleUserUpdate} = useAuth();
-	const {flashMsg} = useFlashMsg()
+	const { user, handleUserUpdate } = useAuth();
+	const { flashMsg } = useFlashMsg();
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ function ConfirmDetails() {
 	const origin = location.state?.from?.pathname || '/';
 
 	if (user.filledDetails) {
-		return <Navigate to={origin} replace />
+		return <Navigate to={origin} replace />;
 	}
 	
 	const onSubmit = () => {
@@ -65,7 +65,7 @@ function ConfirmDetails() {
 			}
 		});
 
-	}
+	};
 
 	return (
 		<div>
@@ -116,9 +116,7 @@ function ConfirmDetails() {
 							onChange={value => {
 								setPhone(value);
 							}}
-							isValid={() => {
-								return !formErrors.phone?.length;
-							}}
+							isValid={() => !formErrors.phone?.length}
 						/>
 						{
 							formErrors.phone?.length ? 
@@ -144,7 +142,7 @@ function ConfirmDetails() {
 				</form>
 			</div>
 		</div>
-	)
+	);
 }
 
 export default ConfirmDetails;

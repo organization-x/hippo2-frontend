@@ -8,7 +8,7 @@
 // 	}
 // }
 
-function formatFormErrors(err, messages, singleField=false) {
+function formatFormErrors(err, messages, singleField = false) {
 	if (err) {
 		if (singleField) {
 			const error = err.failures()[0];
@@ -35,7 +35,7 @@ function formatFormErrors(err, messages, singleField=false) {
 		}
 		return formattedErrors;
 	}
-	return err
+	return err;
 }
 
 export default formatFormErrors;

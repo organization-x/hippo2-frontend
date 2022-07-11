@@ -1,14 +1,11 @@
-import {useState} from "react";
+import { useState } from "react";
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
-
 import { useAuth } from "../../services/authentication";
 import validateUserInformation from "../../validation/userInformation";
 import formatApiErrors from "../../validation/formatApiErrors";
-
 import PhoneInput from "react-phone-input-2";
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
-
 import 'react-phone-input-2/lib/style.css';
 import './inviteUser.css';
 
@@ -30,7 +27,7 @@ function InviteUser() {
 	const origin = location.state?.from?.pathname || '/';
 
 	if (user.filledInvite) {
-		return <Navigate to={origin} replace />
+		return <Navigate to={origin} replace />;
 	}
 
 	const onSubmit = () => {
@@ -57,7 +54,7 @@ function InviteUser() {
 		).then(res => {
 			navigate(origin);
 		}).catch(err => {
-			if(err.status === 400) {
+			if (err.status === 400) {
 				const keyMap = {
 					'first_name': 'fName',
 					'last_name': 'lName',
@@ -145,9 +142,7 @@ function InviteUser() {
 						onChange={value => {
 							setPhone(value);
 						}}
-						isValid={() => {
-							return !formErrors.phone?.length;
-						}}
+						isValid={() => !formErrors.phone?.length}
 					/>
 					{
 						formErrors.phone?.length ? 

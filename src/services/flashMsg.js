@@ -1,4 +1,4 @@
-const { useContext, createContext, useState } = require("react");
+import { useContext, createContext, useState, useRef } from "react";
 
 /**
  * ==============================================
@@ -15,7 +15,7 @@ const { useContext, createContext, useState } = require("react");
 const FlashMessageContext = createContext();
 
 const DURATION = 5000; // flash message duration (ms)
-const FADE = 500 // how fast to fadeout the message
+const FADE = 500; // how fast to fadeout the message
 
 export function useFlashMsg() {
 	return useContext(FlashMessageContext);
@@ -24,41 +24,40 @@ export function useFlashMsg() {
 export function FlashMsgProvider({ children }) {
 	const [msg, setMsg] = useState({});
 	const [idCount, setIdCount] = useState(0);
-	
-	const flashMsg = (type, text) => {
+	const idCountRef = useRef();
+	idCountRef.current = idCount;
+
+	const flashMsg = useRef((type, text) => {
+		const id = idCountRef.current;
 		const newMsg = {
 			status: 'display',
 			text: text,
 			type: type
 		};
-		setMsg((prev) => {
-			return {
-				...prev,
-				[idCount]: newMsg
-			};
-		});
+		setMsg((prev) => ({
+			...prev,
+			[id]: newMsg
+		}));
 		// fade message out after certain duration
 		setTimeout(() => {
 			const fadeMsg = { ...newMsg };
 			fadeMsg.status = 'fadeout';
-			setMsg((prev) => {
-				return {
-					...prev,
-					[idCount]: fadeMsg
-				};
-			});
+			setMsg((prev) => ({
+				...prev,
+				[id]: fadeMsg
+			}));
 		}, DURATION);
 		// completely remove after fadeout
 		setTimeout(() => {
 			setMsg((prev) => {
 				const prevCopy = { ...prev };
-				delete prevCopy[idCount];
+				delete prevCopy[id];
 				return prevCopy;
 			});
 		}, DURATION + FADE);
 		// increment id tracker
 		setIdCount(prev => prev + 1);
-	};
+	}).current;
 
 	const value = {
 		msg,

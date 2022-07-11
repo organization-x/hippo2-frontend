@@ -1,4 +1,4 @@
-import {nonempty, object, pattern, string, validate } from "superstruct";
+import { nonempty, object, pattern, string, validate } from "superstruct";
 import formatFormErrors from "./formatFormErrors";
 
 const Email = object({
@@ -17,7 +17,7 @@ const messages = {
 function validateEmail(data) {
 	const [err, vData] = validate(data, Email);
 	const formattedErr = formatFormErrors(err, messages);
-	return [formattedErr, vData]
+	return [formattedErr, vData];
 }
 
 export default validateEmail;

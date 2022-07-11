@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import baseUrl from "../../apiUrls";
-import validatePassword from "../../validation/password";
 import { useAuth } from "../../services/authentication";
 import { useFlashMsg } from "../../services/flashMsg";
+import validatePassword from "../../validation/password";
 import sendReq from "../../services/sendReq";
+import baseUrl from "../../apiUrls";
 
 import Loading from "../loading/loading";
 import Button from "../../components/button/button";
@@ -23,19 +23,21 @@ function SignUpInvite() {
 	const { flashMsg } = useFlashMsg();
 	const resetToken = search.get('resettoken');
 	const inviteToken = search.get('invitetoken');
-	const flashMsgRef = useRef(flashMsg).current;
+	
 
 	useEffect(() => {
 		if (!resetToken || !inviteToken) {
-			return flashMsgRef('error', 'Invalid invite link');
+			return flashMsg('error', 'Invalid invite link');
 		}
 		// get invite information
 		const url = baseUrl + `/api/v1/groups/invite/${inviteToken}/`;
-		sendReq(url, {method: 'GET'}).then(res => {
+		sendReq(url, { method: 'GET' }).then(res => {
 			setData(res.data);
 			setLoading(false);
+		}).catch(err => {
+			flashMsg('error', 'Failed to get invite info');
 		});
-	}, [resetToken, inviteToken, flashMsgRef]);
+	}, [resetToken, inviteToken, flashMsg]);
 
 	const setupUser = () => {
 		setFormErrors('');
@@ -78,7 +80,7 @@ function SignUpInvite() {
 	}
 
 	const formTitle = `
-		Your ${data.invited_by.type === 'STUDENT' ? 'student': 'parent or guardian'}, 
+		Your ${data.invited_by.type === 'STUDENT' ? 'student' : 'parent or guardian'}, 
 		${data.invited_by.first_name}, has invited you to create a 
 		${data.invite_to.type === 'STUDENT' ? 'student' : 'parent'} account.
 	`;

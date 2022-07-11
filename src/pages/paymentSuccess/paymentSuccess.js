@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import baseUrl from "../../apiUrls";
-import sendReq from "../../services/sendReq";
 import validateUuid from "../../validation/uuid";
+import sendReq from "../../services/sendReq";
+import baseUrl from "../../apiUrls";
 import Button from "../../components/button/button";
 
 function PaymentSuccess() {
@@ -21,7 +21,7 @@ function PaymentSuccess() {
 		sendReq(url, options).then(res => {
 			setData(res.data);
 		}).catch(err => {
-			setErrorText('Could not retrieve order information');
+			setErrorText('Could not get order information');
 		});
 	}, [orderID]);
 

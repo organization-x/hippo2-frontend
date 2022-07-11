@@ -1,13 +1,12 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import Button from "../../components/button/button";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import { useFlashMsg } from '../../services/flashMsg';
-import baseUrl from "../../apiUrls";
-import { useEffect, useRef, useState } from "react";
-import Loading from '../loading/loading';
 import { useAuth } from '../../services/authentication';
+import baseUrl from "../../apiUrls";
+import Button from "../../components/button/button";
+import Loading from '../loading/loading';
 
-function SelectionPage(){
+function SelectionPage() {
     const [batchData, setBatchData] = useState({});
     const [studentData, setStudentData] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -15,12 +14,11 @@ function SelectionPage(){
     const navigate = useNavigate();
 	const { flashMsg } = useFlashMsg();
 	const { autoAuthReq } = useAuth();
-	const flashMsgRef = useRef(flashMsg).current;
 	const here = useLocation().pathname;
 
     useEffect(() => {
         if (!batchID) {
-			return flashMsgRef('error', 'Invalid Batch');
+			return flashMsg('error', 'Invalid Batch');
 		}
 		const batchUrl = baseUrl + `/api/v1/batches/${batchID}/`;
 		const studentsUrl = baseUrl + `/api/v1/users/groupstudents/`;
@@ -41,10 +39,10 @@ function SelectionPage(){
 
 			setLoading(false);
 		})().catch(err => {
-			flashMsgRef('error', 'Error fetching batch and student info');
+			flashMsg('error', 'Error fetching batch and student info');
 			navigate('/courses');
 		});
-    }, [batchID, flashMsgRef, navigate, autoAuthReq, here]);
+    }, [batchID, flashMsg, navigate, autoAuthReq, here]);
 
 	if (loading) {
 		return <Loading />;
@@ -76,7 +74,7 @@ function SelectionPage(){
 				>
 					<p className="text-lg">{student.first_name + ' ' + student.last_name}</p>
 				</Button>
-			)
+			);
 		}
 	}
 

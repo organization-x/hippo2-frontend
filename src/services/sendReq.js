@@ -45,6 +45,6 @@ async function sendReq(url, iOptions) {
 	// if error, handle with .catch
 	if (error) throw result;
 	return result;
-};
+}
 
 export default sendReq;

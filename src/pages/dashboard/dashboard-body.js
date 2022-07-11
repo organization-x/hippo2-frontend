@@ -1,10 +1,9 @@
-import React from "react";
 import DashboardCourseDetails from "./screens/courseDetails";
 import AccountSettings from "./screens/accountSettings";
 import ToDo from "./screens/ToDo";
 
-function DashboardBody({page}) {
-        switch(page) {
+function DashboardBody({ page }) {
+        switch (page) {
             case 'dashboard-home':
                 return (<DashboardCourseDetails />);
             case 'To-Do':

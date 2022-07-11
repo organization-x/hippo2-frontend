@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../services/authentication";
@@ -7,6 +7,7 @@ import { useFlashMsg } from "../../services/flashMsg";
 import Button from "../../components/button/button";
 import baseUrl from "../../apiUrls";
 import Loading from "../loading/loading";
+import logo from "../../logo.svg";
 
 function BatchPayment() {
 	const { batchId } = useParams();
@@ -16,7 +17,7 @@ function BatchPayment() {
 	const [processing, setProcessing] = useState(false);
 	const { user, autoAuthReq } = useAuth();
 	const { flashMsg } = useFlashMsg();
-	const flashMsgRef = useRef(flashMsg).current;
+	
 	const location = useLocation();
 	const navigate = useNavigate();
 	
@@ -38,14 +39,14 @@ function BatchPayment() {
 			setLoading(false);
 		}).catch(err => {
 			if (err.data?.message) {
-				flashMsgRef('error', err.data.message);
+				flashMsg('error', err.data.message);
 			} else {
-				flashMsgRef('error', 'Unable to fetch order info');
+				flashMsg('error', 'Failed to fetch order info');
 			}
 			navigate('/courses');
 		});
 		
-	}, [autoAuthReq, batchId, forUserId, here, flashMsgRef, navigate]);
+	}, [autoAuthReq, batchId, forUserId, here, flashMsg, navigate]);
 
 	if (loading) {
 		return <Loading />;
@@ -65,7 +66,7 @@ function BatchPayment() {
 			if (err.data?.message) {
 				flashMsg('error', err.data.message);
 			} else {
-				flashMsg('error', 'Unable to create payment session');
+				flashMsg('error', 'Failed to create payment session');
 			}
 			navigate('/courses');
 		});
@@ -123,7 +124,7 @@ function BatchPayment() {
 					<p className="text-sm mb-1">"This class not only teaches us about AI, it provides us with resources that can help us determine what we will do in the future."</p>
 					<div className="h-8 flex">
 						<div className="inline-block">
-							<img className="rounded-full bg-zinc-300 h-8 w-8" src="" alt="" />
+							<img className="rounded-full bg-zinc-300 h-8 w-8" src={logo} alt="AI Camp Logo" />
 						</div>
 						<span className="inline-block text-sm ml-1 my-auto leading-none">Valeria Cisneros</span>
 					</div>

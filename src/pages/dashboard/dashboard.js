@@ -1,10 +1,9 @@
-import React from "react";
-import DashboardBody from "./dashboard-body";
 import { useState } from 'react';
+import DashboardBody from "./dashboard-body";
 import AlertBanner from './alertBanner';
 
 
-function Dashboard(){
+function Dashboard() {
 
     const [page, setPage] = useState('dashboard-home');
 
@@ -60,7 +59,7 @@ function Dashboard(){
             </div>
 
         </div>
-    )
+    );
 }
 
 export default Dashboard;

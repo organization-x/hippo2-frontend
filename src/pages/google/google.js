@@ -11,7 +11,7 @@ function GoogleAuth() {
 	const [search] = useSearchParams();
 	const code = useRef(search.get('code')).current;
 	const state = useRef(search.get('state')).current;
-	const flashMsgRef = useRef(flashMsg).current;
+	
 	const navigate = useNavigate();
 	
 
@@ -24,10 +24,10 @@ function GoogleAuth() {
 				type = stateObj.type;
 				origin = stateObj.origin;
 			} catch (err) {
-				return flashMsgRef('error', 'Invalid login credentials');
+				return flashMsg('error', 'Invalid login credentials');
 			}
 			handleGoogleLogin(code, type, origin).then(res => {
-				flashMsgRef('success', 'Welcome!');
+				flashMsg('success', 'Welcome!');
 			}).catch(err => {
 				if (err.status === 400) {
 					// check that err.data is defined
@@ -40,17 +40,17 @@ function GoogleAuth() {
 						const errors = Object.values(err.data);
 						for (let i = 0; i < errors.length; i++) {
 							if (errors[0].length && errors[0][0]) {
-								flashMsgRef('error', errors[0][0]);
+								flashMsg('error', errors[0][0]);
 							}
 						}
 						navigate(origin);
 					}
 				} else {
-					flashMsgRef('error', 'Unable to Sign in');
+					flashMsg('error', 'Failed to Sign in');
 				}
 			});
 		}
-	}, [code, handleGoogleLogin, state, flashMsgRef, navigate]);
+	}, [code, handleGoogleLogin, state, flashMsg, navigate]);
 
 	return (
 		<Loading />

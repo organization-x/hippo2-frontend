@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import baseUrl from "../../apiUrls";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { useFlashMsg } from "../../services/flashMsg";
 import sendReq from "../../services/sendReq";
+import validatePassword from '../../validation/password';
+import baseUrl from "../../apiUrls";
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
-import validatePassword from '../../validation/password';
-import { useFlashMsg } from "../../services/flashMsg";
-import { useNavigate } from "react-router-dom";
 
 
 function ForgotPasswordConfirm() {
@@ -25,11 +24,10 @@ function ForgotPasswordConfirm() {
 		if (err) {
 			//validate password
 			setErrorMessage(err);
-		}
-		else if (password!==confirmPassword) { 
+		} else if (password !== confirmPassword) { 
 			//check if the 2 passwords match
 			setErrorMessage('Passwords do not Match');
-		}else if (uid && token) {
+		} else if (uid && token) {
 			//update password if we have uid and token
 			setErrorMessage('');
 			const url = baseUrl + '/auth/password/reset/confirm/';
@@ -43,15 +41,15 @@ function ForgotPasswordConfirm() {
 				}
 			};
 			sendReq(url, options).then(res => {
-				flashMsg('success','Password Reset Successfully!');
+				flashMsg('success', 'Password Reset Successfully!');
 				navigate('/login');
 			}).catch(err => {
-				if (err.data?.message){
-					return flashMsg('error',err.data.message);
+				if (err.data?.message) {
+					return flashMsg('error', err.data.message);
 				}
-				flashMsg('error', 'Unable to connect to server');
+				flashMsg('error', 'Failed to connect to server');
 			});	
-		}else{
+		} else {
 			// no UID or token but passwords are correct format
 			setErrorMessage('');
 			flashMsg('error', 'Error Resetting Password');

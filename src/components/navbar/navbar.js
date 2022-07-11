@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../logo.svg';
 import { useAuth } from '../../services/authentication';
+import logo from '../../logo.svg';
 import './navbar.css';
 
 function Navbar() {
-	const [show] = useState(true); //change [show] to [show, setShow] if uncommenting showNav() below
+	// const [show] = useState(true); //change [show] to [show, setShow] if uncommenting showNav() below
+	const show = true;
 	const { user, handleLogout } = useAuth();
 	// const showNav = () => {
 	// 	setShow(!show);

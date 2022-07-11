@@ -22,7 +22,7 @@ function Signup() {
 	
 	const handleFade = () => {
 		setFade(true);
-	}
+	};
 
 	const origin = location.state?.from?.pathname || '/';
 
@@ -58,10 +58,10 @@ function Signup() {
 				};
 				setFormErrors(formatApiErrors(err.data, keyMap));
 			} else {
-				flashMsg('error', 'Unable to Sign up');
+				flashMsg('error', 'Failed to Sign up');
 			}
 		});
-	}
+	};
 
 	return (
 		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
@@ -80,7 +80,7 @@ function Signup() {
 				</p>
 
 				<p className="text-base">
-					By signing up for AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Privacy Policy</a>.
+					By signing up for AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
 				</p>
 			</div>
 
@@ -126,7 +126,7 @@ function Signup() {
 					className={
 						`text-blue-700 hover:text-blue-600 my-5 underline decoration-inherit text-center ${fade ? 'hidden' : 'block'}`
 					}
-					state={{from: {pathname: origin}}}
+					state={{ from: { pathname: origin }}}
 				>Already have an account?</Link>
 
 				<div className={`${fade ? "block" : "hidden"}`}>
@@ -150,6 +150,8 @@ function Signup() {
 					onChange={val => setPassword(val)} 
 					/>
 
+					<Button bgColor="green" txtColor="white" className="w-full mb-3 mt-6 py-1" onClick={() => signUpUser()}>Next</Button>
+
 					<p className="text-xl mb-3 text-center">Or</p>
 
 					<div className="block mb-5">
@@ -160,16 +162,14 @@ function Signup() {
 						<Link 
 							to="/login" 
 							className="mx-auto text-blue-700 hover:text-blue-600 underline decoration-inherit"
-							state={{from: {pathname: origin}}}
+							state={{ from: { pathname: origin }}}
 						>Already have an account?</Link>
 					</div>
-
-					<Button bgColor="green" txtColor="white" className="w-full my-1 py-1 mx-auto block text-center" onClick={() => signUpUser()}>Next</Button>
 				</div> 
 
 			</form>
 		</div>
-	)
+	);
 }
 
 export default Signup;

@@ -2,7 +2,7 @@ import BatchSelect from './batchSelect.js';
 import { render, screen } from '@testing-library/react';
 
 test('batch select test', () => {
-  const batch_no = -1;
+  const batchNo = -1;
   const testData = {
     "id": "af83050f-121c-4851-9ba6-78a1ae70ab48",
     "name": "Test Course",
@@ -103,14 +103,14 @@ test('batch select test', () => {
     render(
       <BatchSelect 
         batchData={testData} 
-        batchIndex={batch_no}/>
-    )
-    const seats_left = screen.getByRole('button', { name: '20 LEFT' });
+        batchIndex={batchNo}/>
+    );
+    const seatsLeft = screen.getByRole('button', { name: '20 LEFT' });
     const open = screen.getByRole('button', { name: 'OPEN' });
-    const sold_out = screen.getByRole('button', { name: 'SOLD OUT' });
+    const soldOut = screen.getByRole('button', { name: 'SOLD OUT' });
 
-    expect(seats_left.className.includes('btn bg-yellow my-4 w-1/4 text-center lg:w-11/12 p-2 lg:p-1 inline-block txt-white button active')).toBeTruthy();
+    expect(seatsLeft.className.includes('btn bg-yellow my-4 w-1/4 text-center lg:w-11/12 p-2 lg:p-1 inline-block txt-white button active')).toBeTruthy();
     expect(open.className.includes('btn bg-green my-4 w-1/4 text-center lg:w-11/12 p-2 lg:p-1 inline-block txt-white button active')).toBeTruthy();
-    expect(sold_out.className.includes('btn bg-red my-4 w-1/4 text-center lg:w-11/12 p-2 lg:p-1 inline-block txt-white button active')).toBeTruthy();
+    expect(soldOut.className.includes('btn bg-red my-4 w-1/4 text-center lg:w-11/12 p-2 lg:p-1 inline-block txt-white button active')).toBeTruthy();
 });
 

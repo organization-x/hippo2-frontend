@@ -1,11 +1,19 @@
 import DashboardCourseDetails from "./screens/courseDetails";
 import AccountSettings from "./screens/accountSettings";
 import ToDo from "./screens/ToDo";
+import AlertBanner from "./alertBanner";
 
-function DashboardBody({ page }) {
+function DashboardBody({ page, navigate }) {
 	switch (page) {
 		case 'dashboard-home':
-			return (<DashboardCourseDetails />);
+			return (
+                <div className="flex flex-col">
+                    <div className='w-full'>
+                        <AlertBanner navigate={navigate}/>
+                    </div>
+                    <DashboardCourseDetails />
+                </div>
+            );
 		case 'To-Do':
 			return (<ToDo />);
 		case 'account-settings':

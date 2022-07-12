@@ -29,6 +29,7 @@ function AccountSettings() {
 					type='PARENT'
 					className='w-full md:w-96 m-5'
 					id={user.id}
+					pass_set={user.password_set}
 				/>
 			);
 		}
@@ -47,6 +48,7 @@ function AccountSettings() {
 						type='STUDENT'
 						className='w-full md:w-96 m-5'
 						id={student.id}
+						pass_set={student.password_set}
 					/>
 				);
 			}

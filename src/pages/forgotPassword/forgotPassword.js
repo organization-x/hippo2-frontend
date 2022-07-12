@@ -82,7 +82,7 @@ function ForgotPassword() {
 				</form>
 			</div>	
 		</div>
-		);
-	}
+	);
+}
 
 export default ForgotPassword;

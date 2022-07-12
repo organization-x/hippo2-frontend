@@ -31,7 +31,7 @@ const excludeRedirects = [
 // routes that don't require check to see if user is authenticated
 // prevents navigate from removing query string
 const excludeChecks = [
-	'/auth/google/', '/password/reset', '/password/reset/confirm', '/signup/invite',
+	'/auth/google/', '/password/reset', '/password/reset/confirm', '/signup/invite'
 ];
 
 const blankUser = {
@@ -261,9 +261,6 @@ export function AuthProvider({ children }) {
 	};
 
 	useEffect(() => {
-		if (excludeChecks.includes(location.pathname)) {
-			return setCheckLogin(true);
-		}
 		const url = baseUrl + '/api/v1/users/';
 		const options = {
 			method: 'GET'
@@ -272,7 +269,7 @@ export function AuthProvider({ children }) {
 		if (excludeRedirects.includes(location.pathname)) {
 			origin = '/';
 		}
-		autoAuthReq(url, options, origin).then(res => {
+		sendReq(url, options).then(res => {
 			setCheckLogin(true);
 			const data = res.data;
 			
@@ -293,13 +290,13 @@ export function AuthProvider({ children }) {
 			// if they're signed in already
 			navigate(origin);
 		}).catch(err => {
-			if (err.status !== 403 && err.status !== 401) {
-				setUser(blankUser);
-				navigate('/signup');
+			if (excludeChecks.includes(location.pathname)) {
+				return setCheckLogin(true);
 			}
+			setUser(blankUser);
 			setCheckLogin(true);
 		});
-	}, [autoAuthReq, location, navigate]);
+	}, [location, navigate]);
 
 	const value = {
 		user,

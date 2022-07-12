@@ -60,7 +60,11 @@ function App() {
 									<GroupJoin />
 								</ProtectedRoute>
 							}/>
-							<Route path='/batches/:batchId/payment' element={<BatchPayment />}/>
+							<Route path='/batches/:batchId/payment' element={
+								<ProtectedRoute>
+									<BatchPayment />
+								</ProtectedRoute>
+							}/>
 							<Route path='/orders/:orderID/success' element={<PaymentSuccess />}/>
 							<Route path='/courses' element={<SelectCourses/>}/>
 							<Route path='/courses/:courseID/batches' element={<BatchSelect />}/>

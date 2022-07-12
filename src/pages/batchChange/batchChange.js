@@ -29,9 +29,9 @@ function BatchChange() {
 				method: 'GET',
 			};
 			autoAuthReq(url, options, location.pathname).then(res => {
-				setBatchData(res.data.data);
+				setBatchData(res.data);
 				setIsLoading(false);
-				const currentBatch = res.data.data.batches.find(b => b.id === res.data.data.batch_id);
+				const currentBatch = res.data.batches.find(b => b.id === res.data.batch_id);
 				setCurrentBatch(currentBatch);
 			}).catch(err => {
 				flashMsg('error', 'Failed to get batch info');
@@ -150,7 +150,8 @@ function BatchChange() {
 	return (
 		<div className='container max-w-7xl mt-10 flex flex-wrap mx-auto auth'>
 			<SideBarContent/>
-			<div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
+			<div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 p-5 rounded-b-2xl md:rounded-r-2xl bg-white">
+				<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
 				<BatchBoard
 					className="w-full"
 					batchData={batchData.batches} 

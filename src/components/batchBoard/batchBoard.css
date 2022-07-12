@@ -74,8 +74,12 @@
 	background-color: #f0f0f0;
 }
 
+.batch.disabled {
+	background-color: #e6e5e5;
+}
+
 .batch.selected {
-	background-color: #DCDCDC;
+	background-color: #c2c2c2;
 }
 
 .batch .name {

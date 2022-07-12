@@ -27,7 +27,8 @@ function BatchBoard({ batchData, batchID, onChange, className, price, disabledID
 		const selection = [];
 		for (let i = 0; i < column.length; i++) {
 			const b = column[i];
-			const selected = b.id === batchID || b.id === disabledID;
+			const selected = b.id === batchID;
+			const disabled = !b.seats || b.id === disabledID;
 
 			const seatsInfo = {};
 			if (b.seats > 20) {
@@ -44,8 +45,8 @@ function BatchBoard({ batchData, batchID, onChange, className, price, disabledID
 			selection.push(
 				<button 
 					key={b.id}
-					className={`batch ${selected ? 'selected' : ''}`} 
-					disabled={selected}
+					className={`batch ${selected ? 'selected' : ''} ${disabled ? 'disabled' : ''}`} 
+					disabled={selected || disabled}
 					onClick={() => onChange(b)}
 				>
 					<p className="name">Batch {b.name}</p>

@@ -1,0 +1,217 @@
+.batch-container {
+	flex-flow: row wrap;
+	display: flex;
+}
+
+.batch-container .batch-col:last-child {
+	border-right: none;
+}
+
+.batch-col {
+	display: flex;
+	flex-flow: column nowrap;
+	width: 100%;
+	margin-bottom: 2rem;
+}
+
+.batch-col.show .caret {
+	transform: scale(1, -1);
+}
+
+.batch-col.show .batch-head {
+	border-bottom: 1px solid #979797;
+	border-radius: 2rem 2rem 0 0;
+}
+
+.batch-col.show .batch {
+	display: block;
+}
+
+.batch-col .batch:last-child {
+	border-bottom: none;
+	border-radius: 0 0 2rem 2rem;
+}
+
+.batch-head {
+	text-align: left;
+	position: relative;
+	padding: 2rem;
+	border-bottom: none;
+	border-radius: 2rem;
+	background-color: #F5F6F6;
+}
+
+.batch-head:hover {
+	background-color: #e7e7e7;
+}
+
+.batch-head h1 {
+	font-size: 1.2rem;
+	font-weight: 400;
+}
+
+.batch-head h4 {
+	display: none;
+}
+
+.batch-head .caret {
+	position: absolute;
+	right: 2rem;
+	top: 2.2rem;
+	font-size: 1.5rem;
+}
+
+.batch {
+	position: relative;
+	display: none;
+	padding: 1rem 1.3rem;
+	border-bottom: 1px solid #979797;
+	background-color: #F5F6F6;
+	text-align: left;
+}
+
+.batch:hover {
+	background-color: #f0f0f0;
+}
+
+.batch.selected {
+	background-color: #DCDCDC;
+}
+
+.batch .name {
+	display: inline-block;
+	margin-right: 1.2rem;
+}
+
+.batch .time {
+	display: inline-block;
+	color: #515151;
+}
+
+.batch .time span {
+	color: black;
+	font-weight: 500;
+}
+
+.batch .price {
+	color: #515151;
+}
+
+.batch .price span {
+	margin-right: 0.4rem;
+}
+
+.batch .price .number {
+	font-weight: 500;
+}
+
+.batch .pill {
+	display: block;
+	padding: 0.1rem 1.5rem;
+	color: white;
+	font-size: 1.3rem;
+	border-radius: 3rem;
+	float: right;
+}
+
+.batch .pill.open {
+	background-color: #37C489;
+}
+
+.batch .pill.partial {
+	background-color: #F9A849;
+}
+
+.batch .pill.full {
+	background-color: #E87575;
+}
+
+@media (min-width: 1024px) {
+	.batch-container {
+		border: 1px solid black;
+		border-radius: 1.5rem;
+		overflow: hidden;
+	}
+
+	.batch-col {
+		border-right: 1px solid black;
+		flex: 1;
+		width: auto;
+		margin: 0;
+	}
+
+	.batch-col .batch:last-child {
+		border-radius: 0;
+	}
+
+	.batch-head {
+		background-color: white;
+		border-radius: 0;
+		padding: 1rem 0.5rem;
+		border-bottom: 1px solid black;
+		cursor: auto;
+		text-align: center;
+	}
+
+	.batch-head:hover {
+		background-color: white;
+	}
+
+	.batch-head h1 {
+		font-weight: 500;
+	}
+
+	.batch-head h4 {
+		text-align: center;
+		display: block;
+		font-size: 1rem;
+		color: #515151;
+	}
+
+	.batch-head .caret {
+		display: none;
+	}
+
+	.batch {
+		background-color: white;
+		display: block;
+		text-align: center;
+		font-size: 0.9rem;
+		border-bottom: 1px solid black;
+		padding: 1rem 0.5rem;
+	}
+
+	.batch .name{
+		display: none;
+	}
+
+	.batch .time {
+		color: #515151;
+	}
+
+	.batch .time span {
+		color: black;
+		font-weight: 500;
+	}
+
+	.batch .price {
+		margin-top: 0.5rem;
+		margin-bottom: 3rem;
+	}
+
+	.batch .price span {
+		display: block;
+		color: #515151;
+	}
+
+	.batch .price .number {
+		color: black;
+		font-weight: 500;
+	}
+
+	.batch .pill {
+		margin: 0.5rem 0rem;
+		padding: 0.1rem 1rem;
+		width: 100%;
+	}
+}

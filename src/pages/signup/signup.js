@@ -150,6 +150,10 @@ function Signup() {
 					onChange={val => setPassword(val)} 
 					/>
 
+					<div className='mr-14 ml-2'>
+						<p className='text-gray-300 text-xs'>Your password should include at least 7 characters. Avoid using common words or phrases.</p>
+					</div>
+
 					<Button bgColor="green" txtColor="white" className="w-full mb-3 mt-6 py-1" onClick={() => signUpUser()}>Next</Button>
 
 					<p className="text-xl mb-3 text-center">Or</p>

@@ -66,8 +66,8 @@ function Profile({
 
 	return (
 		<form action="/" method="GET" onSubmit={event => {
-            event.preventDefault();
-        }} className={`flex flex-col py-5 px-12 bg-white rounded-2xl ${className}`}>
+			event.preventDefault();
+		}} className={`flex flex-col py-5 px-12 bg-white rounded-2xl ${className}`}>
 			<div className="grow">
 				<h2 className="text-xl mb-7 text-center">{header}</h2>
 				<Input label="First Name"
@@ -116,7 +116,7 @@ function Profile({
 				{
 					formErrors.phone?.length ? 
 						<span className='mt-1 block form-error text-sm'>{formErrors.phone[0]}</span> 
-					: null
+						: null
 				}
 				{type !== 'PARENT' ?
 					<Input label="Birth Month and Year"
@@ -129,7 +129,7 @@ function Profile({
 						className="mt-3"
 						readOnly={!editing}    
 					/>
-				: null
+					: null
 				}
 
 			</div>
@@ -147,7 +147,7 @@ function Profile({
 			>
 				{editing ? "Save" : "Edit Profile"}
 			</Button>
-        </form>
+		</form>
 	);
 }
 

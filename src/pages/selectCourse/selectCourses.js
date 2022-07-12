@@ -54,12 +54,12 @@ function SelectCourses() {
 				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 					<h1 className="text-2xl mb-8 text-center">3-Week AI Summer Course</h1>
 					<ul className="text-base mb-3 pt">
-                            <li>Learn AI in small classes online</li>
-                            <li>(6 students per instructer)</li>
-                            <li>Build an impressive AI product</li>
-                            <li>No coding experience necessary to start </li>
-                            <li>Tuition: $1949 (early bird)/ $2349 (regular)</li> 
-                        </ul>
+						<li>Learn AI in small classes online</li>
+						<li>(6 students per instructer)</li>
+						<li>Build an impressive AI product</li>
+						<li>No coding experience necessary to start </li>
+						<li>Tuition: $1949 (early bird)/ $2349 (regular)</li> 
+					</ul>
 					<p className="text-base">
 						Click "Next" to view available program dates and choose your batch!
 					</p>
@@ -70,7 +70,7 @@ function SelectCourses() {
 					<div className="mb-4 mt-5 " >
 						<h1 className="text-lg mb-3 font-semibold">Course</h1>
 						<p className="mb-3 text-sm font-light pr-4">Our world-class instructors are here to support you.</p>
-                    </div>
+					</div>
 
 					<div className=''>
 						<select data-dropdown-placement="right" value={courseId} onChange={handleChange}
@@ -90,9 +90,9 @@ function SelectCourses() {
 							focus:outline-none"
 							aria-label=".form-select-lg example"
 						>
-                            <option value ="" disabled >Select a Course</option>
-                            {listItems}
-                        </select>	
+							<option value ="" disabled >Select a Course</option>
+							{listItems}
+						</select>	
 					</div>
 					
 					<div className='pb-3'>

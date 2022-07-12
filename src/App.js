@@ -12,11 +12,10 @@ import ForgotPassword from './pages/forgotPassword/forgotPassword';
 import ForgotPasswordConfirm from './pages/forgotPasswordConfirm/forgotPasswordConfirm';
 import SelectCourses from './pages/selectCourse/selectCourses';
 import OrderCancel from './pages/orderCancel/order-cancel';
-import Protected from './pages/protected/protected';
 import GroupJoin from './pages/groupJoin/groupJoin';
 import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
-import BatchPage from './pages/batches/batchPage';
+import BatchSelect from './pages/batchSelect/batchSelect';
 import Dashboard from './pages/dashboard/dashboard';
 import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
@@ -51,11 +50,6 @@ function App() {
 									<ConfirmDetails />
 								</ProtectedRoute>
 							}/>
-							<Route path='/protected' element={
-								<ProtectedRoute>
-									<Protected />
-								</ProtectedRoute>
-							}/>
 							<Route path='/signup' element={<Signup />}/>
 							<Route path='/login' element={<Login />}/>
 							<Route path='/signup/invite' element={<SignUpInvite />}/>
@@ -66,10 +60,14 @@ function App() {
 									<GroupJoin />
 								</ProtectedRoute>
 							}/>
-							<Route path='/batches/:batchId/payment' element={<BatchPayment />}/>
+							<Route path='/batches/:batchId/payment' element={
+								<ProtectedRoute>
+									<BatchPayment />
+								</ProtectedRoute>
+							}/>
 							<Route path='/orders/:orderID/success' element={<PaymentSuccess />}/>
 							<Route path='/courses' element={<SelectCourses/>}/>
-							<Route path='/courses/:courseID/batches' element={<BatchPage />}/>
+							<Route path='/courses/:courseID/batches' element={<BatchSelect />}/>
 							<Route path='/orders/:orderID/change-batch' element={
 								<ProtectedRoute>
 									<BatchChange />

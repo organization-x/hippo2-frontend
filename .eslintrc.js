@@ -34,6 +34,7 @@ module.exports = {
         "no-console": "warn",
         "no-var": "warn",
         "prefer-arrow-callback": "warn",
+        "indent": ["warn", "tab", { "SwitchCase": 1 }],
         // "max-len": ["error", { "code": 100 }]
 
         // promise plugin

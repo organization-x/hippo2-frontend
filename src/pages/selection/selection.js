@@ -7,17 +7,17 @@ import Button from "../../components/button/button";
 import Loading from '../loading/loading';
 
 function SelectionPage() {
-    const [batchData, setBatchData] = useState({});
-    const [studentData, setStudentData] = useState([]);
+	const [batchData, setBatchData] = useState({});
+	const [studentData, setStudentData] = useState([]);
 	const [loading, setLoading] = useState(true);
-    const { batchID } = useParams();
-    const navigate = useNavigate();
+	const { batchID } = useParams();
+	const navigate = useNavigate();
 	const { flashMsg } = useFlashMsg();
 	const { autoAuthReq } = useAuth();
 	const here = useLocation().pathname;
 
-    useEffect(() => {
-        if (!batchID) {
+	useEffect(() => {
+		if (!batchID) {
 			return flashMsg('error', 'Invalid Batch');
 		}
 		const batchUrl = baseUrl + `/api/v1/batches/${batchID}/`;
@@ -42,13 +42,13 @@ function SelectionPage() {
 			flashMsg('error', 'Error fetching batch and student info');
 			navigate('/courses');
 		});
-    }, [batchID, flashMsg, navigate, autoAuthReq, here]);
+	}, [batchID, flashMsg, navigate, autoAuthReq, here]);
 
 	if (loading) {
 		return <Loading />;
 	}
     
-    const sideBar = (
+	const sideBar = (
 		<div className="flex-none md:flex-initial w-full md:w-80 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 			<h1 className="text-3xl mb-10 text-center">
 				Select a Student
@@ -82,10 +82,10 @@ function SelectionPage() {
 		navigate(`/courses/${batchData.course.id}/batches`);
 	};
 
-    return (
-        <div className='container max-w-7xl mt-10 flex flex-wrap justify-center mx-auto auth md:px-10 px-3'>
-            {sideBar}
-            <div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
+	return (
+		<div className='container max-w-7xl mt-10 flex flex-wrap justify-center mx-auto auth md:px-10 px-3'>
+			{sideBar}
+			<div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
 				<div>
 					<div className="my-2 text-center w-full">
 						<h2 className="text-2xl mt-3">Reserve spot in {batchData.course.name} for</h2>
@@ -94,7 +94,7 @@ function SelectionPage() {
 						{selection}
 					</div>                 
 				</div>
-                <div className="my-5">
+				<div className="my-5">
 					<Button 
 						onClick={() => onBack()} 
 						bgColor="gray" 
@@ -104,9 +104,9 @@ function SelectionPage() {
 						<p className="text-lg">Back</p>
 					</Button>
 				</div>
-            </div>
-        </div>
-    );
+			</div>
+		</div>
+	);
 }
 
 export default SelectionPage;

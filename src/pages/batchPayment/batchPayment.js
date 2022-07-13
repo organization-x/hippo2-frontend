@@ -95,10 +95,10 @@ function BatchPayment() {
 				bgColor="green" txtColor="white" className="col-span-3 py-4 w-full mb-3" 
 				onClick={() => onPayNow()}
 			>Submit Full Tuition</Button>
-			{/* /* <Button  */}
-				{/* bgColor="white" txtColor="black" className="col-span-3 py-4 w-full mb-8"  */}
-				{/* onClick={() => onPayLater()} */}
-			{/* >Pay in Installments</Button> */}
+			<Button 
+				bgColor="white" txtColor="black" className="col-span-3 py-4 w-full mb-8 hidden" 
+				onClick={() => onPayLater()}
+			>Pay in Installments </Button>
 		</>);
 	}
 

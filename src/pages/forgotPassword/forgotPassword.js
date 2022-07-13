@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import baseUrl from "../../apiUrls";
 import sendReq from "../../services/sendReq";
 import Input from "../../components/form/input";
@@ -11,19 +12,22 @@ function ForgotPassword() {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [SuccessMessage, setSuccessMessage] = useState('');
 	const { flashMsg } = useFlashMsg();
+	const navigate = useNavigate();
 
 	const sendResetEmail = () => {
+		setErrorMessage('');
+		setSuccessMessage('');
 		const [err, data] = validateEmail({ email: email });
 		const url = baseUrl + '/auth/password/reset/';
-		const options = {
-			method: 'POST',
-			body: { email: data }
-		};
 		if (err) {
 			// validate email input
 			flashMsg('error', 'Invalid Email Input');
 			setErrorMessage('Invalid Email Input');
 		} else {
+			const options = {
+				method: 'POST',
+				body: { email: data.email }
+			};
 			setErrorMessage('');
 			sendReq(url, options).then(res => {
 				// Email successfully sent
@@ -41,6 +45,7 @@ function ForgotPassword() {
 
 	const onBack = () => {
 		// back button
+		navigate('/login');
 	};
 
 	return (

@@ -32,11 +32,11 @@ function AlertBanner({ navigate }) {
                     {isParent ? 
                         <div>
                             <p>One or more of your children have incomplete tasks in their To Do List.</p>
-                            <p><a className='underline'>Click here</a> to complete them so you can help your child prepare for their course!</p>
+                            <p><b><a className='underline'>Click here</a></b> to complete them so you can help your child prepare for their course!</p>
                         </div> :
                         <div>
                             <p>You have incomplete tasks in your To Do List.</p>
-                            <p> Click on this banner to complete them now so you can gain access to your couse materials!</p>
+                            <p><b><a className='underline'>Click here</a></b> to complete them now so you can gain access to your couse materials!</p>
                         </div>
                     }
                 </div> : null

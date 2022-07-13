@@ -11,7 +11,7 @@ import 'react-phone-input-2/lib/style.css';
 import './profile.css';
 
 function Profile({
-	fName, lName, email, dob, phone, type, className, id, pass_set=true
+	fName, lName, email, dob, phone, type, className, id, passSet = true
 }) {
 	const [f, setF] = useState(fName);
 	const [l, setL] = useState(lName);
@@ -26,7 +26,7 @@ function Profile({
 
 	const header = type === 'PARENT' ? 'Parent Profile' : 'Student Profile';
 
-	const lower_type = type === 'PARENT' ? 'parent' : 'student';
+	const lowerType = type === 'PARENT' ? 'parent' : 'student';
 
 	const onSubmit = () => {
 		setFormErrors({});
@@ -73,10 +73,10 @@ function Profile({
 			<div className="grow">
 				<h2 className="text-xl mb-1 text-center">{header}</h2>
 				{
-					pass_set ?
+					passSet ?
 						<p className="text-sm mb-1 text-center">&nbsp;</p>
-					:
-						<p className="italic text-sm mb-1 text-center text-amber-500">{'Invite sent, check ' + lower_type + ' email to accept'}</p>
+						:
+						<p className="italic text-sm mb-1 text-center text-amber-500">{'Invite sent, check ' + lowerType + ' email to accept'}</p>
 				}
 				<Input label="First Name"
 					type="text"

@@ -7,13 +7,13 @@ function DashboardBody({ page, navigate }) {
 	switch (page) {
 		case 'dashboard-home':
 			return (
-                <div className="flex flex-col">
-                    <div className='w-full'>
-                        <AlertBanner navigate={navigate}/>
-                    </div>
-                    <DashboardCourseDetails />
-                </div>
-            );
+				<div className="flex flex-col">
+					<div className='w-full'>
+						<AlertBanner navigate={navigate}/>
+					</div>
+					<DashboardCourseDetails />
+				</div>
+			);
 		case 'To-Do':
 			return (<ToDo />);
 		case 'account-settings':

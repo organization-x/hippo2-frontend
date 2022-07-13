@@ -5,10 +5,10 @@ import baseUrl from '../../apiUrls';
 
 
 function AlertBanner({ navigate }) {
-    const auth = useAuth();
-    const isParent = auth.user.type === 'PARENT';
-    const [completed, setCompleted] = useState(true);
-    const { flashMsg } = useFlashMsg(); 
+	const auth = useAuth();
+	const isParent = auth.user.type === 'PARENT';
+	const [completed, setCompleted] = useState(true);
+	const { flashMsg } = useFlashMsg(); 
 
 	useEffect(() => {
 		const url =  baseUrl + '/api/v1/users/' + auth.user.id + '/tasks/';
@@ -21,28 +21,28 @@ function AlertBanner({ navigate }) {
 		});
 	}, [auth, flashMsg]);
 
-    const onClick = () => {
-        navigate('To-Do');
-    }
-    
-    return (
-        <>
-            {!completed ?
-                <div onClick={onClick} className="bg-red-500 h-max text-white text-center py-6">
-                    {isParent ? 
-                        <div>
-                            <p>One or more of your children have incomplete tasks in their To Do List.</p>
-                            <p><b><a className='underline'>Click here</a></b> to complete them so you can help your child prepare for their course!</p>
-                        </div> :
-                        <div>
-                            <p>You have incomplete tasks in your To Do List.</p>
-                            <p><b><a className='underline'>Click here</a></b> to complete them now so you can gain access to your couse materials!</p>
-                        </div>
-                    }
-                </div> : null
-            }
-        </>
-    );
+	const onClick = () => {
+		navigate('To-Do');
+	};
+	
+	return (
+		<>
+			{!completed ?
+				<div onClick={onClick} className="bg-red-500 h-max text-white text-center py-6">
+					{isParent ? 
+						<div>
+							<p>One or more of your children have incomplete tasks in their To Do List.</p>
+							<p><b className='underline'>Click here</b> to complete them so you can help your child prepare for their course!</p>
+						</div> :
+						<div>
+							<p>You have incomplete tasks in your To Do List.</p>
+							<p><b className='underline'>Click here</b> to complete them now so you can gain access to your couse materials!</p>
+						</div>
+					}
+				</div> : null
+			}
+		</>
+	);
 }
 
 export default AlertBanner;

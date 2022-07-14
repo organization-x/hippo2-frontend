@@ -52,16 +52,9 @@ function SelectCourses() {
 		<>
 			<div className="container max-w-3xl flex flex-wrap mx-auto pt-11 auth px-3">
 				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-					<h1 className="text-2xl mb-8 text-center">3-Week AI Summer Course</h1>
-					<ul className="text-base mb-3 pt">
-						<li>Learn AI in small classes online</li>
-						<li>(6 students per instructer)</li>
-						<li>Build an impressive AI product</li>
-						<li>No coding experience necessary to start </li>
-						<li>Tuition: $1949 (early bird)/ $2349 (regular)</li> 
-					</ul>
+					<h1 className="text-2xl mb-8 text-center">Course Details</h1>
 					<p className="text-base">
-						Click "Next" to view available program dates and choose your batch!
+						Select the course that you want to register for. Details about your selected course will appear here!
 					</p>
 				</div>
 

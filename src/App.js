@@ -23,7 +23,6 @@ import SelectionPage from './pages/selection/selection';
 import ConfirmDetails from './pages/confirmDetails/confirmDetails';
 import BatchChange from './pages/batchChange/batchChange';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
-import Loading from './pages/loading/loading';
 import './App.css';
 
 function App() {
@@ -66,7 +65,6 @@ function App() {
 									<BatchPayment />
 								</ProtectedRoute>
 							}/>
-							<Route path='/loading' element={<Loading />}/>
 							<Route path='/orders/:orderID/success' element={<PaymentSuccess />}/>
 							<Route path='/courses' element={<SelectCourses/>}/>
 							<Route path='/courses/:courseID/batches' element={<BatchSelect />}/>

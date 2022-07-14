@@ -57,6 +57,7 @@ function InviteUser() {
 		).then(res => {
 			navigate(origin);
 		}).catch(err => {
+			setDisable(false);
 			if (err.status === 400) {
 				const keyMap = {
 					'first_name': 'fName',

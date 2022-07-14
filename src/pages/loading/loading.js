@@ -1,9 +1,27 @@
+import loadingIcon from '../../loading-screen-icon.png';
+import hippoIcon from '../../hippo-icon.png';
+import './loading.css';
+
 function Loading() {
-	return (
-		<div className="loading flex flex-row justify-center items-center mx-auto mt-5 md:mt-24">
-			<h1 className="text-3xl md:text-4xl md:pb-2 text-gray-700">Loading...</h1>
-		</div>
-	);
+	const randInt = Math.floor(Math.random() * 100) + 1;
+	let hippo = false;
+	if (randInt <= 5) {
+		hippo = true;
+	}
+
+	if (hippo) {
+		return (
+			<div className="flex justify-center items-center min-h-screen">
+				<img class="w-1/5 rotate" src={hippoIcon} alt='logo'/>
+			</div>
+		);
+	} else {
+		return (
+			<div className="flex justify-center items-center min-h-screen">
+				<img class="w-1/5 rotate" src={loadingIcon} alt='logo'/>
+			</div>
+		);
+	}
 }
 
 export default Loading;

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../services/authentication';
+import usePageTracking from '../../services/usePageTracking';
 import logo from '../../logo.svg';
 import './navbar.css';
 
 function Navbar() {
+	usePageTracking(); // google analytics
 	// const [show] = useState(true); //change [show] to [show, setShow] if uncommenting showNav() below
 	const show = true;
 	const { user, handleLogout } = useAuth();

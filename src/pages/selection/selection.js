@@ -83,7 +83,7 @@ function SelectionPage() {
 	};
 
 	return (
-		<div className='container max-w-7xl mt-10 flex flex-wrap justify-center mx-auto auth md:px-10 px-3'>
+		<div className='container max-w-7xl mt-12 flex flex-wrap justify-center mx-auto auth md:px-10 px-3'>
 			{sideBar}
 			<div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
 				<div>

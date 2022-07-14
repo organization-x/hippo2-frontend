@@ -51,7 +51,7 @@ function BatchChange() {
                         Batch Change
 					</h1>
 					<p className="text-lg mx-9 mb-3">
-						<b>Current Batch:</b><br></br>Batch {batchData.name} ({currentBatch.time_zone}): {currentBatch.start_date} - {currentBatch.end_date} in {batchData.name} 
+						<b>Current Batch:</b><br />Batch {batchData.name} ({currentBatch.time_zone}): {currentBatch.start_date} - {currentBatch.end_date} in {batchData.name}
 					</p>
 					<h1 className="text-3xl mb-5 mt-9 text-center">
                         New Batch Details
@@ -67,7 +67,7 @@ function BatchChange() {
                         Batch Change
 					</h1>
 					<p className="text-lg mx-9 mb-3">
-						<b>Current Batch:</b><br></br>Batch {currentBatch.name} ({currentBatch.time_zone}): {currentBatch.start_date} - {currentBatch.end_date} in {batchData.name} 
+						<b>Current Batch:</b><br />Batch {currentBatch.name} ({currentBatch.time_zone}): {currentBatch.start_date} - {currentBatch.end_date} in {batchData.name}
 					</p>
 					<h1 className="text-3xl mb-5 mt-9 text-center">
                         New Batch Details
@@ -148,7 +148,7 @@ function BatchChange() {
 	}
     
 	return (
-		<div className='container max-w-7xl mt-10 flex flex-wrap mx-auto auth'>
+		<div className='container max-w-7xl mt-12 flex flex-wrap mx-auto auth'>
 			<SideBarContent/>
 			<div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 p-5 rounded-b-2xl md:rounded-r-2xl bg-white">
 				<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>

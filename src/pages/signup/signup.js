@@ -64,18 +64,18 @@ function Signup() {
 	};
 
 	return (
-		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
+		<div className="container max-w-3xl flex flex-wrap mx-auto px-4 mt-12 auth">
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<h1 className="text-2xl mb-5 text-center">Create an Account</h1>
-				<p className="text-base mb-3">
+				<h1 className="text-2xl mb-8 text-center">Create an Account</h1>
+				<p className="text-base mb-4">
 					AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
 				</p>
 
-				<p className="text-base mb-3">
+				<p className="text-base mb-4">
 					By creating AI products, our students apply what they have learned through first-hand experience of being an engineer, a product manager, or a data scientist.
 				</p>
 
-				<p className="text-base mb-3">
+				<p className="text-base mb-4">
 					Ready to start your AI journey? Our world class mentors and instructors are here to guide you!
 				</p>
 
@@ -150,7 +150,7 @@ function Signup() {
 						onChange={val => setPassword(val)} 
 					/>
 
-					<p className='text-gray-400 text-xs'>Your password should include at least 7 characters. <br></br> Avoid using common words or phrases.</p>
+					<p className='text-gray-400 text-xs'>Your password should include at least 7 characters. <br /> Avoid using common words or phrases.</p>
 
 					<Button bgColor="green" txtColor="white" className="w-full mb-3 mt-6 py-1" onClick={() => signUpUser()}>Next</Button>
 

@@ -69,23 +69,23 @@ function ConfirmDetails() {
 
 	return (
 		<div>
-			<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
+			<div className="container max-w-3xl flex flex-wrap mx-auto mt-12 auth">
 				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 					<h1 className="text-2xl mb-8 text-center">Confirm Your Details</h1>
-					<p className="text-base mb-3">
+					<p className="text-base mb-4">
 						Fill out your personal details to start the course registration process! 
 					</p>
-					<p className="text-base mb-3">
-						Some items may be pre-filled, so feel free to made edits to ensure that the information is accurate.
+					<p className="text-base mb-4">
+						Some items may be pre-filled, so feel free to make edits to ensure that the information is accurate.
 					</p>
-					<p className="text-base mb-3">
+					<p className="text-base mb-4">
 						Click “Next” to move onto the {user.type === 'student' ? 'parent' : 'student'} information section!
 					</p>
 				</div>
 				<form action="/" method="GET" onSubmit={event => {
 					event.preventDefault();
 				}} className="flex-none md:flex-initial w-full md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-					<h2 className="text-xl mb-7 text-center grow-0">Gain real experience by building real AI products. We are here to support you.</h2>
+					<h2 className="text-xl mb-8 text-center grow-0">Gain real experience by building real AI products. We are here to support you.</h2>
 					<div className="mb-8 mt-5 grow">
 						<Input label="First Name"
 							type="text"

@@ -51,8 +51,8 @@ function DashboardCourseDetails() {
 					<div>{transaction.name}</div>
 					<div>
 						<span className=
-							{{ unpaid: 'text-red-400', paid: 'text-green-500', cancelled: 'text-yellow-400', refunded: 'text-gray-500' }[transaction.status]}>
-							{{ unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded' }[transaction.status]}
+							{{ UNPAID: 'text-red-400', PAID: 'text-green-500', CANCELLED: 'text-yellow-400', REFUNDED: 'text-gray-500' }[transaction.status.toUpperCase()]}>
+							{{ UNPAID: 'Not Paid', PAID: 'Paid', CANCELLED: 'Cancelled', REFUNDED: 'Refunded' }[transaction.status.toUpperCase()]}
 						</span>
 					</div>
 				</div>

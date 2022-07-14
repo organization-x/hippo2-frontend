@@ -1,7 +1,7 @@
 /* Rotate */
 
 .rotate {
-    animation: rotation 1s infinite cubic-bezier(.17,.67,1,.29);
+    animation: rotation 1.5s infinite cubic-bezier(1,.29,.17,.67);
 }
 
 @keyframes rotation {

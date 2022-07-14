@@ -11,7 +11,7 @@ function Loading() {
 
 	return (
 		<div className="flex justify-center items-center min-h-screen">
-			<img class="w-1/5 rotate" src={icon} alt='logo'/>
+			<img class="rotate w-1/6" src={icon} alt='logo'/>
 		</div>
 	);
 

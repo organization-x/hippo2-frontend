@@ -1,7 +1,7 @@
 /* Rotate */
 
 .rotate {
-    animation: rotation 1s infinite linear;
+    animation: rotation 0.5s infinite linear;
 }
 
 @keyframes rotation {

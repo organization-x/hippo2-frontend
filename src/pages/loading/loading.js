@@ -1,5 +1,5 @@
 import loadingIcon from '../../loading-screen-icon.png';
-import hippoIcon from '../../hippo-icon.png';
+import hippoIcon from '../../hippo.svg';
 import './loading.css';
 
 function Loading() {

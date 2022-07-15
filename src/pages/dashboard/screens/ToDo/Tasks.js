@@ -35,6 +35,7 @@ function GetTasks(prop) {
 	useEffect(() => {
 		const options = { method: 'GET' };
 		(async () => {
+			// grabbing a list of ToDo Tasks
 			const ourl  = baseUrl + '/api/v1/orders/' + orderId + '/tasks/';
 			const tdata = await autoAuthReq(ourl, options);
 			setTasksList(tdata.data.tasks);
@@ -44,6 +45,7 @@ function GetTasks(prop) {
 		});
 	}, [autoAuthReq, flashMsg, orderId]);
 	
+	// create toDo Tasks containers 
 	const toDoTasks = tasksList.map((task) =>{
 		if (!comTasks.includes(task.id)) {
 			return (

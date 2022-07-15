@@ -15,6 +15,7 @@ function GetCompletedTasks(prop) {
 	useEffect(() => {
 		const options = { method: 'GET' };
 		(async () => {
+			// Grabbing a List of ToDo Tasks
 			const ourl  = baseUrl + '/api/v1/orders/' + orderId + '/tasks/';
 			const tdata = await autoAuthReq(ourl, options);
 			setTasksList(tdata.data.tasks);
@@ -24,6 +25,7 @@ function GetCompletedTasks(prop) {
 		});
 	}, [autoAuthReq, flashMsg, orderId]);
 	
+	// create Completed toDo tasks container
 	const ToDoCompletedTasks = tasksList.map((task) =>{
 		if (comTasks.includes(task.id)) {
 			return (

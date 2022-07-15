@@ -33,7 +33,7 @@ function ToDo() {
 	if (orders !== null) {
 		orderList = [];
 		for (let order of orders) {
-			// Completed Task Container for each order
+			// For each order, create Task Container for each order with both Tasks and Completed Tasks
 			orderList.push((
            	<div className="container flex flex-wrap mx-auto mt-10 px-5 mb-10">           
 			   <div className="flex-none md:flex-initial w-full md:w-full py-5 px-8 bg-white text-black rounded-t-xl md:rounded-t-xl md:rounded-none">
@@ -51,7 +51,7 @@ function ToDo() {
 
 	return (
 		<>
-			<div className="container w-full md:max-w-4xl  md:w-8/12 flex flex-wrap mx-auto pt-12 px-3"> 			
+			<div className="container w-full md:max-w-4xl md:w-8/12 flex flex-wrap mx-auto pt-12 px-3"> 			
 				{orderList};
 			</div>
 		</>

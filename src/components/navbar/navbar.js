@@ -19,7 +19,7 @@ function Navbar() {
 
 	return (
 		<header className='w-full py-3'>
-			<div className="navbar container mx-auto px-3 md:px-0">
+			<div className="navbar container md:mx-auto px-3 md:px-0">
 				<Link className='nav-logo' to="/">
 					<img src={logo} alt='logo'/>
 					<h1 className='text-3xl text-white font-semibold' >{/*Navbar*/}</h1>
@@ -27,7 +27,7 @@ function Navbar() {
 				{/* <button className='navbar-collapse' onClick={() => showNav()}>
 					<FontAwesomeIcon icon={faBars} />
 				</button> */}
-				<nav className={`${show ? 'show' : ''}`}>
+				<nav className={`${show ? 'show' : ''} hidden md:flex`}>
 					<ul className='nav-links grow'>
 						{
 							user.isLoggedIn && user.fName ? 

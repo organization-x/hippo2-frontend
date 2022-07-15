@@ -21,7 +21,6 @@ header {
 .navbar nav {
 	flex-grow: 1;
 	margin-left: 2rem;
-	display: flex;
 	flex-flow: row nowrap;
 }
 
@@ -80,7 +79,6 @@ header {
 	/* flex link groups vertically and hide menu*/
 	.navbar nav {
 		margin-left: 0;
-		display: flex;
 		flex-direction: column;
 		width: 100%;
 		cursor: pointer;

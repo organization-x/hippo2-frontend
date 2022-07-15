@@ -1,53 +1,12 @@
 import { useState } from 'react';
-import "./dashboard.css";
 import DashboardBody from "./dashboard-body";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useAuth } from "../../services/authentication";
 
 
 function Dashboard() {
 	const [page, setPage] = useState('dashboard-home');
-	const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
-	const { handleLogout } = useAuth();
-	
-	const handlePageSwitch = (page) => {
-		setPage(page);
-		setMobileMenuOpened(false);
-	};
-
-	const menuButtonColor = mobileMenuOpened ? `bg-gray-400` : `bg-transparent-green`;
 
 	return (
 		<div className="flex h-screen relative">
-			<button className={`menu md:hidden absolute right-4 h-8 w-8 rounded-full transition-colors ${menuButtonColor}`}
-				onClick={() => setMobileMenuOpened(!mobileMenuOpened)}>
-				<FontAwesomeIcon className={mobileMenuOpened ?
-					`mt-1 h-6 w-6 text-black` :
-					`mt-1 h-5 w-5 text-neutral-800`} icon={mobileMenuOpened ? faXmark : faBars} />
-			</button>
-
-			<div className={`w-full h-full absolute top-0 left-0 z-50 bg-light-green flex flex-col md:hidden transparent ${mobileMenuOpened ? 'show' : null}`}>
-				<div className="h-24 bg-transparent-green p-8 text-right text-xl flex-initial">
-					<button onClick={() => handleLogout()}>Log Out</button>
-				</div>
-				<div className="menu-items flex-grow py-6 px-8 text-right text-xl">
-					<button onClick={() => handlePageSwitch('dashboard-home')}>Home</button>
-					<hr />
-					<button onClick={() => handlePageSwitch('To-Do')}>To Do List</button>
-					<hr />
-					<button onClick={() => handlePageSwitch('account-settings')}>Account Settings</button>
-					<hr />
-					<button onClick={() => handlePageSwitch('register-for-courses')}>Register for Courses</button>
-					<hr />
-					<button onClick={() => handlePageSwitch('upcoming-events')}>Upcoming Events</button>
-					<hr />
-					<button onClick={() => handlePageSwitch('explore-student-products')}>Explore Student Products</button>
-					<hr />
-					<button onClick={() => handlePageSwitch('help-center')}>Help Center</button>
-					<hr />
-				</div>
-			</div>
 
 			<div className="w-64 h-full bg-neutral-300 pr-4 hidden md:inline-block">
 				<ul className="mt-12 whitespace-nowrap">

@@ -1,9 +1,6 @@
-.human_img {
+.human-img {
 	border-radius: 100%;
 	width: 64px;
 	height: 64px;
 }
 
-h1 {
-	font-size: 1.125rem;
-}

@@ -23,6 +23,7 @@ function InviteUser() {
 	const [dob, setDob] = useState('');
 
 	const [formErrors, setFormErrors] = useState({});
+	const [disable, setDisable] = useState(false);
 
 	const origin = location.state?.from?.pathname || '/';
 
@@ -31,6 +32,7 @@ function InviteUser() {
 	}
 
 	const onSubmit = () => {
+		setDisable(true);
 		setFormErrors({});
 		const data = {
 			email,
@@ -44,6 +46,7 @@ function InviteUser() {
 		}
 		const [err, vData] = validateUserInformation(data, type);
 		if (err) {
+			setDisable(false);
 			return setFormErrors(err);
 		}
 
@@ -54,6 +57,7 @@ function InviteUser() {
 		).then(res => {
 			navigate(origin);
 		}).catch(err => {
+			setDisable(false);
 			if (err.status === 400) {
 				const keyMap = {
 					'first_name': 'fName',
@@ -163,7 +167,7 @@ function InviteUser() {
 					}
 				</div>
 
-				<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => onSubmit()}>Next</Button>
+				<Button disabled={disable} bgColor="green" txtColor="white" className={`w-full py-1 ${disable ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => onSubmit()}>Next</Button>
 			</form>
 		</div>
 	);

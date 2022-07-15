@@ -30,7 +30,7 @@ function Navbar() {
 	return (
 		<>
 			<header className='w-full py-3'>
-				<div className="navbar container md:mx-auto px-3 md:px-0">
+				<div className="navbar container lg:mx-auto px-3 lg:px-0">
 					<Link className='nav-logo' to="/">
 						<img src={logo} alt='logo'/>
 						<h1 className='text-3xl text-white font-semibold' >{/*Navbar*/}</h1>
@@ -38,7 +38,7 @@ function Navbar() {
 					{/* <button className='navbar-collapse' onClick={() => showNav()}>
 						<FontAwesomeIcon icon={faBars} />
 					</button> */}
-					<nav className={`${show ? 'show' : ''} hidden md:flex`}>
+					<nav className={`${show ? 'show' : ''} hidden lg:flex`}>
 						<ul className='nav-links grow'>
 							{
 								user.isLoggedIn && user.fName ?
@@ -76,14 +76,14 @@ function Navbar() {
 				</div>
 			</header>
 
-			<button className={`menu md:hidden absolute top-5 right-4 h-8 w-8 rounded-full transition-colors ${menuButtonColor}`}
+			<button className={`menu lg:hidden absolute top-5 right-4 h-8 w-8 rounded-full transition-colors ${menuButtonColor}`}
 				onClick={() => setMobileMenuOpened(!mobileMenuOpened)}>
 				<FontAwesomeIcon className={mobileMenuOpened ?
 					`mt-1 h-6 w-6 text-black` :
 					`mt-1 h-5 w-5 text-neutral-800`} icon={mobileMenuOpened ? faXmark : faBars} />
 			</button>
 
-			<div className={`w-full h-full absolute top-18 left-0 z-50 bg-light-green flex flex-col md:hidden transparent ${mobileMenuOpened ? 'show' : null}`}>
+			<div className={`w-full h-full absolute top-18 left-0 z-50 bg-light-green flex flex-col lg:hidden transparent ${mobileMenuOpened ? 'show' : null}`}>
 				<div className="h-24 bg-transparent-green p-8 text-right text-xl flex-initial">
 					<button onClick={() => handleLogout()}>Log Out</button>
 				</div>

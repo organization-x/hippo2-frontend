@@ -8,7 +8,7 @@ function Dashboard() {
 	return (
 		<div className="flex h-screen relative">
 
-			<div className="w-64 h-full bg-neutral-300 pr-4 hidden md:inline-block">
+			<div className="w-64 h-full bg-neutral-300 pr-4 hidden lg:inline-block">
 				<ul className="mt-12 whitespace-nowrap">
 					<li className={`flex w-full justify-between ${page === 'dashboard-home' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
 						<button onClick = {() => setPage('dashboard-home')} className="flex items-start focus:outline-none focus:ring-2 focus:ring-white">

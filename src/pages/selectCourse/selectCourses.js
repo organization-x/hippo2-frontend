@@ -50,7 +50,7 @@ function SelectCourses() {
 	
 	return (
 		<>
-			<div className="container max-w-3xl flex flex-wrap mx-auto pt-11 auth px-3">
+			<div className="container max-w-3xl flex flex-wrap mx-auto px-4 mt-12 auth px-3">
 				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 					<h1 className="text-2xl mb-8 text-center">Course Details</h1>
 					<p className="text-base">
@@ -60,14 +60,14 @@ function SelectCourses() {
 
 				<div className="flex-none md:flex-initial w-full  md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
 					<h2 className="text-2xl mb-8 text-center font-semibold">Select a course to reserve a spot.</h2>
-					<div className="mb-4 mt-5 " >
+					<div className="mb-4 mt-5">
 						<h1 className="text-lg mb-3 font-semibold">Course</h1>
 						<p className="mb-3 text-sm font-light pr-4">Our world-class instructors are here to support you.</p>
 					</div>
 
 					<div className=''>
 						<select data-dropdown-placement="right" value={courseId} onChange={handleChange}
-							className="w-full py-6 form-select form-select-lg mb-3 
+							className="w-full py-6 form-select form-select-lg mb-3
 							px-5
 							text-left
 							font-normal
@@ -85,14 +85,14 @@ function SelectCourses() {
 						>
 							<option value ="" disabled >Select a Course</option>
 							{listItems}
-						</select>	
+						</select>
 					</div>
 					
 					<div className='pb-3'>
 						{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
 					</div>
 					
-					<Button bgColor="green" txtColor="white" className="w-full py-1 mb-2.5" onClick={() => onSubmit()}>Next</Button>
+					<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => onSubmit()}>Next</Button>
 				</div>	
 			</div>
 		</>

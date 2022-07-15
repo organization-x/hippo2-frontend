@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import DashboardBody from "./dashboard-body";
-import AlertBanner from './alertBanner';
 
 
 function Dashboard() {
@@ -50,11 +49,8 @@ function Dashboard() {
 			</div>
 
 			<div className='w-full flex flex-col flex-1'>
-				<div className='w-full'>
-					<AlertBanner />
-				</div>
-				<div className="">
-					<DashboardBody page={page}/>
+				<div className="grow overflow-y-scroll">
+					<DashboardBody page={page} />
 				</div>
 			</div>
 

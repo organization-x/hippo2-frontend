@@ -1,62 +1,51 @@
-import { useState } from 'react';
-import DashboardBody from "./dashboard-body";
-
+import { Outlet, Link, useLocation } from 'react-router-dom';
 
 function Dashboard() {
-	const [page, setPage] = useState('dashboard-home');
+	const location = useLocation();
+	const split = location.pathname.split('/');
+	const tail = split[split.length - 1];
 
 	return (
 		<div className="flex h-screen relative">
 
-			<div className="w-64 h-full bg-neutral-300 pr-4 hidden lg:inline-block">
-				<ul className="mt-12 whitespace-nowrap">
-					<li className={`flex w-full justify-between ${page === 'dashboard-home' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
-						<button onClick = {() => setPage('dashboard-home')} className="flex items-start focus:outline-none focus:ring-2 focus:ring-white">
-							<span className="font-medium text-base ">Dashboard Home</span>
-						</button>
+			<nav className="w-64 h-full bg-neutral-300 pr-4 hidden lg:block">
+				<ul className="mt-16 list-none pl-6">
+					<li className='mb-6'>
+						<Link to='' className={`px-3 py-1 ${tail === 'dashboard' ? 'text-gray-500 cursor-default' : ''}`}>
+							Dashboard Home
+						</Link>
 					</li>
-
-					<li className={`flex w-full justify-between ${page === 'To-Do' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
-						<button onClick = {() => setPage('To-Do')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-							<span className="font-medium text-base ">To Do List</span>
-						</button>
+					<li className='mb-6'>
+						<Link to='todo' className={`px-3 py-1 ${tail === 'todo' ? 'text-gray-500 cursor-default' : ''}`}>
+							To Do List
+						</Link>
 					</li>
-
-					<li className={`flex w-full justify-between ${page === 'account-settings' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
-						<button onClick = {() => setPage('account-settings')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-							<span className="font-medium text-base ">Account Settings</span>
-						</button>
+					<li className='mb-6'>
+						<Link to='account' className={`px-3 py-1 ${tail === 'account' ? 'text-gray-500 cursor-default' : ''}`}>
+							Account Settings
+						</Link>
 					</li>
-
-					<li className={`flex w-full justify-between ${page === 'register-for-courses' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
-						<button onClick = {() => setPage('register-for-courses')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-							<span className="font-medium text-base ">Register for Courses</span>
-						</button>
+					<li className='mb-6'>
+						<Link to='/courses' className="px-3 py-1">
+							Register for Courses
+						</Link>
 					</li>
-
-					<li className={`flex w-full justify-between ${page === 'upcoming-events' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
-						<button onClick = {() => setPage('upcoming-events')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-							<span className="font-medium text-base ml-5">Upcoming Events</span>
-						</button>
+					<li className='mb-6'>
+						<a href='https://www.ai-camp.org/student-products' target='_blank' rel='noopener noreferrer' className="px-3 py-1">
+							Explore Student Products
+						</a>
 					</li>
-
-					<li className={`flex w-full justify-between ${page === 'explore-student-products' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
-						<button onClick = {() => setPage('explore-student-products')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-							<span className="font-medium text-base ">Explore Student Products</span>
-						</button>
-					</li>
-
-					<li className={`flex w-full justify-between ${page === 'help-center' ? 'text-gray-500' : 'text-gray-800 hover:text-gray-500'} cursor-pointer items-center mb-5`}>
-						<button onClick = {() => setPage('help-center')} className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-							<span className="font-medium text-base ">Help Center</span>
-						</button>
+					<li className='mb-6'>
+						<a href='https://www.ai-camp.org/summer-help-center' target='_blank' rel='noopener noreferrer' className="px-3 py-1">
+							Help Center
+						</a>
 					</li>
 				</ul>
-			</div>
+			</nav>
 
 			<div className='w-full flex flex-col flex-1'>
 				<div className="grow overflow-y-scroll">
-					<DashboardBody page={page} />
+					<Outlet />
 				</div>
 			</div>
 

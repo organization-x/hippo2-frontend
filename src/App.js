@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './services/authentication';
 import { FlashMsgProvider } from './services/flashMsg';
 
@@ -17,6 +17,10 @@ import BatchPayment from "./pages/batchPayment/batchPayment";
 import PaymentSuccess from "./pages/paymentSuccess/paymentSuccess";
 import BatchSelect from './pages/batchSelect/batchSelect';
 import Dashboard from './pages/dashboard/dashboard';
+import AlertBanner from './pages/dashboard/alertBanner';
+import DashboardCourseDetails from './pages/dashboard/screens/courseDetails';
+import AccountSettings from './pages/dashboard/screens/accountSettings';
+import ToDo from './pages/dashboard/screens/ToDo/ToDo';
 import InviteUser from './pages/inviteUser/inviteUser';
 import SignUpInvite from './pages/signupInvite/signupInvite';
 import SelectionPage from './pages/selection/selection';
@@ -35,10 +39,22 @@ function App() {
 						<ToastContainer />
 						<Routes>
 							<Route path='/' element={
+								<Navigate to='/dashboard' replace />
+							}/>
+							<Route path='/dashboard' element={
 								<ProtectedRoute>
 									<Dashboard />
 								</ProtectedRoute>
-							}/>
+							}>
+								<Route index element={
+									<>
+										<AlertBanner />
+										<DashboardCourseDetails />
+									</>
+								}/>
+								<Route path='todo' element={<ToDo />}/>
+								<Route path='account' element={<AccountSettings />}/>
+							</Route>
 							<Route path='/auth/google/' element={<GoogleAuth />}/>
 							<Route path='/invite' element={
 								<ProtectedRoute inviteReq={false}>

@@ -1,6 +1,6 @@
 import DashboardCourseDetails from "./screens/courseDetails";
 import AccountSettings from "./screens/accountSettings";
-import ToDo from "./screens/ToDo";
+import ToDo from "./screens/ToDo/ToDo";
 import AlertBanner from "./alertBanner";
 
 function DashboardBody({ page, navigate }) {

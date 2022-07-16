@@ -79,8 +79,8 @@ function BatchSelect() {
 	} else {
 		sideText = (
 			<>
-				<h1 className="text-center text-3xl mb-10">Batch<br/>Details </h1>
-				<p className="text-base mb-6">
+				<h1 className="text-center text-3xl mb-8">Batch<br/>Details </h1>
+				<p className="text-base mb-4">
 					Select the batch that you want to register for. Details about your selected batch will appear here!
 				</p>
 				<p className="text-base">

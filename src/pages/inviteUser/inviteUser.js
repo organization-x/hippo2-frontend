@@ -74,8 +74,8 @@ function InviteUser() {
 	if (type === 'PARENT') {
 		panelText = (
 			<>
-				<h1 className="text-2xl mb-5 text-center">Parent Or Guardian Details</h1>
-				<p className="text-base mb-3">
+				<h1 className="text-2xl mb-8 text-center">Parent Or Guardian Details</h1>
+				<p className="text-base mb-4">
 					Fill out your parent or guardian's personal details to create their account profile and invite them to log in so they access information, as well as other AI Camp course resources!
 				</p>
 			</>
@@ -84,8 +84,8 @@ function InviteUser() {
 	} else {
 		panelText = (
 			<>
-				<h1 className="text-2xl mb-5 text-center">Student Details</h1>
-				<p className="text-base mb-3">
+				<h1 className="text-2xl mb-8 text-center">Student Details</h1>
+				<p className="text-base mb-4">
 					Fill out your student's email to invite them to create an account, which will allow them to access resources in preparation for their course(s).
 				</p>
 			</>
@@ -96,7 +96,7 @@ function InviteUser() {
 	
 
 	return (
-		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
+		<div className="container max-w-3xl flex flex-wrap mx-auto p-5 auth">
 			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
 				{panelText}
 				<p className="text-lg">Click "Next" to move onto the payment stage!</p>
@@ -167,7 +167,7 @@ function InviteUser() {
 					}
 				</div>
 
-				<Button disabled = {disable} bgColor="green" txtColor="white" className={`w-full py-1 ${disable ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => onSubmit()}>Next</Button>
+				<Button disabled={disable} bgColor="green" txtColor="white" className={`w-full py-1 ${disable ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => onSubmit()}>Next</Button>
 			</form>
 		</div>
 	);

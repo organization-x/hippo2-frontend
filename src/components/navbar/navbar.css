@@ -21,7 +21,6 @@ header {
 .navbar nav {
 	flex-grow: 1;
 	margin-left: 2rem;
-	display: flex;
 	flex-flow: row nowrap;
 }
 
@@ -80,7 +79,6 @@ header {
 	/* flex link groups vertically and hide menu*/
 	.navbar nav {
 		margin-left: 0;
-		display: flex;
 		flex-direction: column;
 		width: 100%;
 		cursor: pointer;
@@ -107,4 +105,38 @@ header {
 	.nav-logo {
 		width: 50%;
 	}
+}
+
+.transparent {
+	opacity: 0;
+	z-index: -50;
+	transition: opacity 200ms ease-in-out, z-index 200ms step-end;
+}
+.transparent.show {
+	opacity: 1;
+	z-index: 50;
+	transition: opacity 200ms ease-in-out, z-index 200ms step-start;
+}
+.bg-transparent-green {
+	background-color: rgba(19, 167, 105, 0.65);
+}
+.bg-light-green {
+	background-color: rgba(145, 218, 191, 1);
+}
+.menu-items > a {
+	margin-bottom: 1.5rem;
+	display: inline-block;
+}
+.menu-items > a:hover {
+	color: rgb(107, 114, 128);
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+}
+.menu-items > hr {
+	border: none;
+	height: 2px;
+	background-color: gray;
+	margin-left: auto;
+	margin-bottom: 1.5rem;
+	width: 60%;
 }

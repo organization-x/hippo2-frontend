@@ -21,6 +21,9 @@ function DashboardBody({ page, navigate }) {
 		case 'register-for-courses':
 			//return (<RegisterForCourses />);
 			break;
+		case 'upcoming-events':
+			// return (<UpcomingEvents />);
+			break;
 		case 'explore-student-products':
 			//return (<ExploreStudentProducts />);
 			break;

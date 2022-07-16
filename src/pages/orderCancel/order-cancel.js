@@ -33,8 +33,8 @@ function OrderCancel () {
     
 
 	return (
-		<div className="container content-center flex flex-wrap mx-auto pt-11 auth max-w-xl">
-			<div className="md:flex-initial w-full py-5 px-8 bg-white">
+		<div className="container content-center flex flex-wrap mx-auto mt-12 auth max-w-xl">
+			<div className="md:flex-initial w-full py-5 px-8 bg-white rounded-xl">
 				<h2 className="text-2xl mb-3 text-center font-semibold">Are you sure you want to cancel your course?</h2>
 				<div className="mb-2 mt-2">
 					<p className="italic text-center text-red-600">Deadline to cancel: 6/1/2022</p>

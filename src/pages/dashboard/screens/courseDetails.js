@@ -51,15 +51,15 @@ function DashboardCourseDetails() {
 					<div>{transaction.name}</div>
 					<div>
 						<span className=
-							{{ unpaid: 'text-red-400', paid: 'text-green-500', cancelled: 'text-yellow-400', refunded: 'text-gray-500' }[transaction.status]}>
-							{{ unpaid: 'Not Paid', paid: 'Paid', cancelled: 'Cancelled', refunded: 'Refunded' }[transaction.status]}
+							{{ UNPAID: 'text-red-400', PAID: 'text-green-500', CANCELLED: 'text-yellow-400', REFUNDED: 'text-gray-500' }[transaction.status.toUpperCase()]}>
+							{{ UNPAID: 'Not Paid', PAID: 'Paid', CANCELLED: 'Cancelled', REFUNDED: 'Refunded' }[transaction.status.toUpperCase()]}
 						</span>
 					</div>
 				</div>
 			));
 
 			coursesList.push((
-				<div key={course.id} className="container flex flex-wrap mx-auto mt-10 px-5 mb-10">
+				<div key={course.id} className="container flex flex-wrap mx-auto mt-12 px-6">
 					<div className="flex-none md:flex-initial w-full md:w-7/12 py-8 px-16 pb-10 text-lg text-black bg-white rounded-t-xl md:rounded-tl-xl md:rounded-none">
 						<h1 className="font-semibold text-2xl mb-8 text-center">Course Information</h1>
 						<p className="mb-5"><b className="font-semibold">Student Name: </b>{course.user.first_name} {course.user.last_name}</p>
@@ -116,7 +116,7 @@ function DashboardCourseDetails() {
 		// if there are no active/paid courses
 		if (coursesList.length === 0) {
 			return (
-				<div className="container p-4 mt-10 mx-auto text-center bg-white rounded-2xl">
+				<div className="mx-6 mt-12 p-5 text-center bg-white rounded-2xl">
 					<h1 className="font-semibold text-2xl mb-6">Start your {auth.user.type === 'parent' ? 'child\'s AI' : ''} journey with an AI Camp course!</h1>
 					<p className="mb-8">{auth.user.type === 'parent' ?
 						'Your child is not registered for any courses. Register for a course to reserve a spot now! Spots are filling up quick!' :

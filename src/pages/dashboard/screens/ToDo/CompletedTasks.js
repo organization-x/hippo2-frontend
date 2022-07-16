@@ -40,7 +40,7 @@ function GetCompletedTasks(prop) {
 
 	return (
 		<>
-			<HideViewBar info={ToDoCompletedTasks}></HideViewBar>
+			<HideViewBar info={ToDoCompletedTasks} buttonName={'Completed Tasks'} > </HideViewBar>
 		</>
 	);
 

@@ -1,0 +1,14 @@
+/* Rotate */
+
+.rotate {
+    animation: rotation 1.5s infinite cubic-bezier(1,.29,.17,.67);
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }

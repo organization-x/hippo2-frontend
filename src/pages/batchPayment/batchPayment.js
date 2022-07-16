@@ -103,10 +103,10 @@ function BatchPayment() {
 	}
 
 	return (
-		<div className="container max-w-4xl flex flex-wrap mx-auto p-4 mt-10 auth">
+		<div className="container max-w-4xl flex flex-wrap mx-auto p-4 mt-12 auth">
 			<div className="flex-none md:flex-initial w-full md:w-1/2 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none text-base">
-				<h1 className="text-2xl mb-5 text-center">Payment Details</h1>
-				<p className="mb-5">Course tuition is listed under your selected course, alongside other course details. We offer competitive prices for the best AI education.</p>
+				<h1 className="text-2xl mb-8 text-center">Payment Details</h1>
+				<p className="mb-4">Course tuition is listed under your selected course, alongside other course details. We offer competitive prices for the best AI education.</p>
 				{/* <p className="mb-5">Optional: Enter promo codes under the "Promotional Code" section.</p> */}
 				{/* <p className="mb-5">Pay the full tuition in smaller installments over time by clicking "Pay in Installments".</p> */}
 				<p className="mb-8 text-lg">Pay now by clicking "Submit Tuition".</p>
@@ -131,7 +131,7 @@ function BatchPayment() {
 				</div>
 			</div>
 			<div className="flex-none md:flex-initial relative w-full md:w-1/2 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-xl mb-6 text-center">Submit payment to finalize registration.</h2>
+				<h2 className="text-xl mb-8 text-center">Submit payment to finalize registration.</h2>
 				<div className="mb-8">
 					<p className="text-lg font-semibold">{data.course.name}</p>
 					<p className="text-base">${data.course.price}</p>

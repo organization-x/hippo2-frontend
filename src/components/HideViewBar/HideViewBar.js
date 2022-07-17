@@ -6,7 +6,7 @@ import './HideViewBar.css';
 
 function HideViewBar(prop) {
 	const [blockHidden, setBlockHidden] = useState(false);
-	const { info } = prop;
+	const { info, buttonName } = prop;
 	const hideView = () => {
 		setBlockHidden(!blockHidden);
 	};
@@ -15,7 +15,7 @@ function HideViewBar(prop) {
 	let arrow;
 	if (blockHidden) {
 		HideViewButton = (
-			<p id = 'hideViewText' className='text-base md:text-xl whitespace-nowrap'>Hide Completed Tasks</p>
+			<p id = 'hideViewText' className='text-base md:text-xl whitespace-nowrap'>Hide {buttonName}</p>
 		);
 		arrow = (
 			<div className='arrow upArrow relative left-3 top-1' id='upArrow'></div>
@@ -23,7 +23,7 @@ function HideViewBar(prop) {
 		);
 	} else {
 		HideViewButton = (
-			<p id = 'hideViewText'className='text-base md:text-xl whitespace-nowrap'>View Completed Tasks</p>
+			<p id = 'hideViewText'className='text-base md:text-xl whitespace-nowrap'>View {buttonName}</p>
 		);
 		arrow = (
 			<div className='arrow downArrow relative left-3 bottom-1' id='downArrow'></div>

@@ -7,7 +7,6 @@ import validateUserLogin from '../../validation/login';
 import formatApiErrors from '../../validation/formatApiErrors';
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
-import TTLogo from "../../components/ttlogo/ttlogo";
 import './login.css';
 
 function Login() {
@@ -60,8 +59,6 @@ function Login() {
 				<p className="text-base">
 					By logging into AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
 				</p>
-
-				<TTLogo />
 			</div>
 
 			<form action="/" method="GET" onSubmit={event => {

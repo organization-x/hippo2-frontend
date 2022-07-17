@@ -27,6 +27,7 @@ import SelectionPage from './pages/selection/selection';
 import ConfirmDetails from './pages/confirmDetails/confirmDetails';
 import BatchChange from './pages/batchChange/batchChange';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
+import PageNotFound from './pages/pageNotFound/pageNotFound';
 import './App.css';
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
 								}/>
 								<Route path='todo' element={<ToDo />}/>
 								<Route path='account' element={<AccountSettings />}/>
+								<Route path='*' element={<PageNotFound />} />
 							</Route>
 							<Route path='/auth/google/' element={<GoogleAuth />}/>
 							<Route path='/invite' element={
@@ -99,6 +101,7 @@ function App() {
 									<SelectionPage />
 								</ProtectedRoute>
 							}/>
+							<Route path='*' element={<PageNotFound />} />
 						</Routes>
 					</div>
 					<Footer />

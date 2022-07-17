@@ -1,6 +1,6 @@
 import DashboardCourseDetails from "./screens/courseDetails";
 import AccountSettings from "./screens/accountSettings";
-import ToDo from "./screens/ToDo";
+import ToDo from "./screens/ToDo/ToDo";
 import AlertBanner from "./alertBanner";
 
 function DashboardBody({ page, navigate }) {
@@ -20,6 +20,9 @@ function DashboardBody({ page, navigate }) {
 			return (<AccountSettings />);
 		case 'register-for-courses':
 			//return (<RegisterForCourses />);
+			break;
+		case 'upcoming-events':
+			// return (<UpcomingEvents />);
 			break;
 		case 'explore-student-products':
 			//return (<ExploreStudentProducts />);

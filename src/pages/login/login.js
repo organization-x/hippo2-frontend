@@ -51,11 +51,11 @@ function Login() {
 	};
 
 	return (
-		<div className="container max-w-3xl flex flex-wrap mx-auto p-4 auth">
-			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none relative">
-				<h1 className="text-2xl mb-5 text-center">Log In</h1>
+		<div className="container max-w-3xl flex flex-wrap mx-auto px-4 mt-12 auth">
+			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+				<h1 className="text-2xl mb-8 text-center">Log In</h1>
 
-				<p className="text-base mb-3">Welcome back to AI Camp!</p>
+				<p className="text-base mb-4">Welcome back to AI Camp!</p>
 
 				<p className="text-base">
 					By logging into AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
@@ -67,7 +67,7 @@ function Login() {
 			<form action="/" method="GET" onSubmit={event => {
 				event.preventDefault();
 			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-2xl mb-3 text-center">Welcome back to AI Camp!</h2>
+				<h2 className="text-2xl mb-8 text-center">Welcome back to AI Camp!</h2>
 
 				{
 					formErrors.nonFieldErrors?.length ? 

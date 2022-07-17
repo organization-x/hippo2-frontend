@@ -1,14 +1,10 @@
 import './ttlogo.css';
-import TTLogoSVG from'../../ttlogo.svg';
+import TTLogoSVG from '../../ttlogo.svg';
 import HippoSVG from '../../hippo.svg';
-import { useState } from 'react';
 
-function TTLogo(){
-    const [displayTextBox, updateDisplay] = useState(false);
-
+function TTLogo() {
     return (
         <div className="ttlogo-main-container">
-            
             <a href="https://www.ai-camp.org/" className="tt-logo">
 				<img src={TTLogoSVG} alt="logo"/>
             </a>
@@ -27,9 +23,7 @@ function TTLogo(){
                     <p><span>Product Designer: </span> Bernice Lau</p>        
                     <p><span>Software Developers: </span> Jackson Choyce, Alex Zhou</p>        
                 </div>
-            </div>
-
-            
+            </div>     
         </div>
     );
 }

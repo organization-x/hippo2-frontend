@@ -89,7 +89,7 @@ function DashboardCourseDetails() {
 					<p className="mb-8">{auth.user.type === 'parent' ?
 						'Your child is not registered for any courses. Register for a course to reserve a spot now! Spots are filling up quick!' :
 						'You are not registered for any courses. Register for a course to reserve your spot now! Spots are filling up quick!'}</p>
-					<Link to="/courses" className="w-full px-24 block">
+					<Link to="/courses" className="w-full md:px-6 lg:px-24 block max-w-4xl mx-auto">
 						<Button className="w-full mb-5 py-2" bgColor="red" txtColor="white">Register for Courses</Button>
 					</Link>
 				</div>

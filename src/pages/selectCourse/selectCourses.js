@@ -68,17 +68,16 @@ function SelectCourses() {
 					<div className=''>
 						<select data-dropdown-placement="right" value={courseId} onChange={handleChange}
 							className="w-full py-6 form-select form-select-lg mb-3
+							course-select
 							px-5
 							text-left
 							font-normal
 							text-gray-700
-							bg-slate-100 bg-no-repeat
 							border border-solid border-gray-100
 							rounded-full
 							transition
 							ease-in-out
 							focus:text-gray-700
-							focus:bg-white
 							focus:border-blue-600
 							focus:outline-none"
 							aria-label=".form-select-lg example"

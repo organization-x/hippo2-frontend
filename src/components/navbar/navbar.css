@@ -20,7 +20,6 @@ header {
 /* flex links horizontally and fill up remaining space */
 .navbar nav {
 	flex-grow: 1;
-	margin-left: 2rem;
 	flex-flow: row nowrap;
 }
 

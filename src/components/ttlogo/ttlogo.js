@@ -2,9 +2,9 @@ import './ttlogo.css';
 import TTLogoSVG from '../../ttlogo.svg';
 import HippoSVG from '../../hippo.svg';
 
-function TTLogo() {
+function TTLogo({ className }) {
 	return (
-		<div className="ttlogo-main-container">
+		<div className={`ttlogo-main-container ${className}`}>
 			<a href="https://www.ai-camp.org/" className="tt-logo">
 				<img src={TTLogoSVG} alt="logo"/>
 			</a>

@@ -1,4 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
+import TTLogo from '../../components/ttlogo/ttlogo';
 
 function Dashboard() {
 	const location = useLocation();
@@ -59,6 +60,7 @@ function Dashboard() {
 					<Outlet />
 				</div>
 			</div>
+			<TTLogo className='absolute bottom-1 left-1 p-6'/>
 
 		</div>
 	);

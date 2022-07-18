@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import TTLogo from '../../components/ttlogo/ttlogo'
+import TTLogo from '../../components/ttlogo/ttlogo';
 
 function Dashboard() {
 	const location = useLocation();

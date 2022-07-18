@@ -10,7 +10,7 @@ import { useFlashMsg } from "../../services/flashMsg";
 function ForgotPassword() {
 	const [email, setEmail] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
-	const [SuccessMessage, setSuccessMessage] = useState('');
+	const [successMessage, setSuccessMessage] = useState('');
 	const { flashMsg } = useFlashMsg();
 	const navigate = useNavigate();
 
@@ -73,7 +73,7 @@ function ForgotPassword() {
 					/>
 					<div className='pb-3'>
 						{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
-						{SuccessMessage && (<p className="error bg-green-100 border-l-4 border-green-500 text-green-900 p-4"> {SuccessMessage} </p>)}
+						{successMessage && (<p className="error bg-green-100 border-l-4 border-green-500 text-green-900 p-4"> {successMessage} </p>)}
 					</div>
 
 					<div>

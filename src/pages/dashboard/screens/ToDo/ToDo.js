@@ -52,7 +52,7 @@ function ToDo() {
 	return (
 		<>
 			<div className="container w-full md:max-w-4xl md:w-8/12 flex flex-wrap mx-auto pt-12 px-3"> 			
-				{orderList};
+				{orderList}
 			</div>
 		</>
 	);

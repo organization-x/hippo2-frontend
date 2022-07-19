@@ -60,7 +60,7 @@ function DashboardCourseDetails() {
 						<p className="mb-5"><b className="font-semibold">Student Name: </b>{course.user.first_name} {course.user.last_name}</p>
 						<p><b className="font-semibold">Course: </b>{course.course.name}</p>
 						<p><b className="font-semibold">{course.product.name}: </b>{course.product.start_date} - {course.product.end_date}, {course.product.start_time} - {course.product.end_time} {course.product.time_zone}</p>
-						<p className="mb-5"><a href="/" className="text-blue-500 underline">Want to change your batch?</a><span className="italic text-red-400"> (Deadline: 6/1)</span></p>
+						<p className="mb-5"><a href={`/orders/${course.id}/change-batch`} className="text-blue-500 underline">Want to change your batch?</a><span className="italic text-red-400"> (Deadline: 6/1)</span></p>
 
 						<Button bgColor="white" txtColor="black" className="w-2/3 py-1 mb-4">Cancel Your Course</Button>
 					</div>

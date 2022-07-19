@@ -8,6 +8,7 @@ import baseUrl from "../../apiUrls";
 import BatchBoard from "../../components/batchBoard/batchBoard";
 import Button from "../../components/button/button";
 import Loading from "../loading/loading";
+import Page from "../../components/page/page";
 import './batchSelect.css';
 
 function BatchSelect() {
@@ -90,41 +91,48 @@ function BatchSelect() {
 		);
 	}
 
+	const maxWidth = '5xl';
+	const leftWidth = '1/3';
+	const rightWidth = '2/3';
+
+	const developers = [];
+
+	const leftChildren =
+		{ sideText };
+
+	const rightChildren =
+		<div>
+			<h1 className="text-center text-xl font-bold">{data.name}</h1>
+			<p className="text-center text-xl mb-8">Select a batch that fits your schedule</p>
+			<BatchBoard 
+				className="w-full"
+				batchID={batch.id} 
+				batchData={data.batches}
+				price={data.price}
+				onChange={(b) => setBatch(b)}
+			/>
+			<div className="flex flex-row flex-nowrap mt-8">
+				<Button 
+					bgColor="gray"
+					txtColor="white" 
+					className="w-full py-1 mr-6" 
+					onClick={() => navigate('/courses')}
+				>
+					Back
+				</Button>
+				<Button 
+					bgColor="green" 
+					txtColor="white" 
+					className="w-full py-1" 
+					onClick={() => onSubmit()}
+				>
+					Next
+				</Button>
+			</div>
+		</div>;
+
 	return (
-		<div className="container max-w-5xl flex flex-row flex-wrap mx-auto my-10 rounded-2xl overflow-hidden">
-			<div className="w-full md:w-1/3 bg-green text-white p-8">
-				{sideText}
-			</div>
-			<div className="w-full md:w-2/3 bg-white p-8">
-				<h1 className="text-center text-xl font-bold">{data.name}</h1>
-				<p className="text-center text-xl mb-8">Select a batch that fits your schedule</p>
-				<BatchBoard 
-					className="w-full"
-					batchID={batch.id} 
-					batchData={data.batches}
-					price={data.price}
-					onChange={(b) => setBatch(b)}
-				/>
-				<div className="flex flex-row flex-nowrap mt-8">
-					<Button 
-						bgColor="gray"
-						txtColor="white" 
-						className="w-full py-1 mr-6" 
-						onClick={() => navigate('/courses')}
-					>
-						Back
-					</Button>
-					<Button 
-						bgColor="green" 
-						txtColor="white" 
-						className="w-full py-1" 
-						onClick={() => onSubmit()}
-					>
-						Next
-					</Button>
-				</div>
-			</div>
-		</div>
+		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
 	);
 }
 

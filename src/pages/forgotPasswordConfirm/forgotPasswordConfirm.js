@@ -6,6 +6,7 @@ import validatePassword from '../../validation/password';
 import baseUrl from "../../apiUrls";
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
+import Page from "../../components/page/page";
 
 
 function ForgotPasswordConfirm() {
@@ -56,42 +57,49 @@ function ForgotPasswordConfirm() {
 		}
 	};
 
-	return (
-		<div className="container max-w-3xl flex flex-wrap mx-auto pt-12 auth px-3">
-			<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<h1 className="text-2xl mb-8 text-center">Password Reset</h1>
-				<p className="text-base mb-6">Reset your password by entering your new password.</p>
-					
-				<p className="text-base">By logging into AI Camp, you agree to our&nbsp;
-					<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and&nbsp; 
-					<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
-				</p>
-			</div>
+	const maxWidth = '3xl';
+	const leftWidth = '2/5';
+	const rightWidth = '3/5';
 
-			<div className="flex-none md:flex-initial w-full md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-2xl mb-8 text-center font-semibold">Reset your password to continue your AI adventure with AI Camp.</h2>
-				<form action="" method="post" onSubmit={e => e.preventDefault()}>
-					<Input label="New Password"
-						type="password"
-						placeHolder="Password"
-						className="mb-3"
-						id="password"
-						onChange={val => setPassword(val)} 
-					/>
-					<Input label="Confirm New Password"
-						type="password"
-						placeHolder="Confirm Password"
-						className="mb-5 mt-5"
-						onChange={val => setConfirmPassword(val)}
-					/>
-					<div className='pb-3'>
-						{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
-					</div>
-					<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => resetPassword()}>Reset Password</Button>
-				</form>
-			</div>	
-		</div>
-		
+	const developers = [];
+
+	const leftChildren =
+		<div>
+			<h1 className="text-2xl mb-8 text-center">Password Reset</h1>
+			<p className="text-base mb-6">Reset your password by entering your new password.</p>
+				
+			<p className="text-base">By logging into AI Camp, you agree to our&nbsp;
+				<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and&nbsp; 
+				<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
+			</p>
+		</div>;
+
+	const rightChildren =
+		<div>
+			<h2 className="text-2xl mb-8 text-center font-semibold">Reset your password to continue your AI adventure with AI Camp.</h2>
+			<form action="" method="post" onSubmit={e => e.preventDefault()}>
+				<Input label="New Password"
+					type="password"
+					placeHolder="Password"
+					className="mb-3"
+					id="password"
+					onChange={val => setPassword(val)} 
+				/>
+				<Input label="Confirm New Password"
+					type="password"
+					placeHolder="Confirm Password"
+					className="mb-5 mt-5"
+					onChange={val => setConfirmPassword(val)}
+				/>
+				<div className='pb-3'>
+					{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
+				</div>
+				<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => resetPassword()}>Reset Password</Button>
+			</form>
+		</div>;
+
+	return (
+		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
 	);
 }
 

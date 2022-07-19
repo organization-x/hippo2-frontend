@@ -5,6 +5,7 @@ import { useAuth } from '../../services/authentication';
 import baseUrl from "../../apiUrls";
 import Button from "../../components/button/button";
 import Loading from '../loading/loading';
+import Page from '../../components/page/page';
 
 function SelectionPage() {
 	const [batchData, setBatchData] = useState({});
@@ -49,7 +50,7 @@ function SelectionPage() {
 	}
     
 	const sideBar = (
-		<div className="flex-none md:flex-initial w-full md:w-80 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+		<div>
 			<h1 className="text-3xl mb-10 text-center">
 				Select a Student
 			</h1>
@@ -82,30 +83,39 @@ function SelectionPage() {
 		navigate(`/courses/${batchData.course.id}/batches`);
 	};
 
-	return (
-		<div className='container max-w-7xl mt-12 flex flex-wrap justify-center mx-auto auth md:px-10 px-3'>
-			{sideBar}
-			<div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
-				<div>
-					<div className="my-2 text-center w-full">
-						<h2 className="text-2xl mt-3">Reserve spot in {batchData.course.name} for</h2>
-					</div>
-					<div className="my-10">
-						{selection}
-					</div>                 
+	const maxWidth = '7xl';
+	const leftWidth = '80';
+	const rightWidth = '5/12';
+
+	const developers = ['Jackson Choyce', 'Alexander Zhou'];
+
+	const leftChildren = 
+		{ sideBar };
+	
+	const rightChildren =
+		<div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
+			<div>
+				<div className="my-2 text-center w-full">
+					<h2 className="text-2xl mt-3">Reserve spot in {batchData.course.name} for</h2>
 				</div>
-				<div className="my-5">
-					<Button 
-						onClick={() => onBack()} 
-						bgColor="gray" 
-						txtColor="white" 
-						className="w-full lg:w-1/4 h-12 mb-2 lg:my-3"
-					>
-						<p className="text-lg">Back</p>
-					</Button>
-				</div>
+				<div className="my-10">
+					{selection}
+				</div>                 
 			</div>
-		</div>
+			<div className="my-5">
+				<Button 
+					onClick={() => onBack()} 
+					bgColor="gray" 
+					txtColor="white" 
+					className="w-full lg:w-1/4 h-12 mb-2 lg:my-3"
+				>
+					<p className="text-lg">Back</p>
+				</Button>
+			</div>
+		</div>;
+
+	return (
+		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
 	);
 }
 

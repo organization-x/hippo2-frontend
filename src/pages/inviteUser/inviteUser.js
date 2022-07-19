@@ -6,6 +6,7 @@ import formatApiErrors from "../../validation/formatApiErrors";
 import PhoneInput from "react-phone-input-2";
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
+import Page from "../../components/page/page";
 import 'react-phone-input-2/lib/style.css';
 import './inviteUser.css';
 
@@ -93,83 +94,90 @@ function InviteUser() {
 		formTitle = 'Invite your student to create their AI Camp account.';
 	}
 
-	
+	const maxWidth = '3xl';
+	const leftWidth = '5/12';
+	const rightWidth = '7/12';
+
+	const developers = [];
+
+	const leftChildren =
+		<div>
+			{panelText}
+			<p className="text-lg">Click "Next" to move onto the payment stage!</p>
+		</div>;
+
+	const rightChildren =
+		<form action="/" method="GET" onSubmit={event => {
+			event.preventDefault();
+		}}>
+			<h2 className="text-xl text-center">
+				{formTitle}
+			</h2>
+			<div className="mb-8 mt-6">
+				<Input label="Email"
+					type="email"
+					placeHolder="example@gmail.com"
+					className="mb-3"
+					value={email}
+					isValid={formErrors.email?.length}
+					errorText={formErrors.email?.[0]}
+					onChange={val => setEmail(val)}
+				/>
+				<Input label="First Name"
+					type="text"
+					placeHolder="John"
+					className="mb-3"
+					value={fName}
+					isValid={formErrors.fName?.length}
+					errorText={formErrors.fName?.[0]}
+					onChange={val => setFName(val)}
+				/>
+				<Input label="Last Name"
+					type="text"
+					placeHolder="Doe"
+					className="mb-3"
+					value={lName}
+					isValid={formErrors.lName?.length}
+					errorText={formErrors.lName?.[0]}
+					onChange={val => setLName(val)}
+				/>
+				<label className="form-label mb-1">Mobile Phone Number</label>
+				<PhoneInput 
+					specialLabel="Phone Number"
+					enableSearch
+					countryCodeEditable={false}
+					country={'us'}
+					disableSearchIcon
+					value={phone}
+					onChange={value => {
+						setPhone(value);
+					}}
+					isValid={() => !formErrors.phone?.length}
+				/>
+				{
+					formErrors.phone?.length ? 
+						<span className='mt-1 block form-error text-sm'>{formErrors.phone[0]}</span> 
+						: 
+						null
+				}
+				{type !== 'PARENT' &&
+					<Input label="Birth Month and Year"
+						type="text"
+						placeHolder="MM/YYYY"
+						value={dob}
+						isValid={formErrors.dob?.length}
+						errorText={formErrors.dob?.[0]}
+						onChange={val => setDob(val)}
+						className='mt-3'
+					/>
+				}
+			</div>
+
+			<Button disabled={disable} bgColor="green" txtColor="white" className={`w-full py-1 ${disable ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => onSubmit()}>Next</Button>
+		</form>;
 
 	return (
-		<div className="container max-w-3xl flex flex-wrap mx-auto p-5 auth">
-			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				{panelText}
-				<p className="text-lg">Click "Next" to move onto the payment stage!</p>
-			</div>
-			<form action="/" method="GET" onSubmit={event => {
-				event.preventDefault();
-			}} className="flex-none md:flex-initial relative w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-xl text-center">
-					{formTitle}
-				</h2>
-				<div className="mb-8 mt-6">
-					<Input label="Email"
-						type="email"
-						placeHolder="example@gmail.com"
-						className="mb-3"
-						value={email}
-						isValid={formErrors.email?.length}
-						errorText={formErrors.email?.[0]}
-						onChange={val => setEmail(val)}
-					/>
-					<Input label="First Name"
-						type="text"
-						placeHolder="John"
-						className="mb-3"
-						value={fName}
-						isValid={formErrors.fName?.length}
-						errorText={formErrors.fName?.[0]}
-						onChange={val => setFName(val)}
-					/>
-					<Input label="Last Name"
-						type="text"
-						placeHolder="Doe"
-						className="mb-3"
-						value={lName}
-						isValid={formErrors.lName?.length}
-						errorText={formErrors.lName?.[0]}
-						onChange={val => setLName(val)}
-					/>
-					<label className="form-label mb-1">Mobile Phone Number</label>
-					<PhoneInput 
-						specialLabel="Phone Number"
-						enableSearch
-						countryCodeEditable={false}
-						country={'us'}
-						disableSearchIcon
-						value={phone}
-						onChange={value => {
-							setPhone(value);
-						}}
-						isValid={() => !formErrors.phone?.length}
-					/>
-					{
-						formErrors.phone?.length ? 
-							<span className='mt-1 block form-error text-sm'>{formErrors.phone[0]}</span> 
-							: 
-							null
-					}
-					{type !== 'PARENT' &&
-						<Input label="Birth Month and Year"
-							type="text"
-							placeHolder="MM/YYYY"
-							value={dob}
-							isValid={formErrors.dob?.length}
-							errorText={formErrors.dob?.[0]}
-							onChange={val => setDob(val)}
-							className='mt-3'
-						/>
-					}
-				</div>
-
-				<Button disabled={disable} bgColor="green" txtColor="white" className={`w-full py-1 ${disable ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => onSubmit()}>Next</Button>
-			</form>
-		</div>
+		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
 	);
 }
 

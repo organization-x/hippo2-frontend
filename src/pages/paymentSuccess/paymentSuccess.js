@@ -4,6 +4,7 @@ import validateUuid from "../../validation/uuid";
 import sendReq from "../../services/sendReq";
 import baseUrl from "../../apiUrls";
 import Button from "../../components/button/button";
+import Page from "../../components/page/page";
 
 function PaymentSuccess() {
 	const [data, setData] = useState(null);
@@ -39,25 +40,34 @@ function PaymentSuccess() {
 		);
 	}
 
-	return (
-		<div className="container max-w-5xl flex flex-wrap mx-auto mt-12 auth">
-			<div className="flex-none md:flex-initial w-full md:w-1/2 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<h1 className="text-2xl mb-8 text-center">Congratulations!</h1>
-				<p className="text-base mb-4">You are now officially enrolled in {data.course} in Batch {data.batch}.</p>
-				<p className="text-base mb-4">Order ID: {data.id}</p>
-				<p className="text-lg">Click "Proceed to Student Dashboard" to view your payment status and prepare for your upcoming AI Camp course!</p>
-			</div>
-			<div className="flex-none md:flex-initial relative w-full md:w-1/2 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-xl mb-16 text-center">Thank you for registering at AI Camp!</h2>
+	const maxWidth = '5xl';
+	const leftWidth = '1/2';
+	const rightWidth = '1/2';
 
-				<Button 
-					bgColor="green" txtColor="white" className="col-span-3 my-2 mb-8 py-3 w-full"
-					onClick={() => studentDashboard()}
-				>
-					Proceed to Student Dashboard
-				</Button>
-			</div>
-		</div>
+	const developers = [];
+
+	const leftChildren =
+		<div>
+			<h1 className="text-2xl mb-8 text-center">Congratulations!</h1>
+			<p className="text-base mb-4">You are now officially enrolled in {data.course} in Batch {data.batch}.</p>
+			<p className="text-base mb-4">Order ID: {data.id}</p>
+			<p className="text-lg">Click "Proceed to Student Dashboard" to view your payment status and prepare for your upcoming AI Camp course!</p>
+		</div>;
+
+	const rightChildren =
+		<div>
+			<h2 className="text-xl mb-16 text-center">Thank you for registering at AI Camp!</h2>
+
+			<Button 
+				bgColor="green" txtColor="white" className="col-span-3 my-2 mb-8 py-3 w-full"
+				onClick={() => studentDashboard()}
+			>
+				Proceed to Student Dashboard
+			</Button>
+		</div>;
+
+	return (
+		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
 	);
 }
 

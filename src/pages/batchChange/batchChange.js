@@ -7,6 +7,7 @@ import baseUrl from "../../apiUrls";
 import BatchBoard from "../../components/batchBoard/batchBoard";
 import Button from "../../components/button/button";
 import Loading from "../loading/loading";
+import Page from "../../components/page/page";
 
 function BatchChange() {  
 	const [batch, setBatch] = useState({});    
@@ -46,7 +47,7 @@ function BatchChange() {
 	function SideBarContent() {
 		if (!batch.id) {
 			return (
-				<div className="flex-none md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+				<div>
 					<h1 className="text-3xl mb-10 text-center">
                         Batch Change
 					</h1>
@@ -62,7 +63,7 @@ function BatchChange() {
 				</div>);
 		} else {
 			return (
-				<div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+				<div>
 					<h1 className="text-3xl mb-10 text-center">
                         Batch Change
 					</h1>
@@ -146,23 +147,32 @@ function BatchChange() {
 			</div>
 		);
 	}
-    
+
+	const maxWidth = '7xl';
+	const leftWidth = '1/3';
+	const rightWidth = '7/12';
+
+	const developers = [];
+
+	const leftChildren = 
+		<SideBarContent/>;
+
+	const rightChildren =
+		<div>
+			<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
+			<BatchBoard
+				className="w-full"
+				batchData={batchData.batches} 
+				onChange={(b) => setBatch(b)}
+				batchID={batch.id}
+				price={batchData.price}
+				disabledID={currentBatch.id}
+			/>
+			<NextAndBackButtons/>
+		</div>;
+
 	return (
-		<div className='container max-w-7xl mt-12 flex flex-wrap mx-auto auth'>
-			<SideBarContent/>
-			<div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 p-5 rounded-b-2xl md:rounded-r-2xl bg-white">
-				<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
-				<BatchBoard
-					className="w-full"
-					batchData={batchData.batches} 
-					onChange={(b) => setBatch(b)}
-					batchID={batch.id}
-					price={batchData.price}
-					disabledID={currentBatch.id}
-				/>
-				<NextAndBackButtons/>
-			</div>
-		</div>
+		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
 	);
 }
 

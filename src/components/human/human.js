@@ -17,8 +17,8 @@ function Human() {
 	return (
 		<div className="flex flex-col items-center">
 			<img src={human.imgUrl} alt="" className="mb-4 human-img"/>
-			<h1 className='text-lg'>Hi! I'm {human.name}, {human.role} at AI Camp.</h1>
-			<h1 className='text-lg'>Let's get started</h1>
+			<h1 className='text-xl text-center'>Hi! I'm {human.name}, {human.role} at AI Camp.</h1>
+			<h1 className='text-xl'>Let's get started.</h1>
 		</div>
 	);
 }

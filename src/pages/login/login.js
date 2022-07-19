@@ -7,6 +7,7 @@ import validateUserLogin from '../../validation/login';
 import formatApiErrors from '../../validation/formatApiErrors';
 import Input from "../../components/form/input";
 import Button from "../../components/button/button";
+import Page from '../../components/page/page';
 import './login.css';
 
 function Login() {
@@ -49,69 +50,77 @@ function Login() {
 		});
 	};
 
-	return (
-		<div className="container max-w-3xl flex flex-wrap mx-auto px-4 mt-12 auth">
-			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<h1 className="text-2xl mb-8 text-center">Log In</h1>
+	const maxWidth = '3xl';
+	const leftWidth = '5/12';
+	const rightWidth = '7/12';
 
-				<p className="text-base mb-4">Welcome back to AI Camp!</p>
+	const developers = [];
 
-				<p className="text-base">
-					By logging into AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
-				</p>
+	const leftChildren =
+		<div>
+			<h1 className="text-2xl mb-8 text-center">Log In</h1>
+
+			<p className="text-base mb-4">Welcome back to AI Camp!</p>
+
+			<p className="text-base">
+				By logging into AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
+			</p>
+		</div>;
+
+	const rightChildren =
+		<form action="/" method="GET" onSubmit={event => {
+			event.preventDefault();
+		}}>
+			<h2 className="text-2xl mb-8 text-center">Welcome back to AI Camp!</h2>
+
+			{
+				formErrors.nonFieldErrors?.length ? 
+					<span className='block form-error'>
+						{formErrors.nonFieldErrors[0]}
+					</span> 
+					:
+					null
+			}
+
+			<Input label="Email"
+				type="email"
+				placeHolder="JohnDoe@yahoo.com"
+				className="mb-5 mt-5"
+				isValid={formErrors.email?.length}
+				errorText={formErrors.email?.[0]}
+				onChange={val => setEmail(val)}
+			/>
+			<Input label="Password"
+				type="password"
+				placeHolder="JohnDoePassword"
+				className="mb-2"
+				isValid={formErrors.password?.length}
+				errorText={formErrors.password?.[0]}
+				onChange={val => setPassword(val)}
+			/>
+			<div className="mb-6">
+				<Link to="/password/reset" className="mx-auto underline text-blue-700 hover:text-blue-600">Forgot password?</Link>
 			</div>
 
-			<form action="/" method="GET" onSubmit={event => {
-				event.preventDefault();
-			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-2xl mb-8 text-center">Welcome back to AI Camp!</h2>
+			<Button bgColor="green" txtColor="white" className="w-full mb-3 py-1" onClick={() => loginUser()}>Next</Button>
 
-				{
-					formErrors.nonFieldErrors?.length ? 
-						<span className='block form-error'>
-							{formErrors.nonFieldErrors[0]}
-						</span> 
-						:
-						null
-				}
+			<p className="text-xl mb-3 text-center">Or</p>
 
-				<Input label="Email"
-					type="email"
-					placeHolder="JohnDoe@yahoo.com"
-					className="mb-5 mt-5"
-					isValid={formErrors.email?.length}
-					errorText={formErrors.email?.[0]}
-					onChange={val => setEmail(val)}
-				/>
-				<Input label="Password"
-					type="password"
-					placeHolder="JohnDoePassword"
-					className="mb-2"
-					isValid={formErrors.password?.length}
-					errorText={formErrors.password?.[0]}
-					onChange={val => setPassword(val)}
-				/>
-				<div className="mb-6">
-					<Link to="/password/reset" className="mx-auto underline text-blue-700 hover:text-blue-600">Forgot password?</Link>
-				</div>
+			<div className="block mb-4">
+				<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Log in with Google</Button>
+			</div>
 
-				<Button bgColor="green" txtColor="white" className="w-full mb-3 py-1" onClick={() => loginUser()}>Next</Button>
+			<div className="mb-5 flex items-center justify-center">
+				<Link 
+					to="/signup" 
+					className="mx-auto text-blue-700 hover:text-blue-600 underline"
+					state={{ from: { pathname: origin }}}
+				>Don't have an account?</Link>
+			</div>
+		</form>;
 
-				<p className="text-xl mb-3 text-center">Or</p>
-
-				<div className="block mb-4">
-					<Button isLink={true} bgColor="white" href={googleSocialUrlFull} className="w-full my-1 py-1 mx-auto block text-center">Log in with Google</Button>
-				</div>
-
-				<div className="mb-5 flex items-center justify-center">
-					<Link 
-						to="/signup" 
-						className="mx-auto text-blue-700 hover:text-blue-600 underline"
-						state={{ from: { pathname: origin }}}
-					>Don't have an account?</Link>
-				</div>
-			</form>
-		</div>
+	return (
+		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
 	);
 }
 

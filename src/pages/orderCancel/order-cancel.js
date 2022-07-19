@@ -28,7 +28,7 @@ function OrderCancel () {
 	};
 
 	const onBack = () => {
-		navigate(-1);
+		navigate('/dashboard');
 	};
     
 

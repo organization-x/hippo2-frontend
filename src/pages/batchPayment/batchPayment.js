@@ -103,65 +103,56 @@ function BatchPayment() {
 		</>);
 	}
 
-	const maxWidth = '4xl';
-	const leftWidth = '1/2';
-	const rightWidth = '1/2';
-
-	const developers = [];
-
-	const leftChildren =
-		<>
-			<h1 className="text-2xl mb-8 text-center">Payment Details</h1>
-			<p className="mb-4">Course tuition is listed under your selected course, alongside other course details. We offer competitive prices for the best AI education.</p>
-			{/* <p className="mb-5">Optional: Enter promo codes under the "Promotional Code" section.</p> */}
-			{/* <p className="mb-5">Pay the full tuition in smaller installments over time by clicking "Pay in Installments".</p> */}
-			<p className="mb-8 text-lg">Pay now by clicking "Submit Tuition".</p>
-			<p className="mb-5"><b>Note: Your spot is not reserved until you have paid the tuition. Courses are filling up fast!</b></p>
-			<hr className="mx-3 mb-4" />
-			<div className="flex flex-row justify-center items-center mb-4">
-				<FontAwesomeIcon className="h-10 w-10 text-yellow-400" icon={faStar} />
-				<p className="inline-block text-3xl ml-2">4.7/5 (208 reviews)</p>
-			</div>
-			<div className="bg-zinc-200 px-4 py-2 rounded-2xl text-black">
-				<div className="flex justify-between">
-					<div className="h-fit">{reviewStars}</div>
-					<p className="text-xs mt-1 align-middle">July 14, 2021</p>
-				</div>
-				<p className="text-sm mb-1">"This class not only teaches us about AI, it provides us with resources that can help us determine what we will do in the future."</p>
-				<div className="h-8 flex">
-					<div className="inline-block">
-						<img className="rounded-full bg-zinc-300 h-8 w-8" src={logo} alt="AI Camp Logo" />
-					</div>
-					<span className="inline-block text-sm ml-1 my-auto leading-none">Valeria Cisneros</span>
-				</div>
-			</div>
-		</>;
-
-	const rightChildren =
-		<>
-			<h2 className="text-xl mb-8 text-center">Submit payment to finalize registration.</h2>
-			<div className="mb-8">
-				<p className="text-lg font-semibold">{data.course.name}</p>
-				<p className="text-base">${data.course.price}</p>
-			</div>
-			<div className="mb-8 text-lg font-semibold">
-				<p>Student Name: {data.user.first_name} {data.user.last_name}</p>
-				<p>
-					Batch: {data.batch.name} ({data.batch.time_zone}) {data.batch.start_date}-{data.batch.end_date}
-				</p>
-			</div>
-
-			{controls}
-		</>;
-
 	return (
 		<Page
-			leftChildren={leftChildren} 
-			rightChildren={rightChildren} 
-			leftWidth={leftWidth} 
-			rightWidth={rightWidth} 
-			maxWidth={maxWidth} 
-			developers={developers}
+			leftChildren={
+				<>
+					<h1 className="text-2xl mb-8 text-center">Payment Details</h1>
+					<p className="mb-4">Course tuition is listed under your selected course, alongside other course details. We offer competitive prices for the best AI education.</p>
+					{/* <p className="mb-5">Optional: Enter promo codes under the "Promotional Code" section.</p> */}
+					{/* <p className="mb-5">Pay the full tuition in smaller installments over time by clicking "Pay in Installments".</p> */}
+					<p className="mb-8 text-lg">Pay now by clicking "Submit Tuition".</p>
+					<p className="mb-5"><b>Note: Your spot is not reserved until you have paid the tuition. Courses are filling up fast!</b></p>
+					<hr className="mx-3 mb-4" />
+					<div className="flex flex-row justify-center items-center mb-4">
+						<FontAwesomeIcon className="h-10 w-10 text-yellow-400" icon={faStar} />
+						<p className="inline-block text-3xl ml-2">4.7/5 (208 reviews)</p>
+					</div>
+					<div className="bg-zinc-200 px-4 py-2 rounded-2xl text-black">
+						<div className="flex justify-between">
+							<div className="h-fit">{reviewStars}</div>
+							<p className="text-xs mt-1 align-middle">July 14, 2021</p>
+						</div>
+						<p className="text-sm mb-1">"This class not only teaches us about AI, it provides us with resources that can help us determine what we will do in the future."</p>
+						<div className="h-8 flex">
+							<div className="inline-block">
+								<img className="rounded-full bg-zinc-300 h-8 w-8" src={logo} alt="AI Camp Logo" />
+							</div>
+							<span className="inline-block text-sm ml-1 my-auto leading-none">Valeria Cisneros</span>
+						</div>
+					</div>
+				</>
+			} 
+			rightChildren={
+				<>
+					<h2 className="text-xl mb-8 text-center">Submit payment to finalize registration.</h2>
+					<div className="mb-8">
+						<p className="text-lg font-semibold">{data.course.name}</p>
+						<p className="text-base">${data.course.price}</p>
+					</div>
+					<div className="mb-8 text-lg font-semibold">
+						<p>Student Name: {data.user.first_name} {data.user.last_name}</p>
+						<p>
+							Batch: {data.batch.name} ({data.batch.time_zone}) {data.batch.start_date}-{data.batch.end_date}
+						</p>
+					</div>
+
+					{controls}
+				</>
+			} 
+			leftRightRatio={'1:1'}
+			maxWidth={'4xl'} 
+			developers={[]}
 		>
 		</Page>
 	);

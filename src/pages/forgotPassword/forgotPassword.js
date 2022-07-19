@@ -49,59 +49,50 @@ function ForgotPassword() {
 		navigate('/login');
 	};
 
-	const maxWidth = '3xl';
-	const leftWidth = '2/5';
-	const rightWidth = '3/5';
-
-	const developers = [];
-
-	const leftChildren =
-		<>
-			<h1 className="text-2xl mb-8 text-center">Password Reset</h1>
-			<p className="text-base mb-6">Enter your email to get a password reset link.</p>
-				
-			<p className="text-base">By logging into AI Camp, you agree to our&nbsp;
-				<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and&nbsp; 
-				<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
-			</p>
-		</>;
-
-	const rightChildren =
-		<>
-			<h2 className="text-2xl mb-8 text-center font-semibold">Reset your password to continue your AI adventure with AI Camp.</h2>
-			<form action="" method="post" onSubmit={e => e.preventDefault()}>
-				<Input label="Email"
-					placeHolder="example@gmail.com"
-					type = 'email'
-					name = 'email'
-					className="mb-3"
-					id="email"
-					onChange={val => setEmail(val)} 
-				/>
-				<div className='pb-3'>
-					{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
-					{successMessage && (<p className="error bg-green-100 border-l-4 border-green-500 text-green-900 p-4"> {successMessage} </p>)}
-				</div>
-
-				<div>
-					<div className='py-2'>
-						<Button bgColor="green" txtColor="white" type="button" className="w-full py-1" onClick={() => sendResetEmail()}>Reset Password</Button>
-					</div>
-					<div className='py-2'>
-						<Button bgColor="gray" txtColor="white" className="w-full py-1 mb-3" onClick={() => onBack()}>Back</Button>
-					</div>
-				</div>
-			</form>
-		</>;	
-
 	return (
 		<Page
-			leftChildren={leftChildren} 
-			rightChildren={rightChildren} 
-			leftWidth={leftWidth} 
-			rightWidth={rightWidth} 
-			maxWidth={maxWidth} 
-			developers={developers}
+			leftChildren={
+				<>
+					<h1 className="text-2xl mb-8 text-center">Password Reset</h1>
+					<p className="text-base mb-6">Enter your email to get a password reset link.</p>
+						
+					<p className="text-base">By logging into AI Camp, you agree to our&nbsp;
+						<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/terms-of-service">Terms of Service</a> and&nbsp; 
+						<a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="https://www.ai-camp.org/privacy-notice">Privacy Policy</a>.
+					</p>
+				</>
+			} 
+			rightChildren={
+				<>
+					<h2 className="text-2xl mb-8 text-center font-semibold">Reset your password to continue your AI adventure with AI Camp.</h2>
+					<form action="" method="post" onSubmit={e => e.preventDefault()}>
+						<Input label="Email"
+							placeHolder="example@gmail.com"
+							type = 'email'
+							name = 'email'
+							className="mb-3"
+							id="email"
+							onChange={val => setEmail(val)} 
+						/>
+						<div className='pb-3'>
+							{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
+							{successMessage && (<p className="error bg-green-100 border-l-4 border-green-500 text-green-900 p-4"> {successMessage} </p>)}
+						</div>
+
+						<div>
+							<div className='py-2'>
+								<Button bgColor="green" txtColor="white" type="button" className="w-full py-1" onClick={() => sendResetEmail()}>Reset Password</Button>
+							</div>
+							<div className='py-2'>
+								<Button bgColor="gray" txtColor="white" className="w-full py-1 mb-3" onClick={() => onBack()}>Back</Button>
+							</div>
+						</div>
+					</form>
+				</>
+			} 
+			leftRightRatio={'2:3'}
+			maxWidth={'3xl'} 
+			developers={[]}
 		>
 		</Page>
 	);

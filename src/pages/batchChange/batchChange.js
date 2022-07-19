@@ -148,37 +148,28 @@ function BatchChange() {
 		);
 	}
 
-	const maxWidth = '7xl';
-	const leftWidth = '1/3';
-	const rightWidth = '7/12';
-
-	const developers = [];
-
-	const leftChildren = 
-		<SideBarContent/>;
-
-	const rightChildren =
-		<>
-			<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
-			<BatchBoard
-				className="w-full"
-				batchData={batchData.batches} 
-				onChange={(b) => setBatch(b)}
-				batchID={batch.id}
-				price={batchData.price}
-				disabledID={currentBatch.id}
-			/>
-			<NextAndBackButtons/>
-		</>;
-
 	return (
 		<Page
-			leftChildren={leftChildren} 
-			rightChildren={rightChildren} 
-			leftWidth={leftWidth} 
-			rightWidth={rightWidth} 
-			maxWidth={maxWidth} 
-			developers={developers}
+			leftChildren={
+				<SideBarContent/>
+			} 
+			rightChildren={
+				<>
+					<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
+					<BatchBoard
+						className="w-full"
+						batchData={batchData.batches} 
+						onChange={(b) => setBatch(b)}
+						batchID={batch.id}
+						price={batchData.price}
+						disabledID={currentBatch.id}
+					/>
+					<NextAndBackButtons/>
+				</>
+			} 
+			leftRightRatio={'1:2'}
+			maxWidth={'7xl'} 
+			developers={[]}
 		>
 		</Page>
 	);

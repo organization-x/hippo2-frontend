@@ -49,65 +49,56 @@ function SelectCourses() {
 		});
 	}, [flashMsg, navigate]);
 
-	const maxWidth = '3xl';
-	const leftWidth = '2/5';
-	const rightWidth = '3/5';
-
-	const developers = [];
-
-	const leftChildren =
-		<>
-			<h1 className="text-2xl mb-8 text-center">Course Details</h1>
-			<p className="text-base">
-				Select the course that you want to register for. Details about your selected course will appear here!
-			</p>
-		</>;
-
-	const rightChildren =
-		<>
-			<h2 className="text-2xl mb-8 text-center font-semibold">Select a course to reserve a spot.</h2>
-			<div className="mb-4 mt-5">
-				<h1 className="text-lg mb-3 font-semibold">Course</h1>
-				<p className="mb-3 text-sm font-light pr-4">Our world-class instructors are here to support you.</p>
-			</div>
-
-			<div className=''>
-				<select data-dropdown-placement="right" value={courseId} onChange={handleChange}
-					className="w-full py-6 form-select form-select-lg mb-3
-					course-select
-					px-5
-					text-left
-					font-normal
-					text-gray-700
-					border border-solid border-gray-100
-					rounded-full
-					transition
-					ease-in-out
-					focus:text-gray-700
-					focus:border-blue-600
-					focus:outline-none"
-					aria-label=".form-select-lg example"
-				>
-					<option value ="" disabled >Select a Course</option>
-					{listItems}
-				</select>
-			</div>
-					
-			<div className='pb-3'>
-				{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
-			</div>
-					
-			<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => onSubmit()}>Next</Button>
-		</>;
-
 	return (
 		<Page
-			leftChildren={leftChildren} 
-			rightChildren={rightChildren} 
-			leftWidth={leftWidth} 
-			rightWidth={rightWidth} 
-			maxWidth={maxWidth} 
-			developers={developers}
+			leftChildren={
+				<>
+					<h1 className="text-2xl mb-8 text-center">Course Details</h1>
+					<p className="text-base">
+						Select the course that you want to register for. Details about your selected course will appear here!
+					</p>
+				</>
+			} 
+			rightChildren={
+				<>
+					<h2 className="text-2xl mb-8 text-center font-semibold">Select a course to reserve a spot.</h2>
+					<div className="mb-4 mt-5">
+						<h1 className="text-lg mb-3 font-semibold">Course</h1>
+						<p className="mb-3 text-sm font-light pr-4">Our world-class instructors are here to support you.</p>
+					</div>
+
+					<div className=''>
+						<select data-dropdown-placement="right" value={courseId} onChange={handleChange}
+							className="w-full py-6 form-select form-select-lg mb-3
+							course-select
+							px-5
+							text-left
+							font-normal
+							text-gray-700
+							border border-solid border-gray-100
+							rounded-full
+							transition
+							ease-in-out
+							focus:text-gray-700
+							focus:border-blue-600
+							focus:outline-none"
+							aria-label=".form-select-lg example"
+						>
+							<option value ="" disabled >Select a Course</option>
+							{listItems}
+						</select>
+					</div>
+							
+					<div className='pb-3'>
+						{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
+					</div>
+							
+					<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => onSubmit()}>Next</Button>
+				</>
+			} 
+			leftRightRatio={'2:3'}
+			maxWidth={'3xl'} 
+			developers={[]}
 		>
 		</Page>
 	);

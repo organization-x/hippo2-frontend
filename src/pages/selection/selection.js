@@ -83,45 +83,36 @@ function SelectionPage() {
 		navigate(`/courses/${batchData.course.id}/batches`);
 	};
 
-	const maxWidth = '7xl';
-	const leftWidth = '80';
-	const rightWidth = '5/12';
-
-	const developers = ['Jackson Choyce', 'Alexander Zhou'];
-
-	const leftChildren = 
-		{ sideBar };
-	
-	const rightChildren =
-		<>
-			<div>
-				<div className="my-2 text-center w-full">
-					<h2 className="text-2xl mt-3">Reserve spot in {batchData.course.name} for</h2>
-				</div>
-				<div className="my-10">
-					{selection}
-				</div>                 
-			</div>
-			<div className="my-5">
-				<Button 
-					onClick={() => onBack()} 
-					bgColor="gray" 
-					txtColor="white" 
-					className="w-full lg:w-1/4 h-12 mb-2 lg:my-3"
-				>
-					<p className="text-lg">Back</p>
-				</Button>
-			</div>
-		</>;
-
 	return (
 		<Page
-			leftChildren={leftChildren} 
-			rightChildren={rightChildren} 
-			leftWidth={leftWidth} 
-			rightWidth={rightWidth} 
-			maxWidth={maxWidth} 
-			developers={developers}
+			leftChildren={
+				{ sideBar }
+			} 
+			rightChildren={
+				<>
+					<div>
+						<div className="my-2 text-center w-full">
+							<h2 className="text-2xl mt-3">Reserve spot in {batchData.course.name} for</h2>
+						</div>
+						<div className="my-10">
+							{selection}
+						</div>                 
+					</div>
+					<div className="my-5">
+						<Button 
+							onClick={() => onBack()} 
+							bgColor="gray" 
+							txtColor="white" 
+							className="w-full lg:w-1/4 h-12 mb-2 lg:my-3"
+						>
+							<p className="text-lg">Back</p>
+						</Button>
+					</div>
+				</>
+			} 
+			leftRightRatio={'1:2'}
+			maxWidth={'3xl'} 
+			developers={[]}
 		>
 		</Page>
 	);

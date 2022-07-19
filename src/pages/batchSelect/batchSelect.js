@@ -91,54 +91,45 @@ function BatchSelect() {
 		);
 	}
 
-	const maxWidth = '5xl';
-	const leftWidth = '1/3';
-	const rightWidth = '2/3';
-
-	const developers = [];
-
-	const leftChildren =
-		{ sideText };
-
-	const rightChildren =
-		<>
-			<h1 className="text-center text-xl font-bold">{data.name}</h1>
-			<p className="text-center text-xl mb-8">Select a batch that fits your schedule</p>
-			<BatchBoard 
-				className="w-full"
-				batchID={batch.id} 
-				batchData={data.batches}
-				price={data.price}
-				onChange={(b) => setBatch(b)}
-			/>
-			<div className="flex flex-row flex-nowrap mt-8">
-				<Button 
-					bgColor="gray"
-					txtColor="white" 
-					className="w-full py-1 mr-6" 
-					onClick={() => navigate('/courses')}
-				>
-					Back
-				</Button>
-				<Button 
-					bgColor="green" 
-					txtColor="white" 
-					className="w-full py-1" 
-					onClick={() => onSubmit()}
-				>
-					Next
-				</Button>
-			</div>
-		</>;
-
 	return (
 		<Page
-			leftChildren={leftChildren} 
-			rightChildren={rightChildren} 
-			leftWidth={leftWidth} 
-			rightWidth={rightWidth} 
-			maxWidth={maxWidth} 
-			developers={developers}
+			leftChildren={
+				{ sideText }
+			} 
+			rightChildren={
+				<>
+					<h1 className="text-center text-xl font-bold">{data.name}</h1>
+					<p className="text-center text-xl mb-8">Select a batch that fits your schedule</p>
+					<BatchBoard 
+						className="w-full"
+						batchID={batch.id} 
+						batchData={data.batches}
+						price={data.price}
+						onChange={(b) => setBatch(b)}
+					/>
+					<div className="flex flex-row flex-nowrap mt-8">
+						<Button 
+							bgColor="gray"
+							txtColor="white" 
+							className="w-full py-1 mr-6" 
+							onClick={() => navigate('/courses')}
+						>
+							Back
+						</Button>
+						<Button 
+							bgColor="green" 
+							txtColor="white" 
+							className="w-full py-1" 
+							onClick={() => onSubmit()}
+						>
+							Next
+						</Button>
+					</div>
+				</>
+			} 
+			leftRightRatio={'1:2'}
+			maxWidth={'5xl'} 
+			developers={[]}
 		>
 		</Page>
 	);

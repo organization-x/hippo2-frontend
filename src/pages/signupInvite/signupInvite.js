@@ -88,69 +88,60 @@ function SignUpInvite() {
 		${data.invite_to.type === 'STUDENT' ? 'student' : 'parent'} account.
 	`;
 
-	const maxWidth = '3xl';
-	const leftWidth = '5/12';
-	const rightWidth = '7/12';
-
-	const developers = [];
-
-	const leftChildren =
-		<>
-			<h1 className="text-2xl mb-8 text-center">Create an Account</h1>
-			<p className="text-base mb-4">
-				AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
-			</p>
-
-			<p className="text-base mb-4">
-				By creating AI products, our students apply what they have learned through first-hand experience of being an engineer, a product manager, or a data scientist.
-			</p>
-
-			<p className="text-base mb-4">
-				Ready to start your AI journey? Our world class mentors and instructors are here to guide you!
-			</p>
-
-			<p className="text-base">
-				By signing up for AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Privacy Policy</a>.
-			</p>
-		</>;
-
-	const rightChildren =
-		<form action="/" method="GET" onSubmit={event => {
-			event.preventDefault();
-		}}>
-			<Human></Human>
-			<h2 className="text-xl mb-6 mt-8 text-center">
-				{formTitle}
-			</h2>
-			<Input label="Email"
-				type="email"
-				className="mb-3"
-				id="email"
-				value={data.invite_to.email}
-				readOnly
-				onChange={() => {}}
-			/>
-			<Input label="Password"
-				type="password"
-				placeHolder="JohnDoePassword"
-				className="mb-3"
-				id="password"
-				isValid={formErrors}
-				errorText={formErrors}
-				onChange={val => setPassword(val)}
-			/>
-
-			<Button bgColor="green" txtColor="white" className="w-full my-1 mb-3 py-1 mx-auto block text-center" onClick={() => setupUser()}>Next</Button>
-		</form>;
-
 	return (
 		<Page
-			leftChildren={leftChildren} 
-			rightChildren={rightChildren} 
-			leftWidth={leftWidth} 
-			rightWidth={rightWidth} 
-			maxWidth={maxWidth} 
-			developers={developers}
+			leftChildren={
+				<>
+					<h1 className="text-2xl mb-8 text-center">Create an Account</h1>
+					<p className="text-base mb-4">
+						AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
+					</p>
+
+					<p className="text-base mb-4">
+						By creating AI products, our students apply what they have learned through first-hand experience of being an engineer, a product manager, or a data scientist.
+					</p>
+
+					<p className="text-base mb-4">
+						Ready to start your AI journey? Our world class mentors and instructors are here to guide you!
+					</p>
+
+					<p className="text-base">
+						By signing up for AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Privacy Policy</a>.
+					</p>
+				</>
+			} 
+			rightChildren={
+				<form action="/" method="GET" onSubmit={event => {
+					event.preventDefault();
+				}}>
+					<Human></Human>
+					<h2 className="text-xl mb-6 mt-8 text-center">
+						{formTitle}
+					</h2>
+					<Input label="Email"
+						type="email"
+						className="mb-3"
+						id="email"
+						value={data.invite_to.email}
+						readOnly
+						onChange={() => {}}
+					/>
+					<Input label="Password"
+						type="password"
+						placeHolder="JohnDoePassword"
+						className="mb-3"
+						id="password"
+						isValid={formErrors}
+						errorText={formErrors}
+						onChange={val => setPassword(val)}
+					/>
+		
+					<Button bgColor="green" txtColor="white" className="w-full my-1 mb-3 py-1 mx-auto block text-center" onClick={() => setupUser()}>Next</Button>
+				</form>
+			} 
+			leftRightRatio={'5:7'}
+			maxWidth={'3xl'} 
+			developers={[]}
 		>
 		</Page>
 	);

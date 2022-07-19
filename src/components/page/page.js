@@ -3,7 +3,7 @@ import TTLogo from '../ttlogo/ttlogo';
 
 //for left and right width, use tailwindcss standard classses (https://tailwindcss.com/docs/width)
 //for maxWidth, use tailwindcss standard classses (https://tailwindcss.com/docs/max-width)
-function Page({ leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers }) {
+function Page({ leftChildren, rightChildren, leftRightRatio, maxWidth, developers }) {
 	let maxWidthClass;
 	switch (maxWidth) {
 		case '3xl':
@@ -24,42 +24,27 @@ function Page({ leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, de
 	}
 
 	let leftWidthClass;
-	switch (leftWidth) {
-		case '1/3':
-			leftWidthClass = 'w-1/3';
-			break;
-		case '2/5':
-			leftWidthClass = 'w-2/5';
-			break;
-		case '5/12':
-			leftWidthClass = 'w-5/12';
-			break;
-		case '1/2':
+	let rightWidthClass;
+
+	switch (leftRightRatio) {
+		case '1:1':
 			leftWidthClass = 'w-1/2';
+			rightWidthClass = 'w-1/2';
 			break;
-		case '80':
-			leftWidthClass = 'w-80';
+		case '1:2':
+			leftWidthClass = 'w-1/3';
+			rightWidthClass = 'w-2/3';
+			break;
+		case '2:3':
+			leftWidthClass = 'w-2/5';
+			rightWidthClass = 'w-3/5';
+			break;
+		case '5:7':
+			leftWidthClass = 'w-5/12';
+			rightWidthClass = 'w-7/12';
 			break;
 		default:
 			leftWidthClass = 'w-full';
-			break;
-	}
-
-	let rightWidthClass;
-	switch (rightWidth) {
-		case '1/2':
-			rightWidthClass = 'w-1/2';
-			break;
-		case '7/12':
-			rightWidthClass = 'w-7/12';
-			break;
-		case '3/5':
-			rightWidthClass = 'w-3/5';
-			break;
-		case '2/3':
-			rightWidthClass = 'w-2/3';
-			break;
-		default:
 			rightWidthClass = 'w-full';
 			break;
 	}

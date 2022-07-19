@@ -28,6 +28,7 @@ import ConfirmDetails from './pages/confirmDetails/confirmDetails';
 import BatchChange from './pages/batchChange/batchChange';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
 import PageNotFound from './pages/pageNotFound/pageNotFound';
+import ApplicationQuestions from './pages/scholarship/application_questions';
 import './App.css';
 
 function App() {
@@ -100,6 +101,12 @@ function App() {
 								<ProtectedRoute>
 									<SelectionPage />
 								</ProtectedRoute>
+							}/>
+							<Route path='/scholarships/application_questions' element={
+								<ProtectedRoute>
+									<ApplicationQuestions />
+								</ProtectedRoute>
+
 							}/>
 							<Route path='*' element={<PageNotFound />} />
 						</Routes>

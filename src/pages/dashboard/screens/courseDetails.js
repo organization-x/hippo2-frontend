@@ -66,7 +66,10 @@ function DashboardCourseDetails() {
 					</div>
 					<div className="flex-none md:flex-initial w-full md:w-5/12 py-8 px-16 pb-10 bg-stone-300  md:rounded-tr-xl md:rounded-none">
 						<h1 className="font-semibold text-2xl mb-10 text-center">Course Materials</h1>
-						{courseTasks[course.id] ? <Button bgColor="white" txtColor="black" className="w-full py-3 mb-4">Student To Do List</Button> :
+						{courseTasks[course.id] ? 
+							<Link to = 'todo'>
+								<Button bgColor="white" txtColor="black" className="w-full py-3 mb-4">Student To Do List</Button>
+							</Link> :
 							<>
 								<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Zoom Link</Button>
 								<Button bgColor="white" txtColor="black" className="w-full py-2 mb-4">Discord Server</Button>

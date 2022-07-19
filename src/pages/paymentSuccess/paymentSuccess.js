@@ -47,15 +47,15 @@ function PaymentSuccess() {
 	const developers = [];
 
 	const leftChildren =
-		<div>
+		<>
 			<h1 className="text-2xl mb-8 text-center">Congratulations!</h1>
 			<p className="text-base mb-4">You are now officially enrolled in {data.course} in Batch {data.batch}.</p>
 			<p className="text-base mb-4">Order ID: {data.id}</p>
 			<p className="text-lg">Click "Proceed to Student Dashboard" to view your payment status and prepare for your upcoming AI Camp course!</p>
-		</div>;
+		</>;
 
 	const rightChildren =
-		<div>
+		<>
 			<h2 className="text-xl mb-16 text-center">Thank you for registering at AI Camp!</h2>
 
 			<Button 
@@ -64,10 +64,18 @@ function PaymentSuccess() {
 			>
 				Proceed to Student Dashboard
 			</Button>
-		</div>;
+		</>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

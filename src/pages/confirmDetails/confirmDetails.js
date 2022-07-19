@@ -75,7 +75,7 @@ function ConfirmDetails() {
 	const developers = [];
 
 	const leftChildren =
-		<div>
+		<>
 			<h1 className="text-2xl mb-8 text-center">Confirm Your Details</h1>
 			<p className="text-base mb-4">
 				Fill out your personal details to start the course registration process! 
@@ -86,7 +86,7 @@ function ConfirmDetails() {
 			<p className="text-base mb-4">
 				Click “Next” to move onto the {user.type === 'student' ? 'parent' : 'student'} information section!
 			</p>
-		</div>;
+		</>;
 
 	const rightChildren =
 		<form action="/" method="GET" onSubmit={event => {
@@ -149,7 +149,15 @@ function ConfirmDetails() {
 		</form>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

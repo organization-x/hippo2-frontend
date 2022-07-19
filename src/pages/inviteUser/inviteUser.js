@@ -101,10 +101,10 @@ function InviteUser() {
 	const developers = [];
 
 	const leftChildren =
-		<div>
+		<>
 			{panelText}
 			<p className="text-lg">Click "Next" to move onto the payment stage!</p>
-		</div>;
+		</>;
 
 	const rightChildren =
 		<form action="/" method="GET" onSubmit={event => {
@@ -177,7 +177,15 @@ function InviteUser() {
 		</form>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

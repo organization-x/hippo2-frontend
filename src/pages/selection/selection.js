@@ -93,7 +93,7 @@ function SelectionPage() {
 		{ sideBar };
 	
 	const rightChildren =
-		<div className="flex flex-col justify-center md:flex-initial w-full md:w-5/12 px-10 rounded-b-2xl md:rounded-r-2xl bg-white">
+		<>
 			<div>
 				<div className="my-2 text-center w-full">
 					<h2 className="text-2xl mt-3">Reserve spot in {batchData.course.name} for</h2>
@@ -112,10 +112,18 @@ function SelectionPage() {
 					<p className="text-lg">Back</p>
 				</Button>
 			</div>
-		</div>;
+		</>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

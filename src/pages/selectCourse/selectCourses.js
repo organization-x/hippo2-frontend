@@ -56,15 +56,15 @@ function SelectCourses() {
 	const developers = [];
 
 	const leftChildren =
-		<div>
+		<>
 			<h1 className="text-2xl mb-8 text-center">Course Details</h1>
 			<p className="text-base">
 				Select the course that you want to register for. Details about your selected course will appear here!
 			</p>
-		</div>;
+		</>;
 
 	const rightChildren =
-		<div>
+		<>
 			<h2 className="text-2xl mb-8 text-center font-semibold">Select a course to reserve a spot.</h2>
 			<div className="mb-4 mt-5">
 				<h1 className="text-lg mb-3 font-semibold">Course</h1>
@@ -98,10 +98,18 @@ function SelectCourses() {
 			</div>
 					
 			<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => onSubmit()}>Next</Button>
-		</div>;
+		</>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

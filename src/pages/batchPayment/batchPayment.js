@@ -110,7 +110,7 @@ function BatchPayment() {
 	const developers = [];
 
 	const leftChildren =
-		<div>
+		<>
 			<h1 className="text-2xl mb-8 text-center">Payment Details</h1>
 			<p className="mb-4">Course tuition is listed under your selected course, alongside other course details. We offer competitive prices for the best AI education.</p>
 			{/* <p className="mb-5">Optional: Enter promo codes under the "Promotional Code" section.</p> */}
@@ -135,10 +135,10 @@ function BatchPayment() {
 					<span className="inline-block text-sm ml-1 my-auto leading-none">Valeria Cisneros</span>
 				</div>
 			</div>
-		</div>;
+		</>;
 
 	const rightChildren =
-		<div>
+		<>
 			<h2 className="text-xl mb-8 text-center">Submit payment to finalize registration.</h2>
 			<div className="mb-8">
 				<p className="text-lg font-semibold">{data.course.name}</p>
@@ -152,10 +152,18 @@ function BatchPayment() {
 			</div>
 
 			{controls}
-		</div>;
+		</>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

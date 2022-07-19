@@ -101,7 +101,7 @@ function BatchSelect() {
 		{ sideText };
 
 	const rightChildren =
-		<div>
+		<>
 			<h1 className="text-center text-xl font-bold">{data.name}</h1>
 			<p className="text-center text-xl mb-8">Select a batch that fits your schedule</p>
 			<BatchBoard 
@@ -129,10 +129,18 @@ function BatchSelect() {
 					Next
 				</Button>
 			</div>
-		</div>;
+		</>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

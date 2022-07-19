@@ -47,7 +47,7 @@ function BatchChange() {
 	function SideBarContent() {
 		if (!batch.id) {
 			return (
-				<div>
+				<>
 					<h1 className="text-3xl mb-10 text-center">
                         Batch Change
 					</h1>
@@ -60,10 +60,10 @@ function BatchChange() {
 					<p className="text-lg mx-9 mb-3">
                         Select another batch in the calendar to find a batch that best fits your schedule. Batch details will be updated here depending on which batch you choose.
 					</p>
-				</div>);
+				</>);
 		} else {
 			return (
-				<div>
+				<>
 					<h1 className="text-3xl mb-10 text-center">
                         Batch Change
 					</h1>
@@ -84,7 +84,7 @@ function BatchChange() {
 					<p className="text-xl mx-9 mb-3">
                         Click "Submit" to finalize your batch change!
 					</p>
-				</div>);
+				</>);
 		}
 	}
 
@@ -119,7 +119,7 @@ function BatchChange() {
 			navigate('/');   
 		};
 		return (
-			<div>
+			<>
 				{   
 					formErrors ? 
 						<div className='text-right text-red-600 mt-5'>{formErrors}</div> 
@@ -144,7 +144,7 @@ function BatchChange() {
                                     
 					</Button>
 				</div>
-			</div>
+			</>
 		);
 	}
 
@@ -158,7 +158,7 @@ function BatchChange() {
 		<SideBarContent/>;
 
 	const rightChildren =
-		<div>
+		<>
 			<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
 			<BatchBoard
 				className="w-full"
@@ -169,10 +169,18 @@ function BatchChange() {
 				disabledID={currentBatch.id}
 			/>
 			<NextAndBackButtons/>
-		</div>;
+		</>;
 
 	return (
-		Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth, developers)
+		<Page
+			leftChildren={leftChildren} 
+			rightChildren={rightChildren} 
+			leftWidth={leftWidth} 
+			rightWidth={rightWidth} 
+			maxWidth={maxWidth} 
+			developers={developers}
+		>
+		</Page>
 	);
 }
 

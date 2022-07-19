@@ -28,7 +28,7 @@ function OrderCancel () {
 	};
 
 	const onBack = () => {
-		//dummy onback function for now
+		navigate(-1);
 	};
     
 
@@ -56,7 +56,7 @@ function OrderCancel () {
 					</div>
 
 					<div className="w-2/3 p-4">
-						<Button bgColor="white" txtColor="black" className="w-full py-1" conClick={() => onConfirm()}>Confirm Cancellation</Button>
+						<Button bgColor="white" txtColor="black" className="w-full py-1" onClick={() => onConfirm()}>Confirm Cancellation</Button>
 					</div>
 				</div>
 

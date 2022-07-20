@@ -34,19 +34,18 @@ function TaxDetails () {
                 
 					<div className="flex flex-col sm:flex-row mt-20">
 						<div className="w-full p-4 sm:w-1/3">
-							<Button bgColor="gray" txtColor="white" className="w-full py-2 w-full sm:w-28" onClick={() => onBack()}>Back</Button>
+							<Button bgColor="gray" txtColor="white" className="w-full py-2" onClick={() => onBack()}>Back</Button>
 						</div>
                 
 						<div className="w-full p-4 sm:w-2/3">
-							<Button bgColor="green" txtColor="white" className="w-full py-2 w-full sm:w-56" onClick={() => onSubmit()}>Submit</Button>
+							<Button bgColor="green" txtColor="white" className="w-full py-2" onClick={() => onSubmit()}>Submit</Button>
 						</div>
 					</div>
                 
 				</div>
                 
 			}
-			leftWidth = '5/12' 
-			rightWidth = '7/12' 
+			leftRightRatio='5:7'
 			maxWidth = '3xl'
 		/>
 	);

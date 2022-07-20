@@ -28,6 +28,7 @@ import ConfirmDetails from './pages/confirmDetails/confirmDetails';
 import BatchChange from './pages/batchChange/batchChange';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
 import PageNotFound from './pages/pageNotFound/pageNotFound';
+import TaxDetails from './pages/taxDetails/tax-details';
 import './App.css';
 
 function App() {
@@ -101,6 +102,7 @@ function App() {
 									<SelectionPage />
 								</ProtectedRoute>
 							}/>
+							<Route path = '/tax-details' element={<TaxDetails />}></Route>
 							<Route path='*' element={<PageNotFound />} />
 						</Routes>
 					</div>

@@ -5,6 +5,7 @@ import sendReq from "../../services/sendReq";
 import validateUuid from "../../validation/uuid";
 import baseUrl from '../../apiUrls';
 import Button from "../../components/button/button";
+import Page from "../../components/page/page";
 import 'react-phone-input-2/lib/style.css';
 import './selectCourses.css';
 
@@ -47,18 +48,19 @@ function SelectCourses() {
 			navigate('/');
 		});
 	}, [flashMsg, navigate]);
-	
+
 	return (
-		<>
-			<div className="container max-w-3xl flex flex-wrap mx-auto px-4 mt-12 auth px-3">
-				<div className="flex-none md:flex-initial w-full md:w-2/5 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+		<Page
+			leftChildren={
+				<>
 					<h1 className="text-2xl mb-8 text-center">Course Details</h1>
 					<p className="text-base">
 						Select the course that you want to register for. Details about your selected course will appear here!
 					</p>
-				</div>
-
-				<div className="flex-none md:flex-initial w-full  md:w-3/5 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
+				</>
+			} 
+			rightChildren={
+				<>
 					<h2 className="text-2xl mb-8 text-center font-semibold">Select a course to reserve a spot.</h2>
 					<div className="mb-4 mt-5">
 						<h1 className="text-lg mb-3 font-semibold">Course</h1>
@@ -86,16 +88,19 @@ function SelectCourses() {
 							{listItems}
 						</select>
 					</div>
-					
+							
 					<div className='pb-3'>
 						{errorMessage && (<p className="error bg-red-100 border-l-4 border-red-500 text-red-700 p-4"> {errorMessage} </p>)}
 					</div>
-					
+							
 					<Button bgColor="green" txtColor="white" className="w-full py-1 mb-3" onClick={() => onSubmit()}>Next</Button>
-				</div>	
-			</div>
-		</>
-		
+				</>
+			} 
+			leftRightRatio={'2:3'}
+			maxWidth={'3xl'} 
+			developers={[]}
+		>
+		</Page>
 	);
 }
 

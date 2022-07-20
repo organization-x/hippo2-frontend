@@ -2,7 +2,7 @@ import './page.css';
 
 //for left and right width, use tailwindcss standard classses (https://tailwindcss.com/docs/width)
 //for maxWidth, use tailwindcss standard classses (https://tailwindcss.com/docs/max-width)
-function Page({ leftChildren, rightChildren, leftWidth, rightWidth, maxWidth }) {
+function Page(leftChildren, rightChildren, leftWidth, rightWidth, maxWidth) {
 	return (
 		<div className={`container max-w-${maxWidth} flex flex-wrap mx-auto my-10 overflow-hidden rounded-xl`}>
 			<div className={`w-full md:w-${leftWidth} text-white bg-green p-7`}>

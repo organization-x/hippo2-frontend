@@ -102,8 +102,8 @@ function App() {
 									<SelectionPage />
 								</ProtectedRoute>
 							}/>
-							<Route path='*' element={<PageNotFound />} />
 							<Route path = '/tax-details' element={<TaxDetails />}></Route>
+							<Route path='*' element={<PageNotFound />} />
 						</Routes>
 					</div>
 					<Footer />

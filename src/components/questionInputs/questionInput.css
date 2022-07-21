@@ -1,0 +1,24 @@
+.textarea {
+    display: block;
+    margin: 0;
+    background-color:white;
+    padding: 0.1rem 0.2rem;
+
+    font-weight: 400;
+    font-size: 0.875rem;
+
+    border: none;
+    border-bottom: 1px solid #979797;
+}
+
+
+.invalid-text {
+    display: block;
+    color: red;
+    font-size: 0.875rem;
+}
+
+.invalid-border {
+    border: 1px solid red;
+    border-radius: 3px;
+}

@@ -28,34 +28,34 @@ function Page({ leftChildren, rightChildren, leftRightRatio, maxWidth, developer
 
 	switch (leftRightRatio) {
 		case '1:1':
-			leftWidthClass = 'w-1/2';
-			rightWidthClass = 'w-1/2';
+			leftWidthClass = 'md:w-1/2';
+			rightWidthClass = 'md:w-1/2';
 			break;
 		case '1:2':
-			leftWidthClass = 'w-1/3';
-			rightWidthClass = 'w-2/3';
+			leftWidthClass = 'md:w-1/3';
+			rightWidthClass = 'md:w-2/3';
 			break;
 		case '2:3':
-			leftWidthClass = 'w-2/5';
-			rightWidthClass = 'w-3/5';
+			leftWidthClass = 'md:w-2/5';
+			rightWidthClass = 'md:w-3/5';
 			break;
 		case '5:7':
-			leftWidthClass = 'w-5/12';
-			rightWidthClass = 'w-7/12';
+			leftWidthClass = 'md:w-5/12';
+			rightWidthClass = 'md:w-7/12';
 			break;
 		default:
-			leftWidthClass = 'w-full';
-			rightWidthClass = 'w-full';
+			leftWidthClass = '';
+			rightWidthClass = '';
 			break;
 	}
 
 	return (
 		<div className={`container ${maxWidthClass} flex flex-wrap mx-auto my-10 overflow-hidden rounded-xl`}>
-			<div className={`w-full md:${leftWidthClass} text-white bg-green p-7 flex flex-col`}>
+			<div className={`w-full ${leftWidthClass} text-white bg-green p-7 flex flex-col`}>
 				{leftChildren}
 				<TTLogo developers={developers} className='mt-auto'></TTLogo>
 			</div>
-			<div className={`w-full md:${rightWidthClass} bg-white p-7`}>
+			<div className={`w-full ${rightWidthClass} bg-white p-7`}>
 				{rightChildren}
 			</div>
 		</div>

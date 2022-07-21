@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import './questionInput.css';
 
-function QuestionInput({ placeHolder, question, radioDict, isValid, errorText, className, id, questionNum, name, maxLength, mutedText }) {
+function QuestionInput({ placeHolder, question, radioDict, value, setValue, isValid, errorText, className, id, questionNum, name, maxLength, mutedText }) {
 	let error = '';
 	let style = '';
-	const [value, setValue] = useState(null);
 	
 	if (isValid) {
 		error = errorText;
@@ -60,9 +59,9 @@ function QuestionInput({ placeHolder, question, radioDict, isValid, errorText, c
 	}
 
 	return (
-		<div className={`${className}`}>
+		<div className={`${className}`} value = {value}>
 			<label className='font-semibold w-full md:text-xl text-base'>
-				{questionNum}. {question} <span className='text-slate-400 pl-1 text-xs relative'>{mutedText}</span>
+				{questionNum} {question} <span className='text-slate-400 pl-1 text-xs relative'>{mutedText}</span>
 			</label>
 
 			<div className={style + 'md:flex w-full md:text-base'}>

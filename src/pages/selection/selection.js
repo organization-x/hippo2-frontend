@@ -49,16 +49,18 @@ function SelectionPage() {
 		return <Loading />;
 	}
     
-	const sideBar = (
-		<div>
-			<h1 className="text-3xl mb-10 text-center">
-				Select a Student
-			</h1>
-			<h1 className="text-1xl mx-4 my-3">You have chosen Batch {batchData.name} ({batchData.start_date} - {batchData.end_date}) {batchData.time_zone} in {batchData.course.name}.</h1>
-			<h1 className="text-1xl mx-4 my-3">Select the student for whom you would like to reserve this spot for.</h1>
-			<h1 className="text-1xl mx-4 mb-6">You may register for additional students afterwards.</h1>
-		</div>
-	);
+	function SideBar() { 
+		return (
+			<>
+				<h1 className="text-3xl mb-10 text-center">
+					Select a Student
+				</h1>
+				<h1 className="text-1xl mx-4 my-3">You have chosen Batch {batchData.name} ({batchData.start_date} - {batchData.end_date}) {batchData.time_zone} in {batchData.course.name}.</h1>
+				<h1 className="text-1xl mx-4 my-3">Select the student for whom you would like to reserve this spot for.</h1>
+				<h1 className="text-1xl mx-4 mb-6">You may register for additional students afterwards.</h1>
+			</>
+		);
+	}
 
 	const selection = [];
 	const ids = [];
@@ -86,7 +88,7 @@ function SelectionPage() {
 	return (
 		<Page
 			leftChildren={
-				{ sideBar }
+				<SideBar/>
 			} 
 			rightChildren={
 				<>

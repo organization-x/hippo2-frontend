@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './questionInput.css';
 
 function QuestionInput({ placeHolder, question, radioDict, value, setValue, isValid, errorText, className, id, questionNum, name, maxLength, mutedText }) {

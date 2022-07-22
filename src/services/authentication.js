@@ -3,7 +3,6 @@ import { useNavigate, useLocation, matchPath } from "react-router-dom";
 import sendReq from "./sendReq";
 import baseUrl from "../apiUrls";
 
-import Navbar from "../components/navbar/navbar";
 import Loading from "../pages/loading/loading";
 
 /**

@@ -54,7 +54,7 @@ function Dashboard() {
 						</li>
 					</ul>
 				</nav>
-				<TTLogo className='sticky bottom-10 left-1 p-6 text-white'/>
+				<TTLogo className='sticky bottom-10 p-6 pl-9 text-white'/>
 			</div>
 
 			<div className='w-full flex flex-col flex-1'>

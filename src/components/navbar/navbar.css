@@ -127,9 +127,11 @@ header {
 	display: inline-block;
 }
 .menu-items > a:hover {
-	color: rgb(107, 114, 128);
 	outline: 2px solid transparent;
 	outline-offset: 2px;
+}
+.menu-items > a:not(.disabled):hover {
+	color: rgb(107, 114, 128);
 }
 .menu-items > hr {
 	border: none;
@@ -138,4 +140,7 @@ header {
 	margin-left: auto;
 	margin-bottom: 1.5rem;
 	width: 60%;
+}
+.disabled {
+	cursor: default;
 }

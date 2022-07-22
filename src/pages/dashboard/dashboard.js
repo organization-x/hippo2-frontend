@@ -1,7 +1,7 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import TTLogo from '../../components/ttlogo/ttlogo';
 
-function Dashboard() {
+function Dashboard({ isStudentRegistered }) {
 	const location = useLocation();
 	const split = location.pathname.split('/');
 	const tail = split[split.length - 1];
@@ -35,10 +35,12 @@ function Dashboard() {
 							Account Settings
 						</Link>
 					</li>
-					<li className='mb-6 hover:text-gray-500'>
+					<li className={`mb-6 ${!isStudentRegistered ? 'hover:text-gray-500' : ''}`}>
 						<Link 
 							to='/courses' 
-							className="px-3 py-1">
+							className={`px-3 py-1 ${isStudentRegistered ? 'cursor-not-allowed' : ''}`} onClick={(event) => {
+								if (isStudentRegistered) event.preventDefault();
+							}}>
 							Register for Courses
 						</Link>
 					</li>

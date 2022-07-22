@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
-function Navbar() {
+function Navbar({ isStudentRegistered }) {
 	usePageTracking(); // google analytics
 	// const [show] = useState(true); //change [show] to [show, setShow] if uncommenting showNav() below
 	const show = true;
@@ -22,6 +22,14 @@ function Navbar() {
 	};
 
 	const menuButtonColor = mobileMenuOpened ? `bg-gray-400` : `bg-transparent-green`;
+
+	const onCoursesClick = (event) => {
+		if (isStudentRegistered) {
+			event.preventDefault();
+		} else {
+			handlePageSwitch();
+		}
+	};
 
 	const onLogout = () => {
 		handleLogout();
@@ -94,13 +102,13 @@ function Navbar() {
 					<hr />
 					<Link to="/dashboard/account" onClick={() => handlePageSwitch()}>Account Settings</Link>
 					<hr />
-					<Link to="/courses" onClick={() => handlePageSwitch()}>Register for Courses</Link>
+					<Link to="/courses" onClick={(e) => onCoursesClick(e)} className={isStudentRegistered ? 'disabled' : ''}>Register for Courses</Link>
 					<hr />
 					<Link to="/dashboard/events" onClick={() => handlePageSwitch()}>Upcoming Events</Link>
 					<hr />
 					<Link to="/dashboard/products" onClick={() => handlePageSwitch()}>Explore Student Products</Link>
 					<hr />
-					<Link to="/dashboard/help" onClick={() => handlePageSwitch('help-center')}>Help Center</Link>
+					<Link to="/dashboard/help" onClick={() => handlePageSwitch()}>Help Center</Link>
 					<hr />
 				</div>
 			</div>

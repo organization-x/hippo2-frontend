@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from "react";
+
 import { AuthProvider } from './services/authentication';
 import { FlashMsgProvider } from './services/flashMsg';
 
@@ -32,12 +34,14 @@ import TaxDetails from './pages/taxDetails/tax-details';
 import './App.css';
 
 function App() {
+	const [isStudentRegistered, setIsStudentRegistered] = useState(false);
+
 	return (
 		<BrowserRouter>
 			<AuthProvider>
 				<FlashMsgProvider>
 					<div className="main">
-						<Navbar />
+						<Navbar isStudentRegistered={isStudentRegistered} />
 						<ToastContainer />
 						<Routes>
 							<Route path='/' element={
@@ -45,13 +49,13 @@ function App() {
 							}/>
 							<Route path='/dashboard' element={
 								<ProtectedRoute>
-									<Dashboard />
+									<Dashboard isStudentRegistered={isStudentRegistered} />
 								</ProtectedRoute>
 							}>
 								<Route index element={
 									<>
 										<AlertBanner />
-										<DashboardCourseDetails />
+										<DashboardCourseDetails setIsStudentRegistered={setIsStudentRegistered} />
 									</>
 								}/>
 								<Route path='todo' element={<ToDo />}/>

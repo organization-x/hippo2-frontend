@@ -10,6 +10,9 @@ import Loading from "../loading/loading";
 import Button from "../../components/button/button";
 import Input from "../../components/form/input";
 
+import Page from "../../components/page/page";
+import Human from "../../components/human/human";
+
 function SignUpInvite() {
 	const [data, setData] = useState({
 		invite_to: {},
@@ -86,53 +89,61 @@ function SignUpInvite() {
 	`;
 
 	return (
-		<div className="container max-w-3xl flex flex-wrap mx-auto mt-12 auth">
-			<div className="flex-none md:flex-initial w-full md:w-5/12 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
-				<h1 className="text-2xl mb-8 text-center">Create an Account</h1>
-				<p className="text-base mb-4">
-					AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
-				</p>
+		<Page
+			leftChildren={
+				<>
+					<h1 className="text-2xl mb-8 text-center">Create an Account</h1>
+					<p className="text-base mb-4">
+						AI Camp teaches future leaders about coding, AI, how to learn, and how to work through creating impressive AI products and tech internships.
+					</p>
 
-				<p className="text-base mb-4">
-					By creating AI products, our students apply what they have learned through first-hand experience of being an engineer, a product manager, or a data scientist.
-				</p>
+					<p className="text-base mb-4">
+						By creating AI products, our students apply what they have learned through first-hand experience of being an engineer, a product manager, or a data scientist.
+					</p>
 
-				<p className="text-base mb-4">
-					Ready to start your AI journey? Our world class mentors and instructors are here to guide you!
-				</p>
+					<p className="text-base mb-4">
+						Ready to start your AI journey? Our world class mentors and instructors are here to guide you!
+					</p>
 
-				<p className="text-base">
-					By signing up for AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Privacy Policy</a>.
-				</p>
-			</div>
-
-			<form action="/" method="GET" onSubmit={event => {
-				event.preventDefault();
-			}} className="flex-none md:flex-initial w-full md:w-7/12 py-5 px-8 bg-white rounded-b-xl md:rounded-r-xl md:rounded-none">
-				<h2 className="text-xl mb-6 text-center">
-					{formTitle}
-				</h2>
-				<Input label="Email"
-					type="email"
-					className="mb-3"
-					id="email"
-					value={data.invite_to.email}
-					readOnly
-					onChange={() => {}}
-				/>
-				<Input label="Password"
-					type="password"
-					placeHolder="JohnDoePassword"
-					className="mb-3"
-					id="password"
-					isValid={formErrors}
-					errorText={formErrors}
-					onChange={val => setPassword(val)}
-				/>
-
-				<Button bgColor="green" txtColor="white" className="w-full my-1 mb-3 py-1 mx-auto block text-center" onClick={() => setupUser()}>Next</Button>
-			</form>
-		</div>
+					<p className="text-base">
+						By signing up for AI Camp, you agree to our <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Terms of Service</a> and <a className="text-blue-700 hover:text-blue-600 underline decoration-inherit" href="/">Privacy Policy</a>.
+					</p>
+				</>
+			} 
+			rightChildren={
+				<form action="/" method="GET" onSubmit={event => {
+					event.preventDefault();
+				}}>
+					<Human></Human>
+					<h2 className="text-xl mb-6 mt-8 text-center">
+						{formTitle}
+					</h2>
+					<Input label="Email"
+						type="email"
+						className="mb-3"
+						id="email"
+						value={data.invite_to.email}
+						readOnly
+						onChange={() => {}}
+					/>
+					<Input label="Password"
+						type="password"
+						placeHolder="JohnDoePassword"
+						className="mb-3"
+						id="password"
+						isValid={formErrors}
+						errorText={formErrors}
+						onChange={val => setPassword(val)}
+					/>
+		
+					<Button bgColor="green" txtColor="white" className="w-full my-1 mb-3 py-1 mx-auto block text-center" onClick={() => setupUser()}>Next</Button>
+				</form>
+			} 
+			leftRightRatio={'5:7'}
+			maxWidth={'3xl'} 
+			developers={[]}
+		>
+		</Page>
 	);
 }
 

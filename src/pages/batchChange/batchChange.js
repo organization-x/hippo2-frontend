@@ -7,6 +7,7 @@ import baseUrl from "../../apiUrls";
 import BatchBoard from "../../components/batchBoard/batchBoard";
 import Button from "../../components/button/button";
 import Loading from "../loading/loading";
+import Page from "../../components/page/page";
 
 function BatchChange() {  
 	const [batch, setBatch] = useState({});    
@@ -46,7 +47,7 @@ function BatchChange() {
 	function SideBarContent() {
 		if (!batch.id) {
 			return (
-				<div className="flex-none md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+				<>
 					<h1 className="text-3xl mb-10 text-center">
                         Batch Change
 					</h1>
@@ -59,10 +60,10 @@ function BatchChange() {
 					<p className="text-lg mx-9 mb-3">
                         Select another batch in the calendar to find a batch that best fits your schedule. Batch details will be updated here depending on which batch you choose.
 					</p>
-				</div>);
+				</>);
 		} else {
 			return (
-				<div className="md:flex-initial w-full md:w-1/3 p-5 text-white bg-green rounded-t-xl md:rounded-l-xl md:rounded-none">
+				<>
 					<h1 className="text-3xl mb-10 text-center">
                         Batch Change
 					</h1>
@@ -83,7 +84,7 @@ function BatchChange() {
 					<p className="text-xl mx-9 mb-3">
                         Click "Submit" to finalize your batch change!
 					</p>
-				</div>);
+				</>);
 		}
 	}
 
@@ -118,7 +119,7 @@ function BatchChange() {
 			navigate('/');   
 		};
 		return (
-			<div>
+			<>
 				{   
 					formErrors ? 
 						<div className='text-right text-red-600 mt-5'>{formErrors}</div> 
@@ -143,26 +144,34 @@ function BatchChange() {
                                     
 					</Button>
 				</div>
-			</div>
+			</>
 		);
 	}
-    
+
 	return (
-		<div className='container max-w-7xl mt-12 flex flex-wrap mx-auto auth'>
-			<SideBarContent/>
-			<div className="flex flex-col md:flex-initial justify-center w-full md:w-7/12 p-5 rounded-b-2xl md:rounded-r-2xl bg-white">
-				<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
-				<BatchBoard
-					className="w-full"
-					batchData={batchData.batches} 
-					onChange={(b) => setBatch(b)}
-					batchID={batch.id}
-					price={batchData.price}
-					disabledID={currentBatch.id}
-				/>
-				<NextAndBackButtons/>
-			</div>
-		</div>
+		<Page
+			leftChildren={
+				<SideBarContent/>
+			} 
+			rightChildren={
+				<>
+					<h4 className="text-xl text-center mb-5">Select a batch that fits your schedule.</h4>
+					<BatchBoard
+						className="w-full"
+						batchData={batchData.batches} 
+						onChange={(b) => setBatch(b)}
+						batchID={batch.id}
+						price={batchData.price}
+						disabledID={currentBatch.id}
+					/>
+					<NextAndBackButtons/>
+				</>
+			} 
+			leftRightRatio={'1:2'}
+			maxWidth={'7xl'} 
+			developers={[]}
+		>
+		</Page>
 	);
 }
 

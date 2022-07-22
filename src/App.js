@@ -29,6 +29,7 @@ import BatchChange from './pages/batchChange/batchChange';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
 import PageNotFound from './pages/pageNotFound/pageNotFound';
 import ApplicationQuestions from './pages/scholarship/application_questions';
+import TaxDetails from './pages/taxDetails/tax-details';
 import './App.css';
 
 function App() {
@@ -103,11 +104,9 @@ function App() {
 								</ProtectedRoute>
 							}/>
 							<Route path='/scholarships/application_questions' element={
-								<ProtectedRoute>
-									<ApplicationQuestions />
-								</ProtectedRoute>
-
+								<ApplicationQuestions />
 							}/>
+							<Route path = '/tax-details' element={<TaxDetails />}></Route>
 							<Route path='*' element={<PageNotFound />} />
 						</Routes>
 					</div>

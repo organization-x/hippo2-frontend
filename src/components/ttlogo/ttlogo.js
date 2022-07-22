@@ -2,7 +2,12 @@ import './ttlogo.css';
 import TTLogoSVG from '../../ttlogo.svg';
 import HippoSVG from '../../hippo.svg';
 
-function TTLogo({ className }) {
+function TTLogo({ className, developers }) {
+	let developerString = '';
+	if (developers) {
+		developerString = developers.join(', ');
+	}
+
 	return (
 		<div className={`ttlogo-main-container ${className}`}>
 			<a href="https://www.ai-camp.org/" className="tt-logo">
@@ -20,7 +25,7 @@ function TTLogo({ className }) {
 					</p>
 					<p><span>Product Manager: </span> Sricharan Guddanti</p>
 					<p><span>Product Designer: </span> Bernice Lau</p>
-					<p><span>Software Developers: </span> Jackson Choyce, Alex Zhou</p>
+					<p><span>Software Developers: </span> {developerString} </p>
 				</div>
 			</div>
 		</div>

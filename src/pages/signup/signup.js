@@ -103,6 +103,7 @@ function Signup() {
 									setType('STUDENT');
 									handleFade();
 								}}
+								type='button'
 								className="w-28 md:w-36 mr-4 p-1"
 							>
 								Student
@@ -114,6 +115,7 @@ function Signup() {
 									setType('PARENT');
 									handleFade();
 								}}
+								type='button'
 								className="w-28 md:w-36 p-1"
 							>
 								Parent
@@ -157,7 +159,13 @@ function Signup() {
 		
 						<p className='text-gray-400 text-xs'>Your password should include at least 7 characters. <br /> Avoid using common words or phrases.</p>
 		
-						<Button bgColor="green" txtColor="white" className="w-full mb-3 mt-6 py-1" onClick={() => signUpUser()}>Next</Button>
+						<Button 
+							bgColor="green" 
+							txtColor="white" 
+							className="w-full mb-3 mt-6 py-1" 
+							onClick={() => signUpUser()}
+							type='submit'
+						>Next</Button>
 		
 						<p className="text-xl mb-3 text-center">Or</p>
 		

@@ -116,7 +116,7 @@ function BatchPayment() {
 					<hr className="mx-3 mb-4" />
 					<div className="flex flex-row justify-center items-center mb-4">
 						<FontAwesomeIcon className="h-10 w-10 text-yellow-400" icon={faStar} />
-						<p className="inline-block text-3xl ml-2">4.7/5 (208 reviews)</p>
+						<p className="inline-block text-3xl ml-2">4.8/5 (208 reviews)</p>
 					</div>
 					<div className="bg-zinc-200 px-4 py-2 rounded-2xl text-black">
 						<div className="flex justify-between">

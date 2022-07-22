@@ -314,10 +314,7 @@ export function AuthProvider({ children }) {
 
 	if (!checkLogin) {
 		return (
-			<AuthContext.Provider value={value}>
-				<Navbar />
-				<Loading />
-			</AuthContext.Provider>
+			<Loading />
 		);
 	}
 	return (

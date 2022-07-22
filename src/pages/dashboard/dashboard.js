@@ -38,7 +38,7 @@ function Dashboard({ isStudentRegistered }) {
 					<li className={`mb-6 ${!isStudentRegistered ? 'hover:text-gray-500' : ''}`}>
 						<Link 
 							to='/courses' 
-							className={`px-3 py-1 ${isStudentRegistered ? 'cursor-not-allowed' : ''}`} onClick={(event) => {
+							className={`px-3 py-1 ${isStudentRegistered ? 'cursor-default' : ''}`} onClick={(event) => {
 								if (isStudentRegistered) event.preventDefault();
 							}}>
 							Register for Courses

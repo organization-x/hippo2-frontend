@@ -44,12 +44,20 @@ function QuestionInput({ placeHolder, question, radioDict, value, setValue, isVa
 		radioList = (
 			<div className = 'w-full'>
 				<textarea onChange={(e) => {
+					// Resizes textarea to fit response
+					if (e.target.value) {
+						e.target.style.height = "";
+						e.target.style.height = e.target.scrollHeight + 'px';
+					}
+					else {
+						e.target.style.height = "";
+					}
 					setValue(e.target.value);
 				}} 
 				name={name}
 				rows="1"
 				placeholder={placeHolder}
-				className=' w-full border-b-2'
+				className='textarea w-full border-b-2'
 				id={id}
 				maxLength={maxLength}
 				>

@@ -4,6 +4,9 @@
     background-color:white;
     padding: 0.1rem 0.2rem;
     resize: none;
+    height: 100%;
+    overflow: auto;
+    max-height: 4.125rem;
 
     font-weight: 400;
     font-size: 0.875rem;

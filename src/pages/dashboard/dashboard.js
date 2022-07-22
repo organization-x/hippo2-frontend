@@ -37,18 +37,18 @@ function Dashboard({ isStudentRegistered }) {
 								Account Settings
 							</Link>
 						</li>
-            <li className={`mb-6 ${!isStudentRegistered ? 'hover:text-gray-500' : ''}`}>
-						<Link 
-							to='/courses' 
-							className={`px-3 py-1 ${isStudentRegistered ? 'cursor-default' : ''}`} onClick={(event) => {
-								if (isStudentRegistered) {
-									event.preventDefault();
-									flashMsg('error', 'You are already registered for a course.');
-								}
-							}}>
-							Register for Courses
-						</Link>
-					</li>
+						<li className={`mb-6 ${!isStudentRegistered ? 'hover:text-gray-500' : ''}`}>
+							<Link 
+								to='/courses'
+								className={`px-3 py-1 ${isStudentRegistered ? 'cursor-default' : ''}`} onClick={(event) => {
+									if (isStudentRegistered) {
+										event.preventDefault();
+										flashMsg('error', 'You are already registered for a course.');
+									}
+								}}>
+								Register for Courses
+							</Link>
+						</li>
 						<li className='mb-6 hover:text-gray-500'>
 							<a href='https://www.ai-camp.org/student-products' target='_blank' rel='noopener noreferrer' className="px-3 py-1">
 								Explore Student Products

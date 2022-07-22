@@ -10,7 +10,7 @@ function TTLogo({ className, developers }) {
 
 	return (
 		<div className={`ttlogo-main-container ${className}`}>
-			<a href="https://www.ai-camp.org/" className="tt-logo">
+			<a target="_blank" rel="noreferrer" href="https://www.ai-camp.org/team-tomorrow" className="tt-logo">
 				<img src={TTLogoSVG} alt="logo"/>
 			</a>
 
@@ -25,6 +25,7 @@ function TTLogo({ className, developers }) {
 					</p>
 					<p><span>Product Manager: </span> Sricharan Guddanti</p>
 					<p><span>Product Designer: </span> Bernice Lau</p>
+					<p><span>Engineering Managers: </span> Jackson Choyce, Alexander Zhou</p>
 					<p><span>Software Developers: </span> {developerString} </p>
 				</div>
 			</div>

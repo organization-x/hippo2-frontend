@@ -52,49 +52,50 @@ function BatchSelect() {
 		}
 	};
 
-	let sideText;
-	if (batch.id) {
-		sideText = (
-			<>
-				<div className="text-center text-3xl mb-10">
-					<h1>Batch {batch.name}</h1>
-					<h4>{batch.start_date} - {batch.end_date}</h4>
-					<h4>({batch.time_zone})</h4>
-				</div>
-				<ul className="text-base">
-					<li className="mb-2">
-						Program Dates: {batch.start_date} - {batch.end_date}
-					</li>
-					<li className="mb-2">
-						Duration: {batch.duration}
-					</li>
-					<li className="mb-10">
-						Time: {batch.start_time} - {batch.end_time} {batch.time_zone} every weekday
-					</li>
-				</ul>
-				<p className="text-lg">
-					Click “Next” to hold your spot while you create your AI Camp account!
-				</p>
-			</>
-		);
-	} else {
-		sideText = (
-			<>
-				<h1 className="text-center text-3xl mb-8">Batch<br/>Details </h1>
-				<p className="text-base mb-4">
-					Select the batch that you want to register for. Details about your selected batch will appear here!
-				</p>
-				<p className="text-base">
-					Some batch choices will be limited due to our capacity.
-				</p>
-			</>
-		);
+	function SideText() {
+		if (batch.id) {
+			return (
+				<>
+					<div className="text-center text-3xl mb-10">
+						<h1>Batch {batch.name}</h1>
+						<h4>{batch.start_date} - {batch.end_date}</h4>
+						<h4>({batch.time_zone})</h4>
+					</div>
+					<ul className="text-base">
+						<li className="mb-2">
+							Program Dates: {batch.start_date} - {batch.end_date}
+						</li>
+						<li className="mb-2">
+							Duration: {batch.duration}
+						</li>
+						<li className="mb-10">
+							Time: {batch.start_time} - {batch.end_time} {batch.time_zone} every weekday
+						</li>
+					</ul>
+					<p className="text-lg">
+						Click “Next” to hold your spot while you create your AI Camp account!
+					</p>
+				</>
+			);
+		} else {
+			return (
+				<>
+					<h1 className="text-center text-3xl mb-8">Batch<br/>Details </h1>
+					<p className="text-base mb-4">
+						Select the batch that you want to register for. Details about your selected batch will appear here!
+					</p>
+					<p className="text-base">
+						Some batch choices will be limited due to our capacity.
+					</p>
+				</>
+			);
+		}
 	}
 
 	return (
 		<Page
 			leftChildren={
-				{ sideText }
+				<SideText/>
 			} 
 			rightChildren={
 				<>

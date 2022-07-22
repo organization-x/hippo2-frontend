@@ -60,8 +60,7 @@ function Dashboard() {
 					<Outlet />
 				</div>
 			</div>
-			<TTLogo className='absolute bottom-1 left-1 p-6'/>
-
+			<TTLogo className='absolute bottom-1 left-1 p-6 text-white'/>
 		</div>
 	);
 }

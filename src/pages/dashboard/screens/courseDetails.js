@@ -59,10 +59,11 @@ function DashboardCourseDetails() {
 						<h1 className="font-semibold text-2xl mb-8 text-center">Course Information</h1>
 						<p className="mb-5"><b className="font-semibold">Student Name: </b>{course.user.first_name} {course.user.last_name}</p>
 						<p><b className="font-semibold">Course: </b>{course.course.name}</p>
-						<p><b className="font-semibold">{course.product.name}: </b>{course.product.start_date} - {course.product.end_date}, {course.product.start_time} - {course.product.end_time} {course.product.time_zone}</p>
-						<p className="mb-5"><a href={`/orders/${course.id}/change-batch`} className="text-blue-500 underline">Want to change your batch?</a><span className="italic text-red-400"> (Deadline: 6/1)</span></p>
-
-						<Button bgColor="white" txtColor="black" className="w-2/3 py-1 mb-4">Cancel Your Course</Button>
+						<p><b className="font-semibold">{course.batch.name}: </b>{course.batch.start_date} - {course.batch.end_date}, {course.batch.start_time} - {course.batch.end_time} {course.batch.time_zone}</p>
+						<p className="mb-5"><a href={`/orders/${course.id}/change-batch`} className="text-blue-500 underline">Want to change your batch?</a><span className="italic text-red-400"> (Deadline: {course.course.batch_change_deadline})</span></p>
+						<Link to={`/orders/${course.id}/refund`} className='mb-4'>
+							<Button bgColor="white" txtColor="black" className="w-2/3 py-1">Cancel Your Course</Button>
+						</Link>
 					</div>
 					<div className="flex-none md:flex-initial w-full md:w-5/12 py-8 px-16 pb-10 bg-stone-300  md:rounded-tr-xl md:rounded-none">
 						<h1 className="font-semibold text-2xl mb-10 text-center">Course Materials</h1>

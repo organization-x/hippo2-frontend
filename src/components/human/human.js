@@ -5,11 +5,10 @@ function Human() {
 	const [human, setHuman] = useState({ 'name': 'Name', 'role': 'Role', 'imgUrl': '' });
 	useEffect(() => {
 		const humans = [
-			{ 'name': 'dummy1', 'role': 'Backend Engineer', 'imgUrl': 'https://www.jbrhomes.com/wp-content/uploads/blank-avatar.png' },
-			{ 'name': 'dummy2', 'role': 'Designer', 'imgUrl': 'https://barryburnett.net/wp-content/uploads/2018/03/Blank-Avatar-Man-in-Suit.jpg' },
-			{ 'name': 'dummy3', 'role': 'Tech Lead', 'imgUrl': 'https://rocksolidpaintingco.com/wp-content/uploads/2019/10/Blank-avatar.png' },
-			{ 'name': 'dummy4', 'role': 'Data Scientist', 'imgUrl': 'https://freesvg.org/img/generic-avatar.png' },
-			{ 'name': 'dummy5', 'role': 'Frontend Engineer', 'imgUrl': 'https://pbs.twimg.com/media/B5PP-IIIMAA-qem.png' },
+			{ 'name': 'Jackson Choyce', 'role': 'Engineering Manager', 'imgUrl': `${process.env.PUBLIC_URL}/humans/jackson.png` },
+			{ 'name': 'Sricharan Guddanti', 'role': 'Product Manager', 'imgUrl': `${process.env.PUBLIC_URL}/humans/sri.jpeg` },
+			{ 'name': 'Bernice Lau', 'role': 'Project Designer', 'imgUrl': `${process.env.PUBLIC_URL}/humans/bernice.jpg` },
+			{ 'name': 'Alexander Zhou', 'role': 'Engineering Manager', 'imgUrl': `${process.env.PUBLIC_URL}/humans/alex.jpg` },
 		];
 		setHuman(humans[Math.floor(Math.random() * humans.length)]);
 	}, []);

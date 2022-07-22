@@ -1,28 +1,59 @@
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../services/authentication";
 import { useFlashMsg } from "../../services/flashMsg";
 import baseUrl from '../../apiUrls';
 import Button from "../../components/button/button";
+import Loading from "../loading/loading";
 
 
 function OrderCancel () {
-
+	const [deadline, setDeadline] = useState();
+	const [processing, setProcessing] = useState(false);
 	const { autoAuthReq } = useAuth(); // import this
 	const { flashMsg } = useFlashMsg(); // this too
 	const navigate = useNavigate(); // this too
-	const here = useLocation().pathname; // this too
+	const location = useLocation(); // this too
 	const { orderID } = useParams(); // this too
 
+	useEffect(() => {
+		const url = baseUrl + `/api/v1/orders/${orderID}/can-refund/`;
+		const options = { method: 'GET' };
+		autoAuthReq(url, options, location.pathname).then(res => {
+			if (res.data.can_refund !== true) {
+				flashMsg('error', 'Refund deadline for course has passed');
+				return navigate('/');
+			}
+			setDeadline(res.data.deadline);
+		}).catch(err => {
+			if (err.data?.message) {
+				flashMsg('error', err.data.message);
+			} else {
+				flashMsg('error', 'Failed to retrieve order info');
+			}
+			navigate('/');
+		});
+	}, [autoAuthReq, flashMsg, location, navigate, orderID]);
+
+	if (!deadline) {
+		return <Loading />;
+	}
+
 	const onConfirm = () => {
+		setProcessing(true);
 		// import baseUrl
 		const url = baseUrl + `/api/v1/orders/${orderID}/refund/`;
 		const options = { method: 'POST' };
     
-		autoAuthReq(url, options, here).then(res => {
+		autoAuthReq(url, options, location.pathname).then(res => {
 			flashMsg('success', 'Order successfully refunded');
 			navigate('/'); // navigate to dashboard once successful
 		}).catch(err => {
+			setProcessing(false);
 			// handle errors
+			if (err.data?.message) {
+				return flashMsg('error', err.data.message);
+			}
 			flashMsg('error', 'Error refunding order');
 		});
 	};
@@ -37,7 +68,7 @@ function OrderCancel () {
 			<div className="md:flex-initial w-full py-5 px-8 bg-white rounded-xl">
 				<h2 className="text-2xl mb-3 text-center font-semibold">Are you sure you want to cancel your course?</h2>
 				<div className="mb-2 mt-2">
-					<p className="italic text-center text-red-600">Deadline to cancel: 6/1/2022</p>
+					<p className="italic text-center text-red-600">Deadline to cancel: {deadline}</p>
 				</div>
 
 				<div className="mb-4 mt-5 ml-16 mr-16 text-center" >
@@ -52,11 +83,19 @@ function OrderCancel () {
 
 				<div className="flex ml-12 mr-12 mt-10">
 					<div className="w-1/3 p-4">
-						<Button bgColor="gray" txtColor="white" className="w-full py-1" onClick={() => onBack()}>Back</Button>
+						<Button 
+							bgColor="gray" txtColor="white" className="w-full py-1" 
+							onClick={() => onBack()}
+							disabled={processing}
+						>Back</Button>
 					</div>
 
 					<div className="w-2/3 p-4">
-						<Button bgColor="white" txtColor="black" className="w-full py-1" onClick={() => onConfirm()}>Confirm Cancellation</Button>
+						<Button 
+							bgColor="white" txtColor="black" className="w-full py-1" 
+							onClick={() => onConfirm()}
+							disabled={processing}
+						>Confirm Cancellation</Button>
 					</div>
 				</div>
 

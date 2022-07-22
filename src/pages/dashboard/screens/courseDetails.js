@@ -7,7 +7,7 @@ import Button from "../../../components/button/button";
 import Loading from "../../loading/loading";
 import HideViewBar from "../../../components/HideViewBar/HideViewBar";
 
-function DashboardCourseDetails() {
+function DashboardCourseDetails({ setIsStudentRegistered }) {
 	const [courses, setCourses] = useState(null);
 	const [courseTasks, setCourseTasks] = useState(null);
 	const auth = useAuth();
@@ -20,6 +20,14 @@ function DashboardCourseDetails() {
 				{ method: 'GET' }
 			);
 
+			// check if user is student and user has paid course
+			for (const course of data.data) {
+				if (auth.user.type === 'STUDENT' && course.transactions.filter(e => e.status.toUpperCase() === 'PAID').length > 0) {
+					setIsStudentRegistered(true);
+					break;
+				}
+			}
+
 			// fetch incomplete tasks from API
 			const courseTaskDict = {};
 			for (let course of data.data) {
@@ -31,7 +39,7 @@ function DashboardCourseDetails() {
 		})().catch(err => {
 			flashMsg('error', 'Failed to get course info');
 		});
-	}, [auth, flashMsg]);
+	}, [auth, flashMsg, setIsStudentRegistered]);
 
 	let coursesList = null;
 
@@ -78,7 +86,7 @@ function DashboardCourseDetails() {
 								<Button bgColor="white" txtColor="black" className="w-full py-2">Slideshow Presentations</Button>
 							</>}
 					</div>
-					<HideViewBar info={transactionsTable} buttonName={'Financial Transactions'}></HideViewBar>
+					<HideViewBar info={transactionsTable} buttonName={'Financial Transactions'} />
 				</div>
 			));
 		}

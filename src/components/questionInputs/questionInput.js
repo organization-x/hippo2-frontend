@@ -44,12 +44,19 @@ function QuestionInput({ placeHolder, question, radioDict, value, setValue, isVa
 		radioList = (
 			<div className = 'w-full'>
 				<textarea onChange={(e) => {
+					// Resizes textarea to fit response
+					if (e.target.value) {
+						e.target.style.height = '';
+						e.target.style.height = e.target.scrollHeight + 'px';
+					} else {
+						e.target.style.height = '';
+					}
 					setValue(e.target.value);
 				}} 
 				name={name}
 				rows="1"
 				placeholder={placeHolder}
-				className=' w-full border-b-2'
+				className='textarea w-full border-b-2'
 				id={id}
 				maxLength={maxLength}
 				>
@@ -63,7 +70,7 @@ function QuestionInput({ placeHolder, question, radioDict, value, setValue, isVa
 				{questionNum} {question} <span className='text-slate-400 pl-1 text-xs relative'>{mutedText}</span>
 			</label>
 
-			<div className={style + 'md:flex w-full md:text-base'}>
+			<div className={style + ' mt-4 md:flex w-full md:text-base'}>
 				{radioList}
 			</div>
 			<span className='invalid-text'>{error}</span>

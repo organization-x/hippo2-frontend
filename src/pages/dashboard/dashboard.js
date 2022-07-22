@@ -1,10 +1,12 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import TTLogo from '../../components/ttlogo/ttlogo';
+import { useFlashMsg } from "../../services/flashMsg";
 
 function Dashboard({ isStudentRegistered }) {
 	const location = useLocation();
 	const split = location.pathname.split('/');
 	const tail = split[split.length - 1];
+	const { flashMsg } = useFlashMsg();
 
 	return (
 		<div className="flex h-screen relative">
@@ -39,7 +41,10 @@ function Dashboard({ isStudentRegistered }) {
 						<Link 
 							to='/courses' 
 							className={`px-3 py-1 ${isStudentRegistered ? 'cursor-default' : ''}`} onClick={(event) => {
-								if (isStudentRegistered) event.preventDefault();
+								if (isStudentRegistered) {
+									event.preventDefault();
+									flashMsg('error', 'You are already registered for a course.');
+								}
 							}}>
 							Register for Courses
 						</Link>

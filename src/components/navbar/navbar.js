@@ -6,12 +6,14 @@ import './navbar.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { useFlashMsg } from "../../services/flashMsg";
 
 function Navbar({ isStudentRegistered }) {
 	usePageTracking(); // google analytics
 	// const [show] = useState(true); //change [show] to [show, setShow] if uncommenting showNav() below
 	const show = true;
 	const { user, handleLogout } = useAuth();
+	const { flashMsg } = useFlashMsg();
 	// const showNav = () => {
 	// 	setShow(!show);
 	// };
@@ -26,6 +28,8 @@ function Navbar({ isStudentRegistered }) {
 	const onCoursesClick = (event) => {
 		if (isStudentRegistered) {
 			event.preventDefault();
+			setMobileMenuOpened(false);
+			flashMsg('error', 'You are already registered for a course.');
 		} else {
 			handlePageSwitch();
 		}

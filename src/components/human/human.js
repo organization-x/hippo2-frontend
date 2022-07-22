@@ -7,7 +7,7 @@ function Human() {
 		const humans = [
 			{ 'name': 'Jackson Choyce', 'role': 'Engineering Manager', 'imgUrl': `${process.env.PUBLIC_URL}/humans/jackson.png` },
 			{ 'name': 'Sricharan Guddanti', 'role': 'Product Manager', 'imgUrl': `${process.env.PUBLIC_URL}/humans/sri.jpeg` },
-			{ 'name': 'Bernice Lau', 'role': 'Project Designer', 'imgUrl': `${process.env.PUBLIC_URL}/humans/bernice.jpg` },
+			{ 'name': 'Bernice Lau', 'role': 'Product Designer', 'imgUrl': `${process.env.PUBLIC_URL}/humans/bernice.jpg` },
 			{ 'name': 'Alexander Zhou', 'role': 'Engineering Manager', 'imgUrl': `${process.env.PUBLIC_URL}/humans/alex.jpg` },
 		];
 		setHuman(humans[Math.floor(Math.random() * humans.length)]);

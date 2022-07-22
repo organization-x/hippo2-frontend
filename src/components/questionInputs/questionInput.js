@@ -46,11 +46,10 @@ function QuestionInput({ placeHolder, question, radioDict, value, setValue, isVa
 				<textarea onChange={(e) => {
 					// Resizes textarea to fit response
 					if (e.target.value) {
-						e.target.style.height = "";
+						e.target.style.height = '';
 						e.target.style.height = e.target.scrollHeight + 'px';
-					}
-					else {
-						e.target.style.height = "";
+					} else {
+						e.target.style.height = '';
 					}
 					setValue(e.target.value);
 				}} 
@@ -71,7 +70,7 @@ function QuestionInput({ placeHolder, question, radioDict, value, setValue, isVa
 				{questionNum} {question} <span className='text-slate-400 pl-1 text-xs relative'>{mutedText}</span>
 			</label>
 
-			<div className={style + ' mt-3 md:flex w-full md:text-base'}>
+			<div className={style + ' mt-4 md:flex w-full md:text-base'}>
 				{radioList}
 			</div>
 			<span className='invalid-text'>{error}</span>

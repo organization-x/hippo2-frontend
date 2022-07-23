@@ -152,7 +152,7 @@ function BatchPayment() {
 			} 
 			leftRightRatio={'1:1'}
 			maxWidth={'4xl'} 
-			developers={[]}
+			developers={['Nathan (19)', 'Leo (17)', 'Zac (18)']}
 		>
 		</Page>
 	);

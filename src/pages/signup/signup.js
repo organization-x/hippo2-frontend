@@ -185,7 +185,7 @@ function Signup() {
 			} 
 			leftRightRatio={'5:7'}
 			maxWidth={'3xl'} 
-			developers={['Jackson Choyce', 'Alexander Zhou']}
+			developers={['Ray (14)', 'Matthew (14)']}
 		>
 		</Page>
 	);

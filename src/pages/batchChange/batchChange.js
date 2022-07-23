@@ -169,7 +169,7 @@ function BatchChange() {
 			} 
 			leftRightRatio={'1:2'}
 			maxWidth={'7xl'} 
-			developers={[]}
+			developers={['Leo Du (17)']}
 		>
 		</Page>
 	);

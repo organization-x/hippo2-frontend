@@ -64,7 +64,7 @@ function PaymentSuccess() {
 			} 
 			leftRightRatio={'1:1'}
 			maxWidth={'5xl'} 
-			developers={[]}
+			developers={['Nathen Xayena (19)', 'Leo Du(17)', 'Zac (18)', 'Matthew (14)']}
 		>
 		</Page>
 	);

@@ -114,7 +114,7 @@ function SelectionPage() {
 			} 
 			leftRightRatio={'1:2'}
 			maxWidth={'3xl'} 
-			developers={[]}
+			developers={['Leo Du (17)']}
 		>
 		</Page>
 	);

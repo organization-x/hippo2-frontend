@@ -130,7 +130,7 @@ function BatchSelect() {
 			} 
 			leftRightRatio={'1:2'}
 			maxWidth={'5xl'} 
-			developers={[]}
+			developers={['Zac (18)', 'Leo Du (17)']}
 		>
 		</Page>
 	);

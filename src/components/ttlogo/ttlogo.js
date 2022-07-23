@@ -23,9 +23,9 @@ function TTLogo({ className, developers }) {
 					<p className="ttlogo-text-box-top text">
                         This system was built entirely by Team Tomorrow, AI Camp’s team of teen developers, in a project called hippo2!
 					</p>
-					<p><span>Product Manager: </span> Sricharan Guddanti</p>
-					<p><span>Product Designer: </span> Bernice Lau</p>
-					<p><span>Engineering Managers: </span> Jackson Choyce, Alexander Zhou</p>
+					<p><span>Product Manager: </span> Sricharan Guddanti (19)</p>
+					<p><span>Product Designer: </span> Bernice Lau (18)</p>
+					<p><span>Engineering Managers: </span> Jackson Choyce (19), Alexander Zhou (18)</p>
 					<p><span>Software Developers: </span> {developerString} </p>
 				</div>
 			</div>

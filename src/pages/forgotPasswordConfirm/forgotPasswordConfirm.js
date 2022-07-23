@@ -96,7 +96,7 @@ function ForgotPasswordConfirm() {
 			} 
 			leftRightRatio={'2:3'}
 			maxWidth={'3xl'} 
-			developers={[]}
+			developers={['Alex (22)']}
 		>
 		</Page>
 	);

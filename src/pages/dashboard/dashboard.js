@@ -1,12 +1,14 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import TTLogo from '../../components/ttlogo/ttlogo';
 import { useFlashMsg } from "../../services/flashMsg";
+import { useState } from "react";
 
 function Dashboard({ isStudentRegistered }) {
 	const location = useLocation();
 	const split = location.pathname.split('/');
 	const tail = split[split.length - 1];
 	const { flashMsg } = useFlashMsg();
+	const [devs, setDevs] = useState([]);
 
 	return (
 		<div className="flex h-screen relative">
@@ -17,6 +19,7 @@ function Dashboard({ isStudentRegistered }) {
 							<Link 
 								to='' 
 								className={`px-3 py-1 ${tail === 'dashboard' ? 'text-gray-500 cursor-default pointer-events-none' : ''}`}
+								onClick = {() => setDevs(['Matthew (14)', 'Alex (22)', 'Zac (18)', 'Sean (16)'])}
 							>
 								Dashboard Home
 							</Link>
@@ -25,6 +28,7 @@ function Dashboard({ isStudentRegistered }) {
 							<Link 
 								to='todo' 
 								className={`px-3 py-1 ${tail === 'todo' ? 'text-gray-500 cursor-default pointer-events-none' : ''}`}
+								onClick = {() => setDevs(['Zac (18)', 'Alex (22)'])}
 							>
 								To Do List
 							</Link>
@@ -33,6 +37,7 @@ function Dashboard({ isStudentRegistered }) {
 							<Link 
 								to='account' 
 								className={`px-3 py-1 ${tail === 'account' ? 'text-gray-500 cursor-default pointer-events-none' : ''}`}
+								onClick = {() => setDevs(['Nathan Xaysena (19)', 'Leo Due (17)'])}
 							>
 								Account Settings
 							</Link>
@@ -61,7 +66,7 @@ function Dashboard({ isStudentRegistered }) {
 						</li>
 					</ul>
 				</nav>
-				<TTLogo className='sticky bottom-10 p-6 pl-9 text-white'/>
+				<TTLogo className='sticky bottom-10 p-6 pl-9 text-white' developers={devs} />
 			</div>
 
 			<div className='w-full flex flex-col flex-1'>

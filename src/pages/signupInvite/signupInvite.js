@@ -141,7 +141,7 @@ function SignUpInvite() {
 			} 
 			leftRightRatio={'5:7'}
 			maxWidth={'3xl'} 
-			developers={[]}
+			developers={['Ray (14)', 'Zac (18)']}
 		>
 		</Page>
 	);

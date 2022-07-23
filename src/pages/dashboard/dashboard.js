@@ -8,7 +8,7 @@ function Dashboard({ isStudentRegistered }) {
 	const split = location.pathname.split('/');
 	const tail = split[split.length - 1];
 	const { flashMsg } = useFlashMsg();
-	const [devs,setDevs] = useState([]);
+	const [devs, setDevs] = useState([]);
 
 	return (
 		<div className="flex h-screen relative">

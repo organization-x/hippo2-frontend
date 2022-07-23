@@ -25,7 +25,7 @@ function TTLogo({ className, developers }) {
 					</p>
 					<p><span>Product Manager: </span> Sricharan Guddanti (19)</p>
 					<p><span>Product Designer: </span> Bernice Lau (18)</p>
-					<p><span>Engineering Managers: </span> Jackson Choyce (19), Alexander Zhou</p>
+					<p><span>Engineering Managers: </span> Jackson Choyce (19), Alexander Zhou (18)</p>
 					<p><span>Software Developers: </span> {developerString} </p>
 				</div>
 			</div>

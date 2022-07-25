@@ -14,32 +14,26 @@ function AlertBanner() {
 
 	useEffect(() => {
 		(async () => {
-			let data;
-			try {
-				data = await auth.autoAuthReq(
-					baseUrl + `/api/v1/users/${auth.user.id}/orders/`,
-					{ method: 'GET' }
-				);
-			} catch (e) {
-				flashMsg('error', 'Failed to fetch tasks');
-				return;
-			}
+			const data = await auth.autoAuthReq(
+				baseUrl + `/api/v1/users/${auth.user.id}/orders/`,
+				{ method: 'GET' }
+			);
 
 			// fetch incomplete tasks from API
 			for (const course of data.data) {
-				try {
-					const incompleteTasks = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, { method: 'GET' })).data.count;
-					if (incompleteTasks > 0) {
-						setCompleted(false);
-						return;
-					}
-				} catch (e) {
-					flashMsg('error', 'Failed to fetch tasks');
+				const incompleteTasks = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, { method: 'GET' })).data.count;
+				if (incompleteTasks > 0) {
+					setCompleted(false);
 					return;
 				}
 			}
 			setCompleted(true);
-		})();
+		})().catch(err => {
+			if (err.data?.message) {
+				return flashMsg('error', err.data.message);
+			}
+			flashMsg('error', 'Failed to fetch tasks');
+		});
 	}, [auth, flashMsg]);
 
 	const onClick = () => {

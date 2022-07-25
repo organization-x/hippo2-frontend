@@ -13,14 +13,22 @@ function AlertBanner() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const url =  baseUrl + '/api/v1/users/' + auth.user.id + '/tasks/';
+		(async () => {
+			const data = await auth.autoAuthReq(
+				baseUrl + `/api/v1/users/${auth.user.id}/orders/`,
+				{ method: 'GET' }
+			);
 
-		auth.autoAuthReq(url, { method: 'GET' }).then(res => {
-			setCompleted(res.data.completed);
-		}).catch(err => {
-			// API request was not successful
-			flashMsg('error', 'Failed to load Completed Tasks');
-		});
+			// fetch incomplete tasks from API
+			for (const course of data.data) {
+				const incompleteTasks = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, { method: 'GET' })).data.count;
+				if (incompleteTasks.length > 0) {
+					setCompleted(false);
+					return;
+				}
+			}
+			setCompleted(true);
+		})();
 	}, [auth, flashMsg]);
 
 	const onClick = () => {
@@ -38,7 +46,7 @@ function AlertBanner() {
 						</div> :
 						<div>
 							<p>You have incomplete tasks in your To Do List.</p>
-							<p><b className='underline cursor-pointer hover:text-gray-200'>Click here</b> to complete them now so you can gain access to your couse materials!</p>
+							<p><b className='underline cursor-pointer hover:text-gray-200'>Click here</b> to complete them now so you can gain access to your course materials!</p>
 						</div>
 					}
 				</div> : null

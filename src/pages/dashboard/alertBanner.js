@@ -14,16 +14,27 @@ function AlertBanner() {
 
 	useEffect(() => {
 		(async () => {
-			const data = await auth.autoAuthReq(
-				baseUrl + `/api/v1/users/${auth.user.id}/orders/`,
-				{ method: 'GET' }
-			);
+			let data;
+			try {
+				data = await auth.autoAuthReq(
+					baseUrl + `/api/v1/users/${auth.user.id}/orders/`,
+					{ method: 'GET' }
+				);
+			} catch (e) {
+				flashMsg('error', 'Failed to fetch tasks');
+				return;
+			}
 
 			// fetch incomplete tasks from API
 			for (const course of data.data) {
-				const incompleteTasks = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, { method: 'GET' })).data.count;
-				if (incompleteTasks.length > 0) {
-					setCompleted(false);
+				try {
+					const incompleteTasks = (await auth.autoAuthReq(baseUrl + `/api/v1/orders/${course.id}/tasks/?countonly=true`, { method: 'GET' })).data.count;
+					if (incompleteTasks > 0) {
+						setCompleted(false);
+						return;
+					}
+				} catch (e) {
+					flashMsg('error', 'Failed to fetch tasks');
 					return;
 				}
 			}
